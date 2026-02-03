@@ -1,0 +1,39 @@
+$black-opacity-40: rgba(22, 22, 22, 0.4);
+
+.bg-black {
+  background-color: $black-opacity-40 !important;
+}
+
+$custom-colors: (
+  "black": #161616,
+  "black-light": #333333,
+  "grey-1": #666563,
+  "grey-2": #9499ac,
+  "grey-3": #C7C7C7,
+  "grey-4": #E0E0E0,
+  "grey-5": #EAEAEA,
+  "grey-6": #F5F5F5,
+  "white": #FFFFFF,
+
+  "yellow-black": #332A18,
+  "yellow-dark": #EBBD67,
+  "yellow": #FFCB66,
+  "yellow-bg": #FFF1D6,
+
+  "blue-dark": #0A2947,
+  "blue-dark-2": #1872CC,
+  "blue": #3090F0,
+  "blue-soft": #60A8F0,
+  "blue-bg": #E0EDFF,
+
+  "red-black": #471D1D,
+  "red-dark": #D64D4D,
+  "red": #EB4B4B,
+  "red-bg": #FFE0E0,
+
+  "green-dark": #2DA35C,
+  "green": #33B868,
+  "green-bg": #E4F7EB
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);

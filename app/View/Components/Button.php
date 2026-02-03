@@ -10,6 +10,21 @@ use Illuminate\View\Component;
 
 class Button extends Component
 {
+    private const VARIANTS = [
+        'main' => 'btn-primary',
+        'secondary' => 'btn-secondary',
+        'danger' => 'btn-danger',
+        'stroke' => 'btn-outline-primary',
+        'string' => 'btn-link',
+        'danger-string' => 'btn-link text-danger',
+    ];
+
+    private const SIZES = [
+        'sm' => 'btn-sm',
+        'md' => '',
+        'lg' => 'btn-lg',
+    ];
+
     /**
      * Create a new component instance.
      */
@@ -18,7 +33,7 @@ class Button extends Component
         public string $size = 'md',
         public bool $outline = false,
         public bool $block = false,
-        public bool $pill = false,
+        public bool $pill = true,
         public bool $disabled = false,
         public bool $loading = false,
         public ?string $iconLeft = null,
@@ -30,23 +45,8 @@ class Button extends Component
     {
         $base = ['btn'];
 
-        $variants = [
-            'main' => 'btn-primary',
-            'secondary' => 'btn-secondary',
-            'danger' => 'btn-danger',
-            'stroke' => 'btn-outline-primary',
-            'string' => 'btn-link',
-            'danger-string' => 'btn-link text-danger',
-        ];
-
-        $sizes = [
-            'sm' => 'btn-sm',
-            'md' => '',
-            'lg' => 'btn-lg',
-        ];
-
-        $base[] = $variants[$this->variant] ?? $variants['main'];
-        $base[] = $sizes[$this->size] ?? '';
+        $base[] = self::VARIANTS[$this->variant] ?? self::VARIANTS['main'];
+        $base[] = self::SIZES[$this->size] ?? '';
         $base[] = $this->block ? 'w-100' : '';
         $base[] = $this->pill ? 'rounded-pill' : '';
 

@@ -1,0 +1,18 @@
+.app-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: map-get($theme-colors, "grey-6");
+  padding: 24px;
+}
+
+.main-area {
+  min-height: 0;
+}
+
+.main-content {
+  min-height: 0;
+}
