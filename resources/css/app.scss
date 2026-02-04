@@ -1,20 +1,21 @@
-@import "@fontsource/inter/latin.css";
-@import "@fontsource/inter/latin-500.css";
-@import "@fontsource/inter/latin-600.css";
-@import "@fontsource/inter/latin-700.css";
+@use "base/fonts";
+
+@use "base/typography";
+@use "base/bootstrap-overrides";
+
+@use "layout/layout";
+@use "layout/topbar";
+
+@use "components/cards";
+
+@use "utilities/helpers";
 
 @import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
 
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-@import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
-@import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
-@import 'datatables.net-select-bs5/css/select.bootstrap5.css';
-
-@import "colors";
-@import "typography";
-@import "layout";
-
-//@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-//@source '../../storage/framework/views/*.php';
-//@source '../**/*.blade.php';
-//@source '../**/*.js';
+@import "base/colors";
+@import "layout/sidebar";
+@import "components/sidebar-menu";
+@import "components/sidebar-footer";
+@import "components/buttons";
+@import "components/menu-section";

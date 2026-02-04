@@ -1,0 +1,16 @@
+.sidebar {
+  background: map-get($custom-colors, "black");
+  color: #fff;
+  transition: width .25s ease;
+}
+
+.sidebar-inner {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.collapsed {
+  .logo-expanded { display: none; }
+  .logo-collapsed { display: block; }
+}

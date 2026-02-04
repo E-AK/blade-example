@@ -11,7 +11,9 @@
         {!! $iconLeft !!}
     @endif
 
-    <span>{{ $slot }}</span>
+    @if($text)
+        <span>{{ $text }}</span>
+    @endif
 
     @if ($iconRight)
         {!! $iconRight !!}

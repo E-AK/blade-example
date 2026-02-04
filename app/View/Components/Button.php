@@ -15,8 +15,8 @@ class Button extends Component
         'secondary' => 'btn-secondary',
         'danger' => 'btn-danger',
         'stroke' => 'btn-outline-primary',
-        'string' => 'btn-link',
-        'danger-string' => 'btn-link text-danger',
+        'string' => 'btn-string',
+        'danger-string' => 'btn-danger-string',
     ];
 
     private const SIZES = [
@@ -25,33 +25,44 @@ class Button extends Component
         'lg' => 'btn-lg',
     ];
 
+    private const TYPOGRAPHY = [
+        'sm' => 'b3',
+        'md' => 'b2',
+        'lg' => 'b1',
+    ];
+
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $class = '',
-        public string $variant = 'main',
-        public string $size = 'md',
-        public bool $outline = false,
-        public bool $block = false,
-        public bool $pill = true,
-        public bool $disabled = false,
-        public bool $loading = false,
+        public string $text,
         public ?string $iconLeft = null,
         public ?string $iconRight = null,
+        public string $variant = 'main',
+        public string $size = 'md',
+        public bool $pill = true,
+        public bool $block = false,
+        public bool $disabled = false,
+        public bool $loading = false,
         public string $type = 'button',
+        public string $class = ''
     ) {}
 
     public function classes(): string
     {
         $base = ['btn'];
 
+        // variant
         $base[] = self::VARIANTS[$this->variant] ?? self::VARIANTS['main'];
+        // size
         $base[] = self::SIZES[$this->size] ?? '';
+        // typography
+        $base[] = self::TYPOGRAPHY[$this->size] ?? '';
+        // block / pill
         $base[] = $this->block ? 'w-100' : '';
         $base[] = $this->pill ? 'rounded-pill' : '';
 
-        return implode(' ', array_filter($base)).' '.$this->class;
+        return implode(' ', array_filter($base)) . ' ' . $this->class;
     }
 
     /**

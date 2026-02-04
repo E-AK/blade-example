@@ -1,0 +1,32 @@
+.sidebar-nav {
+  padding: 1rem 0;
+  flex-grow: 1;
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  padding: .55rem .9rem;
+  margin: 2px 0;
+  border-radius: .5rem;
+  color: map-get($custom-colors, "white");
+  text-decoration: none;
+  transition: background .15s, color .15s;
+}
+
+.sidebar-menu a:hover {
+  background: map-get($custom-colors, "black-light");
+}
+
+.sidebar-menu a.active {
+  background: rgba(255,255,255,.08);
+}
+
+.sidebar-submenu {
+  display: none;
+  padding-left: 1.5rem;
+}
+
+.nav-item.has-sub.open > .sidebar-submenu {
+  display: block;
+}
