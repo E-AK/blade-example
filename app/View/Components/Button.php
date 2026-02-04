@@ -29,6 +29,7 @@ class Button extends Component
      * Create a new component instance.
      */
     public function __construct(
+        public string $class = '',
         public string $variant = 'main',
         public string $size = 'md',
         public bool $outline = false,
@@ -50,7 +51,7 @@ class Button extends Component
         $base[] = $this->block ? 'w-100' : '';
         $base[] = $this->pill ? 'rounded-pill' : '';
 
-        return implode(' ', array_filter($base));
+        return implode(' ', array_filter($base)).' '.$this->class;
     }
 
     /**

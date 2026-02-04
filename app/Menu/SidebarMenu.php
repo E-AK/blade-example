@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Helpers;
+namespace App\Menu;
 
+use Spatie\Menu\Laravel\Html;
 use Spatie\Menu\Laravel\Menu;
 
 class SidebarMenu
