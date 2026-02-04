@@ -14,3 +14,32 @@
   .logo-expanded { display: none; }
   .logo-collapsed { display: block; }
 }
+
+
+.sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+        font-size: 18px;
+        line-height: 1;
+    }
+}
+
+.sidebar.is-collapsed {
+    width: 64px;
+
+    .logo-expanded {
+        display: none;
+    }
+
+    .sidebar-toggle {
+        margin: 0 auto;
+    }
+
+    .sidebar-account,
+    .sidebar-knowledge-text {
+        display: none;
+    }
+}

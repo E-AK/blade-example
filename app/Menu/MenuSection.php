@@ -3,6 +3,7 @@
 namespace App\Menu;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Spatie\Menu\Activatable;
 use Spatie\Menu\Item;
@@ -51,24 +52,7 @@ class MenuSection implements Item, Activatable
 
     public function determineActiveForUrl(string $url, string $root = '/'): void
     {
-        if (! $this->hasUrl()) {
-            return;
-        }
-
-        $itemUrl = trim($this->url(), '/');
-        $current = trim($url, '/');
-
-        if ($itemUrl === '') {
-            $this->active = $current === '';
-            return;
-        }
-
-        if ($this->exactActive) {
-            $this->active = $itemUrl === $current;
-            return;
-        }
-
-        $this->active = Str::startsWith($current, $itemUrl);
+        // @TODO: active by url
     }
 
     public function render(): string

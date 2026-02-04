@@ -18,24 +18,39 @@
 
 <body>
 <div class="app-layout">
-    <aside id="sidebar" class="sidebar">
+    <aside
+        id="sidebar"
+        class="sidebar"
+        x-data="{ collapsed: false }"
+        :class="{ 'is-collapsed': collapsed }"
+    >
         <div class="sidebar-inner d-flex flex-column">
             <div class="px-3 py-3 d-flex align-items-center justify-content-between">
                 <div class="sidebar-logo">
-                    <x-icon name="logo_sidebar" class="logo-expanded" />
-
-{{--                    <x-icon name="logo_sidebar_min" class="logo-collapsed" />--}}
+                    <x-icon
+                        name="logo_sidebar"
+                        class="logo-expanded"
+                        x-show="!collapsed"
+                    />
+                    <x-icon
+                        name="logo_sidebar_min"
+                        class="logo-collapsed"
+                        x-show="collapsed"
+                    />
                 </div>
 
                 <div>
-{{--                    <button--}}
-{{--                            id="sidebarToggle"--}}
-{{--                            class="sidebar-toggle btn btn-sm btn-outline-light"--}}
-{{--                            type="button"--}}
-{{--                            aria-label="Toggle sidebar"--}}
-{{--                    >--}}
-{{--                        СВЕРНУТЬ МЕНЮ--}}
-{{--                    </button>--}}
+                    <button
+                        type="button"
+                        class="sidebar-toggle btn btn-sm btn-outline-light"
+                        @click="collapsed = !collapsed"
+                        :aria-label="collapsed ? 'Развернуть меню' : 'Свернуть меню'"
+                    >
+                        <i
+                            class="bi"
+                            :class="collapsed ? 'bi-arrow-bar-right' : 'bi-arrow-bar-left'"
+                        ></i>
+                    </button>
                 </div>
             </div>
 

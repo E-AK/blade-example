@@ -16,7 +16,7 @@ class SidebarMenu
             ->setActiveFromRequest()
             ->submenu(
                 MenuSection::make('Настройки', [
-                    'href' => '/settings',
+                    'href' => '',
                     'hasChildren' => true,
                     'icon' => '<i class="bi bi-toggles menu-section-icon"></i>'
                 ]),
