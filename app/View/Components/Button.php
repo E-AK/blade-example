@@ -62,7 +62,7 @@ class Button extends Component
         $base[] = $this->block ? 'w-100' : '';
         $base[] = $this->pill ? 'rounded-pill' : '';
 
-        return implode(' ', array_filter($base)) . ' ' . $this->class;
+        return implode(' ', array_filter($base)).' '.$this->class;
     }
 
     /**

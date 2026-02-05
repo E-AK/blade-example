@@ -3,14 +3,13 @@
 namespace App\Menu;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Spatie\Menu\Activatable;
 use Spatie\Menu\Item;
 
-class MenuSection implements Item, Activatable
+class MenuSection implements Activatable, Item
 {
     protected bool $active = false;
+
     protected bool $exactActive = false;
 
     public function __construct(
@@ -23,9 +22,15 @@ class MenuSection implements Item, Activatable
         return new self($text, $props);
     }
 
-    public function setActive(bool | callable $active = true): static
+    public function isExactActive(): bool
+    {
+        return true;
+    }
+
+    public function setActive(bool|callable $active = true): static
     {
         $this->active = $active;
+
         return $this;
     }
 
@@ -47,6 +52,7 @@ class MenuSection implements Item, Activatable
     public function setUrl(?string $url): static
     {
         $this->props['href'] = $url;
+
         return $this;
     }
 
@@ -66,10 +72,12 @@ class MenuSection implements Item, Activatable
     :href="$href ?? '#'"
     :active="$active"
     :has-children="$hasChildren ?? false"
+    :is-submenu="$isSubmenu ?? false"
+    :as-button="$asButton ?? false"
 />
 BLADE,
             array_merge($this->props, [
-                'text'   => $this->text,
+                'text' => $this->text,
                 'active' => $this->active,
             ])
         );
@@ -78,6 +86,7 @@ BLADE,
     public function setInactive(): static
     {
         $this->active = false;
+
         return $this;
     }
 }

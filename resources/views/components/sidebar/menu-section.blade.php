@@ -23,6 +23,10 @@
             </span>
                     @endif
 
+                    @if ($isNew)
+                        <span class="menu-badge">NEW</span>
+                    @endif
+
                     @if ($hasChildren)
                         <span class="menu-arrow d-flex align-items-center">
                 <i class="bi bi-arrow-right-short menu-arrow-icon"></i>

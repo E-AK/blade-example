@@ -1,0 +1,7 @@
+.sidebar-submenu {
+  width: 280px;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: map-get($custom-colors, "black");
+  gap: 8px;
+}

@@ -180,3 +180,62 @@
     }
   }
 }
+
+// =====================================================
+// SUBMENU VARIANT
+// =====================================================
+.menu-section--submenu {
+  width: 256px;
+  min-height: auto;
+
+  padding: 4px 8px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &::before {
+    display: none;
+  }
+
+  .menu-text {
+    @extend .p4;
+  }
+
+  .menu-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .menu-arrow-icon {
+    font-size: 16px;
+  }
+
+  &:hover {
+    background-color: map-get($custom-colors, "black-light");
+  }
+}
+
+// =====================================================
+// ACTION
+// =====================================================
+.menu-section--action {
+  &,
+  .menu-text,
+  .menu-icon {
+    color: map-get($custom-colors, "grey-1");
+  }
+
+  &:hover {
+    .menu-text,
+    .menu-icon {
+      color: map-get($custom-colors, "yellow");
+    }
+  }
+
+  &::before {
+    display: none;
+  }
+}
