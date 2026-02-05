@@ -1,0 +1,182 @@
+// =====================================================
+// BASE
+// =====================================================
+.menu-section {
+  position: relative;
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 8px;
+
+  color: map-get($custom-colors, "white");
+  transition: background-color .2s, color .2s;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 32px;
+    border-radius: 18px;
+    background-color: map-get($custom-colors, "yellow");
+    opacity: 0;
+    transition: opacity .2s;
+  }
+
+  &:hover {
+    background-color: map-get($custom-colors, "black-light");
+
+    &::before {
+      opacity: 1;
+    }
+
+    .menu-icon,
+    &.has-children .menu-arrow {
+      color: map-get($custom-colors, "yellow");
+    }
+  }
+
+  &.active {
+    .menu-icon {
+      color: map-get($custom-colors, "yellow");
+    }
+  }
+}
+
+// =====================================================
+// INNER
+// =====================================================
+.menu-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.menu-text {
+  @extend .b1;
+}
+
+.menu-arrow-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+// =====================================================
+// MUTED VARIANTS (knowledge, toggle)
+// =====================================================
+.menu-section--muted {
+  background-color: transparent !important;
+
+  &::before {
+    display: none;
+  }
+
+  &,
+  .menu-text,
+  .menu-icon {
+    color: map-get($custom-colors, "grey-2") !important;
+  }
+
+  &:hover,
+  &.active {
+    background-color: transparent !important;
+
+    .menu-text,
+    .menu-icon {
+      color: map-get($custom-colors, "white") !important;
+    }
+  }
+}
+
+// конкретные алиасы
+.menu-knowledge {
+  @extend .menu-section--muted;
+}
+
+.menu-toggle {
+  @extend .menu-section--muted;
+
+  .menu-text {
+    @extend .p5;
+  }
+}
+
+// =====================================================
+// COLLAPSED SIDEBAR
+// =====================================================
+.sidebar.is-collapsed {
+  .menu-section {
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 52px;
+    padding: 4px;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .menu-icon {
+    font-size: 24px;
+  }
+
+  .menu-text {
+    @extend .p5;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-arrow-icon {
+    display: none;
+  }
+
+  .menu-toggle {
+    justify-content: center;
+
+    .menu-text {
+      display: none;
+    }
+  }
+}
+
+// =====================================================
+// SIDEBAR TOGGLE BUTTON
+// =====================================================
+.sidebar-toggle-btn {
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid map-get($custom-colors, "black-light") !important;
+  padding: 8px 12px;
+  gap: 8px !important;
+
+  justify-content: start;
+
+  background-color: transparent;
+  color: map-get($custom-colors, "grey-2");
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  .menu-icon {
+    font-size: 18px;
+  }
+
+  .menu-text {
+    @extend .p5;
+  }
+
+  &:hover {
+    background-color: map-get($custom-colors, "black-light");
+    color: map-get($custom-colors, "white");
+
+    .menu-icon {
+      color: map-get($custom-colors, "yellow");
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+}
