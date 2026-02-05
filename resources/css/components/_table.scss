@@ -1,0 +1,86 @@
+@use "sass:map";
+
+.data-table {
+    font-size: 14px;
+    line-height: 20px;
+
+    & thead th {
+        border-bottom-width: 0 !important;
+        background-color: map.get($theme-colors, "grey-6") !important;
+        color: map.get($theme-colors, "grey-1");
+        position: relative;
+        padding: 12px;
+
+        &:hover,
+        &:focus {
+            outline: none !important;
+        }
+
+        &:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        &:not(:first-child)::after {
+            content: "";
+            background-color: map.get($theme-colors, "grey-4");
+            height: 22px;
+            width: 1px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    & tbody tr:first-child {
+        border-top-width: 0 !important;
+    }
+
+    & tbody td {
+        padding: 12px;
+    }
+
+    .pagination {
+        --bs-pagination-padding-x: .5rem;
+        --bs-pagination-padding-y: .25rem;
+        --bs-pagination-font-size: .875rem;
+
+        --bs-pagination-color: map.get($theme-colors, "black");
+        --bs-pagination-hover-color: map.get($theme-colors, "black");
+        --bs-pagination-active-color: map.get($theme-colors, "black");
+
+        --bs-pagination-bg: transparent;
+        --bs-pagination-hover-bg: map.get($theme-colors, "white");
+        --bs-pagination-active-bg: map.get($theme-colors, "white");
+
+        --bs-pagination-border-width: 0;
+        --bs-pagination-border-radius: .5rem;
+
+        & .page-item {
+            margin: 0 .15rem;
+            border-radius: .5rem;
+
+            &>.page-link {
+                border: 0;
+                background: transparent;
+                border-radius: .5rem;
+            }
+        }
+
+        & .page-item.active,
+        & .page-item:hover,
+        & .page-item:focus {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        & .page-item.disabled {
+            opacity: 0.4;
+        }
+    }
+}
