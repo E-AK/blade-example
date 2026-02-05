@@ -35,7 +35,7 @@ class Button extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $text,
+        public string $text = '',
         public ?string $iconLeft = null,
         public ?string $iconRight = null,
         public string $variant = 'main',

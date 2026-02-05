@@ -16,7 +16,8 @@ class MenuSection extends Component
         public bool $active = false,
         public bool $hasChildren = false,
         public string $href = '#',
-        public string $class = ''
+        public string $class = '',
+        public bool $asButton = false
     ) {}
 
     public function classes(): string
@@ -32,6 +33,6 @@ class MenuSection extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.menu-section');
+        return view('components.sidebar.menu-section');
     }
 }

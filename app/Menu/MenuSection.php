@@ -52,6 +52,7 @@ class MenuSection implements Item, Activatable
 
     public function determineActiveForUrl(string $url, string $root = '/'): void
     {
+        $this->active = true;
         // @TODO: active by url
     }
 

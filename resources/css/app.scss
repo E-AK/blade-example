@@ -6,8 +6,6 @@
 @use "layout/layout";
 @use "layout/topbar";
 
-@use "components/cards";
-
 @use "utilities/helpers";
 
 @import "bootstrap/scss/bootstrap";
@@ -15,7 +13,8 @@
 
 @import "base/colors";
 @import "layout/sidebar";
-@import "components/sidebar-menu";
-@import "components/sidebar-footer";
 @import "components/buttons";
-@import "components/menu-section";
+@import "components/sidebar/menu-section";
+@import "components/sidebar/profile/profile-card";
+@import "components/sidebar/profile/profile";
+@import "components/sidebar/profile/balance";

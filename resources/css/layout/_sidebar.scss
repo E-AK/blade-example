@@ -1,45 +1,90 @@
 .sidebar {
+  width: 280px;
+  padding: 20px 12px;
   background: map-get($custom-colors, "black");
   color: #fff;
-  transition: width .25s ease;
-}
 
-.sidebar-inner {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  transition: width .25s ease, padding .25s ease;
+  height: 100%;
+  gap: 20px;
 }
 
-.sidebar.collapsed {
-  .logo-expanded { display: none; }
-  .logo-collapsed { display: block; }
+.sidebar-logo {
+  width: 256px;
+  height: 28px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
+.sidebar-header {
+  display: flex;
+  gap: 20px;
+}
 
 .sidebar-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    i {
-        font-size: 18px;
-        line-height: 1;
-    }
+  i {
+    font-size: 18px;
+    line-height: 1;
+  }
+}
+
+.sidebar-nav {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.sidebar-footer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
 }
 
 .sidebar.is-collapsed {
+  width: 80px;
+  padding: 20px 8px;
+
+  .logo-expanded { display: none; }
+  .logo-collapsed { display: block; }
+
+  .sidebar-toggle {
+    margin: 0 auto;
+  }
+
+  /* Footer stack центрируется */
+  .sidebar-footer-stack {
+    align-items: center;
+  }
+
+  /* База знаний превращается в квадратную кнопку */
+  .menu-knowledge {
+    width: 56px;
+    height: 56px;
+    padding: 6px 4px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-knowledge .menu-text {
+    display: none;
+  }
+
+  .menu-knowledge .menu-icon {
+    font-size: 24px;
+  }
+
+  .sidebar-logo {
     width: 64px;
-
-    .logo-expanded {
-        display: none;
-    }
-
-    .sidebar-toggle {
-        margin: 0 auto;
-    }
-
-    .sidebar-account,
-    .sidebar-knowledge-text {
-        display: none;
-    }
+    height: 28px;
+  }
 }
