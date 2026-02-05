@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('accounts', static function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('status');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

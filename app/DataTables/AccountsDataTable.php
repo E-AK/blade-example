@@ -4,12 +4,12 @@ namespace App\DataTables;
 
 use App\Models\Account;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Services\DataTable;
 
-class AccountsDataTable extends DataTable
+class AccountsDataTable extends BaseDataTable
 {
     /**
      * Build the DataTable class.
@@ -19,6 +19,18 @@ class AccountsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('users', function (Account $account) {
+                return Str::limit($account->users->pluck('name')->join(', '), 30);
+            })
+            ->addColumn('active', function (Account $account) {
+                return $account->active ? 'Активный' : 'Неактивный';
+            })
+            ->filterColumn('active', function (QueryBuilder $query, $value) {
+                $query->where('active', $value === 'true');
+            })
+            ->orderColumn('active', function (QueryBuilder $query, $order) {
+                $query->orderBy('active', $order);
+            })
             ->setRowId('id');
     }
 
@@ -29,7 +41,7 @@ class AccountsDataTable extends DataTable
      */
     public function query(Account $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('users');
     }
 
     /**
@@ -38,11 +50,9 @@ class AccountsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('accounts-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->orderBy(1)
-            ->selectStyleSingle();
+            ->orderBy(0)
+            ->minifiedAjax();
     }
 
     /**
@@ -51,7 +61,16 @@ class AccountsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('name'),
+            Column::make('id')
+                ->hidden(),
+            Column::make('name')
+                ->title('Название')
+                ->searchable(true),
+            Column::computed('users')
+                ->title('Пользователи'),
+            Column::make('active')
+                ->title('Статус')
+                ->searchable(false),
         ];
     }
 
@@ -60,6 +79,6 @@ class AccountsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Accounts_'.date('YmdHis');
+        return 'аккаунты_'.date('YmdHis');
     }
 }

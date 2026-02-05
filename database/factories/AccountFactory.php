@@ -15,8 +15,8 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'status' => $this->faker->randomElement(['Активен', 'Не активен']),
+            'name' => $this->faker->company(),
+            'active' => $this->faker->boolean(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

@@ -12,15 +12,21 @@ class Account extends Model
 {
     use HasFactory;
 
-    protected $fillable
-        = [
-            'name',
-            'status',
-        ];
+    protected $fillable = [
+        'name',
+        'active',
+    ];
 
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
+    /**
+     * @return BelongsToMany<User, $this, AccountUser>
+     */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'account_users')
+        return $this->belongsToMany(User::class, 'account_user')
             ->using(AccountUser::class);
     }
 }
