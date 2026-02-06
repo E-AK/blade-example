@@ -10,27 +10,24 @@ class SidebarMenu
 {
     public static function render(): string
     {
+        $sub = Menu::new()
+            ->addClass('sidebar-menu list-unstyled mb-0')
+            ->add(MenuSection::make('Управление аккаунтами', [
+                'href' => route('settings.account'),
+                'isSubmenu' => true,
+            ]));
+
         return Menu::new()
             ->addClass('sidebar-menu list-unstyled mb-0')
-            ->setActiveFromRequest()
-            ->submenu(
-                MenuSection::make('Настройки', [
-                    'href' => '',
-                    'asButton' => true,
-                    'hasChildren' => true,
-                    'icon' => '<i class="bi bi-toggles menu-section-icon"></i>',
-                ]),
-                function (Menu $menu) {
-                    $menu
-                        ->addClass('sidebar-menu list-unstyled mb-0')
-                        ->setActiveFromRequest()
-                        ->add(
-                            MenuSection::make('Управление аккаунтами', [
-                                'href'      => route('settings.account'),
-                                'isSubmenu' => true,
-                            ])
-                        );
-                }
+            ->add(
+                SidebarDropdown::make(
+                    MenuSection::make('Настройки', [
+                        'asButton' => true,
+                        'hasChildren' => true,
+                        'icon' => '<i class="bi bi-toggles menu-section-icon"></i>',
+                    ]),
+                    $sub
+                )
             )
             ->render();
     }

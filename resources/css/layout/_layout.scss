@@ -4,6 +4,10 @@
   height: 100vh;
 }
 
+.app-layout.is-collapsed {
+  grid-template-columns: 80px 1fr;
+}
+
 .main-area {
   min-width: 0;
 }

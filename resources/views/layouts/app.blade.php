@@ -17,13 +17,12 @@
 </head>
 
 <body>
-<div class="app-layout">
-    <aside
-        id="sidebar"
-        class="sidebar"
+<div
+        class="app-layout"
         x-data="{ collapsed: false }"
         :class="{ 'is-collapsed': collapsed }"
-    >
+>
+    <aside class="sidebar">
         <div class="sidebar-header flex-column">
             <div class="sidebar-logo">
                 <x-icon name="logo_sidebar" class="logo-expanded" x-show="!collapsed"/>

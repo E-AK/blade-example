@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all .2s ease;
 
   // ===== VARIANTS =====
   &.yellow {
@@ -26,7 +25,6 @@
     justify-content: center;
     color: var(--balance-accent);
     line-height: 1;
-    transition: all .2s ease;
   }
 
   .balance-left-icon i {
@@ -48,7 +46,7 @@
   }
 }
 
-.sidebar.is-collapsed {
+.app-layout.is-collapsed {
   .profile-balance {
     width: 56px;
     height: 56px;

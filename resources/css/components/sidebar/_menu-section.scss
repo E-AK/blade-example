@@ -8,7 +8,6 @@
   border-radius: 8px;
 
   color: map-get($custom-colors, "white");
-  transition: background-color .2s, color .2s;
 
   &::before {
     content: "";
@@ -21,7 +20,6 @@
     border-radius: 18px;
     background-color: map-get($custom-colors, "yellow");
     opacity: 0;
-    transition: opacity .2s;
   }
 
   &:hover {
@@ -104,8 +102,10 @@
 // =====================================================
 // COLLAPSED SIDEBAR
 // =====================================================
-.sidebar.is-collapsed {
-  .menu-section {
+.app-layout.is-collapsed {
+
+  /* Только пункты ОСНОВНОГО сайдбара */
+  .menu-section:not(.menu-section--submenu) {
     flex-direction: column;
     justify-content: center;
 
@@ -121,7 +121,7 @@
     font-size: 24px;
   }
 
-  .menu-text {
+  .menu-text:not(.menu-section--submenu .menu-text) {
     @extend .p5;
     text-align: center;
     white-space: nowrap;
@@ -129,7 +129,7 @@
     text-overflow: ellipsis;
   }
 
-  .menu-arrow-icon {
+  .menu-section:not(.menu-section--submenu) .menu-arrow-icon {
     display: none;
   }
 
@@ -157,7 +157,6 @@
   background-color: transparent;
   color: map-get($custom-colors, "grey-2");
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
 
   .menu-icon {
     font-size: 18px;

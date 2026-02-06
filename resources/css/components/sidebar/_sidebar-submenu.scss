@@ -1,7 +1,24 @@
-.sidebar-submenu {
+.sidebar-item {
+  position: relative;
+}
+
+.sidebar-submenu-dropdown {
+  position: absolute;
+  top: 0;
+  left: 100%;
   width: 280px;
   padding: 12px;
   border-radius: 12px;
   background-color: map-get($custom-colors, "black");
   gap: 8px;
+  z-index: 1050;
+}
+
+.sidebar-submenu-inner .sidebar-menu {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-submenu-inner .menu-section {
+  padding-left: 1rem;
 }

@@ -21,7 +21,7 @@
 
             <div class="d-flex justify-content-center align-items-center h-100">
                 @if($createLabel)
-                    <x-button :text="$createLabel" variant="danger-string" size="lg" />
+                    <x-button :text="$createLabel" size="lg" />
                 @endif
             </div>
         </div>
