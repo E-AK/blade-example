@@ -1,0 +1,7 @@
+@function clr($name) {
+  @return map-get($palette, $name);
+}
+
+@function color-alpha($name, $alpha) {
+  @return rgba(clr($name), $alpha);
+}

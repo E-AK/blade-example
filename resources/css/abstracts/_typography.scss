@@ -1,0 +1,33 @@
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif !default;
+
+$fw-regular: 400 !default;
+$fw-medium: 500 !default;
+$fw-semibold: 600 !default;
+$fw-bold: 700 !default;
+
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: $fw-semibold;
+$headings-line-height: 1.2;
+
+h1 { font-size: 24px; line-height: 32px; font-weight: $fw-semibold; }
+h2 { font-size: 20px; line-height: 28px; font-weight: $fw-semibold; }
+h3 { font-size: 16px; line-height: 24px; font-weight: $fw-bold; }
+h4 { font-size: 16px; line-height: 24px; font-weight: $fw-semibold; }
+h5 { font-size: 14px; line-height: 20px; font-weight: $fw-bold; }
+h6 { font-size: 14px; line-height: 20px; font-weight: $fw-semibold; }
+//h7 { font-size: 12px; line-height: 16px; font-weight: $fw-bold; }
+
+.p1 { font-size: 20px; line-height: 28px; font-weight: $fw-regular; }
+.p2 { font-size: 16px; line-height: 24px; font-weight: $fw-regular; }
+.p3, .p4 { font-size: 16px; line-height: 20px; font-weight: $fw-regular; }
+.p5 { font-size: 12px; line-height: 16px; font-weight: $fw-regular; }
+.caps { font-size: 12px; line-height: 16px; font-weight: $fw-regular; text-transform: uppercase; }
+
+.b1 { font-size: 16px; line-height: 20px; font-weight: $fw-medium; }
+.b2 { font-size: 14px; line-height: 20px; font-weight: $fw-medium; }
+.b3 { font-size: 12px; line-height: 16px; font-weight: $fw-medium; }
+
+.l1 { font-size: 16px; line-height: 24px; font-weight: $fw-regular; }
+.l2 { font-size: 14px; line-height: 20px; font-weight: $fw-regular; }
+.l3 { font-size: 12px; line-height: 16px; font-weight: $fw-regular; }

@@ -1,0 +1,191 @@
+.menu-item {
+  position: relative;
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 8px;
+
+  color: map-get($custom-colors, "white") !important;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 32px;
+    border-radius: 18px;
+    background-color: map-get($custom-colors, "yellow");
+    opacity: 0;
+  }
+
+  &:hover {
+    background-color: map-get($custom-colors, "black-light");
+
+    &::before {
+      opacity: 1;
+    }
+
+    .menu-icon,
+    &.has-children .menu-arrow {
+      color: map-get($custom-colors, "yellow");
+    }
+  }
+
+  &.active {
+    .menu-icon {
+      color: map-get($custom-colors, "yellow");
+    }
+  }
+}
+
+.menu-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.menu-text {
+  @extend .b1;
+}
+
+.menu-arrow-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.menu-item--muted {
+  &::before {
+    display: none;
+  }
+
+  &,
+  .menu-text,
+  .menu-icon {
+    color: map-get($custom-colors, "grey-2") !important;
+  }
+
+  &:hover,
+  &.active {
+    .menu-text,
+    .menu-icon {
+      color: map-get($custom-colors, "white") !important;
+    }
+  }
+}
+
+.menu-knowledge {
+  @extend .menu-item--muted;
+}
+
+.app-layout.is-collapsed {
+  .menu-item:not(.menu-item--submenu) {
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 52px;
+    padding: 4px;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .menu-icon {
+    font-size: 24px;
+  }
+
+  .menu-text:not(.menu-item--submenu .menu-text) {
+    @extend .p5;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-item:not(.menu-item--submenu) .menu-arrow-icon {
+    display: none;
+  }
+
+  .sidebar-toggle-btn .menu-text {
+    display: none;
+  }
+}
+
+.sidebar-toggle-btn {
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid map-get($custom-colors, "black-light") !important;
+  padding: 8px 12px !important;
+  gap: 8px !important;
+
+  color: map-get($custom-colors, "grey-2") !important;
+
+  .menu-icon {
+    font-size: 18px;
+  }
+
+  .menu-text {
+    @extend .p5;
+  }
+
+  &:hover {
+    color: map-get($custom-colors, "white") !important;
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.menu-item--submenu {
+  width: 256px;
+  min-height: auto;
+
+  padding: 4px 8px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &::before {
+    display: none;
+  }
+
+  .menu-text {
+    @extend .p4;
+  }
+
+  .menu-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .menu-arrow-icon {
+    font-size: 16px;
+  }
+
+  &:hover {
+    background-color: map-get($custom-colors, "black-light");
+  }
+}
+
+.menu-item--action {
+  &,
+  .menu-text,
+  .menu-icon {
+    color: map-get($custom-colors, "grey-1");
+  }
+
+  &:hover {
+    .menu-text,
+    .menu-icon {
+      color: map-get($custom-colors, "yellow");
+    }
+  }
+
+  &::before {
+    display: none;
+  }
+}
