@@ -20,10 +20,12 @@
     color: map-get($custom-colors, "yellow");
   }
 
-  .menu-arrow-icon:hover {
-    .account-arrow {
-      color: map-get($custom-colors, "yellow");
-    }
+  .menu-arrow-icon {
+    color: map-get($custom-colors, "white");
+  }
+
+  &:hover .menu-arrow-icon {
+    color: map-get($custom-colors, "yellow");
   }
 }
 
@@ -42,8 +44,6 @@
 }
 
 .avatar-circle {
-  width: 100%;
-  height: 100%;
   border-radius: inherit;
   background-color: inherit;
 }
@@ -56,23 +56,16 @@
   width: 24px;
   height: 16px;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   gap: 2px;
 
   padding: 2px 6px;
 
   font-size: 10px;
   line-height: 12px;
-  font-weight: 500;
 
   color: map-get($custom-colors, "white");
   background-color: map-get($custom-colors, "red");
-
-  border-radius: 100px;
   border: 2px solid map-get($custom-colors, "black");
 
-  white-space: nowrap;
   box-sizing: border-box;
 }

@@ -1,15 +1,13 @@
 .menu-item {
-  position: relative;
-  min-height: 48px;
-  padding: 0 12px;
-  border-radius: 8px;
-
+  &:not(.menu-item--submenu) {
+    min-height: 48px;
+  }
   color: map-get($custom-colors, "white") !important;
 
   &::before {
     content: "";
     position: absolute;
-    left: 4px;
+    left: -2px;
     top: 50%;
     transform: translateY(-50%);
     width: 4px;
@@ -37,20 +35,19 @@
       color: map-get($custom-colors, "yellow");
     }
   }
+
+  .item-container {
+    @extend .d-flex;
+    @extend .gap-3;
+  }
 }
 
 .menu-icon {
   font-size: 18px;
-  line-height: 1;
-}
-
-.menu-text {
-  @extend .b1;
 }
 
 .menu-arrow-icon {
   font-size: 24px;
-  line-height: 1;
 }
 
 .menu-item--muted {
@@ -61,6 +58,7 @@
   &,
   .menu-text,
   .menu-icon {
+    @extend .b1;
     color: map-get($custom-colors, "grey-2") !important;
   }
 
@@ -75,18 +73,32 @@
 
 .menu-knowledge {
   @extend .menu-item--muted;
+  @extend .align-items-center;
+  justify-content: center !important;
 }
 
 .app-layout.is-collapsed {
   .menu-item:not(.menu-item--submenu) {
+    min-height: 52px;
+    padding: 4px;
     flex-direction: column;
     justify-content: center;
 
-    min-height: 52px;
-    padding: 4px;
+    .item-container {
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .gap-1;
+    }
 
-    &::before {
-      display: none;
+    .menu-text {
+      display: none !important;
+    }
+
+    .menu-short-text {
+      @extend .p5;
+      display: flex !important;
+      white-space: nowrap;
+      width: 100%;
     }
   }
 
@@ -94,16 +106,12 @@
     font-size: 24px;
   }
 
-  .menu-text:not(.menu-item--submenu .menu-text) {
-    @extend .p5;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   .menu-item:not(.menu-item--submenu) .menu-arrow-icon {
     display: none;
+  }
+
+  .sidebar-toggle-btn {
+    justify-content: center !important;
   }
 
   .sidebar-toggle-btn .menu-text {
@@ -113,47 +121,30 @@
 
 .sidebar-toggle-btn {
   height: 40px;
-  border-radius: 8px;
   border: 1px solid map-get($custom-colors, "black-light") !important;
-  padding: 8px 12px !important;
-  gap: 8px !important;
-
   color: map-get($custom-colors, "grey-2") !important;
-
-  .menu-icon {
-    font-size: 18px;
-  }
-
-  .menu-text {
-    @extend .p5;
-  }
 
   &:hover {
     color: map-get($custom-colors, "white") !important;
+  }
 
-    &::before {
-      display: none;
-    }
+  &::before {
+    display: none !important;
+  }
+
+  &:hover::before {
+    opacity: 0 !important;
   }
 }
 
 .menu-item--submenu {
+  @extend .p4;
   width: 256px;
-  min-height: auto;
-
   padding: 4px 8px;
-  border-radius: 8px;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
 
   &::before {
-    display: none;
-  }
-
-  .menu-text {
-    @extend .p4;
+    width: 4px;
+    height: 20px;
   }
 
   .menu-icon {
@@ -188,4 +179,19 @@
   &::before {
     display: none;
   }
+}
+
+.menu-badge {
+  @extend .l3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: map-get($custom-colors, "yellow-black");
+  color: map-get($custom-colors, "yellow");
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  gap: 10px;
+  text-align: center;
 }

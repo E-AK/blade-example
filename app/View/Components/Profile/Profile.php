@@ -17,6 +17,7 @@ class Profile extends Component
         public string $title,
         public string $subtitle,
         public ?string $badge = null,
+        public bool $hasChildren = false,
         public string $class = ''
     ) {
         //

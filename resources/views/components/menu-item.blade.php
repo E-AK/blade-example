@@ -1,36 +1,42 @@
 <div {{ $attributes }}>
     @if($asButton)
         <button
-            type="button"
-            class="{{ $classes() }} d-flex align-items-center text-start w-100 border-0 bg-transparent"
+                type="button"
+                class="d-flex align-items-center text-start w-100 border-0 bg-transparent position-relative rounded-2 px-3 justify-content-between {{ $classes() }}"
         >
             @else
                 <a
-                    href="{{ $href }}"
-                    class="{{ $classes() }} d-flex align-items-center text-decoration-none text-reset"
+                        href="{{ $href }}"
+                        class="d-flex align-items-center text-decoration-none text-reset position-relative rounded-2 px-3 justify-content-between {{ $classes() }}"
                 >
                     @endif
+                    <div class="item-container">
+                        @if ($icon)
+                            <span class="menu-icon d-flex align-items-center justify-content-center fs-5 lh-1">
+                            {!! $icon !!}
+                          </span>
+                        @endif
 
-                    @if ($icon)
-                        <span class="menu-icon d-flex align-items-center justify-content-center">
-                {!! $icon !!}
-            </span>
-                    @endif
+                        @if($text !== '')
+                            <span class="menu-text flex-grow-1 d-block text-truncate">
+                            {{ $text }}
+                          </span>
+                        @endif
 
-                    @if($text !== '')
-                        <span class="menu-text flex-grow-1">
-                {{ $text }}
-            </span>
-                    @endif
-
+                        @if($shortText !== '' && !$isSubmenu)
+                            <span class="menu-short-text d-none d-app-collapsed d-flex justify-content-center align-items-center">
+                                            {{ $shortText }}
+                                        </span>
+                        @endif
+                    </div>
                     @if ($isNew)
-                        <span class="menu-badge">NEW</span>
+                        <span class="menu-badge">new</span>
                     @endif
 
                     @if ($hasChildren)
                         <span class="menu-arrow d-flex align-items-center">
-                <i class="bi bi-arrow-right-short menu-arrow-icon"></i>
-            </span>
+        <i class="bi bi-arrow-right-short menu-arrow-icon fs-4 lh-1"></i>
+      </span>
             @endif
 
             @if($asButton)

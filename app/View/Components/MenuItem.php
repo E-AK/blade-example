@@ -15,6 +15,7 @@ class MenuItem extends Component
      */
     public function __construct(
         public string $text = '',
+        public string $shortText = '',
         public ?string $icon = null,
         public bool $active = false,
         public bool $hasChildren = false,

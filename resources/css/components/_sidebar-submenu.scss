@@ -1,0 +1,44 @@
+.sidebar-item {
+  position: relative;
+}
+
+.sidebar-submenu-dropdown {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: map-get($custom-colors, "black");
+  flex-direction: column;
+  gap: 6px;
+
+  opacity: 0;
+  display: none;
+
+  z-index: 1050;
+}
+
+.sidebar-item.has-submenu:hover > .sidebar-submenu-dropdown {
+  opacity: 1;
+  display: flex;
+  transform: translateX(0);
+}
+
+.sidebar-item.has-submenu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 16px;
+  height: 100%;
+}
+
+.sidebar-submenu-inner .sidebar-menu {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-submenu-inner .menu-section {
+  padding-left: 1rem;
+}

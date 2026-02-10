@@ -2,10 +2,12 @@
     'class' => 'account-compact d-flex align-items-center gap-2 ' . $class
 ]) }}>
     <div class="position-relative account-avatar">
-        <div class="avatar-circle"></div>
+        <div class="avatar-circle w-100 h-100"></div>
 
         @if($badge)
-            <span class="p5 avatar-badge">{{ $badge }}</span>
+            <span class="p5 avatar-badge d-inline-flex align-items-center justify-content-center rounded-pill text-nowrap">
+                {{ $badge }}
+            </span>
         @endif
     </div>
 
@@ -20,5 +22,9 @@
         </div>
     </div>
 
-    <i class="bi bi-arrow-right-short menu-arrow-icon"></i>
+    @if($hasChildren)
+        <span class="menu-arrow d-flex align-items-center">
+            <i class="bi bi-arrow-right-short menu-arrow-icon fs-4 lh-1"></i>
+        </span>
+    @endif
 </div>

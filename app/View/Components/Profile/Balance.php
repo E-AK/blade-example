@@ -21,6 +21,7 @@ class Balance extends Component
     public function __construct(
         public string $variant = 'yellow',
         public string $balance = '0.00',
+        public string $paymentRoute = '/payment',
         public string $class = ''
     ) {
         //
@@ -28,11 +29,11 @@ class Balance extends Component
 
     public function classes(): string
     {
-        $base = ['profile-balance d-flex align-items-center justify-content-between'];
+        $base = ['text-decoration-none profile-balance d-flex align-items-center justify-content-between'];
 
         $base[] = self::VARIANTS[$this->variant] ?? self::VARIANTS['yellow'];
 
-        return implode(' ', array_filter($base)) . ' ' . $this->class;
+        return implode(' ', array_filter($base)).' '.$this->class;
     }
 
     /**
