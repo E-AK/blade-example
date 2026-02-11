@@ -124,8 +124,12 @@
   border: 1px solid map-get($custom-colors, "black-light") !important;
   color: map-get($custom-colors, "grey-2") !important;
 
-  &:hover {
-    color: map-get($custom-colors, "white") !important;
+  &:hover,
+  &.active {
+    .menu-text,
+    .menu-icon {
+      color: map-get($custom-colors, "white") !important;
+    }
   }
 
   &::before {

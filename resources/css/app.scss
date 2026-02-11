@@ -1,3 +1,4 @@
+@import "abstracts/fonts";
 @import "bootstrap", "bootstrap-icons/font/bootstrap-icons.css";
 
 @import "abstracts/color-tokens", "abstracts/typography";
@@ -9,4 +10,10 @@
   "components/sidebar/profile/profile",
   "components/sidebar/profile/balance";
 
-@import "components/buttons";
+@import "components/buttons",
+  "components/table",
+  "components/search";
+
+.bi::before {
+  vertical-align: 0 !important;
+}

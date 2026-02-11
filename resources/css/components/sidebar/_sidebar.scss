@@ -10,6 +10,14 @@
   height: 28px;
 }
 
+.logo-collapsed {
+  display: none;
+}
+
+.logo-expanded {
+  display: block;
+}
+
 .app-layout.is-collapsed {
   .sidebar {
     width: 80px;
@@ -18,5 +26,13 @@
   .sidebar-logo {
     width: 64px;
     height: 28px;
+  }
+
+  .logo-expanded {
+    display: none;
+  }
+
+  .logo-collapsed {
+    display: block;
   }
 }
