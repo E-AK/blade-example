@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components;
+namespace App\View\Components\Sidebar;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -57,6 +57,6 @@ class MenuItem extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.menu-item');
+        return view('components.sidebar.menu-item');
     }
 }

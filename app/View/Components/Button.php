@@ -1,0 +1,75 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\View\Components;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class Button extends Component
+{
+    private const VARIANTS = [
+        'main' => 'btn-primary',
+        'secondary' => 'btn-secondary',
+        'danger' => 'btn-danger',
+        'stroke' => 'btn-outline-primary',
+        'string' => 'btn-string',
+        'danger-string' => 'btn-danger-string',
+    ];
+
+    private const SIZES = [
+        'sm' => 'btn-sm',
+        'md' => '',
+        'lg' => 'btn-lg',
+    ];
+
+    private const TYPOGRAPHY = [
+        'sm' => 'b3',
+        'md' => 'b2',
+        'lg' => 'b1',
+    ];
+
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(
+        public string $text = '',
+        public ?string $iconLeft = null,
+        public ?string $iconRight = null,
+        public string $variant = 'main',
+        public string $size = 'md',
+        public bool $pill = true,
+        public bool $block = false,
+        public bool $disabled = false,
+        public bool $loading = false,
+        public string $type = 'button',
+        public string $class = ''
+    ) {}
+
+    public function classes(): string
+    {
+        $base = ['btn'];
+
+        // variant
+        $base[] = self::VARIANTS[$this->variant] ?? self::VARIANTS['main'];
+        // size
+        $base[] = self::SIZES[$this->size] ?? '';
+        // typography
+        $base[] = self::TYPOGRAPHY[$this->size] ?? '';
+        // block / pill
+        $base[] = $this->block ? 'w-100' : '';
+        $base[] = $this->pill ? 'rounded-pill' : '';
+
+        return implode(' ', array_filter($base)).' '.$this->class;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.button');
+    }
+}

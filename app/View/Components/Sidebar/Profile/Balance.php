@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Profile;
+namespace App\View\Components\Sidebar\Profile;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -41,6 +41,6 @@ class Balance extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.profile.balance');
+        return view('components.sidebar.profile.balance');
     }
 }

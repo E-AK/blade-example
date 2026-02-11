@@ -2,9 +2,11 @@
 
 @import "abstracts/color-tokens", "abstracts/typography";
 @import "layout";
-@import "components/sidebar",
-  "components/menu-item",
-  "components/sidebar-submenu",
-  "components/profile/profile-card",
-  "components/profile/profile",
-  "components/profile/balance";
+@import "components/sidebar/sidebar",
+  "components/sidebar/menu-item",
+  "components/sidebar/sidebar-submenu",
+  "components/sidebar/profile/profile-card",
+  "components/sidebar/profile/profile",
+  "components/sidebar/profile/balance";
+
+@import "components/buttons";

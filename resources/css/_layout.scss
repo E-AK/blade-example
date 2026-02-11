@@ -28,6 +28,24 @@
   height: 88px;
   border-radius: 12px;
   background-color: map-get($custom-colors, "white");
+  overflow: hidden;
+}
+
+.workspace-container-header-title {
+  position: relative;
+}
+
+.topbar .workspace-container-header-title:before {
+  background: #ffcb66;
+  border-radius: 24px;
+  content: "";
+  display: block;
+  height: 24px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateX(-32px) translateY(-50%);
+  width: 24px;
 }
 
 .content {
