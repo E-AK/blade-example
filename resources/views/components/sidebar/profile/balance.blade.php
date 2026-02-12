@@ -2,7 +2,7 @@
     <div class="balance-container d-flex align-items-center">
         <div class="item-container">
             <span class="menu-icon balance-left-icon d-flex align-items-center justify-content-center">
-                <i class="bi bi-wallet2"></i>
+                <x-icon name="menu_wallet"/>
             </span>
 
                 <span class="flex-grow-1 text-truncate">
@@ -13,9 +13,9 @@
 
     <span class="menu-arrow balance-action-icon d-flex align-items-center justify-content-center">
             @if($variant === 'red')
-            <i class="bi bi-exclamation-circle-fill"></i>
+            <x-icon name="validation_alert"/>
         @else
-            <i class="bi bi-plus-circle-fill"></i>
+            <x-icon name="validation_add_circle"/>
         @endif
     </span>
 </a>

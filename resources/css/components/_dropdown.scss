@@ -1,0 +1,42 @@
+.custom-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap: 10px;
+    border-radius: 8px;
+    background: map-get($custom-colors, 'white');
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: map-get($custom-colors, 'black');
+    cursor: pointer;
+    position: relative;
+
+    &.default { background: map-get($custom-colors, 'white'); color: map-get($custom-colors, 'black'); }
+    &.hover { background: map-get($custom-colors, 'grey-6'); color: map-get($custom-colors, 'black'); }
+    &.selected { background: map-get($custom-colors, 'white'); font-weight: 500; color: map-get($custom-colors, 'black'); }
+    &.disabled { background: map-get($custom-colors, 'white'); color: #A4A4A4; cursor: not-allowed; }
+    &.error { background: map-get($custom-colors, 'white'); color: map-get($custom-colors, 'red'); }
+
+    .icon-left, .icon-right, .icon-controller {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: map-get($custom-colors, 'grey-1');
+    }
+
+    .icon-right {
+      position: absolute;
+      right: 8px;
+    }
+
+    .item-label {
+      flex-grow: 1;
+    }
+  }
+}

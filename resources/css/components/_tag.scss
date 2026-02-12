@@ -1,0 +1,127 @@
+:root {
+  @each $name, $color in $custom-colors {
+    --color-#{$name}: #{$color};
+  }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid;
+  border-color: var(--tag-border-color, var(--color-grey-4));
+  background-color: var(--tag-bg, var(--color-white));
+  color: var(--tag-color, var(--color-black));
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  cursor: default;
+
+  .tag-text {
+    white-space: nowrap;
+  }
+
+  .tag-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.border-solid {
+    border-style: solid;
+  }
+
+  &.border-dashed {
+    border-style: dashed;
+  }
+
+  &--sm {
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 16px;
+
+    .tag-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &--md {
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:not(.tag--icon-left):not(.tag--icon-right):not(.tag--icon-both) {
+      padding: 4px 8px;
+    }
+
+    &.tag--icon-left {
+      padding: 4px 8px 4px 4px;
+    }
+
+    &.tag--icon-right {
+      padding: 4px 4px 4px 8px;
+    }
+
+    &.tag--icon-both {
+      padding: 4px;
+    }
+
+    .tag-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &--lg {
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 20px;
+
+    .tag-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &.is-selected {
+    background-color: var(--tag-hover-bg, var(--tag-bg));
+    color: var(--tag-hover-color, var(--tag-color));
+    border-color: var(--tag-hover-border-color, var(--tag-border-color));
+  }
+
+  &.tag--hoverable:not(.is-disabled):hover {
+    background-color: var(--tag-hover-bg, var(--tag-bg));
+    color: var(--tag-hover-color, var(--tag-color));
+    border-color: var(--tag-hover-border-color, var(--tag-border-color));
+
+    &.is-selected {
+      opacity: 0.8;
+    }
+  }
+
+  &.is-disabled {
+    background-color: var(--color-grey-6) !important;
+    border: 1px solid var(--color-grey-5) !important;
+    color: var(--color-grey-2) !important;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &:hover {
+      background-color: var(--color-grey-6) !important;
+      color: var(--color-grey-2) !important;
+    }
+
+    .tag-icon {
+      color: inherit;
+    }
+  }
+}

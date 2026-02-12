@@ -7,13 +7,13 @@
     </div>
     <div class="right d-flex justify-content-center align-self-center">
         @if($showInfoButton)
-            <x-button :text="$infoButtonText" icon-left='<i class="bi bi-book-half"></i>' variant="string" size="lg"/>
+            <x-button :text="$infoButtonText" icon-left='document_book' variant="string" size="lg"/>
         @endif
         @if($showSummaryButton)
             <x-button :text="$summaryButtonText" size="lg"/>
         @endif
         @if($showActionButton)
-            <x-button :text="$actionButtonText" icon-right='<i class="bi bi-share-fill"></i>' variant="secondary" size="lg"/>
+            <x-button :text="$actionButtonText" icon-right='actions_share' variant="secondary" size="lg"/>
         @endif
     </div>
 </div>

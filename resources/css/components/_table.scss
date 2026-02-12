@@ -5,6 +5,18 @@
     font-size: 14px;
     line-height: 20px;
 
+    .column-name {
+        width: 320px;
+    }
+
+    .column-users {
+        width: 600px;
+    }
+
+    .column-status {
+        width: 160px;
+    }
+
     & thead th {
         border-bottom-width: 0 !important;
         background-color: map.get($theme-colors, "grey-6") !important;

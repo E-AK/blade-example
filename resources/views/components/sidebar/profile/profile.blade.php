@@ -2,7 +2,7 @@
     'class' => 'account-compact d-flex align-items-center gap-2 ' . $class
 ]) }}>
     <div class="position-relative account-avatar">
-        <div class="avatar-circle w-100 h-100"></div>
+        <x-icon name="avatar" />
 
         @if($badge)
             <span class="p5 avatar-badge d-inline-flex align-items-center justify-content-center rounded-pill text-nowrap">
@@ -18,7 +18,7 @@
 
         <div class="p5 account-subtitle d-flex align-items-center gap-1 text-truncate">
             <span>{{ $subtitle }}</span>
-            <i class="bi bi-crown-fill account-crown"></i>
+            <x-icon name="actions_crown" />
         </div>
     </div>
 

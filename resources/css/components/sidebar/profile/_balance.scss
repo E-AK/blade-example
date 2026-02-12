@@ -34,13 +34,17 @@
     --balance-accent: #{map-get($custom-colors, "red")};
   }
 
-  .balance-left-icon i,
-  .balance-action-icon i {
+  .balance-left-icon,
+  .balance-action-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--balance-accent);
     line-height: 1;
+
+    svg {
+      stroke: currentColor;
+    }
   }
 
   .balance-left-icon i {
@@ -49,16 +53,20 @@
     font-size: 16px;
   }
 
-  .balance-action-icon i {
-    width: 16px;
-    height: 16px;
-    font-size: 16px;
+  .balance-action-icon {
+    svg {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+    }
   }
 
-  &:hover .balance-action-icon i {
-    width: 19.2px;
-    height: 19.2px;
-    font-size: 19.2px;
+  &:hover .balance-action-icon {
+    svg {
+      width: 19.2px;
+      height: 19.2px;
+      font-size: 19.2px;
+    }
   }
 }
 

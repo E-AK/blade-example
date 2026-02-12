@@ -97,11 +97,15 @@ $btn-sizes: (
 .btn-sm { @include btn-size(sm); }
 .btn-lg { @include btn-size(lg); }
 
-.btn svg,
-.btn i {
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
+.btn,
+.btn {
+  svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    stroke: currentColor;
+    fill: currentColor;
+  }
 }
 
 $btn-primary: (

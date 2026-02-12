@@ -27,7 +27,7 @@ class BaseDataTable extends DataTable
                     'topEnd'     => null,
                     'bottomStart'=> 'paging',
                     'bottomEnd'  => 'pageLength',
-                ]
+                ],
             ]);
     }
 }

@@ -1,7 +1,7 @@
 <aside class="sidebar d-flex flex-column h-100 py-3 px-2 gap-4">
     <div class="sidebar-header d-flex flex-column gap-4">
         <div class="sidebar-logo px-2">
-            <x-icon name="logo_sidebar" class="logo-expanded"/>
+            <x-icon name="logo_sidebar_light" class="logo-expanded"/>
             <x-icon name="logo_sidebar_min" class="logo-collapsed"/>
         </div>
 
@@ -9,7 +9,7 @@
             as-button
             text="Свернуть меню"
             class="sidebar-toggle-btn"
-            icon='<i class="bi bi-arrow-bar-left"></i>'
+            icon='menu_collapse'
         />
     </div>
 
@@ -18,6 +18,7 @@
             <x-sidebar.menu-item
                     text="Подключения"
                     short-text="Подкл-я"
+                    icon="menu_connections"
                     :has-children="true"
             />
 
@@ -34,6 +35,7 @@
             <x-sidebar.menu-item
                 text="Сбор информации"
                 short-text="Сбор ин-"
+                icon="menu_get_info"
                 :has-children="true"
             />
 
@@ -61,6 +63,7 @@
             <x-sidebar.menu-item
                 text="Сервисы"
                 short-text="Сервисы"
+                icon="menu_services"
                 :has-children="true"
             />
 
@@ -87,23 +90,26 @@
         <x-sidebar.menu-item
             text="Цепочки событий"
             short-text="Цепочки"
+            icon="menu_chain"
         />
 
         <x-sidebar.menu-item
             text="Отчеты"
             short-text="Отчеты"
+            icon="menu_report"
         />
 
         <x-sidebar.menu-item
             text="Планирование"
             short-text="План-е"
+            icon="menu_planning"
         />
 
         <div class="sidebar-item has-submenu">
             <x-sidebar.menu-item
                 text="Настройки"
                 short-text="Наст-ки"
-                icon='<i class="bi bi-toggles"></i>'
+                icon='menu_settings'
                 :has-children="true"
             />
 
@@ -120,6 +126,7 @@
             text="Аккаунты"
             short-text="Аккаунты"
             href="/settings/account"
+            icon="menu_accounts"
             has-children
         />
     </nav>
@@ -136,7 +143,7 @@
             text="База знаний"
             short-text="База зн."
             href="#"
-            icon='<i class="bi bi-book"></i>'
+            icon='menu_knowledge'
             class="menu-knowledge text-center"
         />
     </div>

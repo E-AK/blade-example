@@ -37,6 +37,10 @@ export class Table {
         };
 
         this.instance = this.$table.DataTable(options);
+
+        this.instance.on('draw.dt', () => this.truncateUserTags());
+
+        $(window).on('resize', debounce(() => this.truncateUserTags(), 150));
     }
 
     initSearch() {
@@ -74,6 +78,87 @@ export class Table {
                     this.instance.column(columnIndex).search(event.target.value).draw();
                 }
             });
+        });
+    }
+
+    truncateUserTags() {
+        const self = this;
+        const dt = this.instance;
+        if (!dt) return;
+
+        const $tbody = $(dt.table().body());
+        const $rows = $tbody.find('tr');
+
+        dt.rows().every(function() {
+            const rowNode = this.node();
+            const $td = $(rowNode).find('td.users-column');
+            if ($td.length === 0) return;
+
+            const $container = $td.find('.users-tags-container').first();
+            if (!$container.length) return;
+
+            const $tags = $container.children(':not(.more-tag)');
+            $tags.show();
+            $container.find('.more-tag').remove();
+
+            const totalTags = parseInt($container.data('total-tags'), 10) || $tags.length;
+            if (totalTags === 0) return;
+
+            const containerWidth = $container.width();
+
+            let gap = 0;
+            if ($tags.length > 1) {
+                const $first = $tags.eq(0);
+                const $second = $tags.eq(1);
+                gap = $second.position().left - ($first.position().left + $first.outerWidth(true));
+            }
+
+            let currentWidth = 0;
+            let visibleCount = 0;
+
+            for (let i = 0; i < $tags.length; i++) {
+                const $tag = $tags.eq(i);
+                const tagWidth = $tag.outerWidth(true);
+                if (i > 0) {
+                    currentWidth += gap;
+                }
+                if (currentWidth + tagWidth <= containerWidth) {
+                    currentWidth += tagWidth;
+                    visibleCount++;
+                } else {
+                    $tag.hide();
+                    for (let j = i + 1; j < $tags.length; j++) {
+                        $tags.eq(j).hide();
+                    }
+                    break;
+                }
+            }
+
+            if (visibleCount === totalTags) {
+                return;
+            }
+
+            const tagsToShow = Math.max(0, visibleCount - 1);
+            const hiddenCount = totalTags - tagsToShow;
+
+            for (let i = 0; i < $tags.length; i++) {
+                if (i < tagsToShow) {
+                    $tags.eq(i).show();
+                } else {
+                    $tags.eq(i).hide();
+                }
+            }
+
+            const $moreBadge = $('<span>', {
+                class: 'tag tag-sm more-tag',
+                text: '+' + hiddenCount
+            });
+
+            if (tagsToShow === 0) {
+                $container.prepend($moreBadge);
+            } else {
+                $tags.eq(tagsToShow - 1).after($moreBadge);
+            }
         });
     }
 }

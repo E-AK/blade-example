@@ -8,7 +8,7 @@
     @endif
 
     @if ($iconLeft)
-        {!! $iconLeft !!}
+        <x-icon :name="$iconLeft"/>
     @endif
 
     @if($text)
@@ -16,6 +16,6 @@
     @endif
 
     @if ($iconRight)
-        {!! $iconRight !!}
+        <x-icon :name="$iconRight"/>
     @endif
 </button>

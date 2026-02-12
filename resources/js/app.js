@@ -7,21 +7,42 @@ window.$ = window.jQuery = $;
 $(document).ready(function () {
     const $layout = $('.app-layout');
     const $toggleBtn = $('.sidebar-toggle-btn');
-    const $icon = $toggleBtn.find('i');
 
     $toggleBtn.on('click', function () {
-        const isCollapsed = $layout.toggleClass('is-collapsed')
-            .hasClass('is-collapsed');
+        $layout.toggleClass('is-collapsed');
+    });
+});
 
-        if (isCollapsed) {
-            $icon
-                .removeClass('bi-arrow-bar-left')
-                .addClass('bi-arrow-bar-right');
-        } else {
-            $icon
-                .removeClass('bi-arrow-bar-right')
-                .addClass('bi-arrow-bar-left');
-        }
+$(document).ready(function() {
+    $('.select').on('click', function(e) {
+        e.stopPropagation();
+
+        if ($(this).hasClass('state-disabled')) return;
+
+        const $wrapper = $(this).closest('.select-wrapper');
+        const $dropdown = $wrapper.find('.select-dropdown');
+
+        $('.select-wrapper .select-dropdown').not($dropdown).hide();
+        $('.select-wrapper .select').not(this).removeClass('state-selected');
+
+        $dropdown.toggle();
+        $(this).toggleClass('state-selected');
+    });
+
+    $(document).on('click', function() {
+        $('.select-dropdown').hide();
+        $('.select').removeClass('state-selected');
+    });
+
+    $('.select-item').on('click', function(e) {
+        e.stopPropagation();
+        const $item = $(this);
+        const $wrapper = $item.closest('.select-wrapper');
+        const $select = $wrapper.find('.select');
+
+        $select.find('span').text($item.text());
+        $wrapper.find('.select-dropdown').hide();
+        $select.removeClass('state-selected');
     });
 });
 

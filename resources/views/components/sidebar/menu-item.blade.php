@@ -13,7 +13,7 @@
                     <div class="item-container">
                         @if ($icon)
                             <span class="menu-icon d-flex align-items-center justify-content-center fs-5 lh-1">
-                            {!! $icon !!}
+                                <x-icon :name="$icon"/>
                           </span>
                         @endif
 

@@ -9,14 +9,16 @@
 @section('content')
     <x-table search-placeholder="Найти аккаунт" :data-table="$dataTable">
         <x-slot:filterSlot>
-            <select class="data-table-filter form-select"
-                    data-column="active"
-                    aria-label="Filter by active status"
-            >
-                <option value="">Все статусы</option>
-                <option value="true">Активные</option>
-                <option value="false">Неактивные</option>
-            </select>
+            <x-select
+                text="Все статусы"
+                size="lg"
+                type="stroke"
+                :options="[
+                    '' => 'Все статусы',
+                    'true' => 'Активные',
+                    'false' => 'Неактивные'
+                ]"
+            />
         </x-slot:filterSlot>
     </x-table>
 @endsection

@@ -44,6 +44,11 @@
 
 .menu-icon {
   font-size: 18px;
+  //color: map-get($custom-colors, "white");
+
+  svg {
+    stroke: currentColor;
+  }
 }
 
 .menu-arrow-icon {
@@ -78,6 +83,10 @@
 }
 
 .app-layout.is-collapsed {
+  .sidebar-toggle-btn .menu-icon svg {
+    transform: rotate(180deg);
+  }
+
   .menu-item:not(.menu-item--submenu) {
     min-height: 52px;
     padding: 4px;
