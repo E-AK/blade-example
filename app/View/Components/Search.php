@@ -47,7 +47,7 @@ class Search extends Component
             $classes[] = 'state-selected';
         }
 
-        if (!empty($this->tags)) {
+        if (! empty($this->tags)) {
             $classes[] = 'has-tags';
         }
 
@@ -69,6 +69,7 @@ class Search extends Component
         if ($this->selected) {
             return 'grey-1'; // #666563
         }
+
         return 'grey-3'; // #C7C7C7 (для default/hover)
     }
 

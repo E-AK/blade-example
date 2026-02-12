@@ -17,10 +17,10 @@ class Tag extends Component
     ];
 
     private const ICON_VARIANTS = [
-        'none'  => '',
-        'left'  => 'tag--icon-left',
+        'none' => '',
+        'left' => 'tag--icon-left',
         'right' => 'tag--icon-right',
-        'both'  => 'tag--icon-both',
+        'both' => 'tag--icon-both',
     ];
 
     public function __construct(
@@ -52,7 +52,7 @@ class Tag extends Component
             $base[] = self::ICON_VARIANTS[$this->icon];
         }
 
-        if ($this->hoverable && !$this->disabled) {
+        if ($this->hoverable && ! $this->disabled) {
             $base[] = 'tag--hoverable';
         }
 
@@ -64,7 +64,7 @@ class Tag extends Component
             $base[] = 'is-disabled';
         }
 
-        $base[] = 'border-' . $this->borderStyle;
+        $base[] = 'border-'.$this->borderStyle;
 
         $base[] = $this->class;
 
@@ -111,9 +111,9 @@ class Tag extends Component
     public function iconSize(): int
     {
         return match ($this->size) {
-            'sm'    => 16,
-            'md'    => 20,
-            'lg'    => 20,
+            'sm' => 16,
+            'md' => 20,
+            'lg' => 20,
             default => 20,
         };
     }

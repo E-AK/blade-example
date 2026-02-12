@@ -7,7 +7,6 @@ namespace App\DataTables;
 use App\Models\Account;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
@@ -56,13 +55,13 @@ class AccountsDataTable extends BaseDataTable
                 :text="$text"
                 size="sm"
             />',
-                        ['text' => '+' . $remaining]
+                        ['text' => '+'.$remaining]
                     );
                 }
 
                 return '<div class="d-flex flex-row gap-2 users-tags-container" 
-              data-total-tags="' . $total . '">'
-                    . implode('', $tags) .
+              data-total-tags="'.$total.'">'
+                    .implode('', $tags).
                     '</div>';
             })
             ->addColumn('active', function (Account $account) {

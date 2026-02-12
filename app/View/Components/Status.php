@@ -44,8 +44,7 @@ class Status extends Component
     public function __construct(
         public string $variant = 'success',
         public bool $hasRightIcon = false,
-    )
-    {
+    ) {
         //
     }
 
@@ -56,7 +55,7 @@ class Status extends Component
 
     public function colorClass(): string
     {
-        return 'status-' . (self::VARIANTS[$this->variant]['color'] ?? 'grey-3');
+        return 'status-'.(self::VARIANTS[$this->variant]['color'] ?? 'grey-3');
     }
 
     public function icon(): string

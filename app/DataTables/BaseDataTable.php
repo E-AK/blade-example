@@ -23,10 +23,10 @@ class BaseDataTable extends DataTable
                     'zeroRecords' => 'Записи не найдены',
                 ],
                 'layout' => [
-                    'topStart'   => null,
-                    'topEnd'     => null,
-                    'bottomStart'=> 'paging',
-                    'bottomEnd'  => 'pageLength',
+                    'topStart' => null,
+                    'topEnd' => null,
+                    'bottomStart' => 'paging',
+                    'bottomEnd' => 'pageLength',
                 ],
             ]);
     }
