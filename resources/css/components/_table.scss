@@ -5,18 +5,6 @@
     font-size: 14px;
     line-height: 20px;
 
-    .column-name {
-        width: 320px;
-    }
-
-    .column-users {
-        width: 600px;
-    }
-
-    .column-status {
-        width: 160px;
-    }
-
     & thead th {
         border-bottom-width: 0 !important;
         background-color: map.get($theme-colors, "grey-6") !important;
@@ -60,36 +48,59 @@
     }
 
     .pagination {
-        --bs-pagination-padding-x: .5rem;
-        --bs-pagination-padding-y: .25rem;
-        --bs-pagination-font-size: .875rem;
+        --bs-pagination-padding-x: 0.5rem;
+        --bs-pagination-padding-y: 0.25rem;
+        --bs-pagination-font-size: 1rem;
+        --bs-pagination-line-height: 20px;
 
-        --bs-pagination-color: map.get($theme-colors, "black");
-        --bs-pagination-hover-color: map.get($theme-colors, "black");
-        --bs-pagination-active-color: map.get($theme-colors, "black");
+        --bs-pagination-color: #141414;
+        --bs-pagination-hover-color: #141414;
+        --bs-pagination-active-color: #141414;
 
         --bs-pagination-bg: transparent;
-        --bs-pagination-hover-bg: map.get($theme-colors, "white");
-        --bs-pagination-active-bg: map.get($theme-colors, "white");
+        --bs-pagination-hover-bg: #ffffff;
+        --bs-pagination-active-bg: #ffffff;
 
         --bs-pagination-border-width: 0;
-        --bs-pagination-border-radius: .5rem;
+        --bs-pagination-border-radius: 8px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+        margin: 0 auto;
+        width: 288px;
+        height: 32px;
 
         & .page-item {
-            margin: 0 .15rem;
-            border-radius: .5rem;
+            margin: 0;
+            border-radius: 8px;
+            width: 32px;
+            height: 32px;
 
-            &>.page-link {
+            & > .page-link {
                 border: 0;
                 background: transparent;
-                border-radius: .5rem;
+                border-radius: 8px;
+                padding: 6px;
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                line-height: 20px;
             }
         }
 
-        & .page-item.active,
-        & .page-item:hover,
-        & .page-item:focus {
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+        & .page-item.active .page-link {
+            border: 1px solid #E0E0E0;
+            padding: 0 8px;
+        }
+
+        & .page-item:first-child .page-link,
+        & .page-item:last-child .page-link {
+            padding: 6px;
         }
 
         & .page-item.disabled {

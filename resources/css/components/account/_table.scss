@@ -1,0 +1,32 @@
+.data-table {
+  .column-name {
+    width: 320px;
+  }
+
+  .column-users {
+    max-width: 600px;
+  }
+
+  .column-status {
+    width: 160px;
+  }
+
+  .name-cell {
+    color: map-get($custom-colors, 'grey-2');
+
+    .name-cell-text {
+      color: map-get($custom-colors, 'black');
+    }
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .tag-icon {
+    color: map-get($custom-colors, 'grey-2');
+    svg {
+      fill: currentColor;
+    }
+  }
+}

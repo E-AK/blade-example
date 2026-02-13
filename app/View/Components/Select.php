@@ -26,6 +26,7 @@ class Select extends Component
         public bool $cursor = false,
         public array $options = [],
         public ?string $description = null,
+        public string $class = ''
     ) {}
 
     /**

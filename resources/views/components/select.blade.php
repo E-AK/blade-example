@@ -10,12 +10,14 @@
     'error' => null,
     'cursor' => false,
     'options' => [],
+    'class' => ''
 ])
 
 @php
     $wrapperClass = 'select-wrapper';
     $selectClass = 'select d-flex align-items-center';
     $selectClass .= $type === 'stroke' ? ' select-stroke' : ' select-main';
+    $selectClass .= ' '.$class;
 
     if ($disabled) {
         $selectClass .= ' disabled';

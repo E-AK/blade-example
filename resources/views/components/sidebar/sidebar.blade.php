@@ -1,6 +1,6 @@
 <aside class="sidebar d-flex flex-column h-100 py-3 px-2 gap-4">
     <div class="sidebar-header d-flex flex-column gap-4">
-        <div class="sidebar-logo px-2">
+        <div class="sidebar-logo d-flex justify-content-center px-2">
             <x-icon name="logo_sidebar_light" class="logo-expanded"/>
             <x-icon name="logo_sidebar_min" class="logo-collapsed"/>
         </div>
@@ -131,7 +131,7 @@
         />
     </nav>
 
-    <div class="sidebar-footer-stack d-flex flex-column gap-2 mt-auto">
+    <div class="sidebar-footer-stack d-flex flex-column mt-auto">
         <x-sidebar.profile.profile-card
             title="ООО Сбис-Вятка"
             subtitle="Иванов В. В."

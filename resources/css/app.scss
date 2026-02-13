@@ -17,6 +17,8 @@
   "components/table",
   "components/search";
 
+@import "components/account/table", "components/account/search", "components/account/select";
+
 .bi::before {
   vertical-align: 0 !important;
 }

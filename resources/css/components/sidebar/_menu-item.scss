@@ -1,5 +1,5 @@
 .menu-item {
-  &:not(.menu-item--submenu) {
+  &:not(.menu-item--submenu, .sidebar-toggle-btn) {
     min-height: 48px;
   }
   color: map-get($custom-colors, "white") !important;
@@ -83,11 +83,16 @@
 }
 
 .app-layout.is-collapsed {
+  .sidebar-toggle-btn {
+    .menu-text {
+      display: none !important;
+    }
+  }
   .sidebar-toggle-btn .menu-icon svg {
     transform: rotate(180deg);
   }
 
-  .menu-item:not(.menu-item--submenu) {
+  .menu-item:not(.menu-item--submenu, .sidebar-toggle-btn) {
     min-height: 52px;
     padding: 4px;
     flex-direction: column;
@@ -129,7 +134,7 @@
 }
 
 .sidebar-toggle-btn {
-  height: 40px;
+  height: 40px !important;
   border: 1px solid map-get($custom-colors, "black-light") !important;
   color: map-get($custom-colors, "grey-2") !important;
 
@@ -151,7 +156,9 @@
 }
 
 .menu-item--submenu {
-  @extend .p4;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
   width: 256px;
   padding: 4px 8px;
 

@@ -23,9 +23,9 @@ class AccountsDataTable extends BaseDataTable
         return (new EloquentDataTable($query))
             ->editColumn('name', function (Account $account) {
                 return Blade::render(
-                    '<div class="d-flex flex-row align-items-center gap-2">
+                    '<div class="d-flex flex-row align-items-center gap-2 name-cell">
                 <span style="width: 20px"><x-icon name="actions_home" /></span>
-                <span>{{ $name }}</span>
+                <span class="name-cell-text">{{ $name }}</span>
             </div>',
                     ['name' => $account->name]
                 );
@@ -67,7 +67,7 @@ class AccountsDataTable extends BaseDataTable
             ->addColumn('active', function (Account $account) {
                 $variant = $account->active ? 'success' : 'pause';
 
-                return Blade::render('<div class="d-flex flex-row "><x-status :variant="$variant" /></div>', [
+                return Blade::render('<div class="d-flex flex-row users-cell"><x-status :variant="$variant" /></div>', [
                     'variant' => $variant,
                 ]);
             })
@@ -97,6 +97,7 @@ class AccountsDataTable extends BaseDataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
+            ->addTableClass('accounts-table')
             ->columns($this->getColumns())
             ->orderBy(0)
             ->minifiedAjax();

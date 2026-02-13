@@ -16,6 +16,7 @@ class Search extends Component
         public string $description = '',
         public array $tags = [],
         public bool $clearable = true,
+        public string $class = '',
     ) {}
 
     public function wrapperClasses(): string
@@ -29,6 +30,8 @@ class Search extends Component
         if ($this->description) {
             $classes[] = 'has-description';
         }
+
+        $classes[] = $this->class;
 
         return implode(' ', $classes);
     }

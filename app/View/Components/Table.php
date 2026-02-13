@@ -17,6 +17,7 @@ class Table extends Component
     public function __construct(
         public Builder $dataTable,
         public string $searchPlaceholder = '',
+        public string $searchClass = '',
     ) {}
 
     /**

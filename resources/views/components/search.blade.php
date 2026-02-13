@@ -6,6 +6,7 @@
     'description' => '',
     'tags' => [],
     'clearable' => true,
+    'class' => '',
 ])
 
 @php
@@ -13,6 +14,7 @@
     $wrapperClasses .= $description ? ' has-description' : '';
 
     $searchClasses = 'search-box search-box-' . $size;
+    $searchClasses .= ' '.$class;
     if ($value !== '') $searchClasses .= ' state-filled';
     if ($selected) $searchClasses .= ' state-selected';
     if (!empty($tags)) $searchClasses .= ' has-tags';

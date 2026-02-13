@@ -40,7 +40,7 @@ $(document).ready(function() {
         const $wrapper = $item.closest('.select-wrapper');
         const $select = $wrapper.find('.select');
 
-        $select.find('span').text($item.text());
+        $select.find('.select-text').text($item.text());
         $wrapper.find('.select-dropdown').hide();
         $select.removeClass('state-selected');
     });

@@ -44,7 +44,7 @@ class MenuItem extends Component
         }
 
         if ($this->isSubmenu) {
-            $classes[] = 'menu-item--submenu';
+            $classes[] = 'menu-item--submenu overflow-hidden';
         }
 
         $classes[] = $this->class;
