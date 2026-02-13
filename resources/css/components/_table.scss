@@ -47,6 +47,17 @@
         padding: 12px;
     }
 
+    .dt-length {
+        gap: 8px;
+        display: flex !important;
+
+        label {
+            white-space: nowrap;
+            align-items: center !important;
+            display: flex !important;
+        }
+    }
+
     .pagination {
         --bs-pagination-padding-x: 0.5rem;
         --bs-pagination-padding-y: 0.25rem;
