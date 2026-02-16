@@ -190,7 +190,6 @@
                         :options="$options"
                         :selected="[1,2]"
                         disabled
-{{--                        search-placeholder="Сотрудники"--}}
                 />
 
                 <x-multiselect
@@ -198,7 +197,6 @@
                         :selected="[1,2]"
                         disabled
                         leftIcon="actions_profile"
-{{--                        search-placeholder="Сотрудники"--}}
                 />
             </div>
         </div>
@@ -239,6 +237,147 @@
                 />
             </div>
         </div>
+    </div>
 
+    {{-- ================= CHECKBOX, RADIO, SWITCH ================= --}}
+    <div class="mb-5">
+        <h2 class="h2 mb-4">Checkbox, Radio, Switch</h2>
+
+        <div class="d-flex flex-wrap gap-5">
+            {{-- Checkbox --}}
+            <div class="control-demo-panel border border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
+                <h3 class="h6 mb-3">Checkbox</h3>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb1" size="16" class="control-demo-hover" />
+                        <span class="text-muted small">Default 16, hover</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb2" size="16" />
+                        <span class="text-muted small">Default 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb3" size="16" disabled />
+                        <span class="text-muted small">Disabled 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb4" size="16" error="Error" />
+                        <span class="text-muted small">Error 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb5" size="16" checked disabled />
+                        <span class="text-muted small">Disabled selected 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb6" size="16" checked />
+                        <span class="text-muted small">Selected 16</span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-3 mt-3 pt-3 border-top">
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb7" size="20" />
+                        <span class="text-muted small">Default 20</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-checkbox name="cb8" size="20" checked />
+                        <span class="text-muted small">Selected 20</span>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Radio --}}
+            <div class="control-demo-panel border border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
+                <h3 class="h6 mb-3">Radio</h3>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r1" value="a" size="16" class="control-demo-hover" />
+                        <span class="text-muted small">Default 16, hover</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r1" value="b" size="16" />
+                        <span class="text-muted small">Default 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r2" value="a" size="16" disabled />
+                        <span class="text-muted small">Disabled 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r3" value="a" size="16" error="Error" />
+                        <span class="text-muted small">Error 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r4" value="a" size="16" checked disabled />
+                        <span class="text-muted small">Disabled selected 16</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r5" value="a" size="16" checked />
+                        <span class="text-muted small">Selected 16</span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-3 mt-3 pt-3 border-top">
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r6" value="a" size="20" />
+                        <span class="text-muted small">Default 20</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-radio name="r6" value="b" size="20" checked />
+                        <span class="text-muted small">Selected 20</span>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Switch --}}
+            <div class="control-demo-panel border border-2 border-dashed rounded p-4" style="border-color: #7B61FF !important; width: 351px;">
+                <h3 class="h6 mb-3">Switch</h3>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw1" size="large" />
+                        <span class="text-muted small">Large, default</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw2" size="large" showText />
+                        <span class="text-muted small">Large, ON/OFF</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw3" size="large" loading />
+                        <span class="text-muted small">Large, loading</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw4" size="large" disabled />
+                        <span class="text-muted small">Large, disabled</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw5" size="large" checked />
+                        <span class="text-muted small">Large, selected</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw6" size="large" checked showText />
+                        <span class="text-muted small">Large, selected ON/OFF</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw7" size="large" checked loading />
+                        <span class="text-muted small">Large, selected loading</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw8" size="large" checked disabled />
+                        <span class="text-muted small">Large, selected disabled</span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-3 mt-3 pt-3 border-top">
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw9" size="small" />
+                        <span class="text-muted small">Small, default</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw10" size="small" showText />
+                        <span class="text-muted small">Small, ON/OFF</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <x-switch name="sw11" size="small" checked />
+                        <span class="text-muted small">Small, selected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
