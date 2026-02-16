@@ -1,0 +1,146 @@
+// Toast container: fixed bottom-center for stacking toasts
+.toast-container-custom {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1090;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+// Single toast: matches design spec (State=Success/Error/Attention/Info, Text or Text+Title)
+.toast-custom {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+  min-width: 0;
+  max-width: 600px;
+  width: fit-content;
+  border: none;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.12),
+    0 16px 24px rgba(0, 0, 0, 0.12);
+
+  .toast-custom__inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toast-custom__icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+  }
+
+  .toast-custom__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toast-custom__title {
+    font-family: var(--font-family-base, 'Inter', sans-serif);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: map-get($custom-colors, 'black');
+    flex: none;
+  }
+
+  .toast-custom__text {
+    font-family: var(--font-family-base, 'Inter', sans-serif);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: map-get($custom-colors, 'black');
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toast-custom__close {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: map-get($custom-colors, 'grey-1');
+
+    svg {
+      width: 8.33px;
+      height: 8.33px;
+      stroke: currentColor;
+      fill: none;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &.toast-custom--success {
+    background: map-get($custom-colors, 'green-bg');
+
+    .toast-custom__icon {
+      color: map-get($custom-colors, 'green-dark');
+    }
+  }
+
+  &.toast-custom--error {
+    background: map-get($custom-colors, 'red-bg');
+
+    .toast-custom__icon {
+      color: map-get($custom-colors, 'red-dark');
+    }
+  }
+
+  &.toast-custom--attention {
+    background: map-get($custom-colors, 'yellow-bg');
+
+    .toast-custom__icon {
+      color: map-get($custom-colors, 'yellow-dark');
+    }
+  }
+
+  &.toast-custom--info {
+    background: map-get($custom-colors, 'blue-bg');
+
+    .toast-custom__icon {
+      color: map-get($custom-colors, 'blue');
+    }
+  }
+}
