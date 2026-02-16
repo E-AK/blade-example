@@ -15,7 +15,7 @@ const CLOSE_ICON_SVG =
   '<svg width="20" height="20" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.13338 0.8L0.800049 9.13333M0.800049 0.8L9.13338 9.13333" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 const CONTAINER_ID = 'toast-container-custom';
-const DEFAULT_DELAY = 50000;
+const DEFAULT_DELAY = 5000;
 
 function ensureContainer() {
   let $container = $(`#${CONTAINER_ID}`);
