@@ -18,7 +18,6 @@
                     'true' => 'Активные',
                     'false' => 'Неактивные'
                 ]"
-                    class="select-account"
             />
         </x-slot:filterSlot>
     </x-table>

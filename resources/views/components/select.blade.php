@@ -2,6 +2,7 @@
     'text' => null,
     'value' => null,
     'label' => null,
+    'placeholder' => 'Выбор папки',
     'leftIcon' => null,
     'rightIcon' => 'arrow_chevron_down',
     'type' => 'main',
@@ -10,7 +11,7 @@
     'error' => null,
     'cursor' => false,
     'options' => [],
-    'class' => ''
+    'class' => '',
 ])
 
 @php
@@ -19,14 +20,18 @@
     $selectClass .= $type === 'stroke' ? ' select-stroke' : ' select-main';
     $selectClass .= ' '.$class;
 
+    $hasValue = $value !== null || ($text !== null && $text !== '');
+    $displayText = $text ?? $value ?? $placeholder;
+
     if ($disabled) {
         $selectClass .= ' disabled';
-        if ($label && $value !== null) {
+        if ($label && $hasValue) {
             $selectClass .= ' disabled-filled';
         }
     }
 
     if ($error) {
+        $wrapperClass .= ' has-error';
         $selectClass .= ' error';
     }
 
@@ -38,7 +43,11 @@
         $selectClass .= ' hover';
     }
 
-    $displayText = $value ?? $text ?? 'Выберите';
+    if (! $hasValue) {
+        $selectClass .= ' select-empty';
+    } elseif ($type === 'main') {
+        $selectClass .= ' state-filled';
+    }
 @endphp
 
 <div class="{{ $wrapperClass }}" @if($disabled) aria-disabled="true" @endif>
@@ -49,13 +58,23 @@
             </span>
         @endif
 
-        <div class="select-content flex-grow-1">
-            @if($label)
-                <span class="select-label">{{ $label }}</span>
-            @endif
-            <span class="select-text">{{ $displayText }}</span>
-            @if($cursor)
-                <span class="select-cursor">|</span>
+        <div class="select-content flex-grow-1 min-w-0">
+            @if($type === 'main')
+                <span class="select-label">{{ $label ?? $placeholder }}</span>
+                <input
+                    type="text"
+                    class="select-input"
+                    value="{{ $hasValue ? $displayText : '' }}"
+                    data-placeholder="{{ $placeholder }}"
+                    autocomplete="off"
+                    aria-label="{{ $placeholder }}"
+                    @if($disabled) disabled @endif
+                />
+            @else
+                @if($label)
+                    <span class="select-label">{{ $label }}</span>
+                @endif
+                <span class="select-text">{{ $displayText }}</span>
             @endif
         </div>
 
