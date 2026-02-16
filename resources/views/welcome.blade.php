@@ -1,8 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="h1 mb-4">Multiselect — все состояния</h1>
+    <h1 class="h1 mb-4">Компоненты</h1>
 
+    {{-- ================= ALERT ================= --}}
+    <div class="mb-5">
+        <h2 class="h2 mb-4">Alert — все состояния</h2>
+        <div class="d-flex flex-column gap-4">
+            <div>
+                <h3 class="h6 text-muted mb-2">Success (текст)</h3>
+                <x-alert state="success">Операция выполнена успешно.</x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Success (заголовок + текст)</h3>
+                <x-alert state="success" title="Успех">Изменения сохранены.</x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Error (текст)</h3>
+                <x-alert state="error">Произошла ошибка. Попробуйте ещё раз.</x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Error (заголовок + текст)</h3>
+                <x-alert state="error" title="Ошибка">Не удалось подключиться к серверу.</x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Attention (текст)</h3>
+                <x-alert state="attention">Проверьте данные перед отправкой.</x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Attention (заголовок + текст)</h3>
+                <x-alert state="attention" title="Внимание">Сессия скоро истечёт.</x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Attention (с кнопкой)</h3>
+                <x-alert state="attention" title="Внимание">
+                    Сессия скоро истечёт. Продолжить?
+                    <x-slot:button>
+                        <x-button text="Продолжить" variant="main" size="md" />
+                    </x-slot:button>
+                </x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Info (текст)</h3>
+                <x-alert state="info">Новая версия приложения доступна.</x-alert>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Info (заголовок + текст)</h3>
+                <x-alert state="info" title="Информация">Обновление будет установлено при следующем входе.</x-alert>
+            </div>
+        </div>
+    </div>
+
+    {{-- ================= MULTISELECT ================= --}}
+    <h2 class="h2 mb-4">Multiselect — все состояния</h2>
     @php
         $options = [
             1 => 'Иван Иванов',
