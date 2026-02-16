@@ -1,24 +1,17 @@
-@import "abstracts/fonts";
-@import "bootstrap", "bootstrap-icons/font/bootstrap-icons.css";
-@import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+@import 'abstracts/fonts';
+@import 'bootstrap', 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 
-@import "abstracts/color-tokens", "abstracts/typography";
-@import "layout";
-@import "components/sidebar/sidebar",
-  "components/sidebar/menu-item",
-  "components/sidebar/sidebar-submenu",
-  "components/sidebar/profile/profile-card",
-  "components/sidebar/profile/profile",
-  "components/sidebar/profile/balance",
-  "components/status",
-  "components/tag",
-  "components/select";
+@import 'abstracts/color-tokens', 'abstracts/typography';
+@import 'layout';
+@import 'components/sidebar/sidebar', 'components/sidebar/menu-item',
+  'components/sidebar/sidebar-submenu', 'components/sidebar/profile/profile-card',
+  'components/sidebar/profile/profile', 'components/sidebar/profile/balance', 'components/status',
+  'components/tag', 'components/select', 'components/multiselect';
 
-@import "components/buttons",
-  "components/table",
-  "components/search";
+@import 'components/buttons', 'components/table', 'components/search';
 
-@import "components/account/table", "components/account/search", "components/account/select";
+@import 'components/account/table', 'components/account/search', 'components/account/select';
 
 .bi::before {
   vertical-align: 0 !important;

@@ -13,7 +13,7 @@
     'hoverBorderColor' => 'green',
     'borderStyle' => 'solid',
     'leftIcon' => 'specific_tag',
-    'rightIcon' => 'close',
+    'rightIcon' => 'arrow_close',
 ])
 
 <div

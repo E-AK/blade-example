@@ -17,13 +17,32 @@
     cursor: pointer;
     position: relative;
 
-    &.default { background: map-get($custom-colors, 'white'); color: map-get($custom-colors, 'black'); }
-    &.hover { background: map-get($custom-colors, 'grey-6'); color: map-get($custom-colors, 'black'); }
-    &.selected { background: map-get($custom-colors, 'white'); font-weight: 500; color: map-get($custom-colors, 'black'); }
-    &.disabled { background: map-get($custom-colors, 'white'); color: #A4A4A4; cursor: not-allowed; }
-    &.error { background: map-get($custom-colors, 'white'); color: map-get($custom-colors, 'red'); }
+    &.default {
+      background: map-get($custom-colors, 'white');
+      color: map-get($custom-colors, 'black');
+    }
+    &.hover {
+      background: map-get($custom-colors, 'grey-6');
+      color: map-get($custom-colors, 'black');
+    }
+    &.selected {
+      background: map-get($custom-colors, 'white');
+      font-weight: 500;
+      color: map-get($custom-colors, 'black');
+    }
+    &.disabled {
+      background: map-get($custom-colors, 'white');
+      color: #a4a4a4;
+      cursor: not-allowed;
+    }
+    &.error {
+      background: map-get($custom-colors, 'white');
+      color: map-get($custom-colors, 'red');
+    }
 
-    .icon-left, .icon-right, .icon-controller {
+    .icon-left,
+    .icon-right,
+    .icon-controller {
       width: 20px;
       height: 20px;
       border-radius: 4px;

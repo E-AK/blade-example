@@ -1,6 +1,6 @@
 .profile-card {
-  background-color: map-get($custom-colors, "black");
-  border: 1px solid map-get($custom-colors, "black-light");
+  background-color: map-get($custom-colors, 'black');
+  border: 1px solid map-get($custom-colors, 'black-light');
   border-radius: 12px;
   padding: 12px;
 }

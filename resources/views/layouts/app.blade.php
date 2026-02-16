@@ -22,12 +22,14 @@
             show-info-button
             show-summary-button
             show-action-button
-            :summary-button-text="$summaryButtonText"
-            :header-info-text="$headerInfoText"
-            :header-title-text="$headerTitleText"
+            :summary-button-text="$summaryButtonText ?? ''"
+            :header-info-text="$headerInfoText ?? ''"
+            :header-title-text="$headerTitleText ?? ''"
         />
-        <div class="d-flex shadow content gap-2.5">
-            @yield('content')
+        <div class="d-flex flex-column shadow content">
+            <div class="content-inner d-flex flex-column gap-2.5">
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>

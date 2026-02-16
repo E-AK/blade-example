@@ -2,10 +2,10 @@
   &:not(.menu-item--submenu, .sidebar-toggle-btn) {
     min-height: 48px;
   }
-  color: map-get($custom-colors, "white") !important;
+  color: map-get($custom-colors, 'white') !important;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     left: -2px;
     top: 50%;
@@ -13,12 +13,12 @@
     width: 4px;
     height: 32px;
     border-radius: 18px;
-    background-color: map-get($custom-colors, "yellow");
+    background-color: map-get($custom-colors, 'yellow');
     opacity: 0;
   }
 
   &:hover {
-    background-color: map-get($custom-colors, "black-light");
+    background-color: map-get($custom-colors, 'black-light');
 
     &::before {
       opacity: 1;
@@ -26,13 +26,13 @@
 
     .menu-icon,
     &.has-children .menu-arrow {
-      color: map-get($custom-colors, "yellow");
+      color: map-get($custom-colors, 'yellow');
     }
   }
 
   &.active {
     .menu-icon {
-      color: map-get($custom-colors, "yellow");
+      color: map-get($custom-colors, 'yellow');
     }
   }
 
@@ -64,14 +64,14 @@
   .menu-text,
   .menu-icon {
     @extend .b1;
-    color: map-get($custom-colors, "grey-2") !important;
+    color: map-get($custom-colors, 'grey-2') !important;
   }
 
   &:hover,
   &.active {
     .menu-text,
     .menu-icon {
-      color: map-get($custom-colors, "white") !important;
+      color: map-get($custom-colors, 'white') !important;
     }
   }
 }
@@ -135,14 +135,14 @@
 
 .sidebar-toggle-btn {
   height: 40px !important;
-  border: 1px solid map-get($custom-colors, "black-light") !important;
-  color: map-get($custom-colors, "grey-2") !important;
+  border: 1px solid map-get($custom-colors, 'black-light') !important;
+  color: map-get($custom-colors, 'grey-2') !important;
 
   &:hover,
   &.active {
     .menu-text,
     .menu-icon {
-      color: map-get($custom-colors, "white") !important;
+      color: map-get($custom-colors, 'white') !important;
     }
   }
 
@@ -178,7 +178,7 @@
   }
 
   &:hover {
-    background-color: map-get($custom-colors, "black-light");
+    background-color: map-get($custom-colors, 'black-light');
   }
 }
 
@@ -186,13 +186,13 @@
   &,
   .menu-text,
   .menu-icon {
-    color: map-get($custom-colors, "grey-1");
+    color: map-get($custom-colors, 'grey-1');
   }
 
   &:hover {
     .menu-text,
     .menu-icon {
-      color: map-get($custom-colors, "yellow");
+      color: map-get($custom-colors, 'yellow');
     }
   }
 
@@ -207,8 +207,8 @@
   align-items: center;
   justify-content: center;
 
-  background-color: map-get($custom-colors, "yellow-black");
-  color: map-get($custom-colors, "yellow");
+  background-color: map-get($custom-colors, 'yellow-black');
+  color: map-get($custom-colors, 'yellow');
   border-radius: 4px;
   padding: 2px 4px;
   font-size: 12px;

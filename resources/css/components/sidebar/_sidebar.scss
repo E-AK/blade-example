@@ -2,7 +2,7 @@
   grid-column: 1;
   grid-row: 1 / -1;
   width: 280px;
-  background: map-get($custom-colors, "black");
+  background: map-get($custom-colors, 'black');
 }
 
 .sidebar-logo {

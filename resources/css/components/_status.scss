@@ -19,27 +19,37 @@
 
   &.status-green {
     color: map-get($custom-colors, 'green');
-    .status-dot { background-color: map-get($custom-colors, 'green'); }
+    .status-dot {
+      background-color: map-get($custom-colors, 'green');
+    }
   }
 
   &.status-red {
     color: map-get($custom-colors, 'red');
-    .status-dot { background-color: map-get($custom-colors, 'red'); }
+    .status-dot {
+      background-color: map-get($custom-colors, 'red');
+    }
   }
 
   &.status-yellow {
     color: map-get($custom-colors, 'yellow');
-    .status-dot { background-color: map-get($custom-colors, 'yellow'); }
+    .status-dot {
+      background-color: map-get($custom-colors, 'yellow');
+    }
   }
 
   &.status-blue {
     color: map-get($custom-colors, 'blue');
-    .status-dot { background-color: map-get($custom-colors, 'blue'); }
+    .status-dot {
+      background-color: map-get($custom-colors, 'blue');
+    }
   }
 
   &.status-grey-3 {
     color: map-get($custom-colors, 'grey-3');
-    .status-dot { background-color: map-get($custom-colors, 'grey-3'); }
+    .status-dot {
+      background-color: map-get($custom-colors, 'grey-3');
+    }
   }
 
   .status-text {

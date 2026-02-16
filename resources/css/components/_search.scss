@@ -4,11 +4,11 @@
   gap: 10px;
 
   &.state-selected {
-    border: 2px solid map-get($custom-colors, "blue-bg");
+    border: 2px solid map-get($custom-colors, 'blue-bg');
     border-radius: 8px;
 
     .search-box {
-      border: 1px solid map-get($custom-colors, "blue-soft") !important;
+      border: 1px solid map-get($custom-colors, 'blue-soft') !important;
     }
   }
 
@@ -20,8 +20,8 @@
 .search-box {
   display: flex;
   align-items: center;
-  background-color: map-get($custom-colors, "white");
-  border: 1px solid map-get($custom-colors, "grey-4");
+  background-color: map-get($custom-colors, 'white');
+  border: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 8px;
   transition: all 0.1s ease;
   width: 100%;
@@ -41,7 +41,7 @@
   .search-text {
     font-size: 16px;
     line-height: 20px;
-    color: map-get($custom-colors, "black");
+    color: map-get($custom-colors, 'black');
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -51,7 +51,7 @@
   .search-input {
     font-size: 16px;
     line-height: 20px;
-    color: map-get($custom-colors, "black");
+    color: map-get($custom-colors, 'black');
     background: transparent;
     border: none;
     outline: none;
@@ -62,7 +62,7 @@
     &::placeholder {
       font-size: 16px;
       line-height: 20px;
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
     }
 
     &:focus {
@@ -72,22 +72,22 @@
   }
 
   &:hover {
-    border-color: map-get($custom-colors, "grey-2");
+    border-color: map-get($custom-colors, 'grey-2');
   }
 
   &:focus-within {
-    border-color: map-get($custom-colors, "blue-soft");
+    border-color: map-get($custom-colors, 'blue-soft');
   }
 
   &.state-filled {
     &:hover,
     &:focus-within {
-      border-color: map-get($custom-colors, "grey-4");
+      border-color: map-get($custom-colors, 'grey-4');
     }
   }
 
   &.state-selected {
-    border-color: map-get($custom-colors, "blue-soft");
+    border-color: map-get($custom-colors, 'blue-soft');
   }
 }
 
@@ -101,7 +101,7 @@
 .search-tag {
   display: flex;
   align-items: center;
-  background-color: map-get($custom-colors, "grey-5");
+  background-color: map-get($custom-colors, 'grey-5');
   border-radius: 8px;
   padding: 8px;
   gap: 8px;
@@ -109,7 +109,7 @@
   .tag-text {
     font-size: 14px;
     line-height: 20px;
-    color: map-get($custom-colors, "black");
+    color: map-get($custom-colors, 'black');
   }
 
   .tag-close {
@@ -123,7 +123,7 @@
 .search-description {
   font-size: 12px;
   line-height: 16px;
-  color: map-get($custom-colors, "grey-1");
+  color: map-get($custom-colors, 'grey-1');
   margin-top: 4px;
 }
 

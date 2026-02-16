@@ -8,24 +8,24 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0;
-    color: map-get($custom-colors, "white");
+    color: map-get($custom-colors, 'white');
   }
 
   .account-subtitle {
-    color: map-get($custom-colors, "grey-2");
+    color: map-get($custom-colors, 'grey-2');
   }
 
   .account-crown {
     font-size: 12px;
-    color: map-get($custom-colors, "yellow");
+    color: map-get($custom-colors, 'yellow');
   }
 
   .menu-arrow-icon {
-    color: map-get($custom-colors, "white");
+    color: map-get($custom-colors, 'white');
   }
 
   &:hover .menu-arrow-icon {
-    color: map-get($custom-colors, "yellow");
+    color: map-get($custom-colors, 'yellow');
   }
 }
 
@@ -33,7 +33,7 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background-color: map-get($custom-colors, "black-light");
+  background-color: map-get($custom-colors, 'black-light');
 
   display: flex;
   align-items: center;
@@ -63,9 +63,9 @@
   font-size: 10px;
   line-height: 12px;
 
-  color: map-get($custom-colors, "white");
-  background-color: map-get($custom-colors, "red");
-  border: 2px solid map-get($custom-colors, "black");
+  color: map-get($custom-colors, 'white');
+  background-color: map-get($custom-colors, 'red');
+  border: 2px solid map-get($custom-colors, 'black');
 
   box-sizing: border-box;
 }

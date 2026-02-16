@@ -1,9 +1,24 @@
 $btn-radius-pill: 100px;
 
 $btn-sizes: (
-  sm: (height: 24px, py: 4px,  px: 12px, gap: 4px),
-  md: (height: 36px, py: 8px,  px: 16px, gap: 6px),
-  lg: (height: 44px, py: 12px, px: 20px, gap: 8px),
+  sm: (
+    height: 24px,
+    py: 4px,
+    px: 12px,
+    gap: 4px,
+  ),
+  md: (
+    height: 36px,
+    py: 8px,
+    px: 16px,
+    gap: 6px,
+  ),
+  lg: (
+    height: 44px,
+    py: 12px,
+    px: 20px,
+    gap: 8px,
+  ),
 );
 
 @mixin btn-size($size) {
@@ -94,8 +109,12 @@ $btn-sizes: (
   }
 }
 
-.btn-sm { @include btn-size(sm); }
-.btn-lg { @include btn-size(lg); }
+.btn-sm {
+  @include btn-size(sm);
+}
+.btn-lg {
+  @include btn-size(lg);
+}
 
 .btn,
 .btn {
@@ -109,94 +128,93 @@ $btn-sizes: (
 }
 
 $btn-primary: (
-  color: map-get($custom-colors, "black"),
-  bg: map-get($custom-colors, "yellow"),
-  border: map-get($custom-colors, "yellow"),
-
-  hover-color: map-get($custom-colors, "black"),
-  hover-bg: map-get($custom-colors, "yellow-dark"),
-  hover-border: map-get($custom-colors, "yellow-dark"),
-
-  active-color: map-get($custom-colors, "black"),
-  active-bg: map-get($custom-colors, "yellow-dark"),
-  active-border: map-get($custom-colors, "yellow-dark"),
-
-  disabled-color: map-get($custom-colors, "grey-2"),
-  disabled-bg: map-get($custom-colors, "grey-5"),
-  disabled-border: map-get($custom-colors, "grey-5"),
+  color: map-get($custom-colors, 'black'),
+  bg: map-get($custom-colors, 'yellow'),
+  border: map-get($custom-colors, 'yellow'),
+  hover-color: map-get($custom-colors, 'black'),
+  hover-bg: map-get($custom-colors, 'yellow-dark'),
+  hover-border: map-get($custom-colors, 'yellow-dark'),
+  active-color: map-get($custom-colors, 'black'),
+  active-bg: map-get($custom-colors, 'yellow-dark'),
+  active-border: map-get($custom-colors, 'yellow-dark'),
+  disabled-color: map-get($custom-colors, 'grey-2'),
+  disabled-bg: map-get($custom-colors, 'grey-5'),
+  disabled-border: map-get($custom-colors, 'grey-5'),
 );
 
 $btn-secondary: map-merge(
   $btn-primary,
   (
-    bg: map-get($custom-colors, "grey-5"),
-    border: map-get($custom-colors, "grey-5"),
-    hover-bg: map-get($custom-colors, "grey-4"),
-    hover-border: map-get($custom-colors, "grey-4"),
-    active-bg: map-get($custom-colors, "grey-4"),
-    active-border: map-get($custom-colors, "grey-4"),
+    bg: map-get($custom-colors, 'grey-5'),
+    border: map-get($custom-colors, 'grey-5'),
+    hover-bg: map-get($custom-colors, 'grey-4'),
+    hover-border: map-get($custom-colors, 'grey-4'),
+    active-bg: map-get($custom-colors, 'grey-4'),
+    active-border: map-get($custom-colors, 'grey-4'),
   )
 );
 
-.btn-primary   { @include bs-btn-variant($btn-primary); }
-.btn-secondary { @include bs-btn-variant($btn-secondary); }
+.btn-primary {
+  @include bs-btn-variant($btn-primary);
+}
+.btn-secondary {
+  @include bs-btn-variant($btn-secondary);
+}
 
 .btn-danger {
-  @include bs-btn-variant((
-    color: #fff,
-    bg: map-get($custom-colors, "red"),
-    border: map-get($custom-colors, "red"),
-
-    hover-color: #fff,
-    hover-bg: map-get($custom-colors, "red-dark"),
-    hover-border: map-get($custom-colors, "red-dark"),
-
-    active-color: #fff,
-    active-bg: map-get($custom-colors, "red-dark"),
-    active-border: map-get($custom-colors, "red-dark"),
-
-    disabled-color: map-get($custom-colors, "grey-2"),
-    disabled-bg: map-get($custom-colors, "grey-5"),
-    disabled-border: map-get($custom-colors, "grey-5"),
-  ));
+  @include bs-btn-variant(
+    (
+      color: #fff,
+      bg: map-get($custom-colors, 'red'),
+      border: map-get($custom-colors, 'red'),
+      hover-color: #fff,
+      hover-bg: map-get($custom-colors, 'red-dark'),
+      hover-border: map-get($custom-colors, 'red-dark'),
+      active-color: #fff,
+      active-bg: map-get($custom-colors, 'red-dark'),
+      active-border: map-get($custom-colors, 'red-dark'),
+      disabled-color: map-get($custom-colors, 'grey-2'),
+      disabled-bg: map-get($custom-colors, 'grey-5'),
+      disabled-border: map-get($custom-colors, 'grey-5'),
+    )
+  );
 }
 
 .btn-outline-primary {
   --bs-btn-bg: transparent;
   --bs-btn-border-width: 1px;
 
-  @include bs-btn-variant((
-    color: map-get($custom-colors, "black"),
-    bg: transparent,
-    border: map-get($custom-colors, "grey-4"),
-
-    hover-color: map-get($custom-colors, "black"),
-    hover-bg: transparent,
-    hover-border: map-get($custom-colors, "grey-2"),
-
-    active-color: map-get($custom-colors, "black"),
-    active-bg: transparent,
-    active-border: map-get($custom-colors, "grey-2"),
-
-    disabled-color: map-get($custom-colors, "grey-2"),
-    disabled-bg: transparent,
-    disabled-border: map-get($custom-colors, "grey-5"),
-  ));
+  @include bs-btn-variant(
+    (
+      color: map-get($custom-colors, 'black'),
+      bg: transparent,
+      border: map-get($custom-colors, 'grey-4'),
+      hover-color: map-get($custom-colors, 'black'),
+      hover-bg: transparent,
+      hover-border: map-get($custom-colors, 'grey-2'),
+      active-color: map-get($custom-colors, 'black'),
+      active-bg: transparent,
+      active-border: map-get($custom-colors, 'grey-2'),
+      disabled-color: map-get($custom-colors, 'grey-2'),
+      disabled-bg: transparent,
+      disabled-border: map-get($custom-colors, 'grey-5'),
+    )
+  );
 }
 
 .btn-string {
   @include btn-text(
-    map-get($custom-colors, "grey-2"),
-    map-get($custom-colors, "grey-1"),
-    map-get($custom-colors, "grey-3")
+    map-get($custom-colors, 'grey-2'),
+    map-get($custom-colors, 'grey-1'),
+    map-get($custom-colors, 'grey-3')
   );
 }
 
 .btn-danger-string {
   @include btn-text(
-    map-get($custom-colors, "red"),
-    map-get($custom-colors, "red-dark"),
-    map-get($custom-colors, "grey-3")
+    map-get($custom-colors, 'red'),
+    map-get($custom-colors, 'red-dark'),
+    map-get($custom-colors, 'grey-3')
   );
 }
 

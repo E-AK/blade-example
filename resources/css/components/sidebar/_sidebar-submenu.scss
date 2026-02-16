@@ -9,7 +9,7 @@
   margin-left: 16px;
   padding: 12px;
   border-radius: 12px;
-  background-color: map-get($custom-colors, "black");
+  background-color: map-get($custom-colors, 'black');
 
   display: none;
   flex-direction: column;
@@ -18,15 +18,15 @@
 
   .profile-dropdown-tab {
     gap: 12px;
-    @extend .p5
+    @extend .p5;
   }
 
   .header-grey {
-    color: map-get($custom-colors, "grey-2");
+    color: map-get($custom-colors, 'grey-2');
   }
 
   .header-yellow {
-    color: map-get($custom-colors, "yellow");
+    color: map-get($custom-colors, 'yellow');
   }
 }
 
@@ -42,7 +42,7 @@
 }
 
 .sidebar-item.has-submenu::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 100%;

@@ -38,7 +38,7 @@ class Tag extends Component
         public string $hoverBorderColor = 'green',
         public string $borderStyle = 'solid',
         public string $leftIcon = 'specific_tag',
-        public string $rightIcon = 'close',
+        public string $rightIcon = 'arrow_close',
         public string $class = '',
     ) {}
 

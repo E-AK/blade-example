@@ -5,11 +5,11 @@
   gap: 10px;
 
   &.state-selected {
-    border: 2px solid map-get($custom-colors, "blue-bg");
+    border: 2px solid map-get($custom-colors, 'blue-bg');
     border-radius: 8px;
 
     .select {
-      border: 1px solid map-get($custom-colors, "blue-soft") !important;
+      border: 1px solid map-get($custom-colors, 'blue-soft') !important;
     }
   }
 }
@@ -34,14 +34,14 @@
     .select-label {
       font-size: 12px;
       line-height: 16px;
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
       margin-bottom: 2px;
     }
 
     .select-text {
       font-size: 16px;
       line-height: 20px;
-      color: map-get($custom-colors, "black");
+      color: map-get($custom-colors, 'black');
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -50,7 +50,7 @@
     .select-cursor {
       font-size: 16px;
       line-height: 20px;
-      color: map-get($custom-colors, "black");
+      color: map-get($custom-colors, 'black');
       margin-left: 1px;
       animation: blink 1s step-end infinite;
     }
@@ -64,109 +64,114 @@
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    color: map-get($custom-colors, "grey-1");
+    color: map-get($custom-colors, 'grey-1');
   }
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .select-main {
   padding: 16px 12px;
   height: 52px;
-  background-color: map-get($custom-colors, "grey-6");
+  background-color: map-get($custom-colors, 'grey-6');
   border: none;
 
   &:hover,
   &.hover {
-    background-color: map-get($custom-colors, "grey-5");
+    background-color: map-get($custom-colors, 'grey-5');
   }
 
   &.state-filled {
-    background-color: map-get($custom-colors, "white");
-    border: 1px solid map-get($custom-colors, "grey-4");
+    background-color: map-get($custom-colors, 'white');
+    border: 1px solid map-get($custom-colors, 'grey-4');
   }
 
-  &.disabled:not(.disabled-filled) {
-    background-color: map-get($custom-colors, "grey-5");
+  &.disabled {
+    background-color: map-get($custom-colors, 'grey-5');
     .select-text {
-      color: map-get($custom-colors, "grey-3");
+      color: map-get($custom-colors, 'grey-3');
     }
     .select-icon-right,
     .select-icon-left {
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 
   &.disabled.disabled-filled {
-    background-color: map-get($custom-colors, "grey-5");
+    background-color: map-get($custom-colors, 'grey-5');
     .select-label {
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
     }
     .select-text {
-      color: map-get($custom-colors, "black");
+      color: map-get($custom-colors, 'black');
     }
     .select-icon-right,
     .select-icon-left {
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 
   &.error {
-    background-color: map-get($custom-colors, "white");
-    border: 1px solid map-get($custom-colors, "red");
+    background-color: map-get($custom-colors, 'white');
+    border: 1px solid map-get($custom-colors, 'red');
   }
 }
 
 .select-stroke {
   padding: 12px;
   height: 44px;
-  background-color: map-get($custom-colors, "white");
-  border: 1px solid map-get($custom-colors, "grey-4");
+  background-color: map-get($custom-colors, 'white');
+  border: 1px solid map-get($custom-colors, 'grey-4');
 
   &:hover,
   &.hover {
-    border-color: map-get($custom-colors, "grey-2");
+    border-color: map-get($custom-colors, 'grey-2');
   }
 
-  &.disabled:not(.disabled-filled) {
-    background-color: map-get($custom-colors, "grey-6");
-    border-color: map-get($custom-colors, "grey-4");
+  &.disabled {
+    background-color: map-get($custom-colors, 'grey-6');
+    border-color: map-get($custom-colors, 'grey-4');
     .select-text {
-      color: map-get($custom-colors, "grey-3");
+      color: map-get($custom-colors, 'grey-3');
     }
     .select-icon-right,
     .select-icon-left {
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 
   &.disabled.disabled-filled {
-    background-color: map-get($custom-colors, "grey-6");
-    border-color: map-get($custom-colors, "grey-4");
+    background-color: map-get($custom-colors, 'grey-6');
+    border-color: map-get($custom-colors, 'grey-4');
     .select-label {
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
     }
     .select-text {
-      color: map-get($custom-colors, "black");
+      color: map-get($custom-colors, 'black');
     }
     .select-icon-right,
     .select-icon-left {
-      color: map-get($custom-colors, "grey-2");
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 
   &.error {
-    border-color: map-get($custom-colors, "red");
+    border-color: map-get($custom-colors, 'red');
   }
 }
 
 .select-error {
   font-size: 12px;
   line-height: 16px;
-  color: map-get($custom-colors, "red");
+  color: map-get($custom-colors, 'red');
   margin-top: 4px;
 }
 
@@ -176,11 +181,11 @@
   top: calc(100% + 4px);
   left: 0;
   width: 100%;
-  background: map-get($custom-colors, "white");
-  border: 1px solid map-get($custom-colors, "grey-4");
+  background: map-get($custom-colors, 'white');
+  border: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 8px;
   z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   max-height: 250px;
   overflow-y: auto;
 
@@ -188,15 +193,15 @@
     cursor: pointer;
     padding: 12px;
     font-size: 14px;
-    color: map-get($custom-colors, "black");
+    color: map-get($custom-colors, 'black');
     transition: background 0.1s;
 
     &:hover {
-      background: map-get($custom-colors, "grey-6");
+      background: map-get($custom-colors, 'grey-6');
     }
 
     &:active {
-      background: map-get($custom-colors, "grey-5");
+      background: map-get($custom-colors, 'grey-5');
     }
   }
 }
