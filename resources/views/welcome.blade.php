@@ -51,6 +51,22 @@
         </div>
     </div>
 
+    {{-- ================= TOAST ================= --}}
+    <div class="mb-5">
+        <h2 class="h2 mb-4">Toast</h2>
+        <p class="text-muted mb-3">Нажмите кнопку — toast появится внизу по центру (как в примере).</p>
+        <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-primary toast-demo" data-state="success" data-message="Операция выполнена успешно.">Success (текст)</button>
+            <button type="button" class="btn btn-primary toast-demo" data-state="success" data-message="Изменения сохранены." data-title="Успех">Success (заголовок + текст)</button>
+            <button type="button" class="btn btn-primary toast-demo" data-state="error" data-message="Произошла ошибка. Попробуйте ещё раз.">Error (текст)</button>
+            <button type="button" class="btn btn-primary toast-demo" data-state="error" data-message="Не удалось подключиться к серверу." data-title="Ошибка">Error (заголовок + текст)</button>
+            <button type="button" class="btn btn-primary toast-demo" data-state="attention" data-message="Проверьте данные перед отправкой.">Attention (текст)</button>
+            <button type="button" class="btn btn-primary toast-demo" data-state="attention" data-message="Сессия скоро истечёт." data-title="Внимание">Attention (заголовок + текст)</button>
+            <button type="button" class="btn btn-primary toast-demo" data-state="info" data-message="Пароль перемещен в раздел Удаленные пароли">Info (текст)</button>
+            <button type="button" class="btn btn-primary toast-demo" data-state="info" data-message="Обновление будет установлено при следующем входе." data-title="Информация">Info (заголовок + текст)</button>
+        </div>
+    </div>
+
     {{-- ================= MULTISELECT ================= --}}
     <h2 class="h2 mb-4">Multiselect — все состояния</h2>
     @php

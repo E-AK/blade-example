@@ -33,5 +33,8 @@
         </div>
     </div>
 </div>
+
+<div id="toast-container-custom" class="toast-container-custom" aria-live="polite" aria-atomic="true"></div>
+
 </body>
 </html>
