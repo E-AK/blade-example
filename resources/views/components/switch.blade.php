@@ -39,23 +39,22 @@
     <span class="control-switch__track" aria-hidden="true">
         @if($showText)
             <span class="control-switch__content control-switch__content--on">
-                <span class="control-switch__text control-switch__text--on">ON</span>
                 <span class="control-switch__spacer"></span>
+                <span class="control-switch__text control-switch__text--on">ON</span>
             </span>
         @endif
         <span class="control-switch__knob">
-            <span class="control-switch__knob-inner"></span>
+            <span class="control-switch__knob-inner" aria-hidden="true"></span>
             @if($loading)
-                {{-- TODO: correct loading --}}
                 <span class="control-switch__loading" aria-hidden="true">
-                    <x-icon name="switch_nob_loading" />
+                    <x-icon name="switch_nob_loading" class="control-switch__loading-icon" />
                 </span>
             @endif
         </span>
         @if($showText)
             <span class="control-switch__content control-switch__content--off">
-                <span class="control-switch__spacer"></span>
                 <span class="control-switch__text control-switch__text--off">OFF</span>
+                <span class="control-switch__spacer"></span>
             </span>
         @endif
     </span>
