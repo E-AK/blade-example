@@ -380,4 +380,55 @@
             </div>
         </div>
     </div>
+
+    {{-- ================= BUTTON TOGGLE ================= --}}
+    <div class="mb-5">
+        <h2 class="h2 mb-4">Button toggle</h2>
+
+        <div class="d-flex flex-column gap-5">
+            <div>
+                <h3 class="h6 text-muted mb-2">2 items (text)</h3>
+                <x-button-toggle>
+                    <x-button-toggle-item name="bt1" value="active" label="Активные" selected="active" />
+                    <x-button-toggle-item name="bt1" value="all" label="Все" selected="active" />
+                </x-button-toggle>
+            </div>
+
+            <div>
+                <h3 class="h6 text-muted mb-2">3 items (text)</h3>
+                <x-button-toggle>
+                    <x-button-toggle-item name="bt2" value="a" label="Опция A" selected="b" />
+                    <x-button-toggle-item name="bt2" value="b" label="Опция B" selected="b" />
+                    <x-button-toggle-item name="bt2" value="c" label="Опция C" selected="b" />
+                </x-button-toggle>
+            </div>
+
+            <div>
+                <h3 class="h6 text-muted mb-2">State + text + badge</h3>
+                <x-button-toggle>
+                    <x-button-toggle-item name="bt3" value="active" label="Активные" type="state" variant="success" selected="active" />
+                    <x-button-toggle-item name="bt3" value="all" label="Все" :badge="4" selected="active" />
+                    <x-button-toggle-item name="bt3" value="pay" label="Оплата" type="icon" icon="specific_payment" selected="active" />
+                </x-button-toggle>
+            </div>
+
+            <div>
+                <h3 class="h6 text-muted mb-2">Size small</h3>
+                <x-button-toggle>
+                    <x-button-toggle-item name="bt4" value="a" label="Малый A" size="small" selected="a" />
+                    <x-button-toggle-item name="bt4" value="b" label="Малый B" size="small" selected="a" />
+                    <x-button-toggle-item name="bt4" value="c" label="Малый C" size="small" selected="a" />
+                </x-button-toggle>
+            </div>
+
+            <div>
+                <h3 class="h6 text-muted mb-2">С отключённым пунктом</h3>
+                <x-button-toggle>
+                    <x-button-toggle-item name="bt5" value="on" label="Вкл" selected="on" />
+                    <x-button-toggle-item name="bt5" value="off" label="Выкл" selected="on" />
+                    <x-button-toggle-item name="bt5" value="lock" label="Заблокировано" disabled selected="on" />
+                </x-button-toggle>
+            </div>
+        </div>
+    </div>
 @endsection

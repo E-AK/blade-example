@@ -1,0 +1,156 @@
+.button-toggle {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+  border: 1px solid map-get($custom-colors, 'grey-4');
+  border-radius: 12px;
+  flex: none;
+}
+
+.button-toggle-item {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 8px;
+  flex: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s;
+
+  .button-toggle-item__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .button-toggle-item__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .button-toggle-item__label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: map-get($custom-colors, 'black');
+  }
+
+  .button-toggle-item__icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    color: map-get($custom-colors, 'grey-2');
+  }
+
+  .button-toggle-item__badge {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: map-get($custom-colors, 'grey-2');
+  }
+
+  // Size: large (default)
+  &[data-size='large'] {
+    height: 36px;
+
+    .button-toggle-item__icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Size: small
+  &[data-size='small'] {
+    height: 32px;
+
+    .button-toggle-item__label {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .button-toggle-item__icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .button-toggle-item__badge {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .status .status-text {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  // State: default
+  &:not([data-state]) {
+    background: transparent;
+  }
+
+  // State: hover
+  &:hover:not([data-state='disabled']) {
+    background: map-get($custom-colors, 'grey-6');
+  }
+
+  // State: selected
+  &[data-state='selected'] {
+    background: map-get($custom-colors, 'grey-6');
+
+    .button-toggle-item__label {
+      font-weight: 500;
+    }
+
+    .status .status-text {
+      font-weight: 500;
+    }
+  }
+
+  // State: disabled
+  &[data-state='disabled'] {
+    cursor: not-allowed;
+
+    .button-toggle-item__label {
+      color: map-get($custom-colors, 'grey-2');
+    }
+
+    .button-toggle-item__icon {
+      color: map-get($custom-colors, 'grey-2');
+    }
+
+    .button-toggle-item__badge {
+      color: map-get($custom-colors, 'grey-2');
+    }
+
+    .status {
+      color: map-get($custom-colors, 'grey-2');
+
+      .status-dot {
+        background-color: map-get($custom-colors, 'grey-2');
+      }
+
+      .status-text {
+        color: map-get($custom-colors, 'grey-2');
+      }
+    }
+  }
+}

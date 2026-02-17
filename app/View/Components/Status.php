@@ -44,13 +44,14 @@ class Status extends Component
     public function __construct(
         public string $variant = 'success',
         public bool $hasRightIcon = false,
+        public ?string $text = null,
     ) {
         //
     }
 
     public function text(): string
     {
-        return self::VARIANTS[$this->variant]['text'] ?? '';
+        return $this->text ?? self::VARIANTS[$this->variant]['text'] ?? '';
     }
 
     public function colorClass(): string
