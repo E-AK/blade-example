@@ -36,7 +36,7 @@
                 <x-alert state="attention" title="Внимание">
                     Сессия скоро истечёт. Продолжить?
                     <x-slot:button>
-                        <x-button text="Продолжить" variant="main" size="md" />
+                        <x-button type="main" size="medium">Продолжить</x-button>
                     </x-slot:button>
                 </x-alert>
             </div>
@@ -56,14 +56,14 @@
         <h2 class="h2 mb-4">Toast</h2>
         <p class="text-muted mb-3">Нажмите кнопку — toast появится внизу по центру (как в примере).</p>
         <div class="d-flex flex-wrap gap-2">
-            <button type="button" class="btn btn-primary toast-demo" data-state="success" data-message="Операция выполнена успешно.">Success (текст)</button>
-            <button type="button" class="btn btn-primary toast-demo" data-state="success" data-message="Изменения сохранены." data-title="Успех">Success (заголовок + текст)</button>
-            <button type="button" class="btn btn-primary toast-demo" data-state="error" data-message="Произошла ошибка. Попробуйте ещё раз.">Error (текст)</button>
-            <button type="button" class="btn btn-primary toast-demo" data-state="error" data-message="Не удалось подключиться к серверу." data-title="Ошибка">Error (заголовок + текст)</button>
-            <button type="button" class="btn btn-primary toast-demo" data-state="attention" data-message="Проверьте данные перед отправкой.">Attention (текст)</button>
-            <button type="button" class="btn btn-primary toast-demo" data-state="attention" data-message="Сессия скоро истечёт." data-title="Внимание">Attention (заголовок + текст)</button>
-            <button type="button" class="btn btn-primary toast-demo" data-state="info" data-message="Пароль перемещен в раздел Удаленные пароли">Info (текст)</button>
-            <button type="button" class="btn btn-primary toast-demo" data-state="info" data-message="Обновление будет установлено при следующем входе." data-title="Информация">Info (заголовок + текст)</button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="success" data-message="Операция выполнена успешно.">Success (текст)</x-button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="success" data-message="Изменения сохранены." data-title="Успех">Success (заголовок + текст)</x-button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="error" data-message="Произошла ошибка. Попробуйте ещё раз.">Error (текст)</x-button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="error" data-message="Не удалось подключиться к серверу." data-title="Ошибка">Error (заголовок + текст)</x-button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="attention" data-message="Проверьте данные перед отправкой.">Attention (текст)</x-button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="attention" data-message="Сессия скоро истечёт." data-title="Внимание">Attention (заголовок + текст)</x-button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="info" data-message="Пароль перемещен в раздел Удаленные пароли">Info (текст)</x-button>
+            <x-button type="main" size="medium" class="toast-demo" data-state="info" data-message="Обновление будет установлено при следующем входе." data-title="Информация">Info (заголовок + текст)</x-button>
         </div>
     </div>
 
@@ -465,6 +465,151 @@
                     <x-stepper-item :step-number="4" step-label="Шаг 4" title="Заголовок" :is-last="true" />
                 </x-stepper>
             </div>
+        </div>
+    </div>
+
+    {{-- ================= MODAL (Alpine.js) ================= --}}
+    <div class="mb-5" x-data="{
+        modalSmall: false,
+        modalSmallFooter: false,
+        modalLarge: false,
+        modalLargeFooter: false,
+        modalWithIcon: false,
+        modalFooterVariants: false,
+        modalCustomSize: false
+    }">
+        <h2 class="h2 mb-4">Modal</h2>
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <x-button type="main" size="medium" @click="modalSmall = true">Small, без кнопок в подвале</x-button>
+            <x-button type="main" size="medium" @click="modalSmallFooter = true">Small, с кнопками (Подтвердить / Отмена)</x-button>
+            <x-button type="main" size="medium" @click="modalLarge = true">Large, без кнопок</x-button>
+            <x-button type="main" size="medium" @click="modalLargeFooter = true">Large, с кнопками</x-button>
+            <x-button type="main" size="medium" @click="modalWithIcon = true">С иконкой у заголовка</x-button>
+            <x-button type="main" size="medium" @click="modalFooterVariants = true">Разные кнопки в подвале</x-button>
+            <x-button type="main" size="medium" @click="modalCustomSize = true">Нестандартный размер (800×520)</x-button>
+        </div>
+
+        {{-- Small, no footer — visibility controlled by Alpine x-show --}}
+        <div x-show="modalSmall" x-cloak style="display: none;">
+            <x-modal
+                :open="true"
+                title="Заголовок"
+                size="small"
+                :close-button-attributes="['x-on:click' => 'modalSmall = false']"
+                :overlay-attributes="['x-on:click.self' => 'modalSmall = false']"
+            >
+                Контент модального окна. Только заголовок и крестик — без кнопок в подвале.
+            </x-modal>
+        </div>
+
+        {{-- Small, with footer --}}
+        <div x-show="modalSmallFooter" x-cloak style="display: none;">
+            <x-modal
+                :open="true"
+                title="Подтверждение"
+                size="small"
+                :close-button-attributes="['x-on:click' => 'modalSmallFooter = false']"
+                :overlay-attributes="['x-on:click.self' => 'modalSmallFooter = false']"
+            >
+                Вы уверены, что хотите выполнить это действие?
+                <x-slot:footer>
+                    <div class="d-flex gap-2">
+                        <x-button type="secondary" size="medium" @click="modalSmallFooter = false">Отмена</x-button>
+                        <x-button type="main" size="medium" @click="modalSmallFooter = false">Подтвердить</x-button>
+                    </div>
+                </x-slot:footer>
+            </x-modal>
+        </div>
+
+        {{-- Large, no footer --}}
+        <div x-show="modalLarge" x-cloak style="display: none;">
+            <x-modal
+                :open="true"
+                title="Заголовок (large)"
+                size="large"
+                :close-button-attributes="['x-on:click' => 'modalLarge = false']"
+                :overlay-attributes="['x-on:click.self' => 'modalLarge = false']"
+            >
+                Большое модальное окно без кнопок в подвале. Размер 780×420.
+            </x-modal>
+        </div>
+
+        {{-- Large, with footer --}}
+        <div x-show="modalLargeFooter" x-cloak style="display: none;">
+            <x-modal
+                :open="true"
+                title="Подтверждение (large)"
+                size="large"
+                :close-button-attributes="['x-on:click' => 'modalLargeFooter = false']"
+                :overlay-attributes="['x-on:click.self' => 'modalLargeFooter = false']"
+            >
+                Большое окно с кнопками в подвале.
+                <x-slot:footer>
+                    <div class="d-flex gap-2">
+                        <x-button type="secondary" size="medium" @click="modalLargeFooter = false">Отмена</x-button>
+                        <x-button type="main" size="medium" @click="modalLargeFooter = false">Подтвердить</x-button>
+                    </div>
+                </x-slot:footer>
+            </x-modal>
+        </div>
+
+        {{-- With icon next to title --}}
+        <div x-show="modalWithIcon" x-cloak style="display: none;">
+            <x-modal
+                :open="true"
+                title="Уведомление"
+                size="small"
+                :close-button-attributes="['x-on:click' => 'modalWithIcon = false']"
+                :overlay-attributes="['x-on:click.self' => 'modalWithIcon = false']"
+            >
+                <x-slot:titleIcon>
+                    <x-icon name="actions_mail" :size="20" />
+                </x-slot:titleIcon>
+                Сообщение с иконкой рядом с заголовком.
+                <x-slot:footer>
+                    <x-button type="main" size="medium" @click="modalWithIcon = false">Понятно</x-button>
+                </x-slot:footer>
+            </x-modal>
+        </div>
+
+        {{-- Footer with different button types --}}
+        <div x-show="modalFooterVariants" x-cloak style="display: none;">
+            <x-modal
+                :open="true"
+                title="Удаление"
+                size="small"
+                class="modal--footer-between"
+                :close-button-attributes="['x-on:click' => 'modalFooterVariants = false']"
+                :overlay-attributes="['x-on:click.self' => 'modalFooterVariants = false']"
+            >
+                Удалить выбранный элемент? Это действие нельзя отменить.
+                <x-slot:footer>
+                    <div class="d-flex gap-2 justify-content-between flex-grow-1">
+                        <div class="d-flex gap-2">
+                            <x-button type="danger" size="medium" @click="modalFooterVariants = false">Удалить</x-button>
+                        </div>
+                        <x-button type="string" size="medium" @click="modalFooterVariants = false">Отмена</x-button>
+                    </div>
+                </x-slot:footer>
+            </x-modal>
+        </div>
+
+        {{-- Custom size --}}
+        <div x-show="modalCustomSize" x-cloak style="display: none;">
+            <x-modal
+                :open="true"
+                title="Нестандартный размер"
+                width="800px"
+                :min-height="'520px'"
+                :close-button-attributes="['x-on:click' => 'modalCustomSize = false']"
+                :overlay-attributes="['x-on:click.self' => 'modalCustomSize = false']"
+            >
+                В некоторых кейсах размеры модального окна могут отличаться от стандартных (например, 800×520).
+                <x-slot:footer>
+                    <x-button type="main" size="medium" @click="modalCustomSize = false">Закрыть</x-button>
+                </x-slot:footer>
+            </x-modal>
         </div>
     </div>
 @endsection

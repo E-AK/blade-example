@@ -10,64 +10,80 @@ use Illuminate\View\Component;
 
 class Button extends Component
 {
-    private const VARIANTS = [
-        'main' => 'btn-primary',
-        'secondary' => 'btn-secondary',
-        'danger' => 'btn-danger',
-        'stroke' => 'btn-outline-primary',
-        'string' => 'btn-string',
-        'danger-string' => 'btn-danger-string',
-    ];
-
-    private const SIZES = [
-        'sm' => 'btn-sm',
-        'md' => '',
-        'lg' => 'btn-lg',
-    ];
-
-    private const TYPOGRAPHY = [
-        'sm' => 'b3',
-        'md' => 'b2',
-        'lg' => 'b1',
-    ];
-
     /**
-     * Create a new component instance.
+     * @param  array<string, mixed>  $extraAttributes
      */
     public function __construct(
-        public string $text = '',
-        public ?string $iconLeft = null,
-        public ?string $iconRight = null,
-        public string $variant = 'main',
-        public string $size = 'md',
-        public bool $pill = true,
-        public bool $block = false,
+        public string $type = 'main',
+        public string $size = 'medium',
         public bool $disabled = false,
-        public bool $loading = false,
-        public string $type = 'button',
-        public string $class = ''
+        public string $iconPosition = 'none',
+        public bool $stretch = false,
+        public string $rounded = 'full',
+        public ?string $href = null,
+        public array $extraAttributes = []
     ) {}
 
-    public function classes(): string
+    public function tag(): string
     {
-        $base = ['btn'];
+        return $this->href !== null ? 'a' : 'button';
+    }
 
-        // variant
-        $base[] = self::VARIANTS[$this->variant] ?? self::VARIANTS['main'];
-        // size
-        $base[] = self::SIZES[$this->size] ?? '';
-        // typography
-        $base[] = self::TYPOGRAPHY[$this->size] ?? '';
-        // block / pill
-        $base[] = $this->block ? 'w-100' : '';
-        $base[] = $this->pill ? 'rounded-pill' : '';
+    public function typeClass(): string
+    {
+        $type = in_array($this->type, ['main', 'secondary', 'stroke', 'danger', 'string', 'danger-string'], true)
+            ? $this->type
+            : 'main';
 
-        return implode(' ', array_filter($base)).' '.$this->class;
+        return 'btn btn--'.$type;
+    }
+
+    public function sizeClass(): string
+    {
+        $size = in_array($this->size, ['large', 'medium', 'small'], true) ? $this->size : 'medium';
+
+        return 'btn--'.$size;
+    }
+
+    public function iconClass(): string
+    {
+        if ($this->iconPosition === 'none') {
+            return '';
+        }
+
+        return in_array($this->iconPosition, ['left', 'right', 'only'], true)
+            ? 'btn--icon-'.$this->iconPosition
+            : '';
+    }
+
+    public function roundedClass(): string
+    {
+        return $this->rounded === 'square' ? 'btn--rounded-square' : '';
+    }
+
+    public function classList(): string
+    {
+        return trim(implode(' ', array_filter([
+            'btn',
+            $this->typeClass(),
+            $this->sizeClass(),
+            $this->iconClass(),
+            $this->roundedClass(),
+            $this->stretch ? 'btn--stretch' : '',
+            $this->disabled ? 'btn--disabled' : '',
+        ])));
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * @return array<string, mixed>
      */
+    public function data(): array
+    {
+        return array_merge(parent::data(), [
+            'classList' => $this->classList(),
+        ]);
+    }
+
     public function render(): View|Closure|string
     {
         return view('components.button');

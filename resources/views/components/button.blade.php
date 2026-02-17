@@ -1,21 +1,33 @@
-<button
-    type="{{ $type }}"
-    {{ $disabled || $loading ? 'disabled' : '' }}
-    {{ $attributes->merge(['class' => $classes()]) }}
->
-    @if ($loading)
-        <span class="spinner-border spinner-border-sm me-2"></span>
-    @endif
+@php
+    $tag = $href !== null ? 'a' : 'button';
+    $mergedAttrs = $attributes->merge($extraAttributes ?? [])->merge(['class' => $classList]);
+    if ($tag === 'button' && $href === null) {
+        $mergedAttrs = $mergedAttrs->merge(['type' => $attributes->get('type', 'button')]);
+    }
+    if ($tag === 'button' && $disabled) {
+        $mergedAttrs = $mergedAttrs->merge(['disabled' => true]);
+    }
+    if ($tag === 'a' && $href !== null) {
+        $mergedAttrs = $mergedAttrs->merge(['href' => $href]);
+    }
+    if ($tag === 'a' && $disabled) {
+        $mergedAttrs = $mergedAttrs->merge(['aria-disabled' => 'true']);
+    }
+@endphp
 
-    @if ($iconLeft)
-        <x-icon :name="$iconLeft"/>
-    @endif
-
-    @if($text)
-        <span>{{ $text }}</span>
-    @endif
-
-    @if ($iconRight)
-        <x-icon :name="$iconRight"/>
-    @endif
-</button>
+<{{ $tag }} {{ $mergedAttrs }}>
+    <span class="btn__inner">
+        @if($iconPosition === 'left' && isset($icon) && $icon->isNotEmpty())
+            <span class="btn__icon btn__icon--left" aria-hidden="true">{{ $icon }}</span>
+        @endif
+        @if($iconPosition === 'only' && isset($icon) && $icon->isNotEmpty())
+            <span class="btn__icon btn__icon--only" aria-hidden="true">{{ $icon }}</span>
+        @endif
+        @if($iconPosition !== 'only' && $slot->isNotEmpty())
+            <span class="btn__label">{{ $slot }}</span>
+        @endif
+        @if($iconPosition === 'right' && isset($icon) && $icon->isNotEmpty())
+            <span class="btn__icon btn__icon--right" aria-hidden="true">{{ $icon }}</span>
+        @endif
+    </span>
+</{{ $tag }}>

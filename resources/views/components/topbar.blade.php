@@ -5,15 +5,25 @@
             {{ $headerTitleText }}
         </h1>
     </div>
-    <div class="right d-flex justify-content-center align-self-center">
+    <div class="right d-flex justify-content-center align-self-center gap-2">
         @if($showInfoButton)
-            <x-button :text="$infoButtonText" icon-left='document_book' variant="string" size="lg"/>
+            <x-button type="string" size="large" icon-position="left">
+                <x-slot:icon>
+                    <x-icon name="document_book" :size="20" />
+                </x-slot:icon>
+                {{ $infoButtonText }}
+            </x-button>
         @endif
         @if($showSummaryButton)
-            <x-button :text="$summaryButtonText" size="lg"/>
+            <x-button type="main" size="large">{{ $summaryButtonText }}</x-button>
         @endif
         @if($showActionButton)
-            <x-button :text="$actionButtonText" icon-right='actions_share' variant="secondary" size="lg"/>
+            <x-button type="secondary" size="large" icon-position="right">
+                {{ $actionButtonText }}
+                <x-slot:icon>
+                    <x-icon name="actions_share" :size="20" />
+                </x-slot:icon>
+            </x-button>
         @endif
     </div>
 </div>

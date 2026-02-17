@@ -6,8 +6,13 @@ import initSelect from './ui/select';
 import initMultiselect from './ui/multiselect';
 import initSearch from './ui/search';
 import initToast from './ui/toast';
-import initButtonToggle from './ui/button-toggle';
 import initTables from './components/initTables';
+
+import Alpine from 'alpinejs'
+
+window.Alpine = Alpine
+
+Alpine.start();
 
 window.$ = window.jQuery = $;
 
@@ -17,6 +22,5 @@ $(function () {
   initMultiselect();
   initSearch();
   initToast();
-  initButtonToggle();
   initTables();
 });
