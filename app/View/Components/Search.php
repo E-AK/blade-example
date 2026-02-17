@@ -40,7 +40,7 @@ class Search extends Component
     {
         $classes = ['search-box'];
 
-        $classes[] = "search-box-{$this->size}";
+        $classes[] = "search-box-$this->size";
 
         if ($this->value !== '') {
             $classes[] = 'state-filled';

@@ -76,23 +76,23 @@ class Tag extends Component
         $styles = [];
 
         if ($this->bg) {
-            $styles[] = "--tag-bg: var(--color-{$this->bg});";
+            $styles[] = "--tag-bg: var(--color-$this->bg);";
         }
         if ($this->color) {
-            $styles[] = "--tag-color: var(--color-{$this->color});";
+            $styles[] = "--tag-color: var(--color-$this->color);";
         }
         if ($this->borderColor) {
-            $styles[] = "--tag-border-color: var(--color-{$this->borderColor});";
+            $styles[] = "--tag-border-color: var(--color-$this->borderColor);";
         }
 
         if ($this->hoverBg) {
-            $styles[] = "--tag-hover-bg: var(--color-{$this->hoverBg});";
+            $styles[] = "--tag-hover-bg: var(--color-$this->hoverBg);";
         }
         if ($this->hoverColor) {
-            $styles[] = "--tag-hover-color: var(--color-{$this->hoverColor});";
+            $styles[] = "--tag-hover-color: var(--color-$this->hoverColor);";
         }
         if ($this->hoverBorderColor) {
-            $styles[] = "--tag-hover-border-color: var(--color-{$this->hoverBorderColor});";
+            $styles[] = "--tag-hover-border-color: var(--color-$this->hoverBorderColor);";
         }
 
         return implode(' ', $styles);
@@ -112,8 +112,6 @@ class Tag extends Component
     {
         return match ($this->size) {
             'sm' => 16,
-            'md' => 20,
-            'lg' => 20,
             default => 20,
         };
     }

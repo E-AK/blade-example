@@ -245,7 +245,7 @@
 
         <div class="d-flex flex-wrap gap-5">
             {{-- Checkbox --}}
-            <div class="control-demo-panel border border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
+            <div class="control-demo-panel border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
                 <h3 class="h6 mb-3">Checkbox</h3>
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center gap-3">
@@ -286,7 +286,7 @@
             </div>
 
             {{-- Radio --}}
-            <div class="control-demo-panel border border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
+            <div class="control-demo-panel border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
                 <h3 class="h6 mb-3">Radio</h3>
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center gap-3">
@@ -327,7 +327,7 @@
             </div>
 
             {{-- Switch --}}
-            <div class="control-demo-panel border border-2 border-dashed rounded p-4" style="border-color: #7B61FF !important; width: 351px;">
+            <div class="control-demo-panel border-2 border-dashed rounded p-4" style="border-color: #7B61FF !important; width: 351px;">
                 <h3 class="h6 mb-3">Switch</h3>
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center gap-3">
@@ -428,6 +428,42 @@
                     <x-button-toggle-item name="bt5" value="off" label="Выкл" selected="on" />
                     <x-button-toggle-item name="bt5" value="lock" label="Заблокировано" disabled selected="on" />
                 </x-button-toggle>
+            </div>
+        </div>
+    </div>
+
+    {{-- ================= STEPPER ================= --}}
+    <div class="mb-5">
+        <h2 class="h2 mb-4">Stepper</h2>
+
+        <div class="d-flex flex-column gap-5">
+            <div>
+                <h3 class="h6 text-muted mb-2">3 items (active first)</h3>
+                <x-stepper>
+                    <x-stepper-item :step-number="1" step-label="Шаг 1" title="Заголовок" state="active" />
+                    <x-stepper-item :step-number="2" step-label="Шаг 2" title="Заголовок" />
+                    <x-stepper-item :step-number="3" step-label="Шаг 3" title="Заголовок" :is-last="true" />
+                </x-stepper>
+            </div>
+
+            <div>
+                <h3 class="h6 text-muted mb-2">4 items (success, active, default)</h3>
+                <x-stepper>
+                    <x-stepper-item :step-number="1" step-label="Шаг 1" title="Заголовок" state="success" />
+                    <x-stepper-item :step-number="2" step-label="Шаг 2" title="Заголовок" state="active" />
+                    <x-stepper-item :step-number="3" step-label="Шаг 3" title="Заголовок" />
+                    <x-stepper-item :step-number="4" step-label="Шаг 4" title="Заголовок" :is-last="true" />
+                </x-stepper>
+            </div>
+
+            <div>
+                <h3 class="h6 text-muted mb-2">All states (success, active, error, default)</h3>
+                <x-stepper>
+                    <x-stepper-item :step-number="1" step-label="Шаг 1" title="Заголовок" state="success" />
+                    <x-stepper-item :step-number="2" step-label="Шаг 2" title="Заголовок" state="active" />
+                    <x-stepper-item :step-number="3" step-label="Шаг 3" title="Заголовок" state="error" />
+                    <x-stepper-item :step-number="4" step-label="Шаг 4" title="Заголовок" :is-last="true" />
+                </x-stepper>
             </div>
         </div>
     </div>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\Account;
@@ -21,7 +23,7 @@ class AccountUserSeeder extends Seeder
 
         $assigned = collect();
         $accounts->each(function (Account $account) use ($userPool, &$assigned) {
-            $count = rand(1, 10);
+            $count = random_int(1, 10);
             $ids = $userPool->random($count)->pluck('id')->toArray();
             $account->users()->attach($ids);
             $assigned = $assigned->merge($ids)->unique();

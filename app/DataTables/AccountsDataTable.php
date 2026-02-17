@@ -113,8 +113,7 @@ class AccountsDataTable extends BaseDataTable
                 ->hidden(),
             Column::make('name')
                 ->title('Название')
-                ->addClass('column-name')
-                ->searchable(true),
+                ->addClass('column-name'),
             Column::computed('users')
                 ->addClass('column-users')
                 ->title('Пользователи'),

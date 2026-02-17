@@ -1,13 +1,13 @@
 .button-toggle {
   box-sizing: border-box;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   padding: 4px;
   gap: 4px;
   border: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 12px;
-  flex: none;
+  width: fit-content;
 }
 
 .button-toggle-item {
