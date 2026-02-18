@@ -515,8 +515,8 @@
                 Вы уверены, что хотите выполнить это действие?
                 <x-slot:footer>
                     <div class="d-flex gap-2">
-                        <x-button type="secondary" size="medium" @click="modalSmallFooter = false">Отмена</x-button>
-                        <x-button type="main" size="medium" @click="modalSmallFooter = false">Подтвердить</x-button>
+                        <x-button type="main" size="large" @click="modalSmallFooter = false">Подтвердить</x-button>
+                        <x-button type="stroke" size="large" @click="modalSmallFooter = false">Отмена</x-button>
                     </div>
                 </x-slot:footer>
             </x-modal>
@@ -547,8 +547,8 @@
                 Большое окно с кнопками в подвале.
                 <x-slot:footer>
                     <div class="d-flex gap-2">
-                        <x-button type="secondary" size="medium" @click="modalLargeFooter = false">Отмена</x-button>
-                        <x-button type="main" size="medium" @click="modalLargeFooter = false">Подтвердить</x-button>
+                        <x-button type="secondary" size="large" @click="modalLargeFooter = false">Отмена</x-button>
+                        <x-button type="main" size="large" @click="modalLargeFooter = false">Подтвердить</x-button>
                     </div>
                 </x-slot:footer>
             </x-modal>
@@ -568,7 +568,7 @@
                 </x-slot:titleIcon>
                 Сообщение с иконкой рядом с заголовком.
                 <x-slot:footer>
-                    <x-button type="main" size="medium" @click="modalWithIcon = false">Понятно</x-button>
+                    <x-button type="main" size="large" @click="modalWithIcon = false">Понятно</x-button>
                 </x-slot:footer>
             </x-modal>
         </div>
@@ -587,9 +587,9 @@
                 <x-slot:footer>
                     <div class="d-flex gap-2 justify-content-between flex-grow-1">
                         <div class="d-flex gap-2">
-                            <x-button type="danger" size="medium" @click="modalFooterVariants = false">Удалить</x-button>
+                            <x-button type="danger" size="large" @click="modalFooterVariants = false">Удалить</x-button>
                         </div>
-                        <x-button type="string" size="medium" @click="modalFooterVariants = false">Отмена</x-button>
+                        <x-button type="string" size="large" @click="modalFooterVariants = false">Отмена</x-button>
                     </div>
                 </x-slot:footer>
             </x-modal>
@@ -607,7 +607,7 @@
             >
                 В некоторых кейсах размеры модального окна могут отличаться от стандартных (например, 800×520).
                 <x-slot:footer>
-                    <x-button type="main" size="medium" @click="modalCustomSize = false">Закрыть</x-button>
+                    <x-button type="main" size="large" @click="modalCustomSize = false">Закрыть</x-button>
                 </x-slot:footer>
             </x-modal>
         </div>

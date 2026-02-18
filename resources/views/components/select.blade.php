@@ -88,10 +88,6 @@
     @endif
 
     @if(!empty($options))
-        <ul class="select-dropdown list-unstyled m-0 border rounded shadow-sm">
-            @foreach($options as $val => $lab)
-                <li class="select-item px-3 py-2" data-value="{{ $val }}">{{ $lab }}</li>
-            @endforeach
-        </ul>
+        <x-dropdown :options="$options" />
     @endif
 </div>

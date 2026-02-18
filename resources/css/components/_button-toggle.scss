@@ -5,7 +5,7 @@
   align-items: center;
   padding: 4px;
   gap: 4px;
-  border: 1px solid map-get($custom-colors, 'grey-4');
+  outline: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 12px;
   width: fit-content;
 }
@@ -45,7 +45,7 @@
   }
 
   .button-toggle-item__label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -60,7 +60,7 @@
   }
 
   .button-toggle-item__badge {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;

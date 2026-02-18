@@ -1,12 +1,12 @@
 @php
     $dialogId = $titleId ?? 'modal-title-'.uniqid('', true);
     $sizeClass = $size === 'large' ? 'modal--large' : 'modal--small';
-    $style = [];
+    $style = ['height: auto'];
     if (!empty($width)) {
-        $style[] = '--modal-width: ' . $width;
+        $style[] = 'width: ' . $width;
     }
     if (!empty($minHeight)) {
-        $style[] = '--modal-min-height: ' . $minHeight;
+        $style[] = 'min-height: ' . $minHeight;
     }
     $styleStr = implode('; ', $style);
     $parentClick = $closeButtonAttributes['x-on:click'] ?? $closeButtonAttributes['@click'] ?? '';
@@ -27,13 +27,12 @@
     >
         <div
             class="modal"
-            @style('height: auto')
             @if($styleStr) style="{{ $styleStr }}" @endif
         >
             <header class="modal__header">
                 <div class="modal__header-inner">
                     @if(isset($titleIcon) && $titleIcon->isNotEmpty())
-                        <span class="modal__title-icon" aria-hidden="true">
+                        <span class="modal__title-icon align-items-center" aria-hidden="true">
                             {{ $titleIcon }}
                         </span>
                     @endif

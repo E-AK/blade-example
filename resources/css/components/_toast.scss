@@ -45,15 +45,11 @@
 
   .toast-custom__icon {
     flex: none;
-    width: 20px;
-    height: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     svg {
-      width: 20px;
-      height: 20px;
       fill: currentColor;
     }
   }
@@ -68,7 +64,7 @@
   }
 
   .toast-custom__title {
-    font-family: var(--font-family-base, 'Inter', sans-serif);
+    font-family: var(--font-family-base, 'Inter', serif);
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
@@ -77,10 +73,10 @@
   }
 
   .toast-custom__text {
-    font-family: var(--font-family-base, 'Inter', sans-serif);
+    font-family: var(--font-family-base, 'Inter', serif);
     font-weight: 400;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 24px;
     color: map-get($custom-colors, 'black');
     flex: 1;
     min-width: 0;

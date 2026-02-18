@@ -1,28 +1,28 @@
 .multiselect-wrapper {
   position: relative;
   display: flex;
-  flex-direction: column;
   gap: 10px;
 
   &.state-selected {
-    border: 2px solid map-get($custom-colors, 'blue-bg');
     border-radius: 8px;
+    box-shadow: 0 0 0 2px map-get($custom-colors, 'blue-bg');
 
     .multiselect {
-      border: 1px solid map-get($custom-colors, 'blue-soft') !important;
+      outline: 1px solid map-get($custom-colors, 'blue-soft') !important;
     }
   }
 
   &.has-error .multiselect {
-    border-color: map-get($custom-colors, 'red');
+    outline-color: map-get($custom-colors, 'red');
   }
 }
 
 .multiselect {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   font-size: 16px;
   line-height: 20px;
   width: 100%;
+  height: 52px;
   min-height: 52px;
   transition: all 0.1s ease;
   display: flex;
@@ -32,16 +32,37 @@
   padding: 16px 12px;
   gap: 8px;
   border-radius: 8px;
-  box-sizing: border-box;
+  overflow: hidden;
 
   .multiselect-content {
+    position: relative;
     display: flex !important;
     flex-direction: row;
-    flex-wrap: wrap !important;
     align-items: center !important;
     gap: 8px !important;
     min-width: 0;
     flex: 1 1 auto;
+
+    .multiselect-tags-absolute {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .multiselect-tags-absolute .multiselect-tag {
+      pointer-events: auto;
+    }
+
+    .multiselect-tags-spacer {
+      flex: none;
+      min-width: 0;
+      height: 0;
+    }
 
     .multiselect-placeholder {
       font-size: 16px;
@@ -106,11 +127,17 @@
   }
 }
 
+// When multiselect has tags (semi-filled or filled), use white background per design
+.multiselect:has(.multiselect-tag):not(.disabled) {
+  background-color: map-get($custom-colors, 'white') !important;
+  outline: 1px solid map-get($custom-colors, 'grey-4') !important;
+}
+
 // Selected/focused state (when open or focused)
 .multiselect-wrapper.state-selected .multiselect,
 .multiselect.state-selected {
-  background-color: map-get($custom-colors, 'white');
-  border: 1px solid map-get($custom-colors, 'blue-soft');
+  background-color: map-get($custom-colors, 'white') !important;
+  outline: 1px solid map-get($custom-colors, 'blue-soft') !important;
 }
 
 // Disabled default (empty)
@@ -164,7 +191,7 @@
 // Error state
 .multiselect.error {
   background-color: map-get($custom-colors, 'white');
-  border: 1px solid map-get($custom-colors, 'red');
+  outline: 1px solid map-get($custom-colors, 'red');
 }
 
 .multiselect-wrapper.has-error {
@@ -176,6 +203,7 @@
   line-height: 16px;
   color: map-get($custom-colors, 'red');
   margin-top: 0;
+  white-space: nowrap;
 }
 
 // Dropdown (uses dropdown component when open)
@@ -190,7 +218,7 @@
     width: 100%;
   }
   background: map-get($custom-colors, 'white');
-  border: 1px solid map-get($custom-colors, 'grey-4');
+  outline: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 8px;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);

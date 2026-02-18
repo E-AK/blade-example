@@ -17,6 +17,7 @@ export default function multiselect(Alpine) {
     open: false,
     searchQuery: '',
     selected: [],
+    tagsSpacerWidth: 0,
     _msId: null,
     tagBg: DEFAULT_TAG_STYLE.bg,
     tagColor: DEFAULT_TAG_STYLE.color,
@@ -30,6 +31,10 @@ export default function multiselect(Alpine) {
       this.buildValueToLabelMap();
       this.hydrateSelected();
       this.$watch('selected', this.onSelectedChange.bind(this), { deep: true });
+      this.$watch('selected', () => this.$nextTick(() => this.updateTagsSpacerWidth()), {
+        deep: true,
+      });
+      this.$nextTick(() => this.updateTagsSpacerWidth());
     },
 
     readDataset() {
@@ -65,6 +70,12 @@ export default function multiselect(Alpine) {
       this.syncInput();
       this.updateClasses();
       this.updateAria();
+      this.$nextTick(() => this.updateTagsSpacerWidth());
+    },
+
+    updateTagsSpacerWidth() {
+      const wrap = this.$refs.tagsWrap;
+      this.tagsSpacerWidth = wrap ? wrap.offsetWidth : 0;
     },
 
     tagStyle() {
@@ -81,7 +92,9 @@ export default function multiselect(Alpine) {
 
     openDropdown() {
       const trigger = this.$el.querySelector(MULTISELECT_SELECTORS.trigger);
-      if (trigger?.classList.contains('disabled')) return;
+      if (trigger?.classList.contains('disabled')) {
+        return;
+      }
 
       window.dispatchEvent(new CustomEvent('multiselect-close-others', { detail: this._msId }));
       this.open = true;
@@ -108,7 +121,9 @@ export default function multiselect(Alpine) {
 
     toggleOption(el) {
       const value = String(el.dataset.value ?? '');
-      if (!value) return;
+      if (!value) {
+        return;
+      }
 
       if (this.selected.includes(value)) {
         this.removeTag(value);
@@ -130,7 +145,9 @@ export default function multiselect(Alpine) {
 
     syncInput() {
       const input = this.$el.querySelector(MULTISELECT_SELECTORS.input);
-      if (input) input.value = this.selected.join(',');
+      if (input) {
+        input.value = this.selected.join(',');
+      }
     },
 
     updateClasses() {

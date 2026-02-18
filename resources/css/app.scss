@@ -22,3 +22,7 @@
 [x-cloak] {
   display: none !important;
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
