@@ -65,4 +65,5 @@
                 </footer>
             @endif
         </div>
+    </div>
 @endif

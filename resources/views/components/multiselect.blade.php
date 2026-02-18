@@ -60,8 +60,25 @@
     $hasSelection = !empty($selectedOptions);
 @endphp
 
-<div class="{{ $wrapperClass }}" @if($disabled) aria-disabled="true" @endif>
-    <div class="{{ $selectClass }}" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+<div
+    class="{{ $wrapperClass }}"
+    @if($disabled) aria-disabled="true" @endif
+    data-tag-bg="{{ $tagBg }}"
+    data-tag-color="{{ $tagColor }}"
+    data-tag-border-color="{{ $tagBorderColor }}"
+    data-disabled="{{ $disabled ? '1' : '0' }}"
+    x-data="multiselect()"
+    x-on:click.outside="close()"
+    x-on:multiselect-close-others.window="if ($event.detail !== _msId) close()"
+    :class="{ 'open': open, 'state-selected': open }"
+>
+    <div
+        class="{{ $selectClass }}"
+        role="combobox"
+        :aria-expanded="open"
+        aria-haspopup="listbox"
+        @click="openDropdown()"
+    >
         @if($leftIcon)
             <span class="multiselect-icon-left">
                 <x-icon :name="$leftIcon" />
@@ -69,25 +86,25 @@
         @endif
 
         <div class="multiselect-content flex-grow-1 d-flex flex-wrap align-items-center gap-2 min-w-0">
-            @foreach($selectedOptions as $option)
-                @php
-                    $optionTagBg = is_array($option['tag'] ?? null) ? ($option['tag']['bg'] ?? $tagBg) : $tagBg;
-                    $optionTagColor = is_array($option['tag'] ?? null) ? ($option['tag']['color'] ?? $tagColor) : $tagColor;
-                    $optionTagBorderColor = is_array($option['tag'] ?? null) ? ($option['tag']['borderColor'] ?? $tagBorderColor) : $tagBorderColor;
-                @endphp
-                <span class="multiselect-tag" data-value="{{ $option['value'] }}">
-                    <x-tag
-                        :text="$option['label']"
-                        icon="{{ $disabled ? 'none' : 'right' }}"
-                        rightIcon="arrow_close"
-                        :bg="$optionTagBg"
-                        :color="$optionTagColor"
-                        :borderColor="$optionTagBorderColor"
-                        :hoverable="!$disabled"
-                    />
+            <template x-for="value in selected" :key="value">
+                <span class="multiselect-tag" :data-value="value">
+                    <div
+                        class="tag tag--md tag--icon-right border-solid"
+                        :class="{ 'tag--hoverable': !disabled, 'is-disabled': disabled }"
+                        :style="tagStyle()"
+                    >
+                        <span class="tag-text" x-text="getLabel(value)"></span>
+                        <span
+                            class="tag-icon tag-icon-right"
+                            data-multiselect-remove
+                            x-show="!disabled"
+                            @click.stop="removeTag(value)"
+                        >
+                            <x-icon name="arrow_close" />
+                        </span>
+                    </div>
                 </span>
-            @endforeach
-
+            </template>
             <input
                 type="text"
                 class="multiselect-search"
@@ -96,6 +113,9 @@
                 aria-label="{{ $searchPlaceholder }}"
                 data-placeholder="{{ $placeholder }}"
                 data-search-placeholder="{{ $searchPlaceholder }}"
+                x-model="searchQuery"
+                @input="filterDropdown()"
+                @click.stop="openDropdown()"
                 @if($disabled) disabled @endif
             />
         </div>
@@ -112,36 +132,10 @@
     @endif
 
     @if(!empty($options))
-        <div class="multiselect-dropdown border rounded shadow-sm">
-            <ul class="multiselect-dropdown-list list-unstyled m-0" role="listbox">
-                @foreach($options as $val => $lab)
-                    @php
-                        $label = is_array($lab) ? ($lab['label'] ?? $val) : $lab;
-                    @endphp
-                    <li class="multiselect-item" role="option" data-value="{{ $val }}" data-label="{{ $label }}" aria-selected="{{ in_array((string) $val, array_map('strval', $selected)) ? 'true' : 'false' }}">
-                        {{ $label }}
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+        <x-dropdown :options="$options" :selected="$selected" :for-multiselect="true" />
     @endif
 
     @if($name)
         <input type="hidden" name="{{ $name }}" value="{{ implode(',', $selected) }}" class="multiselect-input" :disabled="$disabled">
     @endif
-
-    {{-- Template for JS-created tags (clone this for new selections) --}}
-    <template class="multiselect-tag-template">
-        <span class="multiselect-tag" data-value="">
-            <x-tag
-                text=""
-                icon="right"
-                rightIcon="arrow_close"
-                :bg="$tagBg"
-                :color="$tagColor"
-                :borderColor="$tagBorderColor"
-                hoverable="false"
-            />
-        </span>
-    </template>
 </div>

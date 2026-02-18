@@ -17,7 +17,10 @@ $btn-grey-5: #eaeaea;
   cursor: pointer;
   border: none;
   text-decoration: none;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
 
   &:focus-visible {
     outline: 2px solid map-get($custom-colors, 'blue');
@@ -303,7 +306,6 @@ $btn-grey-5: #eaeaea;
       color: $btn-grey-3;
     }
   }
-
 }
 
 // ----- Type: Danger-string -----

@@ -1,142 +1,167 @@
-function getValue($tag) {
-  return $tag.data('value');
-}
+const MULTISELECT_SELECTORS = {
+  wrapper: '.multiselect-wrapper',
+  trigger: '.multiselect',
+  search: '.multiselect-search',
+  input: '.multiselect-input',
+  item: '.multiselect-item',
+};
 
-function getOption($wrapper, value) {
-  return $wrapper.find('.multiselect-item').filter(function () {
-    return $(this).data('value') === value;
-  });
-}
+const DEFAULT_TAG_STYLE = {
+  bg: 'grey-4',
+  color: 'black',
+  borderColor: 'grey-4',
+};
 
-function updateInput($wrapper) {
-  const values = $wrapper
-    .find('.multiselect-tag')
-    .map(function () {
-      return $(this).data('value');
-    })
-    .get();
+export default function multiselect(Alpine) {
+  Alpine.data('multiselect', () => ({
+    open: false,
+    searchQuery: '',
+    selected: [],
+    _msId: null,
+    tagBg: DEFAULT_TAG_STYLE.bg,
+    tagColor: DEFAULT_TAG_STYLE.color,
+    tagBorderColor: DEFAULT_TAG_STYLE.borderColor,
+    disabled: false,
+    valueToLabel: null,
 
-  $wrapper.find('.multiselect-input').val(values.join(','));
-}
+    init() {
+      this._msId = `ms-${Math.random().toString(36).slice(2)}`;
+      this.readDataset();
+      this.buildValueToLabelMap();
+      this.hydrateSelected();
+      this.$watch('selected', this.onSelectedChange.bind(this), { deep: true });
+    },
 
-function updateClasses($wrapper) {
-  const count = $wrapper.find('.multiselect-tag').length;
-  const $search = $wrapper.find('.multiselect-search');
+    readDataset() {
+      const { dataset } = this.$el;
+      this.tagBg = dataset.tagBg || DEFAULT_TAG_STYLE.bg;
+      this.tagColor = dataset.tagColor || DEFAULT_TAG_STYLE.color;
+      this.tagBorderColor = dataset.tagBorderColor || DEFAULT_TAG_STYLE.borderColor;
+      this.disabled = dataset.disabled === '1';
+    },
 
-  $wrapper.find('.multiselect').toggleClass('multiselect--filled', count >= 2);
-  $search.attr(
-    'placeholder',
-    count >= 1 ? $search.data('search-placeholder') : $search.data('placeholder')
-  );
-}
+    buildValueToLabelMap() {
+      this.valueToLabel = new Map();
+      this.$el.querySelectorAll(MULTISELECT_SELECTORS.item).forEach((el) => {
+        const value = el.dataset.value;
+        const label = (el.dataset.label ?? el.textContent ?? '').trim() || value;
+        if (value !== null) {
+          this.valueToLabel.set(String(value), label);
+        }
+      });
+    },
 
-function removeTag($wrapper, value) {
-  $wrapper
-    .find('.multiselect-tag')
-    .filter(function () {
-      return $(this).data('value') === value;
-    })
-    .remove();
+    hydrateSelected() {
+      const input = this.$el.querySelector(MULTISELECT_SELECTORS.input);
+      if (input?.value) {
+        this.selected = input.value
+          .split(',')
+          .map((v) => v.trim())
+          .filter(Boolean);
+      }
+    },
 
-  getOption($wrapper, value).attr('aria-selected', 'false');
+    onSelectedChange() {
+      this.syncInput();
+      this.updateClasses();
+      this.updateAria();
+    },
 
-  updateInput($wrapper);
-  updateClasses($wrapper);
-}
+    tagStyle() {
+      return [
+        `--tag-bg: var(--color-${this.tagBg})`,
+        `--tag-color: var(--color-${this.tagColor})`,
+        `--tag-border-color: var(--color-${this.tagBorderColor})`,
+      ].join('; ');
+    },
 
-function filterDropdown($wrapper, query) {
-  const q = (query || '').trim().toLowerCase();
+    getLabel(value) {
+      return this.valueToLabel?.get(String(value)) ?? value;
+    },
 
-  $wrapper.find('.multiselect-item').each(function () {
-    const label = ($(this).data('label') || $(this).text()).trim().toLowerCase();
-    const match = !q || label.includes(q);
-    $(this).toggleClass('multiselect-item--hidden', !match);
-  });
-}
+    openDropdown() {
+      const trigger = this.$el.querySelector(MULTISELECT_SELECTORS.trigger);
+      if (trigger?.classList.contains('disabled')) return;
 
-export default function initMultiselect() {
-  $(document).on('click', '.multiselect-search', function (e) {
-    e.stopPropagation();
-  });
+      window.dispatchEvent(new CustomEvent('multiselect-close-others', { detail: this._msId }));
+      this.open = true;
+      this.searchQuery = '';
+      this.updateAria();
+      this.$nextTick(() => {
+        const search = this.$el.querySelector(MULTISELECT_SELECTORS.search);
+        search?.focus();
+        this.filterDropdown();
+      });
+    },
 
-  $(document).on('click', '.multiselect', function (e) {
-    e.stopPropagation();
+    close() {
+      this.open = false;
+    },
 
-    if ($(this).hasClass('disabled')) {
-      return;
-    }
+    toggle() {
+      this.open ? this.close() : this.openDropdown();
+    },
 
-    const $wrapper = $(this).closest('.multiselect-wrapper');
-    const $dropdown = $wrapper.find('.multiselect-dropdown');
+    isSelected(value) {
+      return this.selected.includes(String(value));
+    },
 
-    $('.multiselect-dropdown').not($dropdown).hide();
-    $('.multiselect-wrapper').not($wrapper).removeClass('open state-selected');
+    toggleOption(el) {
+      const value = String(el.dataset.value ?? '');
+      if (!value) return;
 
-    const isOpening = !$wrapper.hasClass('open');
-    $dropdown.toggle();
-    $wrapper.toggleClass('open state-selected');
+      if (this.selected.includes(value)) {
+        this.removeTag(value);
+      } else {
+        this.selected.push(value);
+      }
+      this.syncInput();
+      this.updateClasses();
+      this.$nextTick(() => this.updateAria());
+    },
 
-    if (isOpening) {
-      $wrapper.find('.multiselect-search').val('').trigger('input').trigger('focus');
-    }
-  });
+    removeTag(value) {
+      const strValue = String(value);
+      this.selected = this.selected.filter((v) => String(v) !== strValue);
+      this.syncInput();
+      this.updateClasses();
+      this.updateAria();
+    },
 
-  $(document).on('click', '.multiselect-dropdown', function (e) {
-    e.stopPropagation();
-  });
+    syncInput() {
+      const input = this.$el.querySelector(MULTISELECT_SELECTORS.input);
+      if (input) input.value = this.selected.join(',');
+    },
 
-  $(document).on('input', '.multiselect-search', function () {
-    const $wrapper = $(this).closest('.multiselect-wrapper');
-    filterDropdown($wrapper, $(this).val());
-  });
+    updateClasses() {
+      const trigger = this.$el.querySelector(MULTISELECT_SELECTORS.trigger);
+      const search = this.$el.querySelector(MULTISELECT_SELECTORS.search);
+      if (trigger) {
+        trigger.classList.toggle('multiselect--filled', this.selected.length >= 2);
+      }
+      if (search) {
+        search.placeholder =
+          this.selected.length >= 1 ? search.dataset.searchPlaceholder : search.dataset.placeholder;
+      }
+    },
 
-  $(document).on('click', function () {
-    $('.multiselect-dropdown').hide();
-    $('.multiselect-wrapper').removeClass('open state-selected');
-  });
+    updateAria() {
+      this.$el.querySelectorAll(MULTISELECT_SELECTORS.item).forEach((el) => {
+        const value = el.dataset.value !== null ? String(el.dataset.value) : '';
+        const selected = this.isSelected(value);
+        el.setAttribute('aria-selected', selected ? 'true' : 'false');
+        el.classList.toggle('multiselect-item--selected', selected);
+      });
+    },
 
-  $(document).on('click', '.multiselect-item', function (e) {
-    e.stopPropagation();
-
-    const $item = $(this);
-    const value = $item.data('value');
-    const label = $item.text().trim();
-
-    const $wrapper = $item.closest('.multiselect-wrapper');
-    const $content = $wrapper.find('.multiselect-content');
-
-    if ($item.attr('aria-selected') === 'true') {
-      removeTag($wrapper, value);
-      return;
-    }
-
-    const template = $wrapper.find('.multiselect-tag-template')[0];
-    const fragment = template.content.cloneNode(true);
-    const $tag = $(fragment.firstElementChild);
-
-    $tag.attr('data-value', value);
-    $tag.find('.tag-text').text(label);
-
-    const $search = $content.find('.multiselect-search');
-
-    $search.length ? $search.before($tag) : $content.append($tag);
-
-    $item.attr('aria-selected', 'true');
-
-    updateInput($wrapper);
-    updateClasses($wrapper);
-  });
-
-  $(document).on('click', '.multiselect-tag .tag-icon-right', function (e) {
-    e.stopPropagation();
-
-    const $tag = $(this).closest('.multiselect-tag');
-    const $wrapper = $tag.closest('.multiselect-wrapper');
-
-    if ($wrapper.find('.multiselect').hasClass('disabled')) {
-      return;
-    }
-
-    removeTag($wrapper, getValue($tag));
-  });
+    filterDropdown() {
+      const search = this.$el.querySelector(MULTISELECT_SELECTORS.search);
+      const query = (search?.value ?? this.searchQuery ?? '').trim().toLowerCase();
+      this.$el.querySelectorAll(MULTISELECT_SELECTORS.item).forEach((el) => {
+        const label = (el.dataset.label ?? el.textContent ?? '').trim().toLowerCase();
+        const hidden = query.length > 0 && !label.includes(query);
+        el.classList.toggle('multiselect-item--hidden', hidden);
+      });
+    },
+  }));
 }

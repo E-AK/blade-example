@@ -14,10 +14,14 @@
     'borderStyle' => 'solid',
     'leftIcon' => 'specific_tag',
     'rightIcon' => 'arrow_close',
+    'rightIconAttributes' => [],
 ])
 
+@php
+    $safeAttributes = $attributes->filter(fn ($value) => is_scalar($value) || $value === null);
+@endphp
 <div
-        {{ $attributes->merge(['class' => $classes()]) }}
+        {{ $safeAttributes->merge(['class' => $classes()]) }}
         style="{{ $inlineStyles() }}"
 >
     @if($hasLeftIcon())
@@ -34,7 +38,14 @@
     <span class="tag-text">{{ $text }}</span>
 
     @if($hasRightIcon())
-        <span class="tag-icon tag-icon-right">
+        <span
+            class="tag-icon tag-icon-right"
+            @foreach(is_array($rightIconAttributes) ? $rightIconAttributes : [] as $attrKey => $attrVal)
+                @if(is_scalar($attrVal))
+                    {{ $attrKey }}="{{ e($attrVal) }}"
+                @endif
+            @endforeach
+        >
             <x-icon
                     :name="$rightIconName()"
                     :size="$iconSize()"

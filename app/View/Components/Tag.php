@@ -39,6 +39,7 @@ class Tag extends Component
         public string $borderStyle = 'solid',
         public string $leftIcon = 'specific_tag',
         public string $rightIcon = 'arrow_close',
+        public array $rightIconAttributes = [],
         public string $class = '',
     ) {}
 

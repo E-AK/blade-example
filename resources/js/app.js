@@ -1,17 +1,18 @@
 import './bootstrap';
 import $ from 'jquery';
+import Alpine from 'alpinejs';
 
 import initSidebar from './layout/sidebar';
 import initSelect from './ui/select';
-import initMultiselect from './ui/multiselect';
 import initSearch from './ui/search';
 import initToast from './ui/toast';
 import initTables from './components/initTables';
+import buttonToggle from './ui/buttonToggle';
+import multiselect from './ui/multiselect';
 
-import Alpine from 'alpinejs'
-
-window.Alpine = Alpine
-
+window.Alpine = Alpine;
+buttonToggle(Alpine);
+multiselect(Alpine);
 Alpine.start();
 
 window.$ = window.jQuery = $;
@@ -19,7 +20,6 @@ window.$ = window.jQuery = $;
 $(function () {
   initSidebar();
   initSelect();
-  initMultiselect();
   initSearch();
   initToast();
   initTables();

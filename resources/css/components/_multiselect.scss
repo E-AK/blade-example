@@ -178,13 +178,17 @@
   margin-top: 0;
 }
 
-// Dropdown
+// Dropdown (uses dropdown component when open)
 .multiselect-dropdown {
   display: none;
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
   width: 100%;
+
+  &.custom-dropdown {
+    width: 100%;
+  }
   background: map-get($custom-colors, 'white');
   border: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 8px;
@@ -214,7 +218,8 @@
     background: map-get($custom-colors, 'grey-5');
   }
 
-  &[aria-selected='true'] {
+  &[aria-selected='true'],
+  &.multiselect-item--selected {
     background: map-get($custom-colors, 'blue-bg');
     font-weight: 500;
   }
