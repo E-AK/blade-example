@@ -48,9 +48,13 @@ export default function multiselect(Alpine) {
     },
 
     addCustomIfAllowed() {
-      if (!this.allowCustom || this.disabled) return;
+      if (!this.allowCustom || this.disabled) {
+        return;
+      }
       const query = (this.searchQuery || '').trim();
-      if (!query || this.selected.includes(query)) return;
+      if (!query || this.selected.includes(query)) {
+        return;
+      }
       this.selected.push(query);
       this.searchQuery = '';
       this.syncInput();

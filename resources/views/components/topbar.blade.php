@@ -1,6 +1,21 @@
 <div class="d-flex justify-content-between shadow topbar">
     <div class="d-flex flex-column gap-1">
-        <span class="workspace-container-header-info">{{ $headerInfoText }}</span>
+        <span class="workspace-container-header-info">
+            @if(! empty($breadcrumbs))
+                @foreach($breadcrumbs as $index => $crumb)
+                    @if($index > 0)
+                        <span class="workspace-container-header-info-sep" aria-hidden="true"> / </span>
+                    @endif
+                    @if($index < count($breadcrumbs) - 1 && ! empty($crumb['url']) && $crumb['url'] !== '#')
+                        <a href="{{ $crumb['url'] }}" class="workspace-container-header-info-link">{{ $crumb['title'] }}</a>
+                    @else
+                        <span>{{ $crumb['title'] }}</span>
+                    @endif
+                @endforeach
+            @else
+                {{ $headerInfoText }}
+            @endif
+        </span>
         <h1 class="workspace-container-header-title">
             {{ $headerTitleText }}
         </h1>

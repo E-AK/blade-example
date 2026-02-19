@@ -65,7 +65,7 @@
 }
 
 .users-modal-profiles-content {
-  gap: 12px
+  gap: 12px;
 }
 
 .accounts-modal-row {
@@ -113,7 +113,6 @@
     color: map-get($custom-colors, 'black') !important;
   }
 }
-
 
 .app-layout.is-collapsed {
   .profile-card {

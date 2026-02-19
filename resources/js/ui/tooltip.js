@@ -6,7 +6,9 @@ export default function tooltip(Alpine) {
     bubbleStyle: {},
 
     updatePosition() {
-      if (!this.$refs.trigger) return;
+      if (!this.$refs.trigger) {
+        return;
+      }
 
       const r = this.$refs.trigger.getBoundingClientRect();
       const bubble = this.$refs.bubble;

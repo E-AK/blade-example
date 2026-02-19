@@ -7,6 +7,7 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Spatie\Navigation\Facades\Navigation;
 
 class Topbar extends Component
 {
@@ -31,6 +32,10 @@ class Topbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.topbar');
+        $breadcrumbs = Navigation::make()->breadcrumbs();
+
+        return view('components.topbar', [
+            'breadcrumbs' => $breadcrumbs,
+        ]);
     }
 }

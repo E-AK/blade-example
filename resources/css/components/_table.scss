@@ -214,10 +214,10 @@
   }
 }
 
-table.dataTable thead>tr>th.dt-orderable-asc .dt-column-order:before {
-  content: "" !important;
+table.dataTable thead > tr > th.dt-orderable-asc .dt-column-order:before {
+  content: '' !important;
 }
 
-table.dataTable thead>tr>th.dt-orderable-desc .dt-column-order:after {
-  content: "" !important;
+table.dataTable thead > tr > th.dt-orderable-desc .dt-column-order:after {
+  content: '' !important;
 }
