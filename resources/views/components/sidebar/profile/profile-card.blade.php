@@ -24,7 +24,7 @@
             </div>
             <div class="d-flex flex-column gap-1">
                 <x-sidebar.menu-item is-submenu text="Настройки" href="#" />
-                <x-sidebar.menu-item is-submenu text="Уведомления" href="#" />
+                <x-sidebar.menu-item is-submenu text="Уведомления" href="#" :badge-count="$badge" />
                 <x-sidebar.menu-item is-submenu text="Выйти из аккаунта" href="#" />
             </div>
             <div
@@ -66,7 +66,6 @@
                                 is-submenu
                                 is-list-action
                                 text="Список всех пользователей"
-                                href="#"
                         />
                     @endif
                 </div>
@@ -89,7 +88,6 @@
                                 is-submenu
                                 is-list-action
                                 text="Список всех аккаунтов"
-                                href="{{ route('settings.account') }}"
                                 icon="actions_list"
                         />
                     @endif

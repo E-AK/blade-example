@@ -20,6 +20,10 @@
                         @if($text !== '')
                             <span class="menu-text flex-grow-1 d-block text-truncate">
                                 {{ $text }}
+
+                                @if($badgeCount !== null && $badgeCount !== '')
+                                    <span class="menu-item__count">{{ $badgeCount }}</span>
+                                @endif
                             </span>
                         @endif
 

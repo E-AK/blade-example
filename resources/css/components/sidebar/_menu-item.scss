@@ -156,6 +156,13 @@
   &:hover {
     background-color: map-get($custom-colors, 'black-light');
   }
+
+  .menu-item__count {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: $fw-regular;
+    color: map-get($custom-colors, 'grey-2');
+  }
 }
 
 // Account row in submenu (icon 20px, trailing check)

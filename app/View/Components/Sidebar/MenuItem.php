@@ -28,6 +28,7 @@ class MenuItem extends Component
         public bool $isSubmenu = false,
         public bool $isAccountItem = false,
         public bool $isListAction = false,
+        public ?string $badgeCount = null,
     ) {}
 
     public function classes(): string
