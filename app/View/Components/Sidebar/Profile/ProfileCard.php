@@ -23,7 +23,41 @@ class ProfileCard extends Component
         public array $users = [],
         public array $accounts = [],
     ) {
-        //
+        $this->users = $this->users ?: $this->staticUsers();
+        $this->accounts = $this->accounts ?: $this->staticAccounts();
+    }
+
+    /**
+     * Static users for testing the "My Accounts" modal filter.
+     *
+     * @return array<int, array{name: string, active: bool, href: string}>
+     */
+    private function staticUsers(): array
+    {
+        return [
+            ['name' => 'Иванов Василий Викторович', 'active' => true, 'href' => '#'],
+            ['name' => 'Петрова Анна Сергеевна', 'active' => false, 'href' => '#'],
+            ['name' => 'Сидоров Илья Валерьевич', 'active' => false, 'href' => '#'],
+            ['name' => 'Козлова Мария Петровна', 'active' => false, 'href' => '#'],
+            ['name' => 'Новиков Алексей Иванович', 'active' => false, 'href' => '#'],
+        ];
+    }
+
+    /**
+     * Static accounts with user associations for testing the "My Accounts" modal.
+     *
+     * @return array<int, array{name: string, active: bool, href: string, users: array<int, array{name: string, type: string}>}>
+     */
+    private function staticAccounts(): array
+    {
+        return [
+            ['name' => 'ООО Сбис-Вятка', 'active' => true, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner'], ['name' => 'Петрова Анна Сергеевна', 'type' => 'member']]],
+            ['name' => 'ООО Нутриотика', 'active' => false, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner']]],
+            ['name' => 'ИП Васильев Петр Ильич', 'active' => false, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner']]],
+            ['name' => 'ООО Рога и копыта', 'active' => false, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner']]],
+            ['name' => 'ИП Сидоров А. А.', 'active' => false, 'href' => '#', 'users' => [['name' => 'Петрова Анна Сергеевна', 'type' => 'member']]],
+            ['name' => 'ООО Тест-Фильтр', 'active' => false, 'href' => '#', 'users' => [['name' => 'Сидоров Илья Валерьевич', 'type' => 'owner'], ['name' => 'Козлова Мария Петровна', 'type' => 'member']]],
+        ];
     }
 
     public function usersCount(): int

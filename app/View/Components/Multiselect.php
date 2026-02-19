@@ -27,7 +27,8 @@ class Multiselect extends Component
         public string $tagBg = 'grey-4',
         public string $tagColor = 'black',
         public string $tagBorderColor = 'grey-4',
-        public string $class = ''
+        public string $class = '',
+        public bool $allowCustom = false,
     ) {}
 
     /**

@@ -9,11 +9,13 @@
   'components/sidebar/profile/profile', 'components/sidebar/profile/balance', 'components/status',
   'components/alert', 'components/toast', 'components/tag', 'components/select',
   'components/multiselect', 'components/checkbox', 'components/radio', 'components/switch',
-  'components/button-toggle', 'components/stepper', 'components/modal', 'components/button';
+  'components/button-toggle', 'components/stepper', 'components/modal', 'components/button',
+  'components/right-sidebar', 'components/user-card', 'components/tooltip';
 
 @import 'components/table', 'components/search';
 
-@import 'components/account/table', 'components/account/search', 'components/account/select';
+@import 'components/account/table', 'components/account/search', 'components/account/select',
+  'components/account/account-settings';
 
 .bi::before {
   vertical-align: 0 !important;

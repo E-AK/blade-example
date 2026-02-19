@@ -13,6 +13,7 @@
     'tagColor' => 'black',
     'tagBorderColor' => 'grey-4',
     'class' => '',
+    'allowCustom' => false,
 ])
 
 @php
@@ -68,6 +69,7 @@
             data-tag-color="{{ $tagColor }}"
             data-tag-border-color="{{ $tagBorderColor }}"
             data-disabled="{{ $disabled ? '1' : '0' }}"
+            data-allow-custom="{{ $allowCustom ? '1' : '0' }}"
             x-data="multiselect()"
             x-on:click.outside="close()"
             x-on:multiselect-close-others.window="if ($event.detail !== _msId) close()"
@@ -127,6 +129,7 @@
                         data-search-placeholder="{{ $searchPlaceholder }}"
                         x-model="searchQuery"
                         @input="filterDropdown()"
+                        @keydown.enter.prevent="addCustomIfAllowed()"
                         @click.stop="openDropdown()"
                         @if($disabled) disabled @endif
                 />
@@ -136,6 +139,11 @@
                 <span class="multiselect-icon-right">
                 <x-icon name="arrow_chevron_down" />
             </span>
+            @endif
+            @if(isset($right) && $right->isNotEmpty())
+                <span class="multiselect-custom-right flex-shrink-0 d-flex align-items-center">
+                    {{ $right }}
+                </span>
             @endif
         </div>
 

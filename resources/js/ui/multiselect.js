@@ -23,6 +23,7 @@ export default function multiselect(Alpine) {
     tagColor: DEFAULT_TAG_STYLE.color,
     tagBorderColor: DEFAULT_TAG_STYLE.borderColor,
     disabled: false,
+    allowCustom: false,
     valueToLabel: null,
 
     init() {
@@ -43,6 +44,19 @@ export default function multiselect(Alpine) {
       this.tagColor = dataset.tagColor || DEFAULT_TAG_STYLE.color;
       this.tagBorderColor = dataset.tagBorderColor || DEFAULT_TAG_STYLE.borderColor;
       this.disabled = dataset.disabled === '1';
+      this.allowCustom = dataset.allowCustom === '1';
+    },
+
+    addCustomIfAllowed() {
+      if (!this.allowCustom || this.disabled) return;
+      const query = (this.searchQuery || '').trim();
+      if (!query || this.selected.includes(query)) return;
+      this.selected.push(query);
+      this.searchQuery = '';
+      this.syncInput();
+      this.updateClasses();
+      this.updateAria();
+      this.$nextTick(() => this.updateTagsSpacerWidth());
     },
 
     buildValueToLabelMap() {
@@ -79,11 +93,16 @@ export default function multiselect(Alpine) {
     },
 
     tagStyle() {
-      return [
+      const iconBlack = ['grey-4', 'yellow'].includes(this.tagBg);
+      const styles = [
         `--tag-bg: var(--color-${this.tagBg})`,
         `--tag-color: var(--color-${this.tagColor})`,
         `--tag-border-color: var(--color-${this.tagBorderColor})`,
-      ].join('; ');
+      ];
+      if (iconBlack) {
+        styles.push('--tag-icon-color: var(--color-black)');
+      }
+      return styles.join('; ');
     },
 
     getLabel(value) {

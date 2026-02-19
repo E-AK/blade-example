@@ -1,0 +1,31 @@
+.tooltip-wrapper {
+  .tooltip-trigger {
+    cursor: default;
+  }
+}
+
+.tooltip-bubble {
+  position: absolute;
+  z-index: 99999;
+  padding: 8px 12px;
+  background: map-get($custom-colors, 'grey-1');
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.tooltip-bubble--fixed {
+  position: fixed;
+  isolation: isolate;
+}
+
+.tooltip-bubble[x-cloak] {
+  display: none !important;
+}

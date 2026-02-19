@@ -144,7 +144,7 @@
                             class="accounts-modal-row d-flex align-items-center text-decoration-none text-reset"
                             :class="{ 'accounts-modal-row--section': accountsModalFilter === 'all' }"
                             x-data="{ account: @js(array_merge($account, ['users' => $account['users'] ?? []])) }"
-                            x-show="
+                            x-show.important="
                                 accountsModalFilter === 'all' ||
                                 (account.users ?? []).map(u => u.name).includes(accountsModalFilter)
                             "
@@ -159,7 +159,7 @@
                                     </span>
                                         <span class="{{ $account['active'] ? 'fw-semibold' : '' }}">{{ $account['name'] }}</span>
                                     </div>
-                                    <div class="d-flex align-items-center gap-2 flex-shrink-0" x-show="accountsModalFilter === 'all'">
+                                    <div class="d-flex align-items-center gap-2 flex-shrink-0" x-show.important="accountsModalFilter === 'all'">
                                         @foreach($account['users'] ?? [] as $u)
                                             <x-tag
                                                     :text="$u['name']"
@@ -197,24 +197,14 @@
                     $otherUsers = collect($users)->filter(fn ($u) => !($u['active'] ?? false))->values()->all();
                 @endphp
                 @if($activeUser)
-                    <div class="users-modal-row users-modal-row--current d-flex flex-row align-items-center p-3 gap-3 rounded-3">
-                        <div class="d-flex align-items-center justify-content-center rounded-2 flex-shrink-0">
-                            <x-icon name="avatar_2" />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center gap-1 flex-grow-1 min-w-0">
-                            <span class="fw-semibold text-body users-modal-row__name">{{ $activeUser['name'] }}</span>
-                            <div class="d-flex flex-row align-items-center gap-2">
-                                <span class="small text-secondary users-modal-row__email">{{ $activeUser['email'] ?? 'vlad_ivanov@company.ru' }}</span>
-                                <x-tag
-                                    :text="$activeUser['role'] ?? 'Администратор'"
-                                    size="sm"
-                                    icon="left"
-                                    :left-icon="'actions_crown'"
-                                    :hoverable="false"
-                                />
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2 flex-shrink-0">
+                    <x-user-card
+                        :name="$activeUser['name']"
+                        :email="$activeUser['email'] ?? 'vlad_ivanov@company.ru'"
+                        :role="$activeUser['role'] ?? 'Администратор'"
+                        tag-left-icon="actions_crown"
+                        wrapper-class="users-modal-row users-modal-row--current rounded-3"
+                    >
+                        <x-slot:actions>
                             <x-button type="stroke" size="medium" icon-position="only" class="rounded-circle" :extra-attributes="['aria-label' => __('Settings')]">
                                 <x-slot:icon>
                                     <x-icon name="actions_settings" :size="20" />
@@ -225,30 +215,19 @@
                                     <x-icon name="actions_logout" :size="20" />
                                 </x-slot:icon>
                             </x-button>
-                        </div>
-                    </div>
+                        </x-slot:actions>
+                    </x-user-card>
                 @endif
                 <span class="small text-uppercase users-modal-others-label">Другие учетные записи</span>
                 <div class="users-modal-profiles-content d-flex flex-column">
                     @foreach($otherUsers as $user)
-                        <a href="{{ $user['href'] }}" class="users-modal-row d-flex flex-row align-items-center p-3 gap-3 rounded-3 text-decoration-none text-reset border">
-                            <div class="users-modal-row__avatar--default d-flex align-items-center justify-content-center rounded-2 flex-shrink-0">
-                                <x-icon name="avatar_2" />
-                            </div>
-                            <div class="d-flex flex-column justify-content-center gap-1 flex-grow-1 min-w-0">
-                                <span class="fw-semibold text-body users-modal-row__name">{{ $user['name'] }}</span>
-                                <div class="d-flex flex-row align-items-center gap-2">
-                                    <span class="small text-secondary users-modal-row__email">{{ $user['email'] ?? 'vlad_ivanov@company.ru' }}</span>
-                                    <x-tag
-                                        :text="$user['role'] ?? 'Менеджер'"
-                                        size="sm"
-                                        icon="left"
-                                        left-icon="actions_profile"
-                                        :hoverable="false"
-                                    />
-                                </div>
-                            </div>
-                        </a>
+                        <x-user-card
+                            :name="$user['name']"
+                            :email="$user['email'] ?? 'vlad_ivanov@company.ru'"
+                            :role="$user['role'] ?? 'Менеджер'"
+                            :href="$user['href']"
+                            wrapper-class="users-modal-row rounded-3 border"
+                        />
                     @endforeach
                 </div>
                 <div class="pt-2">

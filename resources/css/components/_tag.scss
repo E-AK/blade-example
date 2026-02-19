@@ -110,6 +110,10 @@
       color: var(--tag-hover-color, var(--color-white));
     }
 
+    .tag-icon-right {
+      color: var(--tag-icon-color, var(--color-grey-2));
+    }
+
     &.is-selected {
       opacity: 0.8;
     }

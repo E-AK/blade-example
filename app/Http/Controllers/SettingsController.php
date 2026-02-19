@@ -10,6 +10,13 @@ class SettingsController extends Controller
 {
     public function account(AccountsDataTable $dataTable)
     {
-        return $dataTable->render('pages.settings.account');
+        $placeholderUsers = [
+            ['name' => 'Марков А.Н.', 'email' => 'alex_markov@company.ru', 'role' => 'Менеджер'],
+            ['name' => 'Буров О.Л.', 'email' => 'oleg_burov@company.ru', 'role' => 'Менеджер'],
+        ];
+
+        return $dataTable->render('pages.settings.account', [
+            'placeholderUsers' => $placeholderUsers,
+        ]);
     }
 }

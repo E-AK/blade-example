@@ -1,0 +1,43 @@
+.account-settings-page {
+  .data-table table tbody tr {
+    cursor: pointer;
+  }
+}
+
+.account-sidebar-card {
+  border: 1px solid map-get($custom-colors, 'grey-4');
+  border-radius: 12px;
+}
+
+.account-sidebar-card-inner {
+  border: none;
+  min-height: auto;
+}
+
+.account-sidebar-body {
+  gap: 12px;
+}
+
+.account-sidebar-label {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.account-sidebar-hint {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.account-sidebar-multiselect-frame {
+  padding: 8px 12px;
+  gap: 10px;
+  min-height: 52px;
+  background: map-get($custom-colors, 'white');
+  border: 1px solid map-get($custom-colors, 'grey-4');
+  border-radius: 8px;
+
+  .multiselect-wrapper {
+    border: none;
+    background: transparent;
+  }
+}

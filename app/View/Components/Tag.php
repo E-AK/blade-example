@@ -96,7 +96,9 @@ class Tag extends Component
             $styles[] = "--tag-hover-border-color: var(--color-$this->hoverBorderColor);";
         }
 
-        $iconColor = $this->bg === 'white' ? 'grey-2' : 'white';
+        $iconColor = in_array($this->bg, ['grey-4', 'yellow'], true)
+            ? 'black'
+            : ($this->bg === 'white' ? 'grey-2' : 'white');
         $styles[] = "--tag-icon-color: var(--color-$iconColor);";
 
         return implode(' ', $styles);
