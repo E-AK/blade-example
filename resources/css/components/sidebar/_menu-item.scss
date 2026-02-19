@@ -182,6 +182,29 @@
   }
 }
 
+.menu-item--account {
+  .menu-icon:not(.menu-icon--trailing) {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+
+  .menu-icon--trailing {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    color: map-get($custom-colors, 'yellow');
+  }
+
+  &:not(.active) .menu-icon:not(.menu-icon--trailing) {
+    color: map-get($custom-colors, 'grey-1');
+  }
+
+  &.active .menu-icon:not(.menu-icon--trailing) {
+    color: map-get($custom-colors, 'yellow-dark');
+  }
+}
+
 .menu-item--action {
   &,
   .menu-text,
@@ -193,6 +216,25 @@
     .menu-text,
     .menu-icon {
       color: map-get($custom-colors, 'yellow');
+    }
+  }
+
+  &::before {
+    display: none;
+  }
+}
+
+.menu-item--list-action {
+  &,
+  .menu-text,
+  .menu-icon {
+    color: map-get($custom-colors, 'grey-2');
+  }
+
+  &:hover {
+    .menu-text,
+    .menu-icon {
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 

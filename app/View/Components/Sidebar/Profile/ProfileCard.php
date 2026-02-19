@@ -11,16 +11,55 @@ use Illuminate\View\Component;
 class ProfileCard extends Component
 {
     /**
-     * Create a new component instance.
+     * @param  array<int, array{name: string, active: bool, href: string}>  $users
+     * @param  array<int, array{name: string, active: bool, href: string}>  $accounts
      */
     public function __construct(
         public string $title,
         public string $subtitle,
         public ?string $badge = null,
         public string $balance = '0.00',
-        public string $class = ''
+        public string $class = '',
+        public array $users = [],
+        public array $accounts = [],
     ) {
         //
+    }
+
+    public function usersCount(): int
+    {
+        return count($this->users);
+    }
+
+    /**
+     * @return array<int, array{name: string, active: bool, href: string}>
+     */
+    public function displayUsers(): array
+    {
+        return array_slice($this->users, 0, 4);
+    }
+
+    public function hasMoreUsers(): bool
+    {
+        return $this->usersCount() > 4;
+    }
+
+    public function accountsCount(): int
+    {
+        return count($this->accounts);
+    }
+
+    /**
+     * @return array<int, array{name: string, active: bool, href: string}>
+     */
+    public function displayAccounts(): array
+    {
+        return array_slice($this->accounts, 0, 4);
+    }
+
+    public function hasMoreAccounts(): bool
+    {
+        return $this->accountsCount() > 4;
     }
 
     /**

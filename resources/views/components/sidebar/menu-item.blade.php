@@ -14,21 +14,26 @@
                         @if ($icon)
                             <span class="menu-icon d-flex align-items-center justify-content-center fs-5 lh-1">
                                 <x-icon :name="$icon"/>
-                          </span>
+                            </span>
                         @endif
 
                         @if($text !== '')
                             <span class="menu-text flex-grow-1 d-block text-truncate">
-                            {{ $text }}
-                          </span>
+                                {{ $text }}
+                            </span>
                         @endif
 
                         @if($shortText !== '' && !$isSubmenu)
                             <span class="menu-short-text d-none d-app-collapsed d-flex justify-content-center align-items-center">
-                                            {{ $shortText }}
-                                        </span>
+                                {{ $shortText }}
+                            </span>
                         @endif
                     </div>
+                    @if ($trailingIcon)
+                        <span class="menu-icon menu-icon--trailing d-flex align-items-center justify-content-center flex-shrink-0">
+                            <x-icon :name="$trailingIcon"/>
+                        </span>
+                    @endif
                     @if ($isNew)
                         <span class="menu-badge">new</span>
                     @endif

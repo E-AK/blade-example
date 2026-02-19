@@ -27,14 +27,74 @@
                 <x-sidebar.menu-item is-submenu text="Уведомления" href="#" />
                 <x-sidebar.menu-item is-submenu text="Выйти из аккаунта" href="#" />
             </div>
-            <div class="d-flex flex-row profile-dropdown-tab p5">
-                <span class="header-yellow">ПОЛЬЗОВАТЕЛИ</span>
-                <span class="header-grey">АККАУНТЫ</span>
-            </div>
-            <div class="d-flex flex-column gap-1">
-                <x-sidebar.menu-item is-submenu active text="Иванов Василий Викторович" href="#" />
-                <x-sidebar.menu-item is-submenu text="Иванов Василий Викторович" href="#" />
-                <x-sidebar.menu-item is-submenu text="Васин Илья Валерьевич" href="#" />
+            <div
+                class="d-flex flex-column gap-1 profile-list-section"
+                x-data="{ profileSubmenuTab: 'users' }"
+            >
+                <div class="d-flex flex-row profile-dropdown-tab p5">
+                    <button
+                        type="button"
+                        class="border-0 bg-transparent p-0 text-uppercase profile-dropdown-tab__btn"
+                        :class="profileSubmenuTab === 'users' ? 'header-yellow' : 'header-grey'"
+                        @click="profileSubmenuTab = 'users'"
+                    >
+                        Пользователи
+                    </button>
+                    <button
+                        type="button"
+                        class="border-0 bg-transparent p-0 text-uppercase profile-dropdown-tab__btn"
+                        :class="profileSubmenuTab === 'accounts' ? 'header-yellow' : 'header-grey'"
+                        @click="profileSubmenuTab = 'accounts'"
+                    >
+                        Аккаунты
+                    </button>
+                </div>
+                <template x-if="profileSubmenuTab === 'users'">
+                    <div class="d-flex flex-column gap-1">
+                        @foreach($displayUsers() as $user)
+                            <x-sidebar.menu-item
+                                is-submenu
+                                :active="$user['active']"
+                                :text="$user['name']"
+                                :href="$user['href']"
+                                :trailing-icon="$user['active'] ? 'validation_check' : null"
+                                is-account-item
+                            />
+                        @endforeach
+                        @if($hasMoreUsers())
+                            <x-sidebar.menu-item
+                                is-submenu
+                                is-list-action
+                                text="Список всех пользователей"
+                                href="#"
+                            />
+                        @endif
+                    </div>
+                </template>
+                <template x-if="profileSubmenuTab === 'accounts'">
+                    <div class="d-flex flex-column gap-1">
+                        @foreach($displayAccounts() as $account)
+                            <x-sidebar.menu-item
+                                is-submenu
+                                :active="$account['active']"
+                                :text="$account['name']"
+                                :href="$account['href']"
+                                icon="actions_home"
+                                :trailing-icon="$account['active'] ? 'validation_check' : null"
+                                is-account-item
+                            />
+                        @endforeach
+                        @if($hasMoreAccounts())
+                            <x-sidebar.menu-item
+                                is-submenu
+                                is-list-action
+                                text="Список всех аккаунтов"
+                                href="{{ route('settings.account') }}"
+                                icon="actions_list"
+                            />
+                        @endif
+                    </div>
+                </template>
             </div>
         </x-sidebar.sidebar-submenu>
     </div>

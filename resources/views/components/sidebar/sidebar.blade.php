@@ -137,6 +137,20 @@
             subtitle="Иванов В. В."
             badge="24"
             balance="1 00 000.00 ₽"
+            :users="[
+                ['name' => 'Иванов Василий Викторович', 'active' => true, 'href' => '#'],
+                ['name' => 'Петрова Анна Сергеевна', 'active' => false, 'href' => '#'],
+                ['name' => 'Сидоров Илья Валерьевич', 'active' => false, 'href' => '#'],
+                ['name' => 'Козлова Мария Петровна', 'active' => false, 'href' => '#'],
+                ['name' => 'Новиков Алексей Иванович', 'active' => false, 'href' => '#'],
+            ]"
+            :accounts="[
+                ['name' => 'ООО Сбис-Вятка', 'active' => true, 'href' => '#'],
+                ['name' => 'ООО Нутриотика', 'active' => false, 'href' => '#'],
+                ['name' => 'ИП Васильев Петр Ильич', 'active' => false, 'href' => '#'],
+                ['name' => 'ООО Рога и копыта', 'active' => false, 'href' => '#'],
+                ['name' => 'ИП Сидоров А. А.', 'active' => false, 'href' => '#'],
+            ]"
         />
 
         <x-sidebar.menu-item

@@ -28,6 +28,22 @@
   .header-yellow {
     color: map-get($custom-colors, 'yellow');
   }
+
+  .profile-accounts-section {
+    &__header {
+      gap: 12px;
+      padding: 0;
+    }
+
+    &__count {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 400;
+      color: map-get($custom-colors, 'grey-2');
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  }
 }
 
 .sidebar-submenu-dropdown.open-up {

@@ -17,6 +17,7 @@ class MenuItem extends Component
         public string $text = '',
         public string $shortText = '',
         public ?string $icon = null,
+        public ?string $trailingIcon = null,
         public bool $active = false,
         public bool $hasChildren = false,
         public string $href = '#',
@@ -25,6 +26,8 @@ class MenuItem extends Component
         public bool $isNew = false,
         public bool $isAction = false,
         public bool $isSubmenu = false,
+        public bool $isAccountItem = false,
+        public bool $isListAction = false,
     ) {}
 
     public function classes(): string
@@ -45,6 +48,18 @@ class MenuItem extends Component
 
         if ($this->isSubmenu) {
             $classes[] = 'menu-item--submenu overflow-hidden';
+        }
+
+        if ($this->isAccountItem) {
+            $classes[] = 'menu-item--account';
+        }
+
+        if ($this->isListAction) {
+            $classes[] = 'menu-item--list-action';
+        }
+
+        if ($this->active) {
+            $classes[] = 'active';
         }
 
         $classes[] = $this->class;
