@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\DataTables\AccountsDataTable;
+use App\DataTables\UsersDataTable;
 
 class SettingsController extends Controller
 {
@@ -18,5 +19,10 @@ class SettingsController extends Controller
         return $dataTable->render('pages.settings.account', [
             'placeholderUsers' => $placeholderUsers,
         ]);
+    }
+
+    public function users(UsersDataTable $dataTable)
+    {
+        return $dataTable->render('pages.settings.users');
     }
 }

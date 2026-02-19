@@ -129,6 +129,13 @@
             icon="menu_accounts"
             has-children
         />
+
+        <x-sidebar.menu-item
+            text="Пользователи"
+            short-text="Польз-ли"
+            href="{{ route('settings.users') }}"
+            icon="menu_user"
+        />
     </nav>
 
     <div class="sidebar-footer-stack d-flex flex-column mt-auto">

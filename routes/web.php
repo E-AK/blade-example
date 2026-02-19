@@ -11,3 +11,6 @@ Route::get('/', static function () {
 
 Route::get('/settings/account', [SettingsController::class, 'account'])
     ->name('settings.account');
+
+Route::get('/settings/users', [SettingsController::class, 'users'])
+    ->name('settings.users');
