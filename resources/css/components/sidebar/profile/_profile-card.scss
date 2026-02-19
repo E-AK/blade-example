@@ -1,9 +1,119 @@
+// Hide submenu dropdown when accounts modal is open
+.sidebar-item.is-accounts-modal-open .sidebar-submenu-dropdown {
+  display: none !important;
+}
+
 .profile-card {
   background-color: map-get($custom-colors, 'black');
   border: 1px solid map-get($custom-colors, 'black-light');
   border-radius: 12px;
   padding: 12px;
 }
+
+.accounts-modal-body {
+  padding: 0;
+
+  &__toggle {
+    width: 100%;
+  }
+}
+
+.accounts-modal-list {
+  gap: 4px;
+}
+
+// Users list modal (Учетные записи)
+.users-modal-body {
+  padding: 0;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.users-modal-row {
+  box-sizing: border-box;
+  min-height: 76px;
+  padding: 12px;
+  gap: 12px;
+  border: 1px solid map-get($custom-colors, 'grey-4');
+  border-radius: 12px;
+
+  &--current {
+    background: map-get($custom-colors, 'grey-6');
+    border: none;
+  }
+
+  &__name {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #141414;
+  }
+
+  &__email {
+    font-size: 14px;
+    line-height: 20px;
+    color: map-get($custom-colors, 'grey-1');
+  }
+}
+
+.users-modal-others-label {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: map-get($custom-colors, 'grey-2');
+}
+
+.users-modal-profiles-content {
+  gap: 12px
+}
+
+.accounts-modal-row {
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 40px;
+
+  &:hover {
+    background-color: map-get($custom-colors, 'grey-6');
+  }
+
+  // Section-submenu style when "Все учетные записи" is active
+  &--section {
+    flex-direction: column;
+    padding: 8px;
+    gap: 8px;
+    background: #fff;
+    border-radius: 8px;
+
+    .accounts-modal-row__inner {
+      min-height: 24px;
+    }
+  }
+
+  &:not(&--section) {
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  &__inner {
+    min-height: 24px;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &--add:hover {
+    color: map-get($custom-colors, 'black') !important;
+  }
+}
+
 
 .app-layout.is-collapsed {
   .profile-card {

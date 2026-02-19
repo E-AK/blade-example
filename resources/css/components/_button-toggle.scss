@@ -8,6 +8,28 @@
   outline: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 12px;
   width: fit-content;
+
+  // Fill container and let items shrink with ellipsis when many items
+  &--fill {
+    width: 100%;
+    min-width: 0;
+
+    .button-toggle-item {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .button-toggle-item__content {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .button-toggle-item__label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }
 
 .button-toggle-item {

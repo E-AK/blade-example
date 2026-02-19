@@ -145,11 +145,11 @@
                 ['name' => 'Новиков Алексей Иванович', 'active' => false, 'href' => '#'],
             ]"
             :accounts="[
-                ['name' => 'ООО Сбис-Вятка', 'active' => true, 'href' => '#'],
-                ['name' => 'ООО Нутриотика', 'active' => false, 'href' => '#'],
-                ['name' => 'ИП Васильев Петр Ильич', 'active' => false, 'href' => '#'],
-                ['name' => 'ООО Рога и копыта', 'active' => false, 'href' => '#'],
-                ['name' => 'ИП Сидоров А. А.', 'active' => false, 'href' => '#'],
+                ['name' => 'ООО Сбис-Вятка', 'active' => true, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner'], ['name' => 'Петрова Анна Сергеевна', 'type' => 'member']]],
+                ['name' => 'ООО Нутриотика', 'active' => false, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner']]],
+                ['name' => 'ИП Васильев Петр Ильич', 'active' => false, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner']]],
+                ['name' => 'ООО Рога и копыта', 'active' => false, 'href' => '#', 'users' => [['name' => 'Иванов Василий Викторович', 'type' => 'owner']]],
+                ['name' => 'ИП Сидоров А. А.', 'active' => false, 'href' => '#', 'users' => [['name' => 'Петрова Анна Сергеевна', 'type' => 'member']]],
             ]"
         />
 

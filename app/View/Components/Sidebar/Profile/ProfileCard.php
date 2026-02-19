@@ -12,7 +12,7 @@ class ProfileCard extends Component
 {
     /**
      * @param  array<int, array{name: string, active: bool, href: string}>  $users
-     * @param  array<int, array{name: string, active: bool, href: string}>  $accounts
+     * @param  array<int, array{name: string, active: bool, href: string, users?: array<int, array{name: string, type: string}>}>  $accounts
      */
     public function __construct(
         public string $title,
@@ -60,6 +60,22 @@ class ProfileCard extends Component
     public function hasMoreAccounts(): bool
     {
         return $this->accountsCount() > 4;
+    }
+
+    /**
+     * @return array<int, array{name: string, active: bool, href: string, users?: array<int, array{name: string, type: string}>}>
+     */
+    public function accountsWithUsers(): array
+    {
+        return array_map(
+            fn (array $account): array => [
+                'name' => $account['name'],
+                'active' => $account['active'],
+                'href' => $account['href'],
+                'users' => $account['users'] ?? [],
+            ],
+            $this->accounts
+        );
     }
 
     /**

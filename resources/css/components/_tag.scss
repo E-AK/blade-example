@@ -25,11 +25,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--tag-icon-color, var(--color-grey-2));
 
     svg {
       display: block;
-      width: 8.33px;
-      height: 8.33px;
     }
   }
 
@@ -96,12 +95,20 @@
     background-color: var(--tag-hover-bg, var(--tag-bg));
     color: var(--tag-hover-color, var(--tag-color));
     border-color: var(--tag-hover-border-color, var(--tag-border-color));
+
+    .tag-icon {
+      color: var(--tag-hover-color, var(--color-white));
+    }
   }
 
   &.tag--hoverable:not(.is-disabled):hover {
     background-color: var(--tag-hover-bg, var(--tag-bg));
     color: var(--tag-hover-color, var(--tag-color));
     border-color: var(--tag-hover-border-color, var(--tag-border-color));
+
+    .tag-icon {
+      color: var(--tag-hover-color, var(--color-white));
+    }
 
     &.is-selected {
       opacity: 0.8;
