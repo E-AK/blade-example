@@ -1,49 +1,25 @@
+// --- Sidebar item (has submenu) ---
 .sidebar-item {
   position: relative;
 }
 
+// --- Submenu dropdown (Section-submenu container) ---
+// Design: padding 12px, gap 8px, 280px width, black bg, border 1px solid black-light, radius 12px
 .sidebar-submenu-dropdown {
   position: absolute;
   top: 0;
   left: 100%;
   margin-left: 16px;
   padding: 12px;
+  gap: 8px;
   border-radius: 12px;
   background-color: map-get($custom-colors, 'black');
-
+  border: 1px solid map-get($custom-colors, 'black-light');
+  width: 280px;
+  max-width: 280px;
   display: none;
   flex-direction: column;
-  gap: 8px;
   z-index: 1050;
-
-  .profile-dropdown-tab {
-    gap: 12px;
-    @extend .p5;
-  }
-
-  .header-grey {
-    color: map-get($custom-colors, 'grey-2');
-  }
-
-  .header-yellow {
-    color: map-get($custom-colors, 'yellow');
-  }
-
-  .profile-accounts-section {
-    &__header {
-      gap: 12px;
-      padding: 0;
-    }
-
-    &__count {
-      font-size: 12px;
-      line-height: 16px;
-      font-weight: 400;
-      color: map-get($custom-colors, 'grey-2');
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-  }
 }
 
 .sidebar-submenu-dropdown.open-up {
@@ -66,11 +42,75 @@
   height: 100%;
 }
 
-.sidebar-submenu-inner .sidebar-menu {
-  padding: 0;
-  margin: 0;
+// --- Submenu inner (Frame 1321314243): gap 4px between sections ---
+.sidebar-submenu-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  .sidebar-menu {
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-section {
+    padding-left: 1rem;
+  }
 }
 
-.sidebar-submenu-inner .menu-section {
-  padding-left: 1rem;
+// --- Section title (Type=Title) ---
+// Design: padding 8px 0, 12px/16px, uppercase, letter-spacing 0.05em, grey-2
+.profile-dropdown-tab,
+.sidebar-submenu-inner .menu-section-title {
+  padding: 8px 0;
+  gap: 8px;
+}
+
+.profile-dropdown-tab {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-dropdown-tab__btn {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: $fw-regular;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.header-grey {
+  color: map-get($custom-colors, 'grey-2');
+}
+
+.header-yellow {
+  color: map-get($custom-colors, 'yellow');
+}
+
+.profile-accounts-section {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  &__count {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: $fw-regular;
+    color: map-get($custom-colors, 'grey-2');
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}
+
+.profile-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }

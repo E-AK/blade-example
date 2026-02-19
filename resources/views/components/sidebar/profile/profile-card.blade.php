@@ -15,7 +15,7 @@
     </div>
 
     <div class="sidebar-submenu-dropdown" style="gap: 12px">
-        <x-sidebar.sidebar-submenu class="d-flex flex-column gap-3">
+        <x-sidebar.sidebar-submenu class="d-flex flex-column gap-3" x-data="{ profileSubmenuTab: 'users' }">
             <div class="d-flex gap-2">
                 <x-sidebar.profile.profile
                     :title="$title"
@@ -29,7 +29,6 @@
             </div>
             <div
                 class="d-flex flex-column gap-1 profile-list-section"
-                x-data="{ profileSubmenuTab: 'users' }"
             >
                 <div class="d-flex flex-row profile-dropdown-tab p5">
                     <button
@@ -49,32 +48,33 @@
                         Аккаунты
                     </button>
                 </div>
-                <template x-if="profileSubmenuTab === 'users'">
-                    <div class="d-flex flex-column gap-1">
-                        @foreach($displayUsers() as $user)
-                            <x-sidebar.menu-item
+            </div>
+            <template x-if="profileSubmenuTab === 'users'">
+                <div class="d-flex flex-column gap-1">
+                    @foreach($displayUsers() as $user)
+                        <x-sidebar.menu-item
                                 is-submenu
                                 :active="$user['active']"
                                 :text="$user['name']"
                                 :href="$user['href']"
                                 :trailing-icon="$user['active'] ? 'validation_check' : null"
                                 is-account-item
-                            />
-                        @endforeach
-                        @if($hasMoreUsers())
-                            <x-sidebar.menu-item
+                        />
+                    @endforeach
+                    @if($hasMoreUsers())
+                        <x-sidebar.menu-item
                                 is-submenu
                                 is-list-action
                                 text="Список всех пользователей"
                                 href="#"
-                            />
-                        @endif
-                    </div>
-                </template>
-                <template x-if="profileSubmenuTab === 'accounts'">
-                    <div class="d-flex flex-column gap-1">
-                        @foreach($displayAccounts() as $account)
-                            <x-sidebar.menu-item
+                        />
+                    @endif
+                </div>
+            </template>
+            <template x-if="profileSubmenuTab === 'accounts'">
+                <div class="d-flex flex-column gap-1">
+                    @foreach($displayAccounts() as $account)
+                        <x-sidebar.menu-item
                                 is-submenu
                                 :active="$account['active']"
                                 :text="$account['name']"
@@ -82,20 +82,19 @@
                                 icon="actions_home"
                                 :trailing-icon="$account['active'] ? 'validation_check' : null"
                                 is-account-item
-                            />
-                        @endforeach
-                        @if($hasMoreAccounts())
-                            <x-sidebar.menu-item
+                        />
+                    @endforeach
+                    @if($hasMoreAccounts())
+                        <x-sidebar.menu-item
                                 is-submenu
                                 is-list-action
                                 text="Список всех аккаунтов"
                                 href="{{ route('settings.account') }}"
                                 icon="actions_list"
-                            />
-                        @endif
-                    </div>
-                </template>
-            </div>
+                        />
+                    @endif
+                </div>
+            </template>
         </x-sidebar.sidebar-submenu>
     </div>
 </div>

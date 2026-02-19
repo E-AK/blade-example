@@ -1,20 +1,27 @@
+// --- Main sidebar menu items (Section-menu) ---
+// Design: 256px width, 48px height, padding 12px, gap 10px/12px, bg #141414, radius 8px
+// Bar: 4px × 32px, left -2px, top 8px, yellow, visible on hover/active
 .menu-item {
-  &:not(.menu-item--submenu, .sidebar-toggle-btn) {
-    min-height: 48px;
-  }
+  position: relative;
+  isolation: isolate;
   color: map-get($custom-colors, 'white') !important;
+  background-color: map-get($custom-colors, 'black');
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 48px;
+  gap: 10px;
 
   &::before {
     content: '';
     position: absolute;
     left: -2px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 8px;
     width: 4px;
     height: 32px;
     border-radius: 18px;
     background-color: map-get($custom-colors, 'yellow');
     opacity: 0;
+    z-index: 1;
   }
 
   &:hover {
@@ -24,27 +31,46 @@
       opacity: 1;
     }
 
-    .menu-icon,
-    &.has-children .menu-arrow {
+    .menu-icon:not(.menu-icon--trailing),
+    &.has-children .menu-arrow-icon {
       color: map-get($custom-colors, 'yellow');
     }
   }
 
   &.active {
-    .menu-icon {
+    .menu-icon:not(.menu-icon--trailing) {
       color: map-get($custom-colors, 'yellow');
+    }
+
+    &::before {
+      opacity: 1;
     }
   }
 
   .item-container {
-    @extend .d-flex;
-    @extend .gap-3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .menu-text {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: $fw-medium;
   }
 }
 
 .menu-icon {
-  font-size: 18px;
-  //color: map-get($custom-colors, "white");
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   svg {
     stroke: currentColor;
@@ -53,8 +79,10 @@
 
 .menu-arrow-icon {
   font-size: 24px;
+  color: map-get($custom-colors, 'grey-1');
 }
 
+// Muted variant (e.g. База знаний)
 .menu-item--muted {
   &::before {
     display: none;
@@ -63,7 +91,6 @@
   &,
   .menu-text,
   .menu-icon {
-    @extend .b1;
     color: map-get($custom-colors, 'grey-2') !important;
   }
 
@@ -76,101 +103,50 @@
   }
 }
 
+// Knowledge Base (База знаний): icon and text centered, gap 9px
 .menu-knowledge {
   @extend .menu-item--muted;
-  @extend .align-items-center;
   justify-content: center !important;
-}
+  align-items: center !important;
 
-.app-layout.is-collapsed {
-  .sidebar-toggle-btn {
-    .menu-text {
-      display: none !important;
-    }
-  }
-  .sidebar-toggle-btn .menu-icon svg {
-    transform: rotate(180deg);
+  .item-container {
+    flex: none;
+    gap: 9px;
   }
 
-  .menu-item:not(.menu-item--submenu, .sidebar-toggle-btn) {
-    min-height: 52px;
-    padding: 4px;
-    flex-direction: column;
-    justify-content: center;
-
-    .item-container {
-      @extend .d-flex;
-      @extend .flex-column;
-      @extend .gap-1;
-    }
-
-    .menu-text {
-      display: none !important;
-    }
-
-    .menu-short-text {
-      @extend .p5;
-      display: flex !important;
-      white-space: nowrap;
-      width: 100%;
-    }
-  }
-
-  .menu-icon {
-    font-size: 24px;
-  }
-
-  .menu-item:not(.menu-item--submenu) .menu-arrow-icon {
-    display: none;
-  }
-
-  .sidebar-toggle-btn {
-    justify-content: center !important;
-  }
-
-  .sidebar-toggle-btn .menu-text {
-    display: none;
+  .menu-text {
+    flex-grow: 0;
   }
 }
 
-.sidebar-toggle-btn {
-  height: 40px !important;
-  border: 1px solid map-get($custom-colors, 'black-light') !important;
-  color: map-get($custom-colors, 'grey-2') !important;
-
-  &:hover,
-  &.active {
-    .menu-text,
-    .menu-icon {
-      color: map-get($custom-colors, 'white') !important;
-    }
-  }
-
-  &::before {
-    display: none !important;
-  }
-
-  &:hover::before {
-    opacity: 0 !important;
-  }
-}
-
+// --- Submenu items (Section-submenu) ---
+// Design: padding 4px 8px, height 28px, 14px/20px text, bar 4×20 at left -2px top 4px
 .menu-item--submenu {
+  min-height: 28px;
+  padding: 4px 8px;
+  gap: 8px;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 400;
-  width: 256px;
-  padding: 4px 8px;
+  font-weight: $fw-regular;
+  width: 100%;
+  max-width: 256px;
 
   &::before {
+    top: 4px;
     width: 4px;
     height: 20px;
   }
 
-  .menu-icon {
-    font-size: 16px;
+  .menu-text {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: $fw-regular;
+  }
+
+  .menu-icon:not(.menu-icon--trailing) {
     width: 16px;
     height: 16px;
+    font-size: 16px;
   }
 
   .menu-arrow-icon {
@@ -182,6 +158,7 @@
   }
 }
 
+// Account row in submenu (icon 20px, trailing check)
 .menu-item--account {
   .menu-icon:not(.menu-icon--trailing) {
     width: 20px;
@@ -205,6 +182,7 @@
   }
 }
 
+// Action item (grey-1, yellow on hover)
 .menu-item--action {
   &,
   .menu-text,
@@ -224,6 +202,7 @@
   }
 }
 
+// List action (grey-2, no hover change)
 .menu-item--list-action {
   &,
   .menu-text,
@@ -244,16 +223,93 @@
 }
 
 .menu-badge {
-  @extend .l3;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: $fw-regular;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   background-color: map-get($custom-colors, 'yellow-black');
   color: map-get($custom-colors, 'yellow');
   border-radius: 4px;
   padding: 2px 4px;
-  font-size: 12px;
-  gap: 10px;
-  text-align: center;
+}
+
+// --- Sidebar toggle (Menu-controller) ---
+// Design: padding 8px 12px, height 40px, border 1px solid black-light, radius 8px
+.sidebar-toggle-btn {
+  min-height: 40px !important;
+  height: 40px !important;
+  padding: 8px 12px !important;
+  border: 1px solid map-get($custom-colors, 'black-light') !important;
+  border-radius: 8px !important;
+  color: map-get($custom-colors, 'grey-2') !important;
+
+  &:hover,
+  &.active {
+    .menu-text,
+    .menu-icon {
+      color: map-get($custom-colors, 'white') !important;
+    }
+  }
+
+  &::before {
+    display: none !important;
+  }
+}
+
+// --- Collapsed sidebar ---
+.app-layout.is-collapsed {
+  .sidebar-toggle-btn {
+    .menu-text {
+      display: none !important;
+    }
+  }
+
+  .sidebar-toggle-btn .menu-icon svg {
+    transform: rotate(180deg);
+  }
+
+  .menu-item:not(.menu-item--submenu, .sidebar-toggle-btn) {
+    min-height: 52px;
+    padding: 4px;
+    flex-direction: column;
+    justify-content: center;
+
+    .item-container {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .menu-text {
+      display: none !important;
+    }
+
+    .menu-short-text {
+      font-size: 12px;
+      line-height: 16px;
+      display: flex !important;
+      white-space: nowrap;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .menu-icon {
+    font-size: 24px;
+  }
+
+  .menu-item:not(.menu-item--submenu) .menu-arrow-icon {
+    display: none;
+  }
+
+  .sidebar-toggle-btn {
+    justify-content: center !important;
+    width: 64px;
+  }
+
+  .sidebar-toggle-btn .menu-text {
+    display: none;
+  }
 }

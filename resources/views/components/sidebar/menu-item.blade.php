@@ -2,12 +2,12 @@
     @if($asButton)
         <button
                 type="button"
-                class="d-flex align-items-center text-start w-100 border-0 bg-transparent position-relative rounded-2 px-3 justify-content-between {{ $classes() }}"
+                class="d-flex align-items-center text-start w-100 border-0 text-decoration-none position-relative justify-content-between {{ $classes() }}"
         >
             @else
                 <a
                         href="{{ $href }}"
-                        class="d-flex align-items-center text-decoration-none text-reset position-relative rounded-2 px-3 justify-content-between {{ $classes() }}"
+                        class="d-flex align-items-center text-decoration-none text-reset position-relative justify-content-between {{ $classes() }}"
                 >
                     @endif
                     <div class="item-container">

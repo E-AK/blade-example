@@ -5,6 +5,13 @@
   background: map-get($custom-colors, 'black');
 }
 
+// Section-menu: gap between main menu items
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .sidebar-logo {
   width: 256px;
   height: 28px;
