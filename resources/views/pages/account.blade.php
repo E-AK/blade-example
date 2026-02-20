@@ -19,8 +19,9 @@
                 <div style="width: 220px">
                     <x-select
                         text="Все статусы"
-                        size="lg"
+                        value=""
                         type="stroke"
+                        placeholder="Все статусы"
                         :options="[
                             '' => 'Все статусы',
                             'true' => 'Активные',

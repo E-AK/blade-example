@@ -1,5 +1,5 @@
 export default function initSelect() {
-  $(document).on('click', '.select', function (e) {
+  $(document).on('click', '.select-body', function (e) {
     e.stopPropagation();
 
     if ($(this).hasClass('disabled')) {
@@ -30,7 +30,7 @@ export default function initSelect() {
 
   $(document).on('focus', '.select-input', function () {
     const $wrapper = $(this).closest('.select-wrapper');
-    if ($wrapper.find('.select').hasClass('disabled')) {
+    if ($wrapper.find('.select-body').hasClass('disabled')) {
       return;
     }
     $('.select-wrapper').not($wrapper).removeClass('open state-selected');
@@ -59,13 +59,27 @@ export default function initSelect() {
 
     const $item = $(this);
     const $wrapper = $item.closest('.select-wrapper');
-    const $select = $wrapper.find('.select');
-    const text = $item.text();
+    const text = $item.text().trim();
     const value = $item.data('value');
 
-    $wrapper.find('.select-input').val(text);
-    $select.find('.select-text').text(text);
-    $wrapper.find('.select-input').prop('readonly', true);
+    const $input = $wrapper.find('.select-input');
+    const $displayText = $wrapper.find('.select-text');
+    const $hiddenInput = $wrapper.find('input[name][type="hidden"].select-value');
+
+    if ($input.length) {
+      $input.val(text).prop('readonly', true);
+    }
+    if ($displayText.length) {
+      $displayText.text(text);
+    }
+    if ($hiddenInput.length) {
+      $hiddenInput.val(value !== undefined ? value : text);
+    }
+
+    const $body = $wrapper.find('.select-body');
+    $body.removeClass('select-empty input-empty').addClass('state-filled');
+
     $wrapper.removeClass('open state-selected');
+    $wrapper[0].dispatchEvent(new CustomEvent('select-change', { detail: { value, text }, bubbles: true }));
   });
 }

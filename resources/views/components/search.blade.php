@@ -10,52 +10,52 @@
 ])
 
 @php
-    $wrapperClasses = $selected ? 'state-selected' : '';
-    $wrapperClasses .= $description ? ' has-description' : '';
+    $wrapperClass = 'input-wrapper search-wrapper';
+    $wrapperClass .= $selected ? ' state-selected' : '';
+    $wrapperClass .= $description ? ' has-description' : '';
+    $wrapperClass .= ' ' . $class;
 
-    $searchClasses = 'search-box search-box-' . $size;
-    $searchClasses .= ' '.$class;
-    if ($value !== '') $searchClasses .= ' state-filled';
-    if ($selected) $searchClasses .= ' state-selected';
-    if (!empty($tags)) $searchClasses .= ' has-tags';
+    $bodyClass = 'input-body search-body';
+    $bodyClass .= ' search-body--' . $size;
+    $bodyClass .= $value !== '' ? ' state-filled' : '';
+    $bodyClass .= $selected ? ' state-selected' : '';
+    $bodyClass .= !empty($tags) ? ' has-tags' : '';
 
     $iconSize = $size === 'lg' ? 20 : 16;
-    $leftIconColor = $selected ? 'grey-1' : 'grey-3';
 @endphp
 
-<div class="search-wrapper {{ $wrapperClasses }}">
-    <div class="{{ $searchClasses }}">
-        <span class="search-icon">
-            <x-icon :name="'action_search'" :size="$iconSize" :color="$leftIconColor" />
+<div class="{{ $wrapperClass }}">
+    <div class="{{ $bodyClass }}">
+        <span class="input-icon search-icon" aria-hidden="true">
+            <x-icon name="action_search" :size="$iconSize" :color="$selected ? 'grey-1' : 'grey-3'" />
         </span>
 
-        @if(!empty($tags))
-            <div class="search-tags">
-                @foreach($tags as $tag)
-                    <span class="search-tag">
-                        <span class="tag-text">{{ $tag }}</span>
-                        <span class="tag-close">
-                            <x-icon name="close" :size="$size === 'lg' ? 20 : 16" color="grey-2" />
+        <div class="search-content input-content">
+            @if(!empty($tags))
+                <div class="search-tags">
+                    @foreach($tags as $tag)
+                        <span class="search-tag">
+                            <span class="tag-text">{{ $tag }}</span>
+                            <span class="search-tag-close">
+                                <x-icon name="close" :size="$iconSize" color="grey-2" />
+                            </span>
                         </span>
-                    </span>
-                @endforeach
-            </div>
-        @endif
+                    @endforeach
+                </div>
+            @endif
 
-        @if($value === '' && empty($tags))
             <input
-                    type="text"
-                    class="search-input"
-                    placeholder="{{ $placeholder }}"
-                    value=""
-                    @if($selected) autofocus @endif
+                type="search"
+                class="input-field search-input"
+                placeholder="{{ $placeholder }}"
+                value="{{ $value }}"
+                autocomplete="off"
+                @if($selected) autofocus @endif
             >
-        @else
-            <span class="search-text">{{ $value }}</span>
-        @endif
+        </div>
 
-        @if($clearable && $value !== '')
-            <span class="search-clear">
+        @if($clearable)
+            <span class="input-icon search-clear {{ $value === '' ? 'd-none' : '' }}" role="button" tabindex="0" aria-label="{{ __('Clear') }}">
                 <x-icon name="validation_cross_circle" :size="$iconSize" color="black" />
             </span>
         @endif

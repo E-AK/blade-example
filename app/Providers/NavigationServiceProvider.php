@@ -17,7 +17,7 @@ class NavigationServiceProvider extends ServiceProvider
         $navigation
             ->add('Подключения', '#', function (Section $section): void {
                 $section->attributes(['icon' => 'menu_connections', 'shortText' => 'Подкл-я']);
-                $section->add('Сбис', '#');
+                $section->add('Аккаунты Сбис', url('/connections/sbis'));
                 $section->add('Хранилище данных', '#');
                 $section->add('Wazzup 24', '#');
             })

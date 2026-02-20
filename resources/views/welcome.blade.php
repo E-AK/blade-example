@@ -67,6 +67,123 @@
         </div>
     </div>
 
+    {{-- ================= INPUT ================= --}}
+    <div class="mb-5">
+        <h2 class="h2 mb-4">Input — все состояния</h2>
+
+        <div class="d-flex flex-column gap-5">
+            {{-- Main, Icon=None --}}
+            <div>
+                <h3 class="h6 text-muted mb-2">Main, без иконки</h3>
+                <div class="d-flex gap-4 flex-wrap">
+                    <x-input name="input_name" placeholder="Имя" label="Имя" />
+                </div>
+            </div>
+
+            {{-- Main, Icon=Left, Right, Both --}}
+            <div>
+                <h3 class="h6 text-muted mb-2">Main, иконки: слева / справа / обе</h3>
+                <div class="d-flex gap-4 flex-wrap">
+                    <x-input name="input_pass_left" placeholder="Пароль" label="Пароль" leftIcon="document_book" inputType="password" />
+                    <x-input name="input_pass_right" placeholder="Пароль" label="Пароль" rightIcon="arrow_chevron_down" inputType="password" />
+                    <x-input name="input_pass_both" placeholder="Пароль" label="Пароль" leftIcon="document_book" rightIcon="arrow_chevron_down" inputType="password" />
+                </div>
+            </div>
+
+            {{-- Main, Filled / Disabled / Error --}}
+            <div>
+                <h3 class="h6 text-muted mb-2">Main: заполненный, disabled (пустой), disabled (заполненный)</h3>
+                <div class="d-flex gap-4 flex-wrap align-items-start">
+                    <x-input name="input_filled" placeholder="Имя" label="Имя" value="Константин" />
+                    <x-input name="input_disabled" placeholder="Имя" label="Имя" disabled />
+                    <x-input name="input_disabled_filled" placeholder="Имя" label="Имя" value="Константин" disabled />
+                </div>
+            </div>
+
+            {{-- Main, Error --}}
+            <div>
+                <h3 class="h6 text-muted mb-2">Main: ошибка (пустой / заполненный)</h3>
+                <div class="d-flex gap-4 flex-wrap align-items-start">
+                    <x-input name="input_error_empty" placeholder="Имя" label="Имя" error="Поле обязательное для заполнения" />
+                    <x-input name="input_error_filled" placeholder="Пароль" label="Пароль" value="12345678" error="Пароль слишком простой" />
+                </div>
+            </div>
+
+            {{-- Stroke, все варианты иконок --}}
+            <div>
+                <h3 class="h6 text-muted mb-2">Stroke: без иконки, слева, справа, обе</h3>
+                <div class="d-flex gap-4 flex-wrap">
+                    <x-input type="stroke" name="stroke_login" placeholder="Логин" />
+                    <x-input type="stroke" name="stroke_folder" placeholder="Название папки" leftIcon="document_book" />
+                    <x-input type="stroke" name="stroke_folder_r" placeholder="Название папки" rightIcon="arrow_chevron_down" />
+                    <x-input type="stroke" name="stroke_both" placeholder="Название папки" leftIcon="document_book" rightIcon="arrow_chevron_down" />
+                </div>
+            </div>
+
+            {{-- Stroke, Filled / Disabled / Error --}}
+            <div>
+                <h3 class="h6 text-muted mb-2">Stroke: заполненный, disabled, ошибка</h3>
+                <div class="d-flex gap-4 flex-wrap align-items-start">
+                    <x-input type="stroke" name="stroke_filled" placeholder="Логин" value="al-ivanov" />
+                    <x-input type="stroke" name="stroke_filled_folder" placeholder="Название папки" value="Пароли от акаунтов" leftIcon="document_book" />
+                    <x-input type="stroke" name="stroke_disabled" placeholder="Логин" disabled />
+                    <x-input type="stroke" name="stroke_error" placeholder="Логин" error="Поле обязательное для заполнения" />
+                </div>
+            </div>
+
+            {{-- Multiple right icons (slot) --}}
+            <div>
+                <h3 class="h6 text-muted mb-2">Main: несколько иконок справа (слот)</h3>
+                <div class="d-flex gap-4 flex-wrap">
+                    <x-input name="input_multi_icons" placeholder="Пароль" label="Пароль" inputType="password">
+                        <x-slot:rightIcons>
+                            <span class="input-icon"><x-icon name="actions_profile" /></span>
+                            <span class="input-icon"><x-icon name="arrow_chevron_down" /></span>
+                        </x-slot:rightIcons>
+                    </x-input>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ================= SELECT ================= --}}
+    <div class="mb-5">
+        <h2 class="h2 mb-4">Select — те же стили, что у Input</h2>
+        @php
+            $selectOptions = [
+                'folder-1' => 'Пароли от акаунтов',
+                'folder-2' => 'Документы',
+                'folder-3' => 'Архив',
+            ];
+        @endphp
+        <div class="d-flex flex-column gap-4">
+            <div>
+                <h3 class="h6 text-muted mb-2">Main, без иконки</h3>
+                <x-select :options="$selectOptions" placeholder="Выбор папки" label="Папка" />
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Main, с иконкой слева</h3>
+                <x-select :options="$selectOptions" placeholder="Выбор папки" label="Папка" leftIcon="document_book" />
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Main: заполненный, disabled, ошибка</h3>
+                <div class="d-flex gap-4 flex-wrap align-items-start">
+                    <x-select :options="$selectOptions" placeholder="Выбор папки" label="Папка" text="Пароли от акаунтов" value="folder-1" />
+                    <x-select :options="$selectOptions" placeholder="Выбор папки" disabled />
+                    <x-select :options="$selectOptions" placeholder="Выбор папки" error="Поле обязательное для заполнения" />
+                </div>
+            </div>
+            <div>
+                <h3 class="h6 text-muted mb-2">Stroke</h3>
+                <div class="d-flex gap-4 flex-wrap">
+                    <x-select type="stroke" :options="$selectOptions" placeholder="Логин" />
+                    <x-select type="stroke" :options="$selectOptions" placeholder="Название папки" leftIcon="document_book" />
+                    <x-select type="stroke" :options="$selectOptions" placeholder="Название папки" text="Пароли от акаунтов" value="folder-1" />
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- ================= MULTISELECT ================= --}}
     <h2 class="h2 mb-4">Multiselect — все состояния</h2>
     @php

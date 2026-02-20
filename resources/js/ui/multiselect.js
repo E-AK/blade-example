@@ -1,6 +1,6 @@
 const MULTISELECT_SELECTORS = {
   wrapper: '.multiselect-wrapper',
-  trigger: '.multiselect',
+  trigger: '.multiselect-trigger',
   search: '.multiselect-search',
   input: '.multiselect-input',
   item: '.multiselect-item',

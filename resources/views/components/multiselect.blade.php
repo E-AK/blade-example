@@ -17,20 +17,23 @@
 ])
 
 @php
-    $wrapperClass = 'multiselect-wrapper';
-    $selectClass = 'multiselect flex align-items-center';
-    $selectClass .= ' '.$class;
+    $wrapperClass = 'input-wrapper multiselect-wrapper';
+    $wrapperClass .= ' input-wrapper--main';
+    $wrapperClass .= ' ' . $class;
+
+    $triggerClass = 'input-body input-body--main multiselect-trigger';
+    $triggerClass .= ' ' . $class;
 
     if ($disabled) {
-        $selectClass .= ' disabled';
+        $triggerClass .= ' disabled';
         if (!empty($selected)) {
-            $selectClass .= ' disabled-filled';
+            $triggerClass .= ' disabled-filled';
         }
     }
 
     if ($error) {
         $wrapperClass .= ' has-error';
-        $selectClass .= ' error';
+        $triggerClass .= ' error';
     }
 
     if ($state === 'selected') {
@@ -38,11 +41,11 @@
     }
 
     if ($state === 'hover') {
-        $selectClass .= ' hover';
+        $triggerClass .= ' hover';
     }
 
     if (count($selected) >= 2) {
-        $selectClass .= ' multiselect--filled';
+        $triggerClass .= ' multiselect--filled';
     }
 
     $selectedOptions = collect($selected)->map(function ($value) use ($options) {
@@ -61,34 +64,34 @@
     $hasSelection = !empty($selectedOptions);
 @endphp
 
-<div @if($error) class="d-flex flex-column gap-1" @endif>
+<div class="d-flex flex-column {{ $error ? 'gap-1' : 'gap-0' }}">
     <div
-            class="{{ $wrapperClass }}"
-            @if($disabled) aria-disabled="true" @endif
-            data-tag-bg="{{ $tagBg }}"
-            data-tag-color="{{ $tagColor }}"
-            data-tag-border-color="{{ $tagBorderColor }}"
-            data-disabled="{{ $disabled ? '1' : '0' }}"
-            data-allow-custom="{{ $allowCustom ? '1' : '0' }}"
-            x-data="multiselect()"
-            x-on:click.outside="close()"
-            x-on:multiselect-close-others.window="if ($event.detail !== _msId) close()"
-            :class="{ 'open': open, 'state-selected': open }"
+        class="{{ $wrapperClass }}"
+        @if($disabled) aria-disabled="true" @endif
+        data-tag-bg="{{ $tagBg }}"
+        data-tag-color="{{ $tagColor }}"
+        data-tag-border-color="{{ $tagBorderColor }}"
+        data-disabled="{{ $disabled ? '1' : '0' }}"
+        data-allow-custom="{{ $allowCustom ? '1' : '0' }}"
+        x-data="multiselect()"
+        x-on:click.outside="close()"
+        x-on:multiselect-close-others.window="if ($event.detail !== _msId) close()"
+        :class="{ 'open': open, 'state-selected': open }"
     >
         <div
-                class="{{ $selectClass }}"
-                role="combobox"
-                :aria-expanded="open"
-                aria-haspopup="listbox"
-                @click="openDropdown()"
+            class="{{ $triggerClass }}"
+            role="combobox"
+            :aria-expanded="open"
+            aria-haspopup="listbox"
+            @click="openDropdown()"
         >
             @if($leftIcon)
-                <span class="multiselect-icon-left">
-                <x-icon :name="$leftIcon" />
-            </span>
+                <span class="input-icon multiselect-icon-left" aria-hidden="true">
+                    <x-icon :name="$leftIcon" />
+                </span>
             @endif
 
-            <div class="multiselect-content flex-grow-1 d-flex align-items-center min-w-0">
+            <div class="input-content multiselect-content flex-grow-1 d-flex align-items-center min-w-0">
                 <div
                     class="multiselect-tags-absolute"
                     x-ref="tagsWrap"
@@ -120,25 +123,25 @@
                     aria-hidden="true"
                 ></span>
                 <input
-                        type="text"
-                        class="multiselect-search"
-                        placeholder="{{ $hasSelection ? $searchPlaceholder : $placeholder }}"
-                        autocomplete="off"
-                        aria-label="{{ $searchPlaceholder }}"
-                        data-placeholder="{{ $placeholder }}"
-                        data-search-placeholder="{{ $searchPlaceholder }}"
-                        x-model="searchQuery"
-                        @input="filterDropdown()"
-                        @keydown.enter.prevent="addCustomIfAllowed()"
-                        @click.stop="openDropdown()"
-                        @if($disabled) disabled @endif
+                    type="text"
+                    class="input-field multiselect-search"
+                    placeholder="{{ $hasSelection ? $searchPlaceholder : $placeholder }}"
+                    autocomplete="off"
+                    aria-label="{{ $searchPlaceholder }}"
+                    data-placeholder="{{ $placeholder }}"
+                    data-search-placeholder="{{ $searchPlaceholder }}"
+                    x-model="searchQuery"
+                    @input="filterDropdown()"
+                    @keydown.enter.prevent="addCustomIfAllowed()"
+                    @click.stop="openDropdown()"
+                    @if($disabled) disabled @endif
                 />
             </div>
 
             @if($showRightIcon)
-                <span class="multiselect-icon-right">
-                <x-icon name="arrow_chevron_down" />
-            </span>
+                <span class="input-icons-right multiselect-icon-right">
+                    <span class="input-icon"><x-icon name="arrow_chevron_down" /></span>
+                </span>
             @endif
             @if(isset($right) && $right->isNotEmpty())
                 <span class="multiselect-custom-right flex-shrink-0 d-flex align-items-center">
@@ -156,6 +159,6 @@
         @endif
     </div>
     @if($error)
-        <span class="multiselect-error">{{ $error }}</span>
+        <span class="input-error multiselect-error">{{ $error }}</span>
     @endif
 </div>

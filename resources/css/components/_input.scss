@@ -1,0 +1,744 @@
+// Shared field component: Input, Select, Multiselect
+// Variants: main (52px), stroke (36px/44px)
+// States: default, hover, selected (focus/open), filled, disabled, error
+
+// —— Wrapper (Input + Select + Multiselect + Search) ——
+.input-wrapper,
+.select-wrapper,
+.multiselect-wrapper,
+.search-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+
+  &.input-wrapper--stroke,
+  &.select-wrapper--stroke {
+    max-width: 240px;
+  }
+
+  &.search-wrapper {
+    max-width: none;
+  }
+
+  &.has-error {
+    gap: 4px;
+  }
+
+  // Focus / open state (ring)
+  &.state-selected,
+  &.open,
+  &:focus-within {
+    border-radius: 8px;
+    box-shadow: 0 0 0 2px map-get($custom-colors, 'blue-bg');
+
+    .input-body--main,
+    .select-body--main,
+    .multiselect-trigger {
+      background-color: map-get($custom-colors, 'white');
+      outline: 1px solid map-get($custom-colors, 'blue-soft');
+    }
+
+    .search-body {
+      outline: 1px solid map-get($custom-colors, 'blue-soft');
+    }
+  }
+}
+
+.input-wrapper:focus-within .input-body--main {
+  outline: 1px solid map-get($custom-colors, 'blue-soft');
+}
+
+// —— Body (trigger/field) ——
+.input-body,
+.select-body,
+.multiselect-trigger,
+.search-body {
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  transition: background-color 0.1s ease, outline-color 0.1s ease;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  .input-content,
+  .select-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    //justify-content: center;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .input-label,
+  .select-label {
+    font-size: 12px;
+    line-height: 16px;
+    color: map-get($custom-colors, 'grey-2');
+    align-self: stretch;
+    margin-bottom: 2px;
+  }
+
+  .input-label {
+    display: none;
+  }
+
+  .input-field,
+  .select-input {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: map-get($custom-colors, 'black');
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    min-width: 0;
+    appearance: none;
+
+    &:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: map-get($custom-colors, 'grey-1');
+    }
+
+    &[readonly] {
+      cursor: default;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .select-input::placeholder {
+    color: map-get($custom-colors, 'grey-2');
+  }
+
+  .select-text {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: map-get($custom-colors, 'black');
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .input-icon,
+  .input-icons-right,
+  .select-icon-left,
+  .select-icon-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: map-get($custom-colors, 'grey-1');
+  }
+
+  .input-icons-right {
+    gap: 8px;
+
+    .input-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+// —— Main variant (52px) ——
+.input-body--main,
+.select-body--main,
+.multiselect-trigger {
+  padding: 16px 12px;
+  min-height: 52px;
+  height: 52px;
+  background-color: map-get($custom-colors, 'grey-6');
+  outline: 1px solid transparent;
+
+  &:hover,
+  &.hover {
+    background-color: map-get($custom-colors, 'grey-5');
+  }
+
+  &.input-empty .input-field,
+  &.select-empty .select-input {
+    color: map-get($custom-colors, 'grey-1');
+  }
+
+  &.input-empty .input-field::placeholder,
+  &.select-empty .select-input::placeholder {
+    color: map-get($custom-colors, 'grey-1');
+  }
+
+  &.state-filled,
+  &:focus-within {
+    background-color: map-get($custom-colors, 'white');
+    outline: 1px solid map-get($custom-colors, 'grey-4');
+
+    .input-label {
+      display: block;
+    }
+  }
+
+  &.state-filled .input-label {
+    display: block;
+  }
+
+  &.disabled {
+    background-color: map-get($custom-colors, 'grey-5');
+
+    .input-field,
+    .select-input,
+    .select-text {
+      color: map-get($custom-colors, 'grey-3');
+    }
+
+    .input-field::placeholder,
+    .select-input::placeholder {
+      color: map-get($custom-colors, 'grey-3');
+    }
+
+    .input-icon,
+    .input-icons-right,
+    .select-icon-left,
+    .select-icon-right {
+      color: map-get($custom-colors, 'grey-2');
+    }
+  }
+
+  &.disabled.state-filled,
+  &.disabled.disabled-filled {
+    background-color: map-get($custom-colors, 'grey-5');
+
+    .input-label,
+    .select-label {
+      color: map-get($custom-colors, 'grey-2');
+    }
+
+    .input-field,
+    .select-input,
+    .select-text {
+      color: map-get($custom-colors, 'black');
+    }
+
+    .input-icon,
+    .input-icons-right,
+    .select-icon-left,
+    .select-icon-right {
+      color: map-get($custom-colors, 'grey-2');
+    }
+  }
+
+  &.error {
+    background-color: map-get($custom-colors, 'white');
+    outline: 1px solid map-get($custom-colors, 'red');
+  }
+}
+
+// —— Stroke variant (36px / 44px) ——
+.input-body--stroke,
+.select-body--stroke {
+  padding: 8px;
+  min-height: 36px;
+  height: 36px;
+  background-color: map-get($custom-colors, 'white');
+  outline: 1px solid transparent;
+
+  .input-content {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .input-field {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .input-field::placeholder {
+    color: map-get($custom-colors, 'grey-2');
+  }
+}
+
+.select-body--stroke {
+  padding: 12px;
+  height: 44px;
+  outline: 1px solid map-get($custom-colors, 'grey-4');
+
+  &:hover,
+  &.hover {
+    outline-color: map-get($custom-colors, 'grey-2');
+  }
+
+  &.select-empty .select-text {
+    color: map-get($custom-colors, 'grey-1');
+  }
+
+  &.disabled {
+    background-color: map-get($custom-colors, 'grey-6');
+    outline-color: map-get($custom-colors, 'grey-4');
+
+    .select-text {
+      color: map-get($custom-colors, 'grey-3');
+    }
+
+    .select-icon-left,
+    .select-icon-right {
+      color: map-get($custom-colors, 'grey-2');
+    }
+  }
+
+  &.disabled.disabled-filled {
+    background-color: map-get($custom-colors, 'grey-6');
+    outline-color: map-get($custom-colors, 'grey-4');
+
+    .select-label {
+      color: map-get($custom-colors, 'grey-2');
+    }
+
+    .select-text {
+      color: map-get($custom-colors, 'black');
+    }
+
+    .select-icon-left,
+    .select-icon-right {
+      color: map-get($custom-colors, 'grey-2');
+    }
+  }
+
+  &.error {
+    outline: 1px solid map-get($custom-colors, 'red');
+  }
+}
+
+.input-wrapper--stroke.input-wrapper.state-selected .input-body--stroke,
+.input-wrapper--stroke.input-wrapper:focus-within .input-body--stroke {
+  outline: 1px solid map-get($custom-colors, 'blue-soft');
+}
+
+// —— Error message ——
+.input-error,
+.select-error,
+.multiselect-error {
+  font-size: 12px;
+  line-height: 16px;
+  color: map-get($custom-colors, 'red');
+  align-self: stretch;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+// —— Select dropdown ——
+.input-dropdown,
+.select-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: map-get($custom-colors, 'white');
+  outline: 1px solid map-get($custom-colors, 'grey-4');
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  max-height: 250px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.input-dropdown-item,
+.select-dropdown .select-item {
+  cursor: pointer;
+  padding: 12px;
+  font-size: 14px;
+  color: map-get($custom-colors, 'black');
+  transition: background 0.1s;
+
+  &:hover {
+    background: map-get($custom-colors, 'grey-6');
+  }
+
+  &:active {
+    background: map-get($custom-colors, 'grey-5');
+  }
+
+  &.select-item--hidden,
+  &.input-dropdown-item--hidden {
+    display: none;
+  }
+}
+
+.input-wrapper.open .input-dropdown,
+.select-wrapper.open .select-dropdown {
+  display: block;
+}
+
+// —— Multiselect (uses same body styles via .multiselect-trigger) ——
+.multiselect-wrapper.has-error .multiselect-trigger {
+  outline: 1px solid map-get($custom-colors, 'red');
+}
+
+.multiselect-trigger {
+  overflow: hidden;
+
+  .multiselect-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .multiselect-tags-absolute {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  .multiselect-tags-absolute .multiselect-tag {
+    pointer-events: auto;
+  }
+
+  .multiselect-tags-spacer {
+    flex: none;
+    min-width: 0;
+    height: 0;
+  }
+
+  .multiselect-search {
+    flex: 1 1 auto;
+    min-width: 60px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    font-family: inherit;
+    color: map-get($custom-colors, 'black');
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      color: map-get($custom-colors, 'grey-1');
+    }
+  }
+
+  .multiselect-icon-left,
+  .multiselect-icon-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: map-get($custom-colors, 'grey-1');
+  }
+}
+
+.multiselect-trigger:not(.state-selected):not(.disabled):not(.error) {
+  background-color: map-get($custom-colors, 'grey-6');
+
+  &:hover,
+  &.hover {
+    background-color: map-get($custom-colors, 'grey-5');
+  }
+}
+
+.multiselect-trigger:has(.multiselect-tag):not(.disabled) {
+  background-color: map-get($custom-colors, 'white');
+  outline: 1px solid map-get($custom-colors, 'grey-4');
+}
+
+.multiselect-wrapper.state-selected .multiselect-trigger,
+.multiselect-wrapper.open .multiselect-trigger,
+.multiselect-trigger.state-selected {
+  background-color: map-get($custom-colors, 'white');
+  outline: 1px solid map-get($custom-colors, 'blue-soft');
+}
+
+.multiselect-trigger.disabled:not(.disabled-filled) {
+  background-color: map-get($custom-colors, 'grey-5');
+
+  .multiselect-search {
+    color: map-get($custom-colors, 'grey-2');
+
+    &::placeholder {
+      color: map-get($custom-colors, 'grey-2');
+    }
+  }
+
+  .multiselect-icon-left,
+  .multiselect-icon-right {
+    color: map-get($custom-colors, 'grey-2');
+  }
+}
+
+.multiselect-trigger.disabled.disabled-filled {
+  background-color: map-get($custom-colors, 'grey-5');
+
+  .multiselect-search::placeholder {
+    color: map-get($custom-colors, 'grey-2');
+  }
+
+  .multiselect-icon-left,
+  .multiselect-icon-right {
+    color: map-get($custom-colors, 'grey-2');
+  }
+}
+
+.multiselect-trigger.error {
+  background-color: map-get($custom-colors, 'white');
+  outline: 1px solid map-get($custom-colors, 'red');
+}
+
+.multiselect-dropdown,
+.multiselect-dropdown.custom-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: map-get($custom-colors, 'white');
+  outline: 1px solid map-get($custom-colors, 'grey-4');
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.multiselect-dropdown-list {
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+.multiselect-dropdown .multiselect-item,
+.multiselect-dropdown .dropdown-item.multiselect-item {
+  cursor: pointer;
+  padding: 12px;
+  font-size: 14px;
+  color: map-get($custom-colors, 'black');
+  transition: background 0.1s;
+
+  &:hover {
+    background: map-get($custom-colors, 'grey-6');
+  }
+
+  &:active {
+    background: map-get($custom-colors, 'grey-5');
+  }
+
+  &[aria-selected='true'],
+  &.multiselect-item--selected {
+    background: map-get($custom-colors, 'blue-bg');
+    font-weight: 500;
+  }
+
+  &.multiselect-item--hidden {
+    display: none;
+  }
+}
+
+.multiselect-wrapper.open .multiselect-dropdown {
+  display: flex;
+}
+
+.multiselect-wrapper.has-error {
+  gap: 4px;
+}
+
+// —— Search (same structure, white + border look) ——
+.search-wrapper.has-description {
+  gap: 4px;
+}
+
+.search-body {
+  background-color: map-get($custom-colors, 'white');
+  outline: 1px solid map-get($custom-colors, 'grey-4');
+
+  &:hover {
+    outline-color: map-get($custom-colors, 'grey-2');
+  }
+
+  &:focus-within {
+    outline-color: map-get($custom-colors, 'blue-soft');
+  }
+
+  &.state-filled {
+    &:hover,
+    &:focus-within {
+      outline-color: map-get($custom-colors, 'grey-4');
+    }
+  }
+
+  .search-content {
+    flex-direction: row;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .search-input {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    &::placeholder {
+      color: map-get($custom-colors, 'grey-2');
+    }
+  }
+
+  .search-text {
+    font-size: 16px;
+    line-height: 20px;
+    color: map-get($custom-colors, 'black');
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-icon,
+  .search-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .search-clear {
+    cursor: pointer;
+  }
+}
+
+.search-body--lg {
+  padding: 16px 12px;
+  gap: 8px;
+  height: 52px;
+
+  .search-icon,
+  .search-clear {
+    width: 20px;
+    height: 20px;
+  }
+
+  .search-input,
+  .search-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .search-tag {
+    padding: 8px;
+    border-radius: 8px;
+    gap: 8px;
+
+    .tag-text {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .search-tag-close {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.search-body--md {
+  padding: 8px 12px;
+  gap: 8px;
+  height: 36px;
+
+  .search-icon,
+  .search-clear {
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-input,
+  .search-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .search-input::placeholder {
+    color: map-get($custom-colors, 'grey-2');
+  }
+
+  .search-tag {
+    padding: 4px;
+    border-radius: 4px;
+    gap: 4px;
+
+    .tag-text {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .search-tag-close {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.search-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.search-tag {
+  display: flex;
+  align-items: center;
+  background-color: map-get($custom-colors, 'grey-5');
+  border-radius: 8px;
+  padding: 8px;
+  gap: 8px;
+
+  .tag-text {
+    font-size: 14px;
+    line-height: 20px;
+    color: map-get($custom-colors, 'black');
+  }
+
+  .search-tag-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
+
+.search-description {
+  font-size: 12px;
+  line-height: 16px;
+  color: map-get($custom-colors, 'grey-1');
+}

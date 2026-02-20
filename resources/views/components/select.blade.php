@@ -15,85 +15,87 @@
 ])
 
 @php
-    $wrapperClass = 'select-wrapper';
-    $selectClass = 'select d-flex align-items-center';
-    $selectClass .= $type === 'stroke' ? ' select-stroke' : ' select-main';
-    $selectClass .= ' '.$class;
+    $wrapperClass = 'input-wrapper select-wrapper';
+    $wrapperClass .= $type === 'stroke' ? ' input-wrapper--stroke select-wrapper--stroke' : ' input-wrapper--main';
+    if ($error) {
+        $wrapperClass .= ' has-error';
+    }
+    if ($state === 'selected') {
+        $wrapperClass .= ' state-selected';
+    }
+
+    $bodyClass = 'input-body select-body';
+    $bodyClass .= $type === 'stroke' ? ' input-body--stroke select-body--stroke' : ' input-body--main select-body--main';
+    $bodyClass .= ' ' . $class;
 
     $hasValue = $value !== null || ($text !== null && $text !== '');
     $displayText = $text ?? $value ?? $placeholder;
 
     if ($disabled) {
-        $selectClass .= ' disabled';
+        $bodyClass .= ' disabled';
         if ($label && $hasValue) {
-            $selectClass .= ' disabled-filled';
+            $bodyClass .= ' disabled-filled';
         }
     }
 
     if ($error) {
-        $wrapperClass .= ' has-error';
-        $selectClass .= ' error';
-    }
-
-    if ($state === 'selected') {
-        $wrapperClass .= ' state-selected';
+        $bodyClass .= ' error';
     }
 
     if ($state === 'hover') {
-        $selectClass .= ' hover';
+        $bodyClass .= ' hover';
     }
 
     if (! $hasValue) {
-        $selectClass .= ' select-empty';
+        $bodyClass .= ' select-empty input-empty';
     } elseif ($type === 'main') {
-        $selectClass .= ' state-filled';
+        $bodyClass .= ' state-filled';
     }
 @endphp
 
-<div @if($error) class="d-flex flex-column gap-1" @endif>
+<div class="d-flex flex-column {{ $error ? 'gap-1' : 'gap-0' }}">
     <div class="{{ $wrapperClass }}" @if($disabled) aria-disabled="true" @endif>
-        <div class="{{ $selectClass }}">
+        <div class="{{ $bodyClass }}">
             @if($leftIcon)
-                <span class="select-icon-left">
-                <x-icon :name="$leftIcon" />
-            </span>
+                <span class="input-icon select-icon-left" aria-hidden="true">
+                    <x-icon :name="$leftIcon" />
+                </span>
             @endif
 
-            <div class="select-content flex-grow-1 min-w-0">
+            <div class="input-content select-content flex-grow-1 min-w-0">
                 @if($type === 'main')
-                    <span class="select-label">{{ $label ?? $placeholder }}</span>
+                    <span class="input-label select-label">{{ $label ?? $placeholder }}</span>
                     <input
-                            type="text"
-                            class="select-input"
-                            value="{{ $hasValue ? $displayText : '' }}"
-                            data-placeholder="{{ $placeholder }}"
-                            autocomplete="off"
-                            aria-label="{{ $placeholder }}"
-                            @if($disabled) disabled @endif
+                        type="text"
+                        class="input-field select-input"
+                        value="{{ $hasValue ? $displayText : '' }}"
+                        data-placeholder="{{ $placeholder }}"
+                        autocomplete="off"
+                        aria-label="{{ $placeholder }}"
+                        @if($disabled) disabled @endif
                     />
                 @else
                     @if($label)
-                        <span class="select-label">{{ $label }}</span>
+                        <span class="input-label select-label">{{ $label }}</span>
                     @endif
                     <span class="select-text">{{ $displayText }}</span>
                 @endif
             </div>
 
-            <span class="select-icon-right">
-            <x-icon :name="$rightIcon" />
-        </span>
+            <span class="input-icons-right select-icon-right">
+                <span class="input-icon"><x-icon :name="$rightIcon" /></span>
+            </span>
         </div>
 
         @if(!empty($options))
-            <ul class="select-dropdown list-unstyled m-0 border rounded shadow-sm">
+            <ul class="input-dropdown select-dropdown list-unstyled m-0">
                 @foreach($options as $val => $lab)
-                    <li class="select-item px-3 py-2" data-value="{{ $val }}">{{ $lab }}</li>
+                    <li class="input-dropdown-item select-item" data-value="{{ $val }}">{{ $lab }}</li>
                 @endforeach
             </ul>
-            <x-dropdown :options="$options" />
         @endif
     </div>
     @if($error)
-        <span class="select-error">{{ $error }}</span>
+        <span class="input-error select-error">{{ $error }}</span>
     @endif
 </div>

@@ -12,12 +12,19 @@
             :data-table="$dataTable"
         >
             <x-slot:filterSlot>
-                <x-select
-                    text="Все параметры"
-                    size="lg"
-                    type="stroke"
-                    :options="['' => 'Все параметры']"
-                />
+                <div style="width: 220px">
+                    <x-select
+                            text="Все статусы"
+                            value=""
+                            type="stroke"
+                            placeholder="Все статусы"
+                            :options="[
+                            '' => 'Все статусы',
+                            'true' => 'Активные',
+                            'false' => 'Неактивные'
+                        ]"
+                    />
+                </div>
             </x-slot:filterSlot>
         </x-table>
     </div>
