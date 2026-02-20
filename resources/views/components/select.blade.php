@@ -53,9 +53,26 @@
     }
 @endphp
 
-<div class="d-flex flex-column {{ $error ? 'gap-1' : 'gap-0' }}">
-    <div class="{{ $wrapperClass }}" @if($disabled) aria-disabled="true" @endif>
-        <div class="{{ $bodyClass }}">
+<div
+    class="d-flex flex-column {{ $error ? 'gap-1' : 'gap-0' }} position-relative"
+    @if(!empty($options))
+    x-data="selectDropdown()"
+    x-on:click.outside="close()"
+    data-initial-value="{{ $value ?? '' }}"
+    data-initial-label="{{ e($displayText) }}"
+    data-placeholder="{{ e($placeholder) }}"
+    @endif
+>
+    <div
+        class="{{ $wrapperClass }}"
+        @if(!empty($options)) :class="{ 'state-selected': open, 'state-filled': selectedLabel, 'select-empty input-empty': !selectedLabel }" @endif
+        @if($disabled) aria-disabled="true" @endif
+    >
+        <div
+            class="{{ $bodyClass }}"
+            @if(!empty($options)) :class="{ 'state-filled': selectedLabel, 'select-empty input-empty': !selectedLabel }" @endif
+            @if(!empty($options)) @click.stop="toggle()" style="cursor: pointer;" @endif
+        >
             @if($leftIcon)
                 <span class="input-icon select-icon-left" aria-hidden="true">
                     <x-icon :name="$leftIcon" />
@@ -68,17 +85,26 @@
                     <input
                         type="text"
                         class="input-field select-input"
+                        @if(!empty($options))
+                        x-bind:value="displayText"
+                        @else
                         value="{{ $hasValue ? $displayText : '' }}"
+                        @endif
                         data-placeholder="{{ $placeholder }}"
                         autocomplete="off"
                         aria-label="{{ $placeholder }}"
                         @if($disabled) disabled @endif
+                        @if(!empty($options)) readonly @endif
                     />
                 @else
                     @if($label)
                         <span class="input-label select-label">{{ $label }}</span>
                     @endif
-                    <span class="select-text">{{ $displayText }}</span>
+                    @if(!empty($options))
+                        <span class="select-text" x-text="displayText"></span>
+                    @else
+                        <span class="select-text">{{ $displayText }}</span>
+                    @endif
                 @endif
             </div>
 
@@ -88,7 +114,37 @@
         </div>
 
         @if(!empty($options))
-            <x-dropdown :options="$options" :for-select="true" />
+            <div
+                class="dropdown-panel select-dropdown"
+                x-show="open"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                @click.stop
+                x-cloak
+            >
+                <div class="dropdown-panel__inner">
+                    @foreach($options as $optVal => $optLabel)
+                        @php
+                            $label = is_array($optLabel) ? ($optLabel['label'] ?? $optVal) : $optLabel;
+                        @endphp
+                        <button
+                            type="button"
+                            class="dropdown-item dropdown-item--none"
+                            :class="{ 'dropdown-item--selected': selectedValue == '{{ (string) $optVal }}' }"
+                            role="option"
+                            data-value="{{ $optVal }}"
+                            data-label="{{ e($label) }}"
+                            @click="selectOption($event.currentTarget.dataset.value, $event.currentTarget.dataset.label)"
+                        >
+                            <span class="dropdown-item__label">{{ $label }}</span>
+                        </button>
+                    @endforeach
+                </div>
+            </div>
         @endif
     </div>
     @if($error)

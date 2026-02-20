@@ -114,28 +114,22 @@ export default function multiselect(Alpine) {
     },
 
     openDropdown() {
-      const trigger = this.$el.querySelector(MULTISELECT_SELECTORS.trigger);
-      if (trigger?.classList.contains('disabled')) {
+      if (this.disabled) {
         return;
       }
-
-      window.dispatchEvent(new CustomEvent('multiselect-close-others', { detail: this._msId }));
       this.open = true;
-      this.searchQuery = '';
-      this.updateAria();
-      this.$nextTick(() => {
-        const search = this.$el.querySelector(MULTISELECT_SELECTORS.search);
-        search?.focus();
-        this.filterDropdown();
-      });
+      window.dispatchEvent(
+        new CustomEvent('multiselect-close-others', { detail: this._msId })
+      );
+      this.$nextTick(() => this.buildValueToLabelMap());
     },
 
     close() {
       this.open = false;
     },
 
-    toggle() {
-      this.open ? this.close() : this.openDropdown();
+    filterDropdown() {
+      this.$nextTick(() => this.buildValueToLabelMap());
     },
 
     isSelected(value) {
@@ -191,16 +185,6 @@ export default function multiselect(Alpine) {
         const selected = this.isSelected(value);
         el.setAttribute('aria-selected', selected ? 'true' : 'false');
         el.classList.toggle('multiselect-item--selected', selected);
-      });
-    },
-
-    filterDropdown() {
-      const search = this.$el.querySelector(MULTISELECT_SELECTORS.search);
-      const query = (search?.value ?? this.searchQuery ?? '').trim().toLowerCase();
-      this.$el.querySelectorAll(MULTISELECT_SELECTORS.item).forEach((el) => {
-        const label = (el.dataset.label ?? el.textContent ?? '').trim().toLowerCase();
-        const hidden = query.length > 0 && !label.includes(query);
-        el.classList.toggle('multiselect-item--hidden', hidden);
       });
     },
   }));

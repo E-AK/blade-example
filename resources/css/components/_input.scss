@@ -346,54 +346,12 @@
   white-space: nowrap;
 }
 
-// —— Select dropdown ——
-.input-dropdown,
-.select-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  width: 100%;
-  background: map-get($custom-colors, 'white');
-  outline: 1px solid map-get($custom-colors, 'grey-4');
-  border-radius: 8px;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  max-height: 250px;
-  overflow-y: auto;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.input-dropdown-item,
-.select-dropdown .select-item {
-  cursor: pointer;
-  padding: 12px;
-  font-size: 14px;
-  color: map-get($custom-colors, 'black');
-  transition: background 0.1s;
-
-  &:hover {
-    background: map-get($custom-colors, 'grey-6');
-  }
-
-  &:active {
-    background: map-get($custom-colors, 'grey-5');
-  }
-
-  &.select-item--hidden,
-  &.input-dropdown-item--hidden {
-    display: none;
-  }
-}
-
-.input-wrapper.open .input-dropdown,
-.select-wrapper.open .select-dropdown {
-  display: block;
-}
-
 // —— Multiselect (uses same body styles via .multiselect-trigger) ——
+.multiselect-wrapper:not(.open) .multiselect-dropdown,
+.multiselect-dropdown.multiselect-dropdown--hidden {
+  display: none !important;
+}
+
 .multiselect-wrapper.has-error .multiselect-trigger {
   outline: 1px solid map-get($custom-colors, 'red');
 }
@@ -516,59 +474,6 @@
 .multiselect-trigger.error {
   background-color: map-get($custom-colors, 'white');
   outline: 1px solid map-get($custom-colors, 'red');
-}
-
-.multiselect-dropdown,
-.multiselect-dropdown.custom-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  width: 100% !important;
-  background: map-get($custom-colors, 'white');
-  outline: 1px solid map-get($custom-colors, 'grey-4');
-  border-radius: 8px;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  max-height: 250px;
-  overflow-y: auto;
-}
-
-.multiselect-dropdown-list {
-  overflow-y: auto;
-  max-height: 250px;
-  width: 100%;
-}
-
-.multiselect-dropdown .multiselect-item,
-.multiselect-dropdown .dropdown-item.multiselect-item {
-  cursor: pointer;
-  padding: 12px;
-  font-size: 14px;
-  color: map-get($custom-colors, 'black');
-  transition: background 0.1s;
-
-  &:hover {
-    background: map-get($custom-colors, 'grey-6');
-  }
-
-  &:active {
-    background: map-get($custom-colors, 'grey-5');
-  }
-
-  &[aria-selected='true'],
-  &.multiselect-item--selected {
-    background: map-get($custom-colors, 'blue-bg');
-    font-weight: 500;
-  }
-
-  &.multiselect-item--hidden {
-    display: none;
-  }
-}
-
-.multiselect-wrapper.open .multiselect-dropdown {
-  display: flex;
 }
 
 .multiselect-wrapper.has-error {

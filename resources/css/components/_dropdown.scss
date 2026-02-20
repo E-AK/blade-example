@@ -1,132 +1,111 @@
-// Trigger wrapper (e.g. actions-cell): hide menu by default, show when .open
-.dropdown-trigger-wrapper {
-  .dropdown-menu.custom-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    margin-top: 4px;
-  }
+// Dropdown component — design spec: panel 12px radius, shadow, 4px padding; items 8px padding, 8px gap (10px when no icons), states and icon variants.
 
-  &.open .dropdown-menu.custom-dropdown {
-    display: flex;
+$dropdown-text: #141414;
+$dropdown-label: #a4a4a4;
+$dropdown-separator: map-get($custom-colors, 'grey-5');
+
+.dropdown-root {
+  display: inline-block;
+
+  .dropdown-trigger {
+    cursor: pointer;
   }
 }
 
-// Dropdown menu container (design: Dropdown — padding 4px, shadow, 12px radius)
-.dropdown-menu.custom-dropdown {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+.dropdown-panel {
+  position: absolute;
+  z-index: 1050;
+  left: 0;
+  top: 100%;
+  margin-top: 4px;
+  min-width: 280px;
   padding: 4px;
-  width: 288px;
-  max-height: 320px;
-  overflow-y: auto;
   background: map-get($custom-colors, 'white');
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 16px 24px rgba(0, 0, 0, 0.12);
+}
 
-  // Scrollbar (design: 4px, Grey 4, border-radius 100px)
+.dropdown-panel__inner {
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: map-get($custom-colors, 'grey-4') transparent;
+
   &::-webkit-scrollbar {
     width: 4px;
   }
+
   &::-webkit-scrollbar-track {
     background: transparent;
   }
+
   &::-webkit-scrollbar-thumb {
     background: map-get($custom-colors, 'grey-4');
     border-radius: 100px;
   }
 }
 
-.dropdown-menu__separator {
-  flex: none;
-  align-self: stretch;
-  height: 1px;
-  margin: 4px 0;
-  background: map-get($custom-colors, 'grey-5');
-}
-
-// Dropdown item (design: 280px effective, 36px height, 8px padding, 8px gap, 8px radius)
 .dropdown-item {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex: none;
-  align-self: stretch;
-  min-height: 36px;
   padding: 8px;
   gap: 8px;
+  width: 100%;
+  min-height: 36px;
   border: none;
   border-radius: 8px;
   background: map-get($custom-colors, 'white');
   font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
-  color: map-get($custom-colors, 'black');
-  cursor: pointer;
+  color: $dropdown-text;
   text-align: left;
   text-decoration: none;
-  width: 100%;
-  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
 
-  &:hover:not(:disabled):not([aria-disabled='true']) {
+  &:hover:not(:disabled):not([aria-disabled='true']):not(.dropdown-item--disabled) {
     background: map-get($custom-colors, 'grey-6');
   }
 
-  &.dropdown-item--actions .dropdown-item__label {
+  &:focus {
+    outline: none;
+  }
+
+  &.dropdown-item--none {
+    gap: 10px;
+  }
+
+  &.dropdown-item--actions {
     font-weight: 500;
   }
 
-  // State: selected
-  &.dropdown-item--selected {
-    font-weight: 500;
-    .dropdown-item__label {
-      font-weight: 500;
-    }
-  }
-
-  // State: disabled
-  &.dropdown-item--disabled,
-  &:disabled {
-    color: map-get($custom-colors, 'grey-2');
-    cursor: not-allowed;
-    .dropdown-item__icon {
-      background-color: map-get($custom-colors, 'grey-3');
-    }
-    .dropdown-item__sublabel {
-      color: map-get($custom-colors, 'grey-2');
-    }
-  }
-
-  // State: error
-  &.dropdown-item--error {
-    color: map-get($custom-colors, 'red');
-    .dropdown-item__label,
-    .dropdown-item__sublabel {
-      color: map-get($custom-colors, 'red');
-    }
-    .dropdown-item__icon {
-      background-color: map-get($custom-colors, 'red');
-    }
-  }
-
-  // Icon (design: 20x20; placeholder = Grey 1)
-  .dropdown-item__icon {
-    flex: none;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
+  &.dropdown-item--label {
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
-    &--placeholder {
-      background-color: map-get($custom-colors, 'grey-1');
-    }
-    &--right {
-      flex: none;
-    }
+    min-height: 52px;
+  }
+
+  .dropdown-item__content--label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .dropdown-item__sublabel {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    color: $dropdown-label;
   }
 
   .dropdown-item__label {
@@ -134,50 +113,69 @@
     min-width: 0;
   }
 
-  .dropdown-item__content--label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    flex: 1;
-    min-width: 0;
-    gap: 0;
-  }
-
-  .dropdown-item__sublabel {
-    font-size: 12px;
-    line-height: 16px;
-    color: map-get($custom-colors, 'grey-2');
+  .dropdown-item__icon {
     flex: none;
-    align-self: stretch;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($custom-colors, 'grey-1');
+
+    &--placeholder {
+      visibility: hidden;
+    }
   }
 
   .dropdown-item__control {
     flex: none;
   }
-}
 
-// Multiselect branch: keep existing .custom-dropdown width when used as multiselect list
-.multiselect-dropdown.custom-dropdown {
-  display: flex;
-  flex-direction: column;
-  width: 280px;
-}
+  // Selected: text medium weight (except controllers keep regular)
+  &.dropdown-item--selected {
+    font-weight: 500;
 
-.multiselect-dropdown .dropdown-item.multiselect-item {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  gap: 10px;
-  border-radius: 8px;
-  background: map-get($custom-colors, 'white');
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  color: map-get($custom-colors, 'black');
-  cursor: pointer;
-
-  .item-label {
-    flex-grow: 1;
+    &.dropdown-item--controllers .dropdown-item__label {
+      font-weight: 400;
+    }
   }
+
+  // Disabled
+  &.dropdown-item--disabled,
+  &:disabled,
+  &[aria-disabled='true'] {
+    color: $dropdown-label;
+    cursor: not-allowed;
+
+    .dropdown-item__sublabel,
+    .dropdown-item__label {
+      color: $dropdown-label;
+    }
+
+    .dropdown-item__icon {
+      color: map-get($custom-colors, 'grey-3');
+    }
+  }
+
+  // Error
+  &.dropdown-item--error {
+    color: map-get($custom-colors, 'red');
+
+    .dropdown-item__sublabel,
+    .dropdown-item__label {
+      color: map-get($custom-colors, 'red');
+    }
+
+    .dropdown-item__icon {
+      color: map-get($custom-colors, 'red');
+    }
+  }
+}
+
+.dropdown-separator {
+  width: 100%;
+  height: 1px;
+  margin: 4px 0;
+  background: $dropdown-separator;
+  flex: none;
 }

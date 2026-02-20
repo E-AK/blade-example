@@ -1,102 +1,97 @@
 @props([
     'items' => [],
+    'actions' => false,
+    'class' => '',
 ])
 
-@if($forSelect && !empty($options))
-    <ul class="input-dropdown select-dropdown list-unstyled m-0" role="listbox">
-        @foreach($options as $val => $lab)
-            @php
-                $label = is_array($lab) ? ($lab['label'] ?? $val) : $lab;
-            @endphp
-            <li class="input-dropdown-item select-item" data-value="{{ $val }}">{{ $label }}</li>
-        @endforeach
-    </ul>
-@elseif($forMultiselect && !empty($options))
+<div
+    class="dropdown-root position-relative d-inline-block {{ $class }}"
+    x-data="dropdown()"
+    x-on:click.outside="close()"
+    x-on:dropdown-close-others.window="$event.detail !== _dropdownId && close()"
+    x-bind:class="{ 'dropdown-root--open': open }"
+>
     <div
-        class="multiselect-dropdown custom-dropdown border rounded shadow-sm"
-        @click.stop
+        x-ref="trigger"
+        class="dropdown-trigger"
+        aria-haspopup="menu"
+        x-bind:aria-expanded="open"
+        @click.stop="toggle()"
     >
-        <ul class="multiselect-dropdown-list list-unstyled m-0" role="listbox">
-            @foreach($options as $val => $lab)
-                @php
-                    $label = is_array($lab) ? ($lab['label'] ?? $val) : $lab;
-                    $valEnc = json_encode((string) $val);
-                    $alpineClass = "{ 'multiselect-item--selected': isSelected({$valEnc}) }";
-                    $alpineAria = "isSelected({$valEnc}) ? 'true' : 'false'";
-                @endphp
-                <li
-                    class="dropdown-item multiselect-item"
-                    :class="{!! $alpineClass !!}"
-                    role="option"
-                    data-value="{{ $val }}"
-                    data-label="{{ $label }}"
-                    :aria-selected="{!! $alpineAria !!}"
-                    data-multiselect-option
-                    @click="toggleOption($event.currentTarget)"
-                >
-                    <div class="item-label">{{ $label }}</div>
-                </li>
-            @endforeach
-        </ul>
+        {{ $trigger ?? '' }}
     </div>
-@else
-    <div
-        class="dropdown-menu custom-dropdown {{ $forActionCell ? 'dropdown-menu--action-cell' : '' }}"
-        id="{{ $id }}"
-        {{ $attributes }}
-    >
-        @foreach($items as $item)
-            @if(!empty($item['separator']))
-                <div class="dropdown-menu__separator" role="separator"></div>
-            @else
-                @php
-                    $state = $item['state'] ?? 'default';
-                    $icon = $item['icon'] ?? 'none';
-                    $isDisabled = $state === 'disabled';
-                    $tag = !empty($item['url']) ? 'a' : 'button';
-                    $href = $item['url'] ?? null;
-                @endphp
-                <{{ $tag }}
-                    @if($tag === 'a') href="{{ $href }}" @else type="button" @endif
-                    class="dropdown-item dropdown-item--{{ $icon }} dropdown-item--{{ $state }} {{ $actions ? 'dropdown-item--actions' : '' }}"
-                    @disabled($isDisabled)
-                    @if($isDisabled) aria-disabled="true" @endif
-                >
-                    @if(in_array($icon, ['left', 'both', 'controllers'], true))
-                        @if($icon === 'controllers')
-                            <x-checkbox
-                                :checked="$item['checked'] ?? false"
-                                :disabled="$isDisabled"
-                                size="20"
-                                class="dropdown-item__control"
-                            />
-                        @elseif(!empty($item['iconName']))
-                            <span class="dropdown-item__icon dropdown-item__icon--left">
-                                <x-icon :name="$item['iconName']" :size="20" />
-                            </span>
-                        @else
-                            <span class="dropdown-item__icon dropdown-item__icon--left dropdown-item__icon--placeholder" aria-hidden="true"></span>
-                        @endif
-                    @endif
 
-                    @if($icon === 'label')
-                        <div class="dropdown-item__content dropdown-item__content--label">
-                            @if(!empty($item['sublabel']))
-                                <span class="dropdown-item__sublabel">{{ $item['sublabel'] }}</span>
-                            @endif
-                            <span class="dropdown-item__label">{{ $item['label'] }}</span>
-                        </div>
+    <div
+        x-show="open"
+        x-transition:enter="transition ease-out duration-100"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="dropdown-panel"
+        role="menu"
+        x-cloak
+    >
+        <div class="dropdown-panel__inner">
+            @if(!empty($items))
+                @foreach($items as $item)
+                    @if(!empty($item['separator']))
+                        <x-dropdown.separator />
                     @else
-                        <span class="dropdown-item__label">{{ $item['label'] }}</span>
-                    @endif
+                        @php
+                            $state = $item['state'] ?? 'default';
+                            $icon = $item['icon'] ?? 'none';
+                            $isDisabled = $state === 'disabled';
+                            $tag = !empty($item['url']) ? 'a' : 'button';
+                            $href = $item['url'] ?? null;
+                        @endphp
+                        <{{ $tag }}
+                            @if($tag === 'a') href="{{ $href }}" @else type="button" @endif
+                            class="dropdown-item dropdown-item--{{ $icon }} dropdown-item--{{ $state }} {{ $actions ? 'dropdown-item--actions' : '' }}"
+                            role="menuitem"
+                            @disabled($isDisabled)
+                            @if($isDisabled) aria-disabled="true" @endif
+                        >
+                            @if(in_array($icon, ['left', 'both', 'controllers'], true))
+                                @if($icon === 'controllers')
+                                    <x-checkbox
+                                        :checked="$item['checked'] ?? false"
+                                        :disabled="$isDisabled"
+                                        size="20"
+                                        class="dropdown-item__control"
+                                    />
+                                @elseif(!empty($item['iconName']))
+                                    <span class="dropdown-item__icon dropdown-item__icon--left">
+                                        <x-icon :name="$item['iconName']" :size="20" />
+                                    </span>
+                                @else
+                                    <span class="dropdown-item__icon dropdown-item__icon--left dropdown-item__icon--placeholder" aria-hidden="true"></span>
+                                @endif
+                            @endif
 
-                    @if(in_array($icon, ['right', 'both'], true))
-                        <span class="dropdown-item__icon dropdown-item__icon--right" aria-hidden="true">
-                            <x-icon name="arrow_right" :size="20" />
-                        </span>
+                            @if($icon === 'label')
+                                <div class="dropdown-item__content dropdown-item__content--label">
+                                    @if(!empty($item['sublabel']))
+                                        <span class="dropdown-item__sublabel">{{ $item['sublabel'] }}</span>
+                                    @endif
+                                    <span class="dropdown-item__label">{{ $item['label'] ?? '' }}</span>
+                                </div>
+                            @else
+                                <span class="dropdown-item__label">{{ $item['label'] ?? '' }}</span>
+                            @endif
+
+                            @if(in_array($icon, ['right', 'both'], true))
+                                <span class="dropdown-item__icon dropdown-item__icon--right">
+                                    <x-icon name="arrow_right" :size="20" />
+                                </span>
+                            @endif
+                        </{{ $tag }}>
                     @endif
-                </{{ $tag }}>
+                @endforeach
+            @else
+                {{ $slot }}
             @endif
-        @endforeach
+        </div>
     </div>
-@endif
+</div>

@@ -42,7 +42,6 @@ export class Table {
     this.instance.on('draw.dt', () => {
       this.truncateUserTags();
       this.injectSidebarTriggers();
-      // Alpine does not auto-bind to DOM added after start(); init dropdowns in actions column
       const tbody = this.$table.find('tbody')[0];
       if (tbody && window.Alpine) {
         requestAnimationFrame(() => {

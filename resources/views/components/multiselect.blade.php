@@ -151,7 +151,39 @@
         </div>
 
         @if(!empty($options))
-            <x-dropdown :options="$options" :selected="$selected" :for-multiselect="true" />
+            <div
+                class="dropdown-panel multiselect-dropdown"
+                :class="{ 'multiselect-dropdown--hidden': !open }"
+                x-show="open"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                @click.stop
+                x-cloak
+            >
+                <div class="dropdown-panel__inner">
+                    @foreach($options as $val => $lab)
+                        @php
+                            $optionLabel = is_array($lab) ? ($lab['label'] ?? $val) : $lab;
+                        @endphp
+                        <div
+                            class="dropdown-item multiselect-item"
+                            :class="{ 'dropdown-item--selected': isSelected('{{ (string) $val }}') }"
+                            role="option"
+                            data-value="{{ $val }}"
+                            data-label="{{ $optionLabel }}"
+                            :aria-selected="isSelected('{{ (string) $val }}') ? 'true' : 'false'"
+                            data-multiselect-option
+                            @click="toggleOption($event.currentTarget)"
+                        >
+                            <span class="dropdown-item__label">{{ $optionLabel }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         @endif
 
         @if($name)
