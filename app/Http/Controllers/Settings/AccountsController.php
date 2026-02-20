@@ -2,27 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Settings;
 
 use App\DataTables\AccountsDataTable;
-use App\DataTables\UsersDataTable;
+use App\Http\Controllers\Controller;
 
-class SettingsController extends Controller
+class AccountsController extends Controller
 {
-    public function account(AccountsDataTable $dataTable)
+    public function index(AccountsDataTable $dataTable)
     {
         $placeholderUsers = [
             ['name' => 'Марков А.Н.', 'email' => 'alex_markov@company.ru', 'role' => 'Менеджер'],
             ['name' => 'Буров О.Л.', 'email' => 'oleg_burov@company.ru', 'role' => 'Менеджер'],
         ];
 
-        return $dataTable->render('pages.settings.account', [
+        return $dataTable->withoutActiveColumn()->render('pages.settings.account', [
             'placeholderUsers' => $placeholderUsers,
         ]);
-    }
-
-    public function users(UsersDataTable $dataTable)
-    {
-        return $dataTable->render('pages.settings.users');
     }
 }

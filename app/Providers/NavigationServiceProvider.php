@@ -68,12 +68,12 @@ class NavigationServiceProvider extends ServiceProvider
                 $section->attributes(['icon' => 'menu_settings', 'shortText' => 'Наст-ки']);
                 $section->add('Настройки аккаунта', '#');
                 $section->add('Настройка вебхуков', '#');
-                $section->add('Управление аккаунтами', '#');
+                $section->add('Управление аккаунтами', url('/settings/account'));
             })
-            ->add('Аккаунты', '/settings/account', function (Section $section): void {
+            ->add('Аккаунты', url('/account'), function (Section $section): void {
                 $section->attributes(['icon' => 'menu_accounts', 'shortText' => 'Аккаунты']);
             })
-            ->add('Пользователи', '/settings/users', function (Section $section): void {
+            ->add('Пользователи', url('/users'), function (Section $section): void {
                 $section->attributes(['icon' => 'menu_user', 'shortText' => 'Польз-ли']);
             });
     }

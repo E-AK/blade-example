@@ -9,9 +9,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Styles / Scripts -->
+    <!-- Styles -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.scss', 'resources/js/app.js'])
+        @vite(['resources/css/app.scss'])
     @endif
 </head>
 <body>
@@ -33,5 +33,8 @@
         </div>
     </div>
 </div>
+@if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+    @vite(['resources/js/app.js'])
+@endif
 </body>
 </html>

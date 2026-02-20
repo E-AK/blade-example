@@ -16,7 +16,11 @@
             {{ $filterSlot }}
         </div>
     </div>
-    <table class="table" data-options='@json($options)'>
+    <table
+        class="table"
+        data-options='@json($options)'
+        @if($hasSidebar) data-sidebar="true" @endif
+    >
 
     </table>
 </div>

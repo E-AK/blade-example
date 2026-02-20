@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import debounce from '../utils/debounce';
 import 'datatables.net-bs5';
+import sidebarIconUrl from '../../svg/actions_sidebar.svg?url';
 
 export class Table {
   constructor(element) {
@@ -38,7 +39,10 @@ export class Table {
 
     this.instance = this.$table.DataTable(options);
 
-    this.instance.on('draw.dt', () => this.truncateUserTags());
+    this.instance.on('draw.dt', () => {
+      this.truncateUserTags();
+      this.injectSidebarTriggers();
+    });
 
     $(window).on(
       'resize',
@@ -80,6 +84,40 @@ export class Table {
         if (this.instance) {
           this.instance.column(columnIndex).search(event.target.value).draw();
         }
+      });
+    });
+  }
+
+  injectSidebarTriggers() {
+    if (!this.$table.data('sidebar')) {
+      return;
+    }
+    const $tbody = this.$table.find('tbody');
+    if (!$tbody.length) {
+      return;
+    }
+    $tbody.find('tr').each(function () {
+      $(this).find('td').each(function () {
+        const $td = $(this);
+        if ($td.find('.table-sidebar-open-trigger').length > 0) {
+          return;
+        }
+        const iconStyle =
+          'mask:url(' +
+          sidebarIconUrl +
+          ') center/contain no-repeat;' +
+          '-webkit-mask:url(' +
+          sidebarIconUrl +
+          ') center/contain no-repeat;';
+        const $trigger = $(
+          '<span class="table-sidebar-open-trigger" role="button" tabindex="0">' +
+            '<span class="table-sidebar-open-trigger__icon" style="' +
+            iconStyle +
+            '" aria-hidden="true"></span>' +
+            '<span>Открыть</span>' +
+            '</span>'
+        );
+        $td.append($trigger);
       });
     });
   }

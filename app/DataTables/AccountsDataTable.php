@@ -13,6 +13,18 @@ use Yajra\DataTables\Html\Column;
 
 class AccountsDataTable extends BaseDataTable
 {
+    protected bool $includeActiveColumn = true;
+
+    /**
+     * Exclude the active (status) column from the table.
+     */
+    public function withoutActiveColumn(): static
+    {
+        $this->includeActiveColumn = false;
+
+        return $this;
+    }
+
     /**
      * Build the DataTable class.
      *
@@ -20,7 +32,7 @@ class AccountsDataTable extends BaseDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
+        $table = (new EloquentDataTable($query))
             ->editColumn('name', function (Account $account) {
                 return Blade::render(
                     '<div class="d-flex flex-row align-items-center gap-2 name-cell">
@@ -63,22 +75,28 @@ class AccountsDataTable extends BaseDataTable
               data-total-tags="'.$total.'">'
                     .implode('', $tags).
                     '</div>';
-            })
-            ->addColumn('active', function (Account $account) {
+            });
+
+        $rawColumns = ['name', 'users'];
+
+        if ($this->includeActiveColumn) {
+            $table->addColumn('active', function (Account $account) {
                 $variant = $account->active ? 'success' : 'pause';
 
                 return Blade::render('<div class="d-flex flex-row users-cell"><x-status :variant="$variant" /></div>', [
                     'variant' => $variant,
                 ]);
-            })
-            ->rawColumns(['name', 'active', 'users'])
-            ->filterColumn('active', function (QueryBuilder $query, $value) {
+            });
+            $rawColumns[] = 'active';
+            $table->filterColumn('active', function (QueryBuilder $query, $value) {
                 $query->where('active', $value === 'true');
-            })
-            ->orderColumn('active', function (QueryBuilder $query, $order) {
+            });
+            $table->orderColumn('active', function (QueryBuilder $query, $order) {
                 $query->orderBy('active', $order);
-            })
-            ->setRowId('id');
+            });
+        }
+
+        return $table->rawColumns($rawColumns)->setRowId('id');
     }
 
     /**
@@ -108,7 +126,7 @@ class AccountsDataTable extends BaseDataTable
      */
     public function getColumns(): array
     {
-        return [
+        $columns = [
             Column::make('id')
                 ->hidden(),
             Column::make('name')
@@ -117,11 +135,16 @@ class AccountsDataTable extends BaseDataTable
             Column::computed('users')
                 ->addClass('column-users')
                 ->title('Пользователи'),
-            Column::make('active')
+        ];
+
+        if ($this->includeActiveColumn) {
+            $columns[] = Column::make('active')
                 ->title('Статус')
                 ->addClass('column-status')
-                ->searchable(false),
-        ];
+                ->searchable(false);
+        }
+
+        return $columns;
     }
 
     /**

@@ -18,6 +18,7 @@ class Table extends Component
         public Builder $dataTable,
         public string $searchPlaceholder = '',
         public string $searchClass = '',
+        public bool $hasSidebar = false,
     ) {}
 
     /**

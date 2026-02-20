@@ -2,7 +2,6 @@
 
 @php
     $summaryButtonText = 'Добавить пользователя';
-    $headerInfoText = 'Пользователи';
     $headerTitleText = 'Пользователи';
 @endphp
 

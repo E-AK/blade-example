@@ -6,7 +6,7 @@
                     @if($index > 0)
                         <span class="workspace-container-header-info-sep" aria-hidden="true"> / </span>
                     @endif
-                    @if($index < count($breadcrumbs) - 1 && ! empty($crumb['url']) && $crumb['url'] !== '#')
+                    @if(! empty($crumb['url']) && $crumb['url'] !== '#' && $index < count($breadcrumbs) - 1)
                         <a href="{{ $crumb['url'] }}" class="workspace-container-header-info-link">{{ $crumb['title'] }}</a>
                     @else
                         <span>{{ $crumb['title'] }}</span>

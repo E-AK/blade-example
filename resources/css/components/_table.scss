@@ -117,12 +117,17 @@
     opacity: 1;
   }
 
-  // Body row – padding 4px 0, border-bottom Grey 5
+  // Body row – padding 4px 0, border-bottom Grey 5, 52px height, hover Grey 6
   & tbody tr {
     padding: 4px 0;
+    min-height: 52px;
     background: #fff;
     border-bottom: 1px solid map.get($theme-colors, 'grey-5');
     box-sizing: border-box;
+
+    &:hover {
+      background: map.get($theme-colors, 'grey-6');
+    }
   }
 
   & tbody tr:first-child {
@@ -135,6 +140,56 @@
     font-size: 14px;
     line-height: 20px;
     color: #141414;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  & tbody tr:hover td {
+    background: transparent;
+  }
+
+  // Sidebar-open trigger: in data row, visible only when this cell is hovered
+  & .table-sidebar-open-trigger {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 89px;
+    height: 32px;
+    padding: 4px;
+    background: #fff;
+    box-shadow: 0 4px 8px -4px rgba(22, 34, 51, 0.04), 0 4px 16px rgba(20, 20, 20, 0.08);
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: map.get($theme-colors, 'grey-1');
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 1;
+  }
+
+  & tbody td:hover .table-sidebar-open-trigger {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  & .table-sidebar-open-trigger {
+    cursor: pointer;
+  }
+
+  & .table-sidebar-open-trigger .table-sidebar-open-trigger__icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    display: block;
+    background-color: map.get($theme-colors, 'grey-1');
   }
 
   .dt-length {
@@ -220,4 +275,8 @@ table.dataTable thead > tr > th.dt-orderable-asc .dt-column-order:before {
 
 table.dataTable thead > tr > th.dt-orderable-desc .dt-column-order:after {
   content: '' !important;
+}
+
+div.dt-processing {
+  display: none !important;
 }

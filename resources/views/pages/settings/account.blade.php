@@ -2,38 +2,24 @@
 
 @php
     $summaryButtonText = 'Создать новый аккаунт';
-    $headerInfoText = 'Аккаунты';
-    $headerTitleText = 'Аккаунты';
+    $headerTitleText = 'Управление аккаунтами';
     $placeholderUsers = $placeholderUsers ?? [];
 @endphp
 
 @section('content')
     <div
-        class="account-settings-page"
-        x-data="{ accountSidebarOpen: false, selectedAccountId: null, showSendAccessForm: false }"
-        @click="const tr = $event.target.closest('.data-table tbody tr'); if (tr) { selectedAccountId = tr.id; accountSidebarOpen = true; showSendAccessForm = false; }"
+            class="account-settings-page"
+            x-data="{ accountSidebarOpen: false, selectedAccountId: null, showSendAccessForm: false }"
+            @click="if ($event.target.closest('.table-sidebar-open-trigger')) { const tr = $event.target.closest('.data-table tbody tr'); if (tr) { selectedAccountId = tr.id; accountSidebarOpen = true; showSendAccessForm = false; } }"
     >
-        <x-table search-class="account-search" search-placeholder="Найти аккаунт" :data-table="$dataTable">
-            <x-slot:filterSlot>
-                <x-select
-                    text="Все статусы"
-                    size="lg"
-                    type="stroke"
-                    :options="[
-                        '' => 'Все статусы',
-                        'true' => 'Активные',
-                        'false' => 'Неактивные'
-                    ]"
-                />
-            </x-slot:filterSlot>
-        </x-table>
+        <x-table search-class="account-search" search-placeholder="Найти аккаунт" :data-table="$dataTable" :has-sidebar="true" />
 
         <template x-if="accountSidebarOpen">
             <x-right-sidebar
-                :open="true"
-                title="Детали аккаунта"
-                :close-button-attributes="['x-on:click' => 'accountSidebarOpen = false']"
-                :overlay-attributes="['x-on:click.self' => 'accountSidebarOpen = false']"
+                    :open="true"
+                    title="Детали аккаунта"
+                    :close-button-attributes="['x-on:click' => 'accountSidebarOpen = false']"
+                    :overlay-attributes="['x-on:click.self' => 'accountSidebarOpen = false']"
             >
                 <div class="account-sidebar-body d-flex flex-column align-items-stretch w-100">
                     {{-- User cards (same component as profile modal) --}}
@@ -41,20 +27,20 @@
                         @foreach($placeholderUsers as $user)
                             <div class="account-sidebar-card">
                                 <x-user-card
-                                    :name="$user['name']"
-                                    :email="$user['email'] ?? ''"
-                                    :role="$user['role'] ?? 'Менеджер'"
-                                    wrapper-class="account-sidebar-card-inner"
+                                        :name="$user['name']"
+                                        :email="$user['email'] ?? ''"
+                                        :role="$user['role'] ?? 'Менеджер'"
+                                        wrapper-class="account-sidebar-card-inner"
                                 />
                             </div>
                         @endforeach
 
                         <div class="pt-2" x-show="!showSendAccessForm">
                             <x-button
-                                type="string"
-                                size="medium"
-                                icon-position="left"
-                                :extra-attributes="['x-on:click' => 'showSendAccessForm = true']"
+                                    type="string"
+                                    size="medium"
+                                    icon-position="left"
+                                    :extra-attributes="['x-on:click' => 'showSendAccessForm = true']"
                             >
                                 <x-slot:icon>
                                     <x-icon name="actions_mail" :size="20" />
@@ -93,17 +79,17 @@
 
                         <div class="d-flex flex-row gap-2 align-items-start">
                             <x-button
-                                type="main"
-                                size="medium"
-                                class="account-sidebar-btn-send"
-                                :extra-attributes="['title' => 'Доступ будет отправлен после нажатия кнопки «Отправить»']"
+                                    type="main"
+                                    size="medium"
+                                    class="account-sidebar-btn-send"
+                                    :extra-attributes="['title' => 'Доступ будет отправлен после нажатия кнопки «Отправить»']"
                             >
                                 Отправить
                             </x-button>
                             <x-button
-                                type="stroke"
-                                size="medium"
-                                :extra-attributes="['x-on:click' => 'showSendAccessForm = false']"
+                                    type="stroke"
+                                    size="medium"
+                                    :extra-attributes="['x-on:click' => 'showSendAccessForm = false']"
                             >
                                 Отмена
                             </x-button>
