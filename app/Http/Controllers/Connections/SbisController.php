@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Connections;
 
+use App\DataTables\SbisDataTable;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class SbisController extends Controller
 {
-    public function index()
+    public function index(SbisDataTable $dataTable)
     {
-        return view('pages.connections.sbis');
+        return $dataTable->render('pages.connections.sbis');
     }
 }

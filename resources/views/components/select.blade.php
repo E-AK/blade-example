@@ -88,11 +88,7 @@
         </div>
 
         @if(!empty($options))
-            <ul class="input-dropdown select-dropdown list-unstyled m-0">
-                @foreach($options as $val => $lab)
-                    <li class="input-dropdown-item select-item" data-value="{{ $val }}">{{ $lab }}</li>
-                @endforeach
-            </ul>
+            <x-dropdown :options="$options" :for-select="true" />
         @endif
     </div>
     @if($error)

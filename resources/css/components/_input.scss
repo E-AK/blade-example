@@ -524,7 +524,7 @@
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  width: 100%;
+  width: 100% !important;
   background: map-get($custom-colors, 'white');
   outline: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 8px;
@@ -537,6 +537,7 @@
 .multiselect-dropdown-list {
   overflow-y: auto;
   max-height: 250px;
+  width: 100%;
 }
 
 .multiselect-dropdown .multiselect-item,
