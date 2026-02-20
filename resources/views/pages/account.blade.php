@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @php
-    $summaryButtonText = 'Создать новый аккаунт';
-    $headerTitleText = 'Аккаунты';
     $placeholderUsers = $placeholderUsers ?? [];
 @endphp
+
+@section('topbar_buttons')
+    <x-button type="main" size="large">Создать новый аккаунт</x-button>
+@endsection
 
 @section('content')
     <div

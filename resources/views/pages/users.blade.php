@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-@php
-    $summaryButtonText = 'Добавить пользователя';
-    $headerTitleText = 'Пользователи';
-@endphp
+@section('topbar_buttons')
+    <x-button type="main" size="large">Добавить нового пользователя</x-button>
+@endsection
 
 @section('content')
     <div class="users-settings-page">

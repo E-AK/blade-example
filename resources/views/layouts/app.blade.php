@@ -19,13 +19,11 @@
     <x-sidebar.sidebar />
     <div class="d-flex flex-column main-scroll">
         <x-topbar
-            show-info-button
-            show-summary-button
-            show-action-button
-            :summary-button-text="$summaryButtonText ?? ''"
             :header-info-text="$headerInfoText ?? ''"
             :header-title-text="$headerTitleText ?? ''"
-        />
+        >
+            @yield('topbar_buttons')
+        </x-topbar>
         <div class="d-flex flex-column shadow content">
             <div class="content-inner d-flex flex-column gap-2.5">
                 @yield('content')

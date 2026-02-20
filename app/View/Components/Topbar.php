@@ -15,14 +15,8 @@ class Topbar extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $headerInfoText = '',
+        public ?string $headerInfoText = null,
         public string $headerTitleText = '',
-        public bool $showInfoButton = false,
-        public string $infoButtonText = 'Информация',
-        public bool $showSummaryButton = false,
-        public string $summaryButtonText = '',
-        public bool $showActionButton = false,
-        public string $actionButtonText = 'Действия',
     ) {
         //
     }
@@ -34,8 +28,15 @@ class Topbar extends Component
     {
         $breadcrumbs = Navigation::make()->breadcrumbs();
 
+        $headerInfoText = $this->headerInfoText;
+        if (! empty($breadcrumbs)) {
+            $last = end($breadcrumbs);
+            $headerInfoText = $last['title'] ?? $headerInfoText;
+        }
+
         return view('components.topbar', [
             'breadcrumbs' => $breadcrumbs,
+            'headerInfoText' => $headerInfoText,
         ]);
     }
 }
