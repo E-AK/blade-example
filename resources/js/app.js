@@ -9,11 +9,13 @@ import initTables from './components/initTables';
 import buttonToggle from './ui/buttonToggle';
 import tooltip from './ui/tooltip';
 import dropdown from './ui/dropdown';
+import multiselect from './ui/multiselect';
 
 window.Alpine = Alpine;
 buttonToggle(Alpine);
 tooltip(Alpine);
 dropdown(Alpine);
+multiselect(Alpine);
 Alpine.start();
 
 window.$ = window.jQuery = $;

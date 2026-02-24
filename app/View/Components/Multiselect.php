@@ -13,6 +13,8 @@ class Multiselect extends Component
     /**
      * Create a new component instance.
      */
+    public string $multiselectId;
+
     public function __construct(
         public ?string $name = null,
         public ?string $placeholder = 'Сотрудники',
@@ -29,7 +31,9 @@ class Multiselect extends Component
         public string $tagBorderColor = 'grey-4',
         public string $class = '',
         public bool $allowCustom = false,
-    ) {}
+    ) {
+        $this->multiselectId = 'ms-'.bin2hex(random_bytes(4));
+    }
 
     /**
      * Get selected option labels for display.

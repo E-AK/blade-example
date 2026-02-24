@@ -1,190 +1,95 @@
-const MULTISELECT_SELECTORS = {
-  wrapper: '.multiselect-wrapper',
-  trigger: '.multiselect-trigger',
-  search: '.multiselect-search',
-  input: '.multiselect-input',
-  item: '.multiselect-item',
-};
-
-const DEFAULT_TAG_STYLE = {
-  bg: 'grey-4',
-  color: 'black',
-  borderColor: 'grey-4',
-};
-
 export default function multiselect(Alpine) {
+  Alpine.data('multiselectDropdownItems', () => ({
+    selectedValues: [],
+    init() {
+      const root = this.$el.closest('[data-multiselect-id]');
+      const id = root?.dataset?.multiselectId || this.$el.dataset.multiselectOptionsId || '';
+      if (!id) return;
+      const sync = () => {
+        const raw = Alpine.store('multiselectState')?.[id] || [];
+        this.selectedValues = Array.isArray(raw) ? raw.map((v) => String(v)) : [];
+      };
+      this.$watch(() => Alpine.store('multiselectState')?.[id], sync, { immediate: true, deep: true });
+    },
+  }));
+
   Alpine.data('multiselect', () => ({
-    open: false,
-    searchQuery: '',
+    options: {},
     selected: [],
+    searchQuery: '',
     tagsSpacerWidth: 0,
-    _msId: null,
-    tagBg: DEFAULT_TAG_STYLE.bg,
-    tagColor: DEFAULT_TAG_STYLE.color,
-    tagBorderColor: DEFAULT_TAG_STYLE.borderColor,
     disabled: false,
-    allowCustom: false,
-    valueToLabel: null,
+    tagBg: 'grey-4',
+    tagColor: 'black',
+    tagBorderColor: 'grey-4',
 
     init() {
-      this._msId = `ms-${Math.random().toString(36).slice(2)}`;
-      this.readDataset();
-      this.buildValueToLabelMap();
-      this.hydrateSelected();
-      this.$watch('selected', this.onSelectedChange.bind(this), { deep: true });
-      this.$watch('selected', () => this.$nextTick(() => this.updateTagsSpacerWidth()), {
-        deep: true,
-      });
+      const el = this.$el;
+      this.options = JSON.parse(el.dataset.options || '{}');
+      const rawSelected = JSON.parse(el.dataset.selected || '[]');
+      this.selected = Array.isArray(rawSelected) ? rawSelected.map((v) => String(v)) : [];
+      this.disabled = el.dataset.disabled === '1';
+      this.tagBg = el.dataset.tagBg || 'grey-4';
+      this.tagColor = el.dataset.tagColor || 'black';
+      this.tagBorderColor = el.dataset.tagBorderColor || 'grey-4';
+      this.id = el.dataset.multiselectId || `ms-${Math.random().toString(36).slice(2)}`;
+      el.dataset.multiselectId = this.id;
+      if (typeof Alpine.store('multiselectState') === 'undefined') {
+        Alpine.store('multiselectState', {});
+      }
+      this.syncStore();
+      this.$watch('selected', () => {
+        this.updateTagsSpacerWidth();
+        this.syncStore();
+      }, { deep: true });
       this.$nextTick(() => this.updateTagsSpacerWidth());
     },
 
-    readDataset() {
-      const { dataset } = this.$el;
-      this.tagBg = dataset.tagBg || DEFAULT_TAG_STYLE.bg;
-      this.tagColor = dataset.tagColor || DEFAULT_TAG_STYLE.color;
-      this.tagBorderColor = dataset.tagBorderColor || DEFAULT_TAG_STYLE.borderColor;
-      this.disabled = dataset.disabled === '1';
-      this.allowCustom = dataset.allowCustom === '1';
+    syncStore() {
+      const state = Alpine.store('multiselectState') || {};
+      Alpine.store('multiselectState', { ...state, [this.id]: [...this.selected] });
     },
 
-    addCustomIfAllowed() {
-      if (!this.allowCustom || this.disabled) {
-        return;
-      }
-      const query = (this.searchQuery || '').trim();
-      if (!query || this.selected.includes(query)) {
-        return;
-      }
-      this.selected.push(query);
-      this.searchQuery = '';
-      this.syncInput();
-      this.updateClasses();
-      this.updateAria();
-      this.$nextTick(() => this.updateTagsSpacerWidth());
-    },
-
-    buildValueToLabelMap() {
-      this.valueToLabel = new Map();
-      this.$el.querySelectorAll(MULTISELECT_SELECTORS.item).forEach((el) => {
-        const value = el.dataset.value;
-        const label = (el.dataset.label ?? el.textContent ?? '').trim() || value;
-        if (value !== null) {
-          this.valueToLabel.set(String(value), label);
-        }
-      });
-    },
-
-    hydrateSelected() {
-      const input = this.$el.querySelector(MULTISELECT_SELECTORS.input);
-      if (input?.value) {
-        this.selected = input.value
-          .split(',')
-          .map((v) => v.trim())
-          .filter(Boolean);
-      }
-    },
-
-    onSelectedChange() {
-      this.syncInput();
-      this.updateClasses();
-      this.updateAria();
-      this.$nextTick(() => this.updateTagsSpacerWidth());
-    },
-
-    updateTagsSpacerWidth() {
-      const wrap = this.$refs.tagsWrap;
-      this.tagsSpacerWidth = wrap ? wrap.offsetWidth : 0;
-    },
-
-    tagStyle() {
-      const iconBlack = ['grey-4', 'yellow'].includes(this.tagBg);
-      const styles = [
-        `--tag-bg: var(--color-${this.tagBg})`,
-        `--tag-color: var(--color-${this.tagColor})`,
-        `--tag-border-color: var(--color-${this.tagBorderColor})`,
-      ];
-      if (iconBlack) {
-        styles.push('--tag-icon-color: var(--color-black)');
-      }
-      return styles.join('; ');
-    },
-
-    getLabel(value) {
-      return this.valueToLabel?.get(String(value)) ?? value;
-    },
-
-    openDropdown() {
-      if (this.disabled) {
-        return;
-      }
-      this.open = true;
-      window.dispatchEvent(
-        new CustomEvent('multiselect-close-others', { detail: this._msId })
-      );
-      this.$nextTick(() => this.buildValueToLabelMap());
-    },
-
-    close() {
-      this.open = false;
-    },
-
-    filterDropdown() {
-      this.$nextTick(() => this.buildValueToLabelMap());
-    },
-
-    isSelected(value) {
-      return this.selected.includes(String(value));
-    },
-
-    toggleOption(el) {
-      const value = String(el.dataset.value ?? '');
-      if (!value) {
-        return;
-      }
-
-      if (this.selected.includes(value)) {
-        this.removeTag(value);
+    toggleOption(value) {
+      if (this.disabled) return;
+      const str = String(value);
+      const idx = this.selected.indexOf(str);
+      if (idx === -1) {
+        this.selected.push(str);
       } else {
-        this.selected.push(value);
+        this.selected.splice(idx, 1);
       }
-      this.syncInput();
-      this.updateClasses();
-      this.$nextTick(() => this.updateAria());
     },
 
     removeTag(value) {
-      const strValue = String(value);
-      this.selected = this.selected.filter((v) => String(v) !== strValue);
-      this.syncInput();
-      this.updateClasses();
-      this.updateAria();
+      this.toggleOption(value);
     },
 
-    syncInput() {
-      const input = this.$el.querySelector(MULTISELECT_SELECTORS.input);
-      if (input) {
-        input.value = this.selected.join(',');
-      }
+    getLabel(value) {
+      const opt = this.options[value];
+      if (opt == null) return String(value);
+      return typeof opt === 'object' && opt !== null && 'label' in opt
+        ? (opt.label ?? String(value))
+        : String(opt);
     },
 
-    updateClasses() {
-      const trigger = this.$el.querySelector(MULTISELECT_SELECTORS.trigger);
-      const search = this.$el.querySelector(MULTISELECT_SELECTORS.search);
-      if (trigger) {
-        trigger.classList.toggle('multiselect--filled', this.selected.length >= 2);
-      }
-      if (search) {
-        search.placeholder =
-          this.selected.length >= 1 ? search.dataset.searchPlaceholder : search.dataset.placeholder;
-      }
+    tagStyle(value) {
+      const opt = this.options[value];
+      const tag = typeof opt === 'object' && opt !== null && opt.tag ? opt.tag : null;
+      const bg = tag?.bg ?? this.tagBg;
+      const color = tag?.color ?? this.tagColor;
+      const borderColor = tag?.borderColor ?? this.tagBorderColor;
+      return {
+        '--tag-bg': `var(--color-${bg}, var(--color-grey-4))`,
+        '--tag-color': `var(--color-${color}, var(--color-black))`,
+        '--tag-border-color': `var(--color-${borderColor}, var(--color-grey-4))`,
+      };
     },
 
-    updateAria() {
-      this.$el.querySelectorAll(MULTISELECT_SELECTORS.item).forEach((el) => {
-        const value = el.dataset.value !== null ? String(el.dataset.value) : '';
-        const selected = this.isSelected(value);
-        el.setAttribute('aria-selected', selected ? 'true' : 'false');
-        el.classList.toggle('multiselect-item--selected', selected);
+    updateTagsSpacerWidth() {
+      this.$nextTick(() => {
+        const wrap = this.$refs.tagsWrap;
+        this.tagsSpacerWidth = wrap ? wrap.offsetWidth : 0;
       });
     },
   }));

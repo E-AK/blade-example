@@ -22,7 +22,9 @@
     </div>
 
     <div
+        x-ref="panel"
         x-show="open"
+        x-bind:style="panelStyle"
         x-transition:enter="transition ease-out duration-100"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"

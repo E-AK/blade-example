@@ -9,6 +9,11 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
 
   .dropdown-trigger {
     cursor: pointer;
+    width: fit-content;
+  }
+
+  &.dropdown-root--trigger-full .dropdown-trigger {
+    width: 100%;
   }
 }
 
@@ -23,6 +28,18 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
   background: map-get($custom-colors, 'white');
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 16px 24px rgba(0, 0, 0, 0.12);
+}
+
+.dropdown-root--open-up .dropdown-panel {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.dropdown-root--align-right .dropdown-panel {
+  left: auto;
+  right: 0;
 }
 
 .dropdown-panel__inner {

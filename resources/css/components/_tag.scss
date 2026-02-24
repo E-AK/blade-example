@@ -112,6 +112,7 @@
 
     .tag-icon-right {
       color: var(--tag-icon-color, var(--color-grey-2));
+      cursor: pointer;
     }
 
     &.is-selected {

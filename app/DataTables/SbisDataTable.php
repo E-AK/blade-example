@@ -23,7 +23,7 @@ class SbisDataTable extends BaseDataTable
         $dropdownItems = [
             ['label' => 'Сделать основным'],
             ['label' => 'Редактировать'],
-            ['label' => 'Удалить'],
+            ['label' => 'Удалить', 'state' => 'error'],
         ];
 
         return (new EloquentDataTable($query))
