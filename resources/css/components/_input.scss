@@ -13,16 +13,6 @@
   align-items: flex-start;
   gap: 10px;
   width: 100%;
-  max-width: 340px;
-
-  &.input-wrapper--stroke,
-  &.select-wrapper--stroke {
-    max-width: 240px;
-  }
-
-  &.search-wrapper {
-    max-width: none;
-  }
 
   &.has-error {
     gap: 4px;

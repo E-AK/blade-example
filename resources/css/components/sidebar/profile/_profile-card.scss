@@ -1,3 +1,8 @@
+// Hide submenu when any profile modal is open
+.sidebar-item.has-submenu.is-accounts-modal-open > .sidebar-submenu-dropdown {
+  display: none !important;
+}
+
 .profile-card {
   background-color: map-get($custom-colors, 'black');
   border: 1px solid map-get($custom-colors, 'black-light');

@@ -3,7 +3,8 @@
     'items' => [],
 ])
 
-<x-dropdown :items="$items" :actions="true" class="dropdown-trigger-wrapper">
+<div class="actions-cell">
+    <x-dropdown :items="$items" :actions="true" class="dropdown-trigger-wrapper">
     <x-slot:trigger>
         <x-button
             type="string"
@@ -16,4 +17,5 @@
             </x-slot:icon>
         </x-button>
     </x-slot:trigger>
-</x-dropdown>
+    </x-dropdown>
+</div>

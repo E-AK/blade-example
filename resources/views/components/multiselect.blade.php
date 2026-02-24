@@ -163,9 +163,10 @@
                 <button
                     type="button"
                     class="dropdown-item dropdown-item--none dropdown-item--default"
-                    :class="{ 'dropdown-item--selected': selectedValues.includes('{{ (string) $value }}' }"
+                    data-option-value="{{ e((string) $value) }}"
+                    :class="{ 'dropdown-item--selected': selectedValues.includes($el.dataset.optionValue) }"
                     role="menuitem"
-                    @click="$dispatch('multiselect-toggle', { value: '{{ (string) $value }}' })"
+                    @click="$dispatch('multiselect-toggle', { value: $el.dataset.optionValue })"
                 >
                     <span class="dropdown-item__label">{{ $label }}</span>
                 </button>

@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  overflow: visible;
 
   & .table {
     flex: none;
@@ -268,6 +269,19 @@
     }
   }
 
+  // Actions column: dropdown must not be clipped; allow overflow and add padding
+  & td.column-actions {
+    overflow: visible;
+    padding: 8px 12px;
+    vertical-align: middle;
+  }
+
+  & .actions-cell {
+    display: inline-flex;
+    padding: 4px 0;
+    overflow: visible;
+  }
+
   // SBIS secret-cell: single row, text + copy + eye buttons
   & td.column-protected-key,
   & td.column-service-key {
@@ -354,4 +368,13 @@ table.dataTable thead > tr > th.dt-orderable-desc .dt-column-order:after {
 
 div.dt-processing {
   display: none !important;
+}
+
+.search-wrapper {
+  width: 400px;
+
+  .search-body {
+    height: 44px !important;
+    min-height: 44px;
+  }
 }

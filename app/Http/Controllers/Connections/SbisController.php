@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Connections;
 
 use App\DataTables\SbisDataTable;
 use App\Http\Controllers\Controller;
-use Illuminate\View\View;
 
 class SbisController extends Controller
 {

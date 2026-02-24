@@ -1,0 +1,28 @@
+$col-narrow: 180px;
+$col-medium: 172px;
+$col-wide: 260px;
+
+.data-storage-page .data-table {
+  .column-server-address {
+    width: $col-narrow;
+  }
+
+  .column-database-name,
+  .column-user,
+  .column-password {
+    width: $col-medium;
+  }
+
+  .column-ip-access,
+  .column-comment {
+    width: $col-wide;
+  }
+
+  .column-actions {
+    width: 91px;
+  }
+
+  .dropdown-panel {
+    left: -144px;
+  }
+}

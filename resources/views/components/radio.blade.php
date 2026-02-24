@@ -22,7 +22,6 @@
         data-size="{{ $size }}"
         @if($hasError) data-state="error" @endif
         @if($disabled) data-state="{{ $isDisabledSelected ? 'disabled-selected' : 'disabled' }}" @endif
-        @if($checked && !$disabled) data-state="selected" @endif
 >
     <input
             type="radio"

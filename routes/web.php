@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AccountsController;
+use App\Http\Controllers\Connections\DataStorageController;
 use App\Http\Controllers\Connections\SbisController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,9 @@ Route::group(['prefix' => 'connections'], static function () {
         [SbisController::class, 'index']
     )
         ->name('connections.sbis');
+    Route::get(
+        'data-storage',
+        [DataStorageController::class, 'index']
+    )
+        ->name('connections.data-storage');
 });

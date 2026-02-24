@@ -2,14 +2,19 @@ export default function multiselect(Alpine) {
   Alpine.data('multiselectDropdownItems', () => ({
     selectedValues: [],
     init() {
-      const root = this.$el.closest('[data-multiselect-id]');
-      const id = root?.dataset?.multiselectId || this.$el.dataset.multiselectOptionsId || '';
+      const id =
+        this.$el.dataset.multiselectOptionsId ||
+        this.$el.closest('[data-multiselect-id]')?.dataset?.multiselectId ||
+        '';
       if (!id) return;
-      const sync = () => {
-        const raw = Alpine.store('multiselectState')?.[id] || [];
-        this.selectedValues = Array.isArray(raw) ? raw.map((v) => String(v)) : [];
-      };
-      this.$watch(() => Alpine.store('multiselectState')?.[id], sync, { immediate: true, deep: true });
+      this.$watch(
+        () => Alpine.store('multiselectState'),
+        (store) => {
+          const raw = store?.[id] || [];
+          this.selectedValues = Array.isArray(raw) ? raw.map((v) => String(v)) : [];
+        },
+        { immediate: true, deep: true }
+      );
     },
   }));
 
@@ -32,8 +37,9 @@ export default function multiselect(Alpine) {
       this.tagBg = el.dataset.tagBg || 'grey-4';
       this.tagColor = el.dataset.tagColor || 'black';
       this.tagBorderColor = el.dataset.tagBorderColor || 'grey-4';
-      this.id = el.dataset.multiselectId || `ms-${Math.random().toString(36).slice(2)}`;
-      el.dataset.multiselectId = this.id;
+      const existingId = el.dataset.multiselectId?.trim();
+      this.id = existingId || `ms-${Math.random().toString(36).slice(2)}`;
+      if (!existingId) el.dataset.multiselectId = this.id;
       if (typeof Alpine.store('multiselectState') === 'undefined') {
         Alpine.store('multiselectState', {});
       }

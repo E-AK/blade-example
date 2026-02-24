@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AccountUserSeeder::class,
             SbisConnectionSeeder::class,
+            DataStorageSeeder::class,
         ]);
     }
 }
