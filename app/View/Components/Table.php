@@ -19,6 +19,8 @@ class Table extends Component
         public string $searchPlaceholder = '',
         public string $searchClass = '',
         public bool $hasSidebar = false,
+        public ?string $sidebarLabel = null,
+        public bool $showSearch = true,
     ) {}
 
     /**

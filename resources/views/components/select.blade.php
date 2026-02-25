@@ -28,7 +28,7 @@
     $bodyClass .= $type === 'stroke' ? ' input-body--stroke select-body--stroke' : ' input-body--main select-body--main';
     $bodyClass .= ' ' . $class;
 
-    $hasValue = $value !== null || ($text !== null && $text !== '');
+    $hasValue = $value || $text;
     $displayText = $text ?? $value ?? $placeholder;
 
     if ($disabled) {
@@ -46,6 +46,7 @@
         $bodyClass .= ' hover';
     }
 
+    \Log::debug('hasValue', [$hasValue]);
     if (! $hasValue) {
         $bodyClass .= ' select-empty input-empty';
     } elseif ($type === 'main') {
@@ -59,11 +60,11 @@
     x-data="selectDropdown()"
     x-on:click.outside="close()"
     data-initial-value="{{ $value ?? '' }}"
-    data-initial-label="{{ e($displayText) }}"
     data-placeholder="{{ e($placeholder) }}"
     @endif
 >
     <div
+        @if(!empty($options)) x-ref="selectWrapper" @endif
         class="{{ $wrapperClass }}"
         @if(!empty($options)) :class="{ 'state-selected': open, 'state-filled': selectedLabel, 'select-empty input-empty': !selectedLabel }" @endif
         @if($disabled) aria-disabled="true" @endif
@@ -115,8 +116,10 @@
 
         @if(!empty($options))
             <div
+                x-ref="panel"
                 class="dropdown-panel select-dropdown"
                 x-show="open"
+                x-bind:style="panelStyle"
                 x-transition:enter="transition ease-out duration-100"
                 x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100"

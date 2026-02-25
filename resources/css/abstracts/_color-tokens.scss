@@ -1,9 +1,5 @@
 $black-opacity-40: rgba(22, 22, 22, 0.4);
 
-.bg-black {
-  background-color: $black-opacity-40 !important;
-}
-
 $custom-colors: (
   'black': #161616,
   'black-light': #333333,
@@ -37,3 +33,23 @@ $custom-colors: (
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
+
+// Opacity variant (not in map)
+.bg-black {
+  background-color: $black-opacity-40 !important;
+}
+
+// Color utility classes: .text-{name}, .bg-{name}, .border-{name}
+@each $name, $color in $custom-colors {
+  .text-#{$name} {
+    color: $color;
+  }
+
+  .bg-#{$name} {
+    background-color: $color;
+  }
+
+  .border-#{$name} {
+    border-color: $color;
+  }
+}

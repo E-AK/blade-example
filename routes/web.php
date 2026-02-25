@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Connections\DataStorageController;
 use App\Http\Controllers\Connections\SbisController;
+use App\Http\Controllers\CustomTablesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,15 @@ Route::get('/users', [UsersController::class, 'index'])
 Route::group(['prefix' => 'settings'], static function () {
     Route::get('account', [App\Http\Controllers\Settings\AccountsController::class, 'index'])
         ->name('settings.account');
+});
+
+Route::group(['prefix' => 'custom-tables'], static function () {
+    Route::get('/', [CustomTablesController::class, 'index'])
+        ->name('custom-tables.index');
+    Route::get('{custom_table}/edit', [CustomTablesController::class, 'edit'])
+        ->name('custom-tables.edit');
+    Route::get('{custom_table}', [CustomTablesController::class, 'show'])
+        ->name('custom-tables.show');
 });
 
 Route::group(['prefix' => 'connections'], static function () {

@@ -38,6 +38,26 @@
   }
 }
 
+// Main select: selected state (spec: Blue-bg border, gap 10px)
+.select-wrapper.state-selected {
+  box-shadow: 0 0 0 2px map-get($custom-colors, 'blue-bg');
+  border-radius: 8px;
+}
+
+.select-wrapper.state-selected .select-body--main {
+  gap: 10px;
+}
+
+// Select label: only in selected-autocomplete (focus/open) or filled
+.select-wrapper .select-label {
+  display: none;
+}
+
+.select-wrapper.state-selected .select-label,
+.select-body--main.state-filled .select-label {
+  display: block;
+}
+
 .input-wrapper:focus-within .input-body--main {
   outline: 1px solid map-get($custom-colors, 'blue-soft');
 }
@@ -118,7 +138,7 @@
   }
 
   .select-input::placeholder {
-    color: map-get($custom-colors, 'grey-2');
+    color: map-get($custom-colors, 'grey-1');
   }
 
   .select-text {

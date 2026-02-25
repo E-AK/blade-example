@@ -18,6 +18,24 @@ export class Table {
     }
     const options = this.$table.data('options');
 
+    // Strip callback options that were JSON-serialized as strings (cannot be functions in JSON).
+    // DataTables expects functions and calls .apply() on them, causing "val.apply is not a function".
+    const callbackKeys = [
+      'rowCallback',
+      'drawCallback',
+      'initComplete',
+      'createdRow',
+      'headerCallback',
+      'footerCallback',
+      'formatNumber',
+      'search',
+    ];
+    callbackKeys.forEach((key) => {
+      if (Object.prototype.hasOwnProperty.call(options, key) && typeof options[key] !== 'function') {
+        delete options[key];
+      }
+    });
+
     options.ajax.data = function (data) {
       for (let i = 0; i < data.columns.length; i++) {
         // Clean up query params unused by laravel-datatables
@@ -41,7 +59,9 @@ export class Table {
 
     this.instance.on('draw.dt', () => {
       this.truncateUserTags();
+      this.injectViewUrlAttributes();
       this.injectSidebarTriggers();
+      this.togglePagingVisibility();
       const tbody = this.$table.find('tbody')[0];
       if (tbody && window.Alpine) {
         requestAnimationFrame(() => {
@@ -54,6 +74,37 @@ export class Table {
       'resize',
       debounce(() => this.truncateUserTags(), 150)
     );
+  }
+
+  /**
+   * Hide pagination and per-page control when the table has 10 or fewer records; show them otherwise.
+   */
+  togglePagingVisibility() {
+    if (!this.instance) {
+      return;
+    }
+    const info = this.instance.page.info();
+    const hide = info.recordsTotal <= 10;
+    const $container = $(this.instance.table().container());
+
+    let $paging =
+      $container.find('[data-dt-id="paging"]').length > 0
+        ? $container.find('[data-dt-id="paging"]')
+        : $container.find('.dt-paging');
+    if (!$paging.length) {
+      $paging = $container.find('.pagination').parent();
+    }
+    if ($paging.length) {
+      $paging[hide ? 'hide' : 'show']();
+    }
+
+    let $length =
+      $container.find('[data-dt-id="pageLength"]').length > 0
+        ? $container.find('[data-dt-id="pageLength"]')
+        : $container.find('.dt-length');
+    if ($length.length) {
+      $length[hide ? 'hide' : 'show']();
+    }
   }
 
   initSearch() {
@@ -94,6 +145,20 @@ export class Table {
     });
   }
 
+  injectViewUrlAttributes() {
+    const dt = this.instance;
+    if (!dt) {
+      return;
+    }
+    dt.rows().every(function () {
+      const row = this.node();
+      const data = this.data();
+      if (data && data.view_url) {
+        $(row).attr('data-view-url', data.view_url);
+      }
+    });
+  }
+
   injectSidebarTriggers() {
     if (!this.$table.data('sidebar')) {
       return;
@@ -105,7 +170,7 @@ export class Table {
     $tbody.find('tr').each(function () {
       $(this).find('td').each(function () {
         const $td = $(this);
-        if ($td.find('.table-sidebar-open-trigger').length > 0) {
+        if ($td.hasClass('column-actions') || $td.find('.table-sidebar-open-trigger').length > 0) {
           return;
         }
         const iconStyle =
@@ -115,12 +180,13 @@ export class Table {
           '-webkit-mask:url(' +
           sidebarIconUrl +
           ') center/contain no-repeat;';
+        const label = $td.closest('table').data('sidebar-label') || 'Открыть';
         const $trigger = $(
           '<span class="table-sidebar-open-trigger" role="button" tabindex="0">' +
             '<span class="table-sidebar-open-trigger__icon" style="' +
             iconStyle +
             '" aria-hidden="true"></span>' +
-            '<span>Открыть</span>' +
+            '<span>' + label + '</span>' +
             '</span>'
         );
         $td.append($trigger);

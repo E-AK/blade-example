@@ -9,31 +9,47 @@
   align-items: stretch;
   overflow: visible;
 
+  // Remove top margin from DataTables layout wrapper (row mt-2 justify-content-between dt-layout-table)
+  & .dt-layout-table {
+    margin-top: 0 !important;
+  }
+
   & .table {
     flex: none;
     width: 100%;
   }
 
-  // Header row – height 44px, border-radius 8px
+  // Design tokens for column header (spec: Grey 1–6, Inter 14/20)
+  $header-bg: #f5f5f5;
+  $header-bg-hover: #eaeaea;
+  $header-divider: #e0e0e0;
+  $header-text: #666563;
+  $header-sorter-active: #666563;
+  $header-sorter-inactive: #a4a4a4;
+
+  // Header row – 44px height, 8px border-radius (keep th as table-cell so row stays horizontal)
   & thead tr {
     height: 44px;
   }
 
   & thead th {
+    padding: 12px 27px 12px 12px; /* extra right padding for sorter (4px gap + 11px icon) */
+    isolation: isolate;
     border-bottom-width: 0 !important;
-    background-color: map.get($theme-colors, 'grey-6') !important;
-    color: map.get($theme-colors, 'grey-1');
+    background-color: $header-bg !important;
+    color: $header-text;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
     position: relative;
-    padding: 12px;
-    gap: 4px;
-    isolation: isolate;
+    min-height: 44px;
+    box-sizing: border-box;
 
     &:hover,
     &:focus {
       outline: none !important;
+      background-color: $header-bg-hover !important;
     }
 
     &:first-child {
@@ -46,7 +62,7 @@
       border-bottom-right-radius: 8px;
     }
 
-    // Divider between header cells – Grey 4 (22px height, vertical)
+    // First column has no divider on the left; divider only between columns
     &:not(:first-child)::after {
       content: '';
       position: absolute;
@@ -54,68 +70,105 @@
       top: 50%;
       width: 1px;
       height: 22px;
-      background-color: map.get($theme-colors, 'grey-4');
+      background-color: $header-divider;
       transform: translateY(-50%);
       z-index: 0;
     }
   }
 
-  // Sorter: use arrow_chevron_up (asc) and arrow_chevron_down (desc) instead of default glyphs
-  & thead th .dt-column-order,
-  & thead td .dt-column-order {
-    width: 11px;
-    height: 20px;
-    flex: none;
-    align-self: stretch;
+  // Sorter positioned on the right so th stays table-cell and header row stays horizontal
+  & thead th .dt-column-order {
+    position: absolute !important;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 11px !important;
+    height: 20px !important;
     z-index: 2;
   }
 
-  & thead th.dt-orderable-asc .dt-column-order:before,
-  & thead th.dt-ordering-asc .dt-column-order:before,
-  & thead td.dt-orderable-asc .dt-column-order:before,
-  & thead td.dt-ordering-asc .dt-column-order:before {
+  // Non-orderable columns: hide sorter (columns may not have a sort icon)
+  & thead th:not(.dt-orderable-asc):not(.dt-orderable-desc) .dt-column-order {
+    display: none;
+  }
+
+  & thead th:not(.dt-orderable-asc):not(.dt-orderable-desc) {
+    padding-right: 12px;
+  }
+
+  // Sorter: both carets visible and vertically centered as a pair (right-aligned in cell)
+  & thead th .dt-column-order::before,
+  & thead td .dt-column-order::before {
     content: '';
     position: absolute;
-    display: block;
     left: 50%;
-    top: 0;
+    top: calc(50% - 11px / 2 - 3.5px);
     width: 11px;
     height: 11px;
     margin-left: -5.5px;
-    background-image: url('../../svg/arrow_up.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 11px 7px;
-    opacity: 0.125;
+    background-color: $header-sorter-inactive;
+    mask-image: url('../../svg/arrow_up.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 11px 7px;
+    -webkit-mask-image: url('../../svg/arrow_up.svg');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: 11px 7px;
   }
 
-  & thead th.dt-orderable-desc .dt-column-order:after,
-  & thead th.dt-ordering-desc .dt-column-order:after,
-  & thead td.dt-orderable-desc .dt-column-order:after,
-  & thead td.dt-ordering-desc .dt-column-order:after {
+  & thead th .dt-column-order::after,
+  & thead td .dt-column-order::after {
     content: '';
     position: absolute;
-    display: block;
     left: 50%;
-    bottom: 0;
+    top: calc(50% - 11px / 2 + 4.5px);
     width: 11px;
     height: 11px;
     margin-left: -5.5px;
-    background-image: url('../../svg/arrow_down.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 11px 7px;
-    opacity: 0.125;
+    background-color: $header-sorter-inactive;
+    mask-image: url('../../svg/arrow_down.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 11px 7px;
+    -webkit-mask-image: url('../../svg/arrow_down.svg');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: 11px 7px;
   }
 
-  & thead th.dt-ordering-asc .dt-column-order:before,
-  & thead td.dt-ordering-asc .dt-column-order:before {
-    opacity: 1;
+  // Hover: caret-up highlighted (hint ascending); when sorted desc keep up inactive
+  & thead th:hover .dt-column-order::before {
+    background-color: $header-sorter-active;
   }
 
-  & thead th.dt-ordering-desc .dt-column-order:after,
-  & thead td.dt-ordering-desc .dt-column-order:after {
-    opacity: 1;
+  & thead th.dt-ordering-desc:hover .dt-column-order::before {
+    background-color: $header-sorter-inactive;
+  }
+
+  // Active ascending: caret-up active
+  & thead th.dt-ordering-asc .dt-column-order::before {
+    background-color: $header-sorter-active;
+  }
+
+  // Active descending: caret-down active
+  & thead th.dt-ordering-desc .dt-column-order::after {
+    background-color: $header-sorter-active;
+  }
+
+  // Numeric columns: text left, sort icons on the right
+  & thead th.dt-type-numeric {
+    text-align: left;
+  }
+
+  & thead th.dt-type-numeric .dt-column-order {
+    position: absolute !important;
+    right: 12px;
+    left: auto;
+  }
+
+  & tbody td.dt-type-numeric {
+    text-align: left;
   }
 
   // Body row – padding 4px 0, border-bottom Grey 5, 52px height, hover Grey 6
@@ -195,7 +248,7 @@
 
   .dt-length {
     gap: 8px;
-    display: flex !important;
+    display: flex;
 
     label {
       white-space: nowrap;
@@ -356,14 +409,15 @@
   & .sbis-secret-cell__icon {
     flex-shrink: 0;
   }
-}
 
-table.dataTable thead > tr > th.dt-orderable-asc .dt-column-order:before {
-  content: '' !important;
-}
-
-table.dataTable thead > tr > th.dt-orderable-desc .dt-column-order:after {
-  content: '' !important;
+  // Actions column: fixed 91px for both header and cells
+  & th.column-actions,
+  & td.column-actions {
+    width: 91px !important;
+    min-width: 91px !important;
+    max-width: 91px !important;
+    box-sizing: border-box;
+  }
 }
 
 div.dt-processing {

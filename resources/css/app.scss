@@ -15,7 +15,9 @@
 @import 'components/table';
 
 @import 'components/account/table', 'components/account/search', 'components/account/select',
-  'components/account/account-settings', 'components/users/search', 'components/sbis/table', 'components/data-storage/table';
+  'components/account/account-settings', 'components/users/search', 'components/sbis/table',
+  'components/data-storage/table', 'components/custom-table/table', 'components/custom-table/show/table',
+  'components/custom-table/edit/table';
 
 .bi::before {
   vertical-align: 0 !important;

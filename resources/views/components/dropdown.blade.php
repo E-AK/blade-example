@@ -1,11 +1,13 @@
 @props([
     'items' => [],
     'actions' => false,
+    'panelMatchTrigger' => false,
     'class' => '',
 ])
 
 <div
     class="dropdown-root position-relative d-inline-block {{ $class }}"
+    @if($panelMatchTrigger) data-panel-match-trigger="true" @endif
     x-data="dropdown()"
     x-on:click.outside="close()"
     x-on:dropdown-close-others.window="$event.detail !== _dropdownId && close()"

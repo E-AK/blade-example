@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             AccountUserSeeder::class,
             SbisConnectionSeeder::class,
             DataStorageSeeder::class,
+            CustomTableSeeder::class,
+            CustomTableColumnSeeder::class,
+            CustomTableRowSeeder::class,
         ]);
     }
 }

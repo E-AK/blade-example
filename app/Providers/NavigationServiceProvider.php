@@ -23,7 +23,7 @@ class NavigationServiceProvider extends ServiceProvider
             })
             ->add('Сбор информации', '#', function (Section $section): void {
                 $section->attributes(['icon' => 'menu_get_info', 'shortText' => 'Сбор ин-']);
-                $section->add('Пользовательские таблицы', '#');
+                $section->add('Пользовательские таблицы', url('/custom-tables'));
                 $section->add('Сотрудники', '#');
                 $section->add('Лиды', '#');
                 $section->add('События', '#');

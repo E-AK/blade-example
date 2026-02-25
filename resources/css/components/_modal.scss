@@ -34,7 +34,6 @@ $modal-text-color: #141414;
   flex-direction: column;
   align-items: stretch;
   padding: 0;
-  min-height: var(--modal-min-height, 320px);
   background: map-get($custom-colors, 'white');
   box-shadow: $modal-shadow;
   border-radius: 12px;
@@ -44,12 +43,10 @@ $modal-text-color: #141414;
 
 .modal-overlay.modal--small .modal {
   width: var(--modal-width, 560px);
-  min-height: var(--modal-min-height, 320px);
 }
 
 .modal-overlay.modal--large .modal {
   width: var(--modal-width, 780px);
-  min-height: var(--modal-min-height, 420px);
 }
 
 .modal__header {
@@ -113,7 +110,6 @@ $modal-text-color: #141414;
   gap: 16px;
   flex: 1 1 auto;
   align-self: stretch;
-  min-height: 0;
   overflow-y: auto;
   font-family: 'Inter', serif;
   font-style: normal;
