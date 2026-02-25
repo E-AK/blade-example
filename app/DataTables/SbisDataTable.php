@@ -77,29 +77,36 @@ class SbisDataTable extends BaseDataTable
         return [
             Column::make('id')
                 ->title('id приложения')
-                ->addClass('column-id'),
+                ->addClass('column-id')
+                ->width('180px'),
             Column::make('protected_key')
                 ->title('Защищенный ключ')
                 ->addClass('column-protected-key')
-                ->searchable(false),
+                ->searchable(false)
+                ->width('172px'),
             Column::make('service_key')
                 ->title('Сервисный ключ')
                 ->addClass('column-service-key')
-                ->searchable(false),
+                ->searchable(false)
+                ->width('172px'),
             Column::make('connection_type')
                 ->title('Тип подключения')
-                ->addClass('column-connection-type'),
+                ->addClass('column-connection-type')
+                ->width('172px'),
             Column::make('organization')
                 ->title('Организация')
-                ->addClass('column-organization'),
+                ->addClass('column-organization')
+                ->width('260px'),
             Column::make('comment')
                 ->title('Комментарий')
-                ->addClass('column-comment'),
+                ->addClass('column-comment')
+                ->width('260px'),
             Column::computed('actions')
                 ->title('Действия')
                 ->addClass('column-actions text-center')
                 ->orderable(false)
-                ->searchable(false),
+                ->searchable(false)
+                ->width('91px'),
         ];
     }
 

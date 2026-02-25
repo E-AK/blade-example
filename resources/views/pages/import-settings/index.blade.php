@@ -55,6 +55,7 @@
                 <x-select
                         name="2"
                         placeholder="Новые пароли 2024"
+                        left-icon="actions_calendar"
                         :options="[1 => 1]"
                 />
                 <div class="d-flex flex-row" style="gap: 12px">

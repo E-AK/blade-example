@@ -15,13 +15,36 @@ export default function dropdown(Alpine) {
           new CustomEvent('dropdown-close-others', { detail: this._dropdownId })
         );
         this.$nextTick(() => {
-          if (this.$el.dataset.panelMatchTrigger === 'true' && this.$refs.trigger && this.$refs.panel) {
-            this.panelStyle = { width: `${this.$refs.trigger.offsetWidth}px` };
-          }
+          this._applyPanelStyle();
         });
       } else {
         this.panelStyle = {};
       }
+    },
+
+    _applyPanelStyle() {
+      if (!this.$refs.panel) return;
+      const panel = this.$refs.panel;
+      let style = {};
+      if (this.$el.dataset.panelMatchTrigger === 'true' && this.$refs.trigger) {
+        style.width = `${this.$refs.trigger.offsetWidth}px`;
+      }
+      const dataTable = this.$el.closest('.data-table');
+      const contentInner = this.$el.closest('.content-inner');
+      if (dataTable && contentInner) {
+        const contentRect = contentInner.getBoundingClientRect();
+        const paddingX = 20;
+        const safeLeft = contentRect.left + paddingX;
+        const safeRight = contentRect.right - paddingX;
+        const panelRect = panel.getBoundingClientRect();
+        const rootRect = this.$el.getBoundingClientRect();
+        let panelLeft = panelRect.left;
+        if (panelLeft < safeLeft) panelLeft = safeLeft;
+        if (panelLeft + panelRect.width > safeRight) panelLeft = safeRight - panelRect.width;
+        style.left = `${panelLeft - rootRect.left}px`;
+        style.right = 'auto';
+      }
+      this.panelStyle = style;
     },
 
     close() {

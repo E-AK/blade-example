@@ -71,29 +71,36 @@ class DataStoragesDataTable extends BaseDataTable
             Column::make('id')->hidden(),
             Column::make('server_address')
                 ->title('Адрес сервера')
-                ->addClass('column-server-address'),
+                ->addClass('column-server-address')
+                ->width('180px'),
             Column::make('database_name')
                 ->title('Имя базы данных')
-                ->addClass('column-database-name'),
+                ->addClass('column-database-name')
+                ->width('172px'),
             Column::make('user')
                 ->title('Пользователь')
-                ->addClass('column-user'),
+                ->addClass('column-user')
+                ->width('172px'),
             Column::make('password')
                 ->title('Пароль')
                 ->addClass('column-password')
                 ->searchable(false)
-                ->orderable(false),
+                ->orderable(false)
+                ->width('172px'),
             Column::make('ip_access')
                 ->title('Доступ по IP')
-                ->addClass('column-ip-access'),
+                ->addClass('column-ip-access')
+                ->width('260px'),
             Column::make('comment')
                 ->title('Комментарий')
-                ->addClass('column-comment'),
+                ->addClass('column-comment')
+                ->width('260px'),
             Column::computed('actions')
                 ->title('Действия')
                 ->addClass('column-actions text-center')
                 ->orderable(false)
-                ->searchable(false),
+                ->searchable(false)
+                ->width('91px'),
         ];
     }
 

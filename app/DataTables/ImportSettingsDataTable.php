@@ -108,7 +108,8 @@ class ImportSettingsDataTable extends BaseDataTable
                 ->title('Действия')
                 ->addClass('column-actions text-center')
                 ->orderable(false)
-                ->searchable(false),
+                ->searchable(false)
+                ->width('91px'),
         ];
     }
 

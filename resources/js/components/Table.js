@@ -57,6 +57,11 @@ export class Table {
 
     this.instance = this.$table.DataTable(options);
 
+    // Wrap only the table in scroll container so pagination/length stay outside
+    if (!this.$table.parent().hasClass('data-table__scroll')) {
+      this.$table.wrap('<div class="data-table__scroll"></div>');
+    }
+
     this.instance.on('draw.dt', () => {
       this.truncateUserTags();
       this.injectViewUrlAttributes();

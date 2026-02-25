@@ -2,21 +2,32 @@
 
 .data-table {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   font-size: 14px;
   line-height: 20px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  overflow: visible;
 
   // Remove top margin from DataTables layout wrapper (row mt-2 justify-content-between dt-layout-table)
   & .dt-layout-table {
     margin-top: 0 !important;
   }
 
+  // Horizontal scroll only for the table; pagination and length stay outside
+  & .data-table__scroll {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  & .data-table__scroll .table,
   & .table {
     flex: none;
     width: 100%;
+    min-width: max-content;
   }
 
   // Design tokens for column header (spec: Grey 1–6, Inter 14/20)
@@ -410,12 +421,7 @@
     flex-shrink: 0;
   }
 
-  // Actions column: fixed 91px for both header and cells
-  & th.column-actions,
   & td.column-actions {
-    width: 91px !important;
-    min-width: 91px !important;
-    max-width: 91px !important;
     box-sizing: border-box;
   }
 }

@@ -72,30 +72,38 @@ class CustomTableColumnsDataTable extends BaseDataTable
             Column::make('id')->hidden(),
             Column::make('sort_order')
                 ->title('Позиция')
-                ->addClass('column-sort-order'),
+                ->addClass('column-sort-order')
+                ->width('104px'),
             Column::make('name')
                 ->title('Название колонки')
-                ->addClass('column-name'),
+                ->addClass('column-name')
+                ->width('156px'),
             Column::make('type')
                 ->title('Тип данных в БД')
-                ->addClass('column-type'),
+                ->addClass('column-type')
+                ->width('156px'),
             Column::make('data_type')
                 ->title('Тип данных')
-                ->addClass('column-data-type'),
+                ->addClass('column-data-type')
+                ->width('156px'),
             Column::make('example_data')
                 ->title('Пример данных')
-                ->addClass('column-example-data'),
+                ->addClass('column-example-data')
+                ->width('112px'),
             Column::make('is_required')
                 ->title('Необходимость заполнения')
-                ->addClass('column-is-required'),
+                ->addClass('column-is-required')
+                ->width('156px'),
             Column::make('comment')
                 ->title('Комментарий')
-                ->addClass('column-comment'),
+                ->addClass('column-comment')
+                ->width('149px'),
             Column::computed('actions')
                 ->title('Действия')
                 ->addClass('column-actions text-center')
                 ->orderable(false)
-                ->searchable(false),
+                ->searchable(false)
+                ->width('91px'),
         ];
     }
 

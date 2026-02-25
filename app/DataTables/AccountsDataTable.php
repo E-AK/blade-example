@@ -131,17 +131,20 @@ class AccountsDataTable extends BaseDataTable
                 ->hidden(),
             Column::make('name')
                 ->title('Название')
-                ->addClass('column-name'),
+                ->addClass('column-name')
+                ->width('320px'),
             Column::computed('users')
                 ->addClass('column-users')
-                ->title('Пользователи'),
+                ->title('Пользователи')
+                ->width('600px'),
         ];
 
         if ($this->includeActiveColumn) {
             $columns[] = Column::make('active')
                 ->title('Статус')
                 ->addClass('column-status')
-                ->searchable(false);
+                ->searchable(false)
+                ->width('160px');
         }
 
         return $columns;
