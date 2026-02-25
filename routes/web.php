@@ -6,6 +6,7 @@ use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Connections\DataStorageController;
 use App\Http\Controllers\Connections\SbisController;
 use App\Http\Controllers\CustomTablesController;
+use App\Http\Controllers\ImportSettingsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::group(['prefix' => 'custom-tables'], static function () {
     Route::get('{custom_table}', [CustomTablesController::class, 'show'])
         ->name('custom-tables.show');
 });
+
+Route::get('import-settings', [ImportSettingsController::class, 'index'])
+    ->name('import-settings.index');
 
 Route::group(['prefix' => 'connections'], static function () {
     Route::get(

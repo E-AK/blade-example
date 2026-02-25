@@ -28,7 +28,7 @@
   height: 88px;
   border-radius: 12px;
   background-color: map-get($custom-colors, 'white');
-  overflow: hidden;
+  overflow: visible;
 
   .right {
     gap: 20px;
@@ -78,6 +78,7 @@
   transform: translateX(-32px) translateY(-50%);
   width: 24px;
   height: 24px;
+  clip-path: inset(0 0 0 50%);
 }
 
 .content {
@@ -87,6 +88,8 @@
   min-height: 0;
   min-width: 0;
   overflow: auto;
+  position: relative;
+  z-index: 0;
 
   scrollbar-width: thin;
 

@@ -35,7 +35,7 @@ class NavigationServiceProvider extends ServiceProvider
                 $section->add('Номенклатура', '#');
                 $section->add('Виды работ', '#');
                 $section->add('Чеки', '#');
-                $section->add('Настройка импорта данных', '#');
+                $section->add('Настройка импорта данных', url('/import-settings'));
                 $section->add('Витрина данных', '#');
             })
             ->add('Сервисы', '#', function (Section $section): void {

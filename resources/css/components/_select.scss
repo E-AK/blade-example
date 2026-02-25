@@ -2,6 +2,16 @@
   position: relative;
   gap: 10px;
 
+  &--pilled {
+    border-radius: 9999px;
+
+    .select-body,
+    .select-body--main,
+    .select-body--stroke {
+      border-radius: 9999px;
+    }
+  }
+
   .dropdown-panel.select-dropdown {
     width: 100%;
     min-width: 100%;

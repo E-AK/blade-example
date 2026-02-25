@@ -12,11 +12,13 @@
     'cursor' => false,
     'options' => [],
     'class' => '',
+    'pilled' => false,
 ])
 
 @php
     $wrapperClass = 'input-wrapper select-wrapper';
     $wrapperClass .= $type === 'stroke' ? ' input-wrapper--stroke select-wrapper--stroke' : ' input-wrapper--main';
+    $wrapperClass .= $pilled ? ' select-wrapper--pilled' : '';
     if ($error) {
         $wrapperClass .= ' has-error';
     }
@@ -26,6 +28,7 @@
 
     $bodyClass = 'input-body select-body';
     $bodyClass .= $type === 'stroke' ? ' input-body--stroke select-body--stroke' : ' input-body--main select-body--main';
+    $bodyClass .= $pilled ? ' select-body--pilled' : '';
     $bodyClass .= ' ' . $class;
 
     $hasValue = $value || $text;
@@ -46,7 +49,6 @@
         $bodyClass .= ' hover';
     }
 
-    \Log::debug('hasValue', [$hasValue]);
     if (! $hasValue) {
         $bodyClass .= ' select-empty input-empty';
     } elseif ($type === 'main') {

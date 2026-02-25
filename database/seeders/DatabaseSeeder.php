@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CustomTableSeeder::class,
             CustomTableColumnSeeder::class,
             CustomTableRowSeeder::class,
+            ImportTaskSeeder::class,
         ]);
     }
 }

@@ -48,6 +48,23 @@
   gap: 10px;
 }
 
+// Select pilled modifier: fully rounded (pill) borders
+.select-wrapper--pilled {
+  border-radius: 9999px;
+
+  &.state-selected,
+  &.open,
+  &:focus-within {
+    border-radius: 9999px;
+  }
+
+  .select-body,
+  .select-body--main,
+  .select-body--stroke {
+    border-radius: 9999px;
+  }
+}
+
 // Select label: only in selected-autocomplete (focus/open) or filled
 .select-wrapper .select-label {
   display: none;
