@@ -136,7 +136,6 @@ class AccountsDataTable extends BaseDataTable
             Column::computed('users')
                 ->addClass('column-users')
                 ->title('Пользователи')
-                ->width('600px'),
         ];
 
         if ($this->includeActiveColumn) {

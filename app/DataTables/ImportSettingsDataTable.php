@@ -33,19 +33,19 @@ class ImportSettingsDataTable extends BaseDataTable
                 return $task->period_end_date?->format('d.m.Y') ?? '—';
             })
             ->addColumn('webhooks', function (ImportTask $task) {
-                return view('components.import-settings.webhook-cell', [
-                    'webhookMode' => $task->webhook_mode,
+                return view('components.switch-cell', [
                     'name' => 'webhook_'.$task->id,
+                    'checked' => $task->webhook_mode === 'send',
+                    'label' => 'Отправлять',
                 ])->render();
             })
             ->addColumn('status_cell', function (ImportTask $task) {
-                return view('components.import-settings.status-cell', [
+                return view('components.status-cell', [
                     'variant' => $task->status,
                 ])->render();
             })
             ->addColumn('actions', function (ImportTask $task) use ($dropdownItems) {
-                return view('components.sbis.actions-cell', [
-                    'id' => $task->id,
+                return view('components.actions-cell', [
                     'items' => $dropdownItems,
                 ])->render();
             })

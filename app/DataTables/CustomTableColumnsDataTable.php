@@ -31,8 +31,7 @@ class CustomTableColumnsDataTable extends BaseDataTable
                 return $column->is_required ? 'Обязательное' : 'Не обязательное';
             })
             ->addColumn('actions', function (CustomTableColumn $column) use ($dropdownItems) {
-                return view('components.sbis.actions-cell', [
-                    'id' => $column->id,
+                return view('components.actions-cell', [
                     'items' => $dropdownItems,
                 ])->render();
             })

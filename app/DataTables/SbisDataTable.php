@@ -27,20 +27,19 @@ class SbisDataTable extends BaseDataTable
 
         return (new EloquentDataTable($query))
             ->editColumn('protected_key', function (SbisConnection $connection) {
-                return view('components.sbis.secret-cell', [
+                return view('components.secret-cell', [
                     'value' => $connection->protected_key,
                     'columnName' => 'Защищенный ключ',
                 ])->render();
             })
             ->editColumn('service_key', function (SbisConnection $connection) {
-                return view('components.sbis.secret-cell', [
+                return view('components.secret-cell', [
                     'value' => $connection->service_key,
                     'columnName' => 'Сервисный ключ',
                 ])->render();
             })
             ->addColumn('actions', function (SbisConnection $connection) use ($dropdownItems) {
-                return view('components.sbis.actions-cell', [
-                    'id' => $connection->id,
+                return view('components.actions-cell', [
                     'items' => $dropdownItems,
                 ])->render();
             })

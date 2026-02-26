@@ -26,14 +26,13 @@ class DataStoragesDataTable extends BaseDataTable
 
         return (new EloquentDataTable($query))
             ->editColumn('password', function (DataStorage $dataStorage) {
-                return view('components.sbis.secret-cell', [
+                return view('components.secret-cell', [
                     'value' => $dataStorage->password,
                     'columnName' => 'Пароль',
                 ])->render();
             })
             ->addColumn('actions', function (DataStorage $dataStorage) use ($dropdownItems) {
-                return view('components.sbis.actions-cell', [
-                    'id' => $dataStorage->id,
+                return view('components.actions-cell', [
                     'items' => $dropdownItems,
                 ])->render();
             })
@@ -72,35 +71,35 @@ class DataStoragesDataTable extends BaseDataTable
             Column::make('server_address')
                 ->title('Адрес сервера')
                 ->addClass('column-server-address')
-                ->width('180px'),
+                ->width(180),
             Column::make('database_name')
                 ->title('Имя базы данных')
                 ->addClass('column-database-name')
-                ->width('172px'),
+                ->width(172),
             Column::make('user')
                 ->title('Пользователь')
                 ->addClass('column-user')
-                ->width('172px'),
+                ->width(172),
             Column::make('password')
                 ->title('Пароль')
                 ->addClass('column-password')
                 ->searchable(false)
                 ->orderable(false)
-                ->width('172px'),
+                ->width(172),
             Column::make('ip_access')
                 ->title('Доступ по IP')
                 ->addClass('column-ip-access')
-                ->width('260px'),
+                ->width(260),
             Column::make('comment')
                 ->title('Комментарий')
                 ->addClass('column-comment')
-                ->width('260px'),
+                ->width(260),
             Column::computed('actions')
                 ->title('Действия')
                 ->addClass('column-actions text-center')
                 ->orderable(false)
                 ->searchable(false)
-                ->width('91px'),
+                ->width(91),
         ];
     }
 

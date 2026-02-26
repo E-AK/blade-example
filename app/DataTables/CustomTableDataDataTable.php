@@ -48,8 +48,7 @@ class CustomTableDataDataTable extends BaseDataTable
         ];
 
         $dataTable->addColumn('actions', function (CustomTableRow $row) use ($dropdownItems) {
-            return view('components.sbis.actions-cell', [
-                'id' => $row->id,
+            return view('components.actions-cell', [
                 'items' => $dropdownItems,
             ])->render();
         });

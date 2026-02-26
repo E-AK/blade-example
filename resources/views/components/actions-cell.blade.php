@@ -16,6 +16,6 @@
                 </x-slot:icon>
             </x-button>
         </x-slot:trigger>
-        {{ $slot }}
+        {{ $slot ?? '' }}
     </x-dropdown>
 </div>

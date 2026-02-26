@@ -24,7 +24,7 @@ class DataShowcasesDataTable extends BaseDataTable
 
         return (new EloquentDataTable($query))
             ->addColumn('status_cell', function (DataShowcase $showcase) {
-                return view('components.data-showcases.status-cell', [
+                return view('components.status-cell', [
                     'variant' => $showcase->status,
                 ])->render();
             })
@@ -32,8 +32,7 @@ class DataShowcasesDataTable extends BaseDataTable
                 return $showcase->progress.'%';
             })
             ->addColumn('actions', function (DataShowcase $showcase) use ($dropdownItems) {
-                return view('components.sbis.actions-cell', [
-                    'id' => $showcase->id,
+                return view('components.actions-cell', [
                     'items' => $dropdownItems,
                 ])->render();
             })
