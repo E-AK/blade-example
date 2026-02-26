@@ -40,7 +40,7 @@ class NavigationServiceProvider extends ServiceProvider
             })
             ->add('Сервисы', '#', function (Section $section): void {
                 $section->attributes(['icon' => 'menu_services', 'shortText' => 'Сервисы']);
-                $section->add('Сервис сокращения ссылок', '#');
+                $section->add('Сервис сокращения ссылок', url('/services/link-shortener'));
                 $section->add('Списание в пересорт', '#');
                 $section->add('Отчет "Потребности"', '#');
                 $section->add('Инвентаризация', '#');

@@ -1,6 +1,7 @@
 @php
     $tag = $href !== null ? 'a' : 'button';
-    $mergedAttrs = $attributes->merge($extraAttributes ?? [])->merge(['class' => $classList]);
+    $fullClass = trim($classList . ' ' . ($attributes->get('class') ?? ''));
+    $mergedAttrs = $attributes->merge($extraAttributes ?? [])->merge(['class' => $fullClass]);
     if ($tag === 'button' && $href === null) {
         $mergedAttrs = $mergedAttrs->merge(['type' => $attributes->get('type', 'button')]);
     }

@@ -81,13 +81,11 @@ class SbisDataTable extends BaseDataTable
             Column::make('protected_key')
                 ->title('Защищенный ключ')
                 ->addClass('column-protected-key')
-                ->searchable(false)
-                ->width('172px'),
+                ->searchable(false),
             Column::make('service_key')
                 ->title('Сервисный ключ')
                 ->addClass('column-service-key')
-                ->searchable(false)
-                ->width('172px'),
+                ->searchable(false),
             Column::make('connection_type')
                 ->title('Тип подключения')
                 ->addClass('column-connection-type')

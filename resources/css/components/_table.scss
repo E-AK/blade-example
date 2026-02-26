@@ -33,6 +33,7 @@
     flex: none;
     width: 100%;
     min-width: max-content;
+    table-layout: fixed;
   }
 
   // Design tokens for column header (spec: Grey 1–6, Inter 14/20)
@@ -212,6 +213,40 @@
     color: #141414;
     vertical-align: middle;
     position: relative;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & tbody td.column-actions {
+    overflow: visible;
+    white-space: normal;
+  }
+
+  // Secret-cell columns: whole column expands so full password/key and buttons are visible
+  & thead th.column-password,
+  & thead th.column-protected-key,
+  & thead th.column-service-key {
+    width: auto;
+    min-width: 220px;
+  }
+
+  & tbody td.column-password,
+  & tbody td.column-protected-key,
+  & tbody td.column-service-key {
+    overflow: visible;
+    white-space: normal;
+    min-width: 220px;
+  }
+
+  // Allow flex content (e.g. short-link-cell) to shrink so ellipsis works
+  & tbody td .short-link-cell {
+    min-width: 0;
+  }
+
+  & tbody td .short-link-cell__url {
+    min-width: 0;
   }
 
   & tbody tr:hover td {

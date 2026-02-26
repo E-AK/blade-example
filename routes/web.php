@@ -8,6 +8,7 @@ use App\Http\Controllers\Connections\SbisController;
 use App\Http\Controllers\CustomTablesController;
 use App\Http\Controllers\DataShowcasesController;
 use App\Http\Controllers\ImportSettingsController;
+use App\Http\Controllers\Services\LinkShortenerController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,3 +54,6 @@ Route::group(['prefix' => 'connections'], static function () {
     )
         ->name('connections.data-storage');
 });
+
+Route::get('services/link-shortener', [LinkShortenerController::class, 'index'])
+    ->name('services.link-shortener');
