@@ -10,15 +10,20 @@ export default function dropdown(Alpine) {
 
     toggle() {
       this.open = !this.open;
+      const dataTable = this.$el.closest('.data-table');
       if (this.open) {
         window.dispatchEvent(
           new CustomEvent('dropdown-close-others', { detail: this._dropdownId })
         );
+        if (dataTable) dataTable.classList.add('data-table--dropdown-open');
         this.$nextTick(() => {
           this._applyPanelStyle();
         });
       } else {
         this.panelStyle = {};
+        if (dataTable) {
+          setTimeout(() => dataTable.classList.remove('data-table--dropdown-open'), 100);
+        }
       }
     },
 
@@ -52,6 +57,10 @@ export default function dropdown(Alpine) {
       this.open = false;
       this.panelStyle = {};
       this.$el.classList.remove('dropdown-root--open-up', 'dropdown-root--align-right');
+      const dataTable = this.$el.closest('.data-table');
+      if (dataTable) {
+        setTimeout(() => dataTable.classList.remove('data-table--dropdown-open'), 100);
+      }
     },
   }));
 

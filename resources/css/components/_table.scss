@@ -23,6 +23,11 @@
     overflow-y: visible;
   }
 
+  // Prevent scrollbar flash when dropdown opens/closes (panel with negative left)
+  &.data-table--dropdown-open .data-table__scroll {
+    overflow-x: hidden;
+  }
+
   & .data-table__scroll .table,
   & .table {
     flex: none;
