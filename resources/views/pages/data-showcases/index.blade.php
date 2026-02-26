@@ -33,11 +33,27 @@
                 :close-button-attributes="['x-on:click' => 'addShowcaseSidebarOpen = false']"
                 :overlay-attributes="['x-on:click.self' => 'addShowcaseSidebarOpen = false']"
             >
-                <div class="d-flex flex-column" style="gap: 12px">
-                    <p class="p4 text-secondary mb-0">Форма добавления витрины данных.</p>
-                </div>
+                <x-input name="name" placeholder="Название" />
+                <x-select
+                        name="section"
+                        placeholder="Раздел"
+                        :options="[1 => 1]"
+                />
+                <x-select
+                        name="period-start"
+                        placeholder="Собирать данные с"
+                        left-icon="actions_calendar"
+                        :options="[1 => 1]"
+                />
+                <x-select
+                        name="period-start"
+                        placeholder="Собирать данные по"
+                        left-icon="actions_calendar"
+                        :options="[1 => 1]"
+                />
+                <p class="p4 text-grey-1" style="font-size: 14px !important;">Рекомендуемый максимальный интервал данных - 12 месяцев</p>
                 <x-slot:footer>
-                    <x-button type="main" size="large">Сохранить</x-button>
+                    <x-button type="main" size="large">Добавить</x-button>
                 </x-slot:footer>
             </x-right-sidebar>
         </template>
