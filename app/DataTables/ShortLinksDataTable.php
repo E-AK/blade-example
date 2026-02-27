@@ -31,6 +31,7 @@ class ShortLinksDataTable extends BaseDataTable
             ->editColumn('short_url', function (ShortLink $shortLink) {
                 return view('components.short-link-cell', [
                     'shortUrl' => $shortLink->short_url,
+                    'copyable' => true,
                 ])->render();
             })
             ->editColumn('comment', function (ShortLink $shortLink) {

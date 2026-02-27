@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AccountUserSeeder::class,
             SbisConnectionSeeder::class,
             DataStorageSeeder::class,
+            PasswordManagerEntrySeeder::class,
             ShortLinkSeeder::class,
             CustomTableSeeder::class,
             CustomTableColumnSeeder::class,

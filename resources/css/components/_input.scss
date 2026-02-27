@@ -86,7 +86,6 @@
 .search-body {
   font-family: 'Inter', sans-serif;
   width: 100%;
-  transition: background-color 0.1s ease, outline-color 0.1s ease;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -510,6 +509,19 @@
 // —— Search (same structure, white + border look) ——
 .search-wrapper.has-description {
   gap: 4px;
+}
+
+.search-wrapper--pilled {
+  border-radius: 9999px;
+
+  &.state-selected,
+  &:focus-within {
+    border-radius: 9999px;
+  }
+
+  .search-body {
+    border-radius: 9999px;
+  }
 }
 
 .search-body {

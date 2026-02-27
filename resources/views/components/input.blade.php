@@ -24,11 +24,10 @@
     $bodyClass .= $disabled ? ' disabled' : '';
     $bodyClass .= $error ? ' error' : '';
     if ($type === 'main') {
-        $hasValue = old($name, $value) !== null && old($name, $value) !== '';
-        $bodyClass .= $hasValue ? ' state-filled' : ' input-empty';
+        // state-filled / input-empty set reactively via x-bind:class for x-model sync
     }
     if ($type === 'stroke') {
-        $bodyClass .= ($value !== null && $value !== '') ? ' state-filled' : ' input-empty';
+        // state-filled / input-empty set reactively via x-bind:class for x-model sync
     }
 
     $hasLeftIcon = $leftIcon !== null || (isset($iconLeft) && $iconLeft->isNotEmpty());
@@ -43,11 +42,19 @@
             class="{{ $wrapperClass }}"
             @if($type === 'main')
                 x-data="{ hasValue: {{ (old($name, $value) !== null && old($name, $value) !== '') ? 'true' : 'false' }} }"
-            x-init="hasValue = $refs.input && $refs.input.value.length > 0"
+                x-init="$nextTick(() => { $nextTick(() => { hasValue = $refs.input && $refs.input.value.length > 0 }); setTimeout(() => { hasValue = $refs.input && $refs.input.value.length > 0 }, 50) })"
+            @endif
+            @if($type === 'stroke')
+                x-data="{ hasValue: {{ ($value !== null && $value !== '') ? 'true' : 'false' }} }"
+                x-init="$nextTick(() => { $nextTick(() => { hasValue = $refs.input && $refs.input.value.length > 0 }); setTimeout(() => { hasValue = $refs.input && $refs.input.value.length > 0 }, 50) })"
             @endif
             @if($disabled) aria-disabled="true" @endif
     >
-        <div class="{{ $bodyClass }}" @if($type === 'main') x-bind:class="{ 'state-filled': hasValue }" @endif>
+        <div
+            class="{{ $bodyClass }}"
+            @if($type === 'main') x-bind:class="{ 'state-filled': hasValue, 'input-empty': !hasValue }" @endif
+            @if($type === 'stroke') x-bind:class="{ 'state-filled': hasValue, 'input-empty': !hasValue }" @endif
+        >
             @if($hasLeftIcon)
                 <span class="input-icon input-icon--left" aria-hidden="true">
                 @if(isset($iconLeft) && $iconLeft->isNotEmpty())
@@ -70,7 +77,7 @@
                         placeholder="{{ $placeholder }}"
                         value="{{ old($name, $value) }}"
                         @if($disabled) disabled @endif
-                        @if($type === 'main') x-ref="input" x-on:input="hasValue = $el.value.length > 0" @endif
+                        @if($type === 'main' || $type === 'stroke') x-ref="input" x-on:input="hasValue = $el.value.length > 0" @endif
                         {{ $attributes->except('class')->merge(['aria-invalid' => $error ? 'true' : 'false', 'aria-describedby' => $error ? $inputId . '-error' : null]) }}
                 />
             </div>

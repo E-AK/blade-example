@@ -77,7 +77,7 @@
     data-allow-custom="{{ $allowCustom ? '1' : '0' }}"
     x-on:multiselect-toggle="toggleOption($event.detail.value)"
 >
-    <x-dropdown class="w-100 dropdown-root--trigger-full">
+    <x-dropdown class="w-100 dropdown-root--trigger-full" :panel-match-trigger="true">
         <x-slot:trigger>
             <div
                 class="{{ $wrapperClass }}"

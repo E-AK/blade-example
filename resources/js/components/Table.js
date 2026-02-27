@@ -36,24 +36,51 @@ export class Table {
       }
     });
 
-    options.ajax.data = function (data) {
-      for (let i = 0; i < data.columns.length; i++) {
-        // Clean up query params unused by laravel-datatables
-        if (!data.columns[i].search.value) {
-          delete data.columns[i].search;
+    const self = this;
+    // Normalize ajax to an object (Yajra may pass a string URL)
+    if (typeof options.ajax === 'string') {
+      options.ajax = { url: options.ajax };
+    }
+    if (options.ajax && typeof options.ajax === 'object') {
+      const existingData = options.ajax.data;
+      options.ajax.data = function (data) {
+        for (let i = 0; i < data.columns.length; i++) {
+          // Clean up query params unused by laravel-datatables
+          if (!data.columns[i].search.value) {
+            delete data.columns[i].search;
+          }
+          if (data.columns[i].searchable === true) {
+            delete data.columns[i].searchable;
+          }
+          if (data.columns[i].orderable === true) {
+            delete data.columns[i].orderable;
+          }
+          if (data.columns[i].data === data.columns[i].name) {
+            delete data.columns[i].name;
+          }
         }
-        if (data.columns[i].searchable === true) {
-          delete data.columns[i].searchable;
+        delete data.search.regex;
+        const deletedOnly = self.$root.parent().data('deletedOnly');
+        if (deletedOnly !== undefined && deletedOnly !== null) {
+          data.deleted_only = deletedOnly ? 1 : 0;
         }
-        if (data.columns[i].orderable === true) {
-          delete data.columns[i].orderable;
+        const folder = self.$root.parent().attr('data-folder');
+        if (folder !== undefined && folder !== null && folder !== '') {
+          data.folder = folder;
         }
-        if (data.columns[i].data === data.columns[i].name) {
-          delete data.columns[i].name;
+        const passwordFilter = self.$root.parent().attr('data-password-filter');
+        if (passwordFilter !== undefined && passwordFilter !== null && passwordFilter !== '') {
+          data.password_filter = passwordFilter;
         }
-      }
-      delete data.search.regex;
-    };
+        const accessType = self.$root.attr('data-access-type');
+        if (accessType !== undefined && accessType !== null && accessType !== '') {
+          data.access_type = accessType;
+        }
+        if (typeof existingData === 'function') {
+          existingData(data);
+        }
+      };
+    }
 
     this.instance = this.$table.DataTable(options);
 
@@ -63,9 +90,21 @@ export class Table {
     }
 
     this.instance.on('draw.dt', () => {
+      if (this.isPasswordManagerTable()) {
+        this.$table.addClass('password-manager-table');
+        const store = window.Alpine && window.Alpine.store && window.Alpine.store('passwordManager');
+        if (store && store.searchApplied) {
+          const info = this.instance.page.info();
+          store.searchDescription = `По запросу найдено ${info.recordsDisplay} элементов`;
+          store.searchApplied = false;
+        }
+      }
+      this.applyAccessTableColumnVisibility();
       this.truncateUserTags();
       this.injectViewUrlAttributes();
       this.injectSidebarTriggers();
+      this.injectPasswordManagerRowData();
+      this.bindPasswordManagerRowClick();
       this.togglePagingVisibility();
       const tbody = this.$table.find('tbody')[0];
       if (tbody && window.Alpine) {
@@ -113,7 +152,7 @@ export class Table {
   }
 
   initSearch() {
-    const $searchInput = this.$root.find('.search-box input');
+    const $searchInput = this.$root.find('.search-box input, .search-input');
     if (!$searchInput || $searchInput.length === 0) {
       return;
     }
@@ -160,6 +199,70 @@ export class Table {
       const data = this.data();
       if (data && data.view_url) {
         $(row).attr('data-view-url', data.view_url);
+      }
+    });
+  }
+
+  /**
+   * For password-manager table: set data-entry on each row with entry_data JSON for sidebar edit.
+   */
+  injectPasswordManagerRowData() {
+    if (!this.isPasswordManagerTable() || !this.instance) {
+      return;
+    }
+    const dt = this.instance;
+    dt.rows().every(function () {
+      const row = this.node();
+      const data = this.data();
+      const entryData = data && (data.entry_data !== undefined ? data.entry_data : data[6]);
+      if (entryData) {
+        $(row).attr('data-entry', typeof entryData === 'string' ? entryData : JSON.stringify(entryData));
+      }
+    });
+  }
+
+  isPasswordManagerTable() {
+    return (
+      this.$table.hasClass('password-manager-table') ||
+      this.$table.hasClass('password-manager-access-table') ||
+      (this.$root.parent().attr && this.$root.parent().attr('id') === 'password-manager-table') ||
+      (this.$root.attr && this.$root.attr('id') === 'password-manager-access-table')
+    );
+  }
+
+  /**
+   * For access table: show/hide columns by tab (sent: name, employee, email; received: name, login, password).
+   * Column indices: 0=id, 1=name, 2=employee, 3=email, 4=login, 5=password, 6=entry_data.
+   */
+  applyAccessTableColumnVisibility() {
+    if (!this.instance || !this.$table.hasClass('password-manager-access-table')) {
+      return;
+    }
+    const accessType = this.$root.attr('data-access-type') || 'sent';
+    const api = this.instance;
+    const showSent = accessType === 'sent';
+    api.column(2).visible(showSent); // employee
+    api.column(3).visible(showSent); // email
+    api.column(4).visible(!showSent); // login
+    api.column(5).visible(!showSent); // password
+  }
+
+  /**
+   * For password-manager table: bind delegated click on tbody to dispatch open-edit event with data-entry.
+   */
+  bindPasswordManagerRowClick() {
+    if (!this.isPasswordManagerTable() || this._passwordManagerClickBound) {
+      return;
+    }
+    this._passwordManagerClickBound = true;
+    this.$root.on('click', 'tbody tr', (e) => {
+      if ($(e.target).closest('.column-actions').length) {
+        return;
+      }
+      const $tr = $(e.currentTarget);
+      const entry = $tr.attr('data-entry');
+      if (entry) {
+        window.dispatchEvent(new CustomEvent('password-manager-open-edit', { detail: { entry } }));
       }
     });
   }

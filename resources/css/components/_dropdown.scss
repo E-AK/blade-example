@@ -83,7 +83,6 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.1s ease;
 
   &:hover:not(:disabled):not([aria-disabled='true']):not(.dropdown-item--disabled) {
     background: map-get($custom-colors, 'grey-6');
@@ -184,6 +183,24 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
 
     .dropdown-item__icon {
       color: map-get($custom-colors, 'red');
+    }
+  }
+
+  // Danger: red text/icon + red background on hover (e.g. delete action)
+  &.dropdown-item--danger {
+    color: map-get($custom-colors, 'red');
+
+    .dropdown-item__sublabel,
+    .dropdown-item__label {
+      color: map-get($custom-colors, 'red');
+    }
+
+    .dropdown-item__icon {
+      color: map-get($custom-colors, 'red');
+    }
+
+    &:hover:not(:disabled):not([aria-disabled='true']) {
+      background: map-get($custom-colors, 'red-bg');
     }
   }
 }

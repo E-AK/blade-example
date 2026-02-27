@@ -6,15 +6,9 @@
     'description' => '',
     'tags' => [],
     'clearable' => true,
-    'class' => '',
 ])
 
 @php
-    $wrapperClass = 'input-wrapper search-wrapper';
-    $wrapperClass .= $selected ? ' state-selected' : '';
-    $wrapperClass .= $description ? ' has-description' : '';
-    $wrapperClass .= ' ' . $class;
-
     $bodyClass = 'input-body search-body';
     $bodyClass .= ' search-body--' . $size;
     $bodyClass .= $value !== '' ? ' state-filled' : '';
@@ -24,10 +18,10 @@
     $iconSize = $size === 'lg' ? 20 : 16;
 @endphp
 
-<div class="{{ $wrapperClass }}">
+<div class="{{ $wrapperClass ?? 'input-wrapper search-wrapper' }}">
     <div class="{{ $bodyClass }}">
         <span class="input-icon search-icon" aria-hidden="true">
-            <x-icon name="action_search" :size="$iconSize" :color="$selected ? 'grey-1' : 'grey-3'" />
+            <x-icon name="actions_search" :size="$iconSize" :color="$selected ? 'grey-1' : 'grey-3'" />
         </span>
 
         <div class="search-content input-content">

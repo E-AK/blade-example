@@ -2,15 +2,18 @@
     'items' => [],
     'actions' => false,
     'panelMatchTrigger' => false,
+    'teleport' => false,
     'class' => '',
 ])
 
 <div
     class="dropdown-root position-relative d-inline-block {{ $class }}"
     @if($panelMatchTrigger) data-panel-match-trigger="true" @endif
+    data-teleport="{{ $teleport ? 'true' : 'false' }}"
     x-data="dropdown()"
-    x-on:click.outside="close()"
+    x-on:click.outside="{!! $teleport ? "(e) => !e.target.closest('.dropdown-panel') && close()" : 'close()' !!}"
     x-on:dropdown-close-others.window="$event.detail !== _dropdownId && close()"
+    x-on:dropdown-close-self.window="$event.detail === _dropdownId && close()"
     x-bind:class="{ 'dropdown-root--open': open }"
 >
     <div
@@ -18,21 +21,19 @@
         class="dropdown-trigger"
         aria-haspopup="menu"
         x-bind:aria-expanded="open"
-        @click.stop="toggle()"
+        @click.stop="toggle($event)"
     >
         {{ $trigger ?? '' }}
     </div>
 
+    @if($teleport)
+    <template x-teleport="body">
+    @endif
     <div
         x-ref="panel"
         x-show="open"
         x-bind:style="panelStyle"
-        x-transition:enter="transition ease-out duration-100"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-75"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
+        x-bind:data-dropdown-id="_dropdownId"
         class="dropdown-panel"
         role="menu"
         x-cloak
@@ -56,6 +57,9 @@
                             role="menuitem"
                             @disabled($isDisabled)
                             @if($isDisabled) aria-disabled="true" @endif
+                            @foreach($item['extraAttributes'] ?? [] as $attrKey => $attrValue)
+                                {!! $attrKey !!}="{{ $attrValue }}"
+                            @endforeach
                         >
                             @if(in_array($icon, ['left', 'both', 'controllers'], true))
                                 @if($icon === 'controllers')
@@ -98,4 +102,7 @@
             @endif
         </div>
     </div>
+    @if($teleport)
+    </template>
+    @endif
 </div>

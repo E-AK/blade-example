@@ -13,12 +13,12 @@
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="{{ $title ? $dialogId : '' }}"
-        @foreach($overlayAttributes as $key => $value) {!! $key !!}="{{ is_bool($value) ? ($value ? 'true' : 'false') : e($value) }}" @endforeach
+        @foreach(collect($overlayAttributes)->filter(fn ($_, $key) => $key !== '' && $key !== null) as $key => $value) {!! $key !!}="{{ is_bool($value) ? ($value ? 'true' : 'false') : e($value) }}" @endforeach
         >
         <div class="right-sidebar">
             <header class="right-sidebar__header">
-                @if($title !== null && $title !== '')
-                    <h2 id="{{ $dialogId }}" class="right-sidebar__title">{{ $title }}</h2>
+                @if($title !== null && $title !== '' || (isset($titleSlot) && $titleSlot->isNotEmpty()))
+                    <h2 id="{{ $dialogId }}" class="right-sidebar__title">{{ isset($titleSlot) && $titleSlot->isNotEmpty() ? $titleSlot : $title }}</h2>
                 @endif
                 <x-button
                         type="stroke"

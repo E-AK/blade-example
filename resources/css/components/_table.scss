@@ -1,5 +1,13 @@
 @use 'sass:map';
 
+// Wrapper for table when it must fill height and keep pagination visible (e.g. password-manager page)
+.data-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
 .data-table {
   width: 100%;
   max-width: 100%;
@@ -15,12 +23,13 @@
     margin-top: 0 !important;
   }
 
-  // Horizontal scroll only for the table; pagination and length stay outside
+  // Vertical scroll for table body (header stays fixed); horizontal scroll for wide tables.
   & .data-table__scroll {
     max-width: 100%;
     min-width: 0;
+    max-height: calc(100vh - 220px);
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: auto;
   }
 
   // Prevent scrollbar flash when dropdown opens/closes (panel with negative left)
@@ -45,8 +54,11 @@
   $header-sorter-inactive: #a4a4a4;
 
   // Header row – 44px height, 8px border-radius (keep th as table-cell so row stays horizontal)
-  & thead tr {
-    height: 44px;
+  // Sticky so when scrolling tbody, header and search/filters stay in place
+  & thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
 
   & thead th {
@@ -188,10 +200,10 @@
     text-align: left;
   }
 
-  // Body row – padding 4px 0, border-bottom Grey 5, 52px height, hover Grey 6
+  // Body row – fixed 52px total height, border Grey 5 (Figma: Body → Row). No padding on tr to avoid row growing.
   & tbody tr {
-    padding: 4px 0;
-    min-height: 52px;
+    height: 52px;
+    max-height: 52px;
     background: #fff;
     border-bottom: 1px solid map.get($theme-colors, 'grey-5');
     box-sizing: border-box;
@@ -205,9 +217,13 @@
     border-top-width: 0 !important;
   }
 
+  // Data cell – padding 12px; cell fills row (52px), content area 52−24 = 28px (Figma: Data)
   & tbody td {
-    padding: 12px;
+    padding-inline: 12px;
+    height: 52px;
+    box-sizing: border-box;
     background: #fff;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 20px;
     color: #141414;
@@ -276,7 +292,6 @@
     color: map.get($theme-colors, 'grey-1');
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.15s ease;
     z-index: 1;
   }
 
@@ -386,18 +401,22 @@
     overflow: visible;
   }
 
-  // SBIS secret-cell: single row, text + copy + eye buttons
+  // SBIS secret-cell: single row, text + copy + eye buttons (+ optional warning/alert icons)
   & td.column-protected-key,
-  & td.column-service-key {
+  & td.column-service-key,
+  & td.column-password {
     padding: 0;
     vertical-align: middle;
+  }
+
+  & td.column-password .sbis-secret-cell {
+    padding: 12px;
   }
 
   & .sbis-secret-cell {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 12px;
     gap: 8px;
     height: 44px;
     background: #fff;
@@ -461,9 +480,81 @@
     flex-shrink: 0;
   }
 
+  & .sbis-secret-cell__icon-tooltip {
+    flex: none;
+    order: 3;
+
+    & ~ .sbis-secret-cell__icon-tooltip {
+      order: 4;
+    }
+  }
+
+  & .sbis-secret-cell__icon-wrap--warning,
+  & .sbis-secret-cell__icon-wrap--alert {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    cursor: default;
+
+    svg,
+    path {
+      fill: currentColor;
+    }
+  }
+
+  & .sbis-secret-cell__icon-wrap--warning {
+    color: #ffcb66;
+  }
+
+  & .sbis-secret-cell__icon-wrap--alert {
+    color: #eb4b4b;
+  }
+
   & td.column-actions {
     box-sizing: border-box;
   }
+}
+
+// Only when table must fill height (e.g. password-manager in two-column layout): flex chain so pagination stays visible
+.data-table-wrapper .data-table {
+  flex: 1 1 0;
+  min-height: 0;
+
+  & > .row:first-of-type {
+    flex: none;
+  }
+
+  & > *:has(.data-table__scroll) {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .dt-layout-table:first-of-type {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+  }
+
+  & .dt-layout-table:first-of-type > *:has(.data-table__scroll) {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .data-table__scroll {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+}
+
+.table > :not(caption) > * > * {
+  padding: 0;
 }
 
 div.dt-processing {

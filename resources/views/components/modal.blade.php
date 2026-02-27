@@ -22,7 +22,7 @@
         role="dialog"
         aria-modal="true"
         aria-labelledby="{{ $title ? $dialogId : '' }}"
-        @foreach($overlayAttributes as $key => $value) {!! $key !!}="{{ is_bool($value) ? ($value ? 'true' : 'false') : e($value) }}" @endforeach
+        @foreach(collect($overlayAttributes)->filter(fn ($_, $key) => $key !== '' && $key !== null) as $key => $value) {!! $key !!}="{{ is_bool($value) ? ($value ? 'true' : 'false') : e($value) }}" @endforeach
         {{ $attributes->except('class') }}
     >
         <div

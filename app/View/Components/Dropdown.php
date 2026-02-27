@@ -18,6 +18,8 @@ class Dropdown extends Component
     public function __construct(
         public array $items = [],
         public bool $actions = false,
+        public bool $panelMatchTrigger = false,
+        public bool $teleport = false,
         public string $class = ''
     ) {}
 

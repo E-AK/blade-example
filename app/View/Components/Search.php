@@ -17,11 +17,12 @@ class Search extends Component
         public array $tags = [],
         public bool $clearable = true,
         public string $class = '',
+        public bool $pilled = false,
     ) {}
 
     public function wrapperClasses(): string
     {
-        $classes = ['search-wrapper'];
+        $classes = ['input-wrapper', 'search-wrapper'];
 
         if ($this->selected) {
             $classes[] = 'state-selected';
@@ -31,9 +32,15 @@ class Search extends Component
             $classes[] = 'has-description';
         }
 
-        $classes[] = $this->class;
+        if ($this->pilled) {
+            $classes[] = 'search-wrapper--pilled';
+        }
 
-        return implode(' ', $classes);
+        if ($this->class !== '') {
+            $classes[] = $this->class;
+        }
+
+        return implode(' ', array_filter($classes));
     }
 
     public function searchClasses(): string
@@ -81,6 +88,8 @@ class Search extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.search');
+        return view('components.search', [
+            'wrapperClass' => $this->wrapperClasses(),
+        ]);
     }
 }

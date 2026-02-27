@@ -44,7 +44,7 @@ class NavigationServiceProvider extends ServiceProvider
                 $section->add('Списание в пересорт', '#');
                 $section->add('Отчет "Потребности"', '#');
                 $section->add('Инвентаризация', '#');
-                $section->add('Менеджер паролей', '#');
+                $section->add('Менеджер паролей', url('/services/password-manager'));
                 $section->add('WordPress', '#');
                 $section->add('Интеграция с liko', '#');
                 $section->add('Отправка опросного лица', '#');

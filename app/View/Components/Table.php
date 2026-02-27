@@ -21,6 +21,8 @@ class Table extends Component
         public bool $hasSidebar = false,
         public ?string $sidebarLabel = null,
         public bool $showSearch = true,
+        public bool $searchPilled = false,
+        public ?string $searchWidth = null,
     ) {}
 
     /**

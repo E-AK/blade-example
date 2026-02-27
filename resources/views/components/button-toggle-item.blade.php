@@ -15,9 +15,10 @@
 @php
     $size = $size === 'small' ? 'small' : 'large';
     $type = in_array($type, ['text', 'state', 'icon'], true) ? $type : 'text';
-    $isSelected = $selected !== null && (string) $selected === (string) $value;
+    $isSelected = $selected !== null && (string) $selected === $value;
     $inputId = 'button-toggle-'.($name ? preg_replace('/[^a-z0-9]+/i', '-', $name).'-' : '').preg_replace('/[^a-z0-9]+/i', '-', (string) $value).'-'.uniqid('', true);
-    $valueJson = json_encode((string) $value);
+    $valueEscaped = str_replace(["\\", "'"], ["\\\\", "\\'"], $value);
+    $dataStateExpr = $disabled ? "'disabled'" : "selected === '{$valueEscaped}' ? 'selected' : ''";
 @endphp
 
 <label
@@ -25,7 +26,7 @@
     {{ $attributes->except('wire:model')->merge(['class' => 'button-toggle-item ' . $class]) }}
     data-size="{{ $size }}"
     data-type="{{ $type }}"
-    :data-state="{{ $disabled ? "'disabled'" : "selected === {$valueJson} ? 'selected' : ''" }}"
+    :data-state="{{ $dataStateExpr }}"
 >
     <input
         type="radio"

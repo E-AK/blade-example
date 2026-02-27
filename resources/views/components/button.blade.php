@@ -1,7 +1,9 @@
 @php
     $tag = $href !== null ? 'a' : 'button';
     $fullClass = trim($classList . ' ' . ($attributes->get('class') ?? ''));
-    $mergedAttrs = $attributes->merge($extraAttributes ?? [])->merge(['class' => $fullClass]);
+    $extra = $extraAttributes ?? [];
+    $extra = is_array($extra) ? array_filter($extra, fn ($_, $key) => $key !== '' && $key !== null, ARRAY_FILTER_USE_BOTH) : $extra;
+    $mergedAttrs = $attributes->merge($extra)->merge(['class' => $fullClass]);
     if ($tag === 'button' && $href === null) {
         $mergedAttrs = $mergedAttrs->merge(['type' => $attributes->get('type', 'button')]);
     }

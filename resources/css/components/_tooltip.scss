@@ -26,6 +26,16 @@
   isolation: isolate;
 }
 
+.tooltip-bubble--pill {
+  background: #666563;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+
 .tooltip-bubble[x-cloak] {
   display: none !important;
 }

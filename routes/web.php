@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomTablesController;
 use App\Http\Controllers\DataShowcasesController;
 use App\Http\Controllers\ImportSettingsController;
 use App\Http\Controllers\Services\LinkShortenerController;
+use App\Http\Controllers\Services\PasswordManagerController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,3 +58,10 @@ Route::group(['prefix' => 'connections'], static function () {
 
 Route::get('services/link-shortener', [LinkShortenerController::class, 'index'])
     ->name('services.link-shortener');
+
+Route::get('services/password-manager', [PasswordManagerController::class, 'index'])
+    ->name('services.password-manager');
+Route::get('services/password-manager/access-data', [PasswordManagerController::class, 'accessData'])
+    ->name('services.password-manager.access-data');
+Route::get('services/password-manager/autocomplete', [PasswordManagerController::class, 'autocomplete'])
+    ->name('services.password-manager.autocomplete');
