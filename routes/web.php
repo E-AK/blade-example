@@ -30,6 +30,10 @@ Route::group(['prefix' => 'settings'], static function () {
         ->name('settings.guest-accounts.index');
     Route::post('guest-accounts', [App\Http\Controllers\Settings\GuestAccountsController::class, 'store'])
         ->name('settings.guest-accounts.store');
+    Route::get('requisites', [App\Http\Controllers\Settings\RequisitesController::class, 'index'])
+        ->name('settings.requisites.index');
+    Route::post('requisites', [App\Http\Controllers\Settings\RequisitesController::class, 'store'])
+        ->name('settings.requisites.store');
 });
 
 Route::group(['prefix' => 'custom-tables'], static function () {

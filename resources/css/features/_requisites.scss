@@ -1,0 +1,43 @@
+// Страница «Реквизиты» — карточка формы по макету (Frame 515197)
+.requisites-page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+}
+
+.requisites-card {
+  width: 100%;
+  max-width: 1120px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.requisites-card-body {
+  padding: 20px;
+  gap: 24px;
+}
+
+.requisites-label {
+  font-size: 16px;
+  line-height: 24px;
+  color: #141414;
+}
+
+// Блок полей: 520×256px, gap 16px (Frame 1321314303)
+.requisites-fields {
+  width: 520px;
+  gap: 16px;
+}
+
+// Кнопка «Сохранить»: 520×44px, растянута по ширине блока (Frame 8749-10416)
+.requisites-submit {
+  width: 520px;
+
+  .btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+}
