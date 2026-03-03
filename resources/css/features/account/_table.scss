@@ -1,0 +1,19 @@
+// -----------------------------------------------------------------------------
+// Account feature: data table name cell styling. Single responsibility.
+// -----------------------------------------------------------------------------
+
+@import '../../base/variables';
+
+.data-table {
+  .name-cell {
+    color: map-get($custom-colors, 'grey-2');
+
+    .name-cell-text {
+      color: map-get($custom-colors, 'black');
+    }
+
+    svg {
+      fill: currentColor;
+    }
+  }
+}

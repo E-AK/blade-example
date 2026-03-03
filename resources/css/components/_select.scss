@@ -2,6 +2,12 @@
   position: relative;
   gap: 10px;
 
+  &--clickable .select-body,
+  &--clickable .select-body--main,
+  &--clickable .select-body--stroke {
+    cursor: pointer;
+  }
+
   &--pilled {
     border-radius: 9999px;
 

@@ -1,3 +1,5 @@
+import { uniqueId } from '../utils/id.js';
+
 const DROPDOWN_PORTAL_ID = 'alpine-dropdown-teleport';
 
 function getDropdownPortal() {
@@ -18,7 +20,7 @@ export default function dropdown(Alpine) {
     panelStyle: {},
 
     init() {
-      this._dropdownId = `dropdown-${Math.random().toString(36).slice(2)}`;
+      this._dropdownId = uniqueId('dropdown-');
     },
 
     toggle(evt) {
@@ -175,7 +177,7 @@ export default function dropdown(Alpine) {
     placeholder: '',
 
     init() {
-      this._dropdownId = `dropdown-${Math.random().toString(36).slice(2)}`;
+      this._dropdownId = uniqueId('dropdown-');
       this.selectedValue = this.$el.dataset.initialValue ?? '';
       this.selectedLabel = this.$el.dataset.initialLabel ?? '';
       this.placeholder = this.$el.dataset.placeholder ?? '';

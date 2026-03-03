@@ -17,7 +17,6 @@
         $mergedAttrs = $mergedAttrs->merge(['aria-disabled' => 'true']);
     }
 @endphp
-
 <{{ $tag }} {{ $mergedAttrs }}>
     <span class="btn__inner">
         @if($iconPosition === 'left' && isset($icon) && $icon->isNotEmpty())

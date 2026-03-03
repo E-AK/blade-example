@@ -46,13 +46,6 @@
   }
 
   // Design tokens for column header (spec: Grey 1–6, Inter 14/20)
-  $header-bg: #f5f5f5;
-  $header-bg-hover: #eaeaea;
-  $header-divider: #e0e0e0;
-  $header-text: #666563;
-  $header-sorter-active: #666563;
-  $header-sorter-inactive: #a4a4a4;
-
   // Header row – 44px height, 8px border-radius (keep th as table-cell so row stays horizontal)
   // Sticky so when scrolling tbody, header and search/filters stay in place
   & thead {
@@ -65,8 +58,8 @@
     padding: 12px 27px 12px 12px; /* extra right padding for sorter (4px gap + 11px icon) */
     isolation: isolate;
     border-bottom-width: 0 !important;
-    background-color: $header-bg !important;
-    color: $header-text;
+    background-color: map-get($custom-colors, 'grey-6') !important;
+    color: map-get($custom-colors, 'grey-1');
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -78,7 +71,7 @@
     &:hover,
     &:focus {
       outline: none !important;
-      background-color: $header-bg-hover !important;
+      background-color: map-get($custom-colors, 'grey-5') !important;
     }
 
     &:first-child {
@@ -99,7 +92,7 @@
       top: 50%;
       width: 1px;
       height: 22px;
-      background-color: $header-divider;
+      background-color: map-get($custom-colors, 'grey-4');
       transform: translateY(-50%);
       z-index: 0;
     }
@@ -135,7 +128,7 @@
     width: 11px;
     height: 11px;
     margin-left: -5.5px;
-    background-color: $header-sorter-inactive;
+    background-color: map-get($custom-colors, 'grey-2');
     mask-image: url('../../svg/arrow_up.svg');
     mask-repeat: no-repeat;
     mask-position: center;
@@ -155,7 +148,7 @@
     width: 11px;
     height: 11px;
     margin-left: -5.5px;
-    background-color: $header-sorter-inactive;
+    background-color: map-get($custom-colors, 'grey-2');
     mask-image: url('../../svg/arrow_down.svg');
     mask-repeat: no-repeat;
     mask-position: center;
@@ -168,21 +161,21 @@
 
   // Hover: caret-up highlighted (hint ascending); when sorted desc keep up inactive
   & thead th:hover .dt-column-order::before {
-    background-color: $header-sorter-active;
+    background-color: map-get($custom-colors, 'grey-1');
   }
 
   & thead th.dt-ordering-desc:hover .dt-column-order::before {
-    background-color: $header-sorter-inactive;
+    background-color: map-get($custom-colors, 'grey-2');
   }
 
   // Active ascending: caret-up active
   & thead th.dt-ordering-asc .dt-column-order::before {
-    background-color: $header-sorter-active;
+    background-color: map-get($custom-colors, 'grey-1');
   }
 
   // Active descending: caret-down active
   & thead th.dt-ordering-desc .dt-column-order::after {
-    background-color: $header-sorter-active;
+    background-color: map-get($custom-colors, 'grey-1');
   }
 
   // Numeric columns: text left, sort icons on the right
@@ -204,7 +197,7 @@
   & tbody tr {
     height: 52px;
     max-height: 52px;
-    background: #fff;
+    background: map-get($custom-colors, 'white');
     border-bottom: 1px solid map.get($theme-colors, 'grey-5');
     box-sizing: border-box;
 
@@ -222,11 +215,11 @@
     padding-inline: 12px;
     height: 52px;
     box-sizing: border-box;
-    background: #fff;
+    background: map-get($custom-colors, 'white');
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 20px;
-    color: #141414;
+    color: map-get($custom-colors, 'black');
     vertical-align: middle;
     position: relative;
     min-width: 0;
@@ -282,7 +275,7 @@
     width: 89px;
     height: 32px;
     padding: 4px;
-    background: #fff;
+    background: map-get($custom-colors, 'white');
     box-shadow: 0 4px 8px -4px rgba(22, 34, 51, 0.04), 0 4px 16px rgba(20, 20, 20, 0.08);
     border-radius: 8px;
     font-family: inherit;
@@ -329,19 +322,19 @@
     --bs-pagination-font-size: 1rem;
     --bs-pagination-line-height: 20px;
 
-    --bs-pagination-color: #141414;
-    --bs-pagination-hover-color: #141414;
-    --bs-pagination-active-color: #141414;
+    --bs-pagination-color: #{map-get($custom-colors, 'black')};
+    --bs-pagination-hover-color: #{map-get($custom-colors, 'black')};
+    --bs-pagination-active-color: #{map-get($custom-colors, 'black')};
 
     --bs-pagination-bg: transparent;
-    --bs-pagination-hover-bg: #ffffff;
-    --bs-pagination-active-bg: #ffffff;
+    --bs-pagination-hover-bg: #{map-get($custom-colors, 'white')};
+    --bs-pagination-active-bg: #{map-get($custom-colors, 'white')};
 
     --bs-pagination-border-width: 0;
     --bs-pagination-border-radius: 8px;
 
-    --bs-pagination-focus-box-shadow: #141414;
-    --bs-pagination-focus-color: #141414;
+    --bs-pagination-focus-box-shadow: #{map-get($custom-colors, 'black')};
+    --bs-pagination-focus-color: #{map-get($custom-colors, 'black')};
 
     display: flex;
     flex-direction: row;
@@ -374,7 +367,7 @@
     }
 
     & .page-item.active .page-link {
-      border: 1px solid #e0e0e0;
+      border: 1px solid map-get($custom-colors, 'grey-4');
       padding: 0 8px;
     }
 
@@ -419,11 +412,11 @@
     align-items: center;
     gap: 8px;
     height: 44px;
-    background: #fff;
+    background: map-get($custom-colors, 'white');
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 20px;
-    color: #141414;
+    color: map-get($custom-colors, 'black');
     box-sizing: border-box;
   }
 
@@ -503,11 +496,11 @@
   }
 
   & .sbis-secret-cell__icon-wrap--warning {
-    color: #ffcb66;
+    color: map-get($custom-colors, 'yellow');
   }
 
   & .sbis-secret-cell__icon-wrap--alert {
-    color: #eb4b4b;
+    color: map-get($custom-colors, 'red');
   }
 
   & td.column-actions {

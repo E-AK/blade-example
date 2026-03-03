@@ -8,7 +8,7 @@
     <x-button
         type="main"
         size="large"
-        :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'data-showcases-open-add-sidebar\'))']"
+        :extra-attributes="['data-dispatch' => 'data-showcases-open-add-sidebar']"
     >
         Добавить витрину данных
     </x-button>
@@ -51,7 +51,7 @@
                         left-icon="actions_calendar"
                         :options="[1 => 1]"
                 />
-                <p class="p4 text-grey-1" style="font-size: 14px !important;">Рекомендуемый максимальный интервал данных - 12 месяцев</p>
+                <p class="p4 text-grey-1 text-hint">Рекомендуемый максимальный интервал данных - 12 месяцев</p>
                 <x-slot:footer>
                     <x-button type="main" size="large">Добавить</x-button>
                 </x-slot:footer>

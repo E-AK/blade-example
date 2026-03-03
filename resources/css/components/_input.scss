@@ -181,12 +181,17 @@
   }
 
   .input-icons-right {
-    gap: 8px;
+    gap: 10px;
 
     .input-icon {
       width: 20px;
       height: 20px;
     }
+  }
+
+  // Input с несколькими иконками справа: по макету Figma gap 10px между контентом и блоком иконок
+  &:has(.input-icons-right) {
+    gap: 10px;
   }
 }
 

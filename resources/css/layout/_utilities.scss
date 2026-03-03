@@ -1,0 +1,63 @@
+// -----------------------------------------------------------------------------
+// Layout utilities: repeated patterns (stack, form rows, hints). No inline styles in Blade.
+// -----------------------------------------------------------------------------
+
+@import '../base/variables';
+
+// Vertical stack with consistent gap (replaces d-flex flex-column style="gap: 12px")
+.stack {
+  display: flex;
+  flex-direction: column;
+
+  &--gap-12 {
+    gap: 12px;
+  }
+
+  &--gap-1 {
+    gap: 0.25rem;
+  }
+
+  &--gap-3 {
+    gap: 1rem;
+  }
+}
+
+// Horizontal row with 12px gap (replaces d-flex flex-row style="gap: 12px")
+.stack-row--gap-12 {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+// Data table: search row (replaces inline style on .row)
+.data-table__search-row {
+  padding-bottom: 20px;
+  gap: 12px;
+}
+
+.data-table__search-col {
+  max-width: 720px;
+
+  &--custom {
+    max-width: var(--data-table-search-width, 720px);
+  }
+}
+
+// Hint text (replaces p4 text-grey-1 style="font-size: 14px !important")
+.text-hint {
+  font-size: 14px !important;
+}
+
+// Fixed widths used in forms/tables (replaces style="width: 220px")
+.w-220 {
+  width: 220px;
+}
+
+// Tag truncation in chips (replaces style="max-width: 140px" / 120px)
+.tag-text--truncate-folder {
+  max-width: 140px;
+}
+
+.tag-text--truncate-tag {
+  max-width: 120px;
+}

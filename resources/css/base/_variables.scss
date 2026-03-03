@@ -1,3 +1,7 @@
+// -----------------------------------------------------------------------------
+// Design tokens: spacing, radius, shadows. One concern per variable.
+// -----------------------------------------------------------------------------
+
 $black-opacity-40: rgba(22, 22, 22, 0.4);
 
 $custom-colors: (
@@ -34,22 +38,12 @@ $custom-colors: (
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
-// Opacity variant (not in map)
-.bg-black {
-  background-color: $black-opacity-40 !important;
-}
+// Reusable radius tokens
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-pill: 100px;
 
-// Color utility classes: .text-{name}, .bg-{name}, .border-{name}
-@each $name, $color in $custom-colors {
-  .text-#{$name} {
-    color: $color;
-  }
-
-  .bg-#{$name} {
-    background-color: $color;
-  }
-
-  .border-#{$name} {
-    border-color: $color;
-  }
-}
+// Reusable panel padding
+$panel-padding-x: 20px;
+$panel-padding-y: 16px;
+$panel-padding: $panel-padding-y $panel-padding-x;

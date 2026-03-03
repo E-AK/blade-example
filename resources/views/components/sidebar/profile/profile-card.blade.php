@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="sidebar-submenu-dropdown" style="gap: 12px">
+    <div class="sidebar-submenu-dropdown stack stack--gap-12">
         <x-sidebar.sidebar-submenu class="d-flex flex-column gap-3">
             <div class="d-flex gap-2">
                 <x-sidebar.profile.profile

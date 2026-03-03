@@ -9,8 +9,8 @@
 
 <div class="data-table">
     @if($showSearch)
-        <div class="row align-items-center" style="padding-bottom: 20px; gap: 12px;">
-            <div class="col-8" @if($searchWidth) style="max-width: {{ $searchWidth }}" @else style="max-width: 720px" @endif>
+        <div class="row align-items-center data-table__search-row">
+            <div class="col-8 data-table__search-col {{ $searchWidth ? 'data-table__search-col--custom' : '' }}" @if($searchWidth) style="--data-table-search-width: {{ $searchWidth }}" @endif>
                 @if(isset($search) && $search->isNotEmpty())
                     {{ $search }}
                 @else

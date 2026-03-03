@@ -25,43 +25,23 @@
         @foreach(collect($overlayAttributes)->filter(fn ($_, $key) => $key !== '' && $key !== null) as $key => $value) {!! $key !!}="{{ is_bool($value) ? ($value ? 'true' : 'false') : e($value) }}" @endforeach
         {{ $attributes->except('class') }}
     >
-        <div
-            class="modal"
-            @if($styleStr) style="{{ $styleStr }}" @endif
-        >
+        <div class="modal" @if($styleStr) style="{{ $styleStr }}" @endif>
             <header class="modal__header d-flex align-items-center gap-3">
                 <div class="modal__header-inner d-flex align-items-center gap-2 flex-grow-1 min-w-0">
                     @if(isset($titleIcon) && $titleIcon->isNotEmpty())
-                        <span class="modal__title-icon d-inline-flex align-items-center" aria-hidden="true">
-                            {{ $titleIcon }}
-                        </span>
+                        <span class="modal__title-icon d-inline-flex align-items-center" aria-hidden="true">{{ $titleIcon }}</span>
                     @endif
                     @if($title !== null && $title !== '')
                         <h2 id="{{ $dialogId }}" class="modal__title">{{ $title }}</h2>
                     @endif
                 </div>
-                <x-button
-                    type="stroke"
-                    size="medium"
-                    icon-position="only"
-                    aria-label="{{ __('Close') }}"
-                    class="modal__close"
-                    :extra-attributes="$closeButtonAttrs"
-                >
-                    <x-slot:icon>
-                        <x-icon name="arrow_close" :size="20" />
-                    </x-slot:icon>
+                <x-button type="stroke" size="medium" icon-position="only" aria-label="{{ __('Close') }}" class="modal__close" :extra-attributes="$closeButtonAttrs">
+                    <x-slot:icon><x-icon name="arrow_close" :size="20" /></x-slot:icon>
                 </x-button>
             </header>
-
-            <div class="modal__body d-flex flex-column gap-3">
-                {{ $slot }}
-            </div>
-
+            <div class="modal__body d-flex flex-column gap-3">{{ $slot }}</div>
             @if(isset($footer) && $footer->isNotEmpty())
-                <footer class="modal__footer d-flex align-items-center gap-2">
-                    {{ $footer }}
-                </footer>
+                <footer class="modal__footer d-flex align-items-center gap-2">{{ $footer }}</footer>
             @endif
         </div>
     </div>

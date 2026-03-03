@@ -1,9 +1,5 @@
 // Dropdown component — design spec: panel 12px radius, shadow, 4px padding; items 8px padding, 8px gap (10px when no icons), states and icon variants.
 
-$dropdown-text: #141414;
-$dropdown-label: #a4a4a4;
-$dropdown-separator: map-get($custom-colors, 'grey-5');
-
 .dropdown-root {
   display: inline-block;
 
@@ -79,7 +75,7 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
-  color: $dropdown-text;
+  color: map-get($custom-colors, 'black');
   text-align: left;
   text-decoration: none;
   cursor: pointer;
@@ -120,7 +116,7 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
     font-size: 12px;
     line-height: 16px;
     font-weight: 400;
-    color: $dropdown-label;
+    color: map-get($custom-colors, 'grey-2');
   }
 
   .dropdown-item__label {
@@ -159,12 +155,12 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
   &.dropdown-item--disabled,
   &:disabled,
   &[aria-disabled='true'] {
-    color: $dropdown-label;
+    color: map-get($custom-colors, 'grey-2');
     cursor: not-allowed;
 
     .dropdown-item__sublabel,
     .dropdown-item__label {
-      color: $dropdown-label;
+      color: map-get($custom-colors, 'grey-2');
     }
 
     .dropdown-item__icon {
@@ -209,6 +205,6 @@ $dropdown-separator: map-get($custom-colors, 'grey-5');
   width: 100%;
   height: 1px;
   margin: 4px 0;
-  background: $dropdown-separator;
+  background: map-get($custom-colors, 'grey-5');
   flex: none;
 }

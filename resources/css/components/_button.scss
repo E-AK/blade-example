@@ -1,10 +1,3 @@
-$btn-black: #141414;
-$btn-grey-1: #666563;
-$btn-grey-2: #a4a4a4;
-$btn-grey-3: #c7c7c7;
-$btn-grey-4: #e0e0e0;
-$btn-grey-5: #eaeaea;
-
 .btn {
   box-sizing: border-box;
   display: inline-flex;
@@ -173,11 +166,11 @@ $btn-grey-5: #eaeaea;
 // ----- Type: Main -----
 .btn--main {
   background: map-get($custom-colors, 'yellow');
-  color: $btn-black;
+  color: map-get($custom-colors, 'black');
   border-radius: 100px;
 
   .btn__icon svg {
-    color: $btn-grey-1;
+    color: map-get($custom-colors, 'grey-1');
   }
 
   &:hover:not(.btn--disabled) {
@@ -186,38 +179,38 @@ $btn-grey-5: #eaeaea;
 
   &.btn--disabled,
   &[aria-disabled='true'] {
-    background: $btn-grey-5;
-    color: $btn-grey-2;
+    background: map-get($custom-colors, 'grey-5');
+    color: map-get($custom-colors, 'grey-2');
     cursor: not-allowed;
 
     .btn__icon svg {
-      color: $btn-grey-2;
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 }
 
 // ----- Type: Secondary -----
 .btn--secondary {
-  background: $btn-grey-5;
-  color: $btn-black;
+  background: map-get($custom-colors, 'grey-5');
+  color: map-get($custom-colors, 'black');
   border-radius: 100px;
 
   .btn__icon svg {
-    color: $btn-grey-1;
+    color: map-get($custom-colors, 'grey-1');
   }
 
   &:hover:not(.btn--disabled) {
-    background: $btn-grey-4;
+    background: map-get($custom-colors, 'grey-4');
   }
 
   &.btn--disabled,
   &[aria-disabled='true'] {
-    background: $btn-grey-5;
-    color: $btn-grey-2;
+    background: map-get($custom-colors, 'grey-5');
+    color: map-get($custom-colors, 'grey-2');
     cursor: not-allowed;
 
     .btn__icon svg {
-      color: $btn-grey-2;
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 }
@@ -225,26 +218,26 @@ $btn-grey-5: #eaeaea;
 // ----- Type: Stroke -----
 .btn--stroke {
   background: transparent;
-  color: $btn-black;
-  border: 1px solid $btn-grey-4;
+  color: map-get($custom-colors, 'black');
+  border: 1px solid map-get($custom-colors, 'grey-4');
   border-radius: 100px;
 
   .btn__icon svg {
-    color: $btn-grey-1;
+    color: map-get($custom-colors, 'grey-1');
   }
 
   &:hover:not(.btn--disabled) {
-    border-color: $btn-grey-2;
+    border-color: map-get($custom-colors, 'grey-2');
   }
 
   &.btn--disabled,
   &[aria-disabled='true'] {
-    border-color: $btn-grey-5;
-    color: $btn-grey-2;
+    border-color: map-get($custom-colors, 'grey-5');
+    color: map-get($custom-colors, 'grey-2');
     cursor: not-allowed;
 
     .btn__icon svg {
-      color: $btn-grey-2;
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 }
@@ -265,12 +258,12 @@ $btn-grey-5: #eaeaea;
 
   &.btn--disabled,
   &[aria-disabled='true'] {
-    background: $btn-grey-5;
-    color: $btn-grey-2;
+    background: map-get($custom-colors, 'grey-5');
+    color: map-get($custom-colors, 'grey-2');
     cursor: not-allowed;
 
     .btn__icon svg {
-      color: $btn-grey-2;
+      color: map-get($custom-colors, 'grey-2');
     }
   }
 }
@@ -278,28 +271,28 @@ $btn-grey-5: #eaeaea;
 // ----- Type: String (text only) -----
 .btn--string {
   background: transparent;
-  color: $btn-grey-2;
+  color: map-get($custom-colors, 'grey-2');
   padding: 0;
 
   .btn__icon svg {
-    color: $btn-grey-2;
+    color: map-get($custom-colors, 'grey-2');
   }
 
   &:hover:not(.btn--disabled) {
-    color: $btn-grey-1;
+    color: map-get($custom-colors, 'grey-1');
 
     .btn__icon svg {
-      color: $btn-grey-1;
+      color: map-get($custom-colors, 'grey-1');
     }
   }
 
   &.btn--disabled,
   &[aria-disabled='true'] {
-    color: $btn-grey-3;
+    color: map-get($custom-colors, 'grey-3');
     cursor: not-allowed;
 
     .btn__icon svg {
-      color: $btn-grey-3;
+      color: map-get($custom-colors, 'grey-3');
     }
   }
 }
@@ -325,11 +318,11 @@ $btn-grey-5: #eaeaea;
 
   &.btn--disabled,
   &[aria-disabled='true'] {
-    color: $btn-grey-3;
+    color: map-get($custom-colors, 'grey-3');
     cursor: not-allowed;
 
     .btn__icon svg {
-      color: $btn-grey-3;
+      color: map-get($custom-colors, 'grey-3');
     }
   }
 }

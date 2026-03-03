@@ -19,6 +19,9 @@
     $wrapperClass = 'input-wrapper select-wrapper';
     $wrapperClass .= $type === 'stroke' ? ' input-wrapper--stroke select-wrapper--stroke' : ' input-wrapper--main';
     $wrapperClass .= $pilled ? ' select-wrapper--pilled' : '';
+    if (! empty($options)) {
+        $wrapperClass .= ' select-wrapper--clickable';
+    }
     if ($error) {
         $wrapperClass .= ' has-error';
     }
@@ -74,7 +77,7 @@
         <div
             class="{{ $bodyClass }}"
             @if(!empty($options)) :class="{ 'state-filled': selectedLabel, 'select-empty input-empty': !selectedLabel }" @endif
-            @if(!empty($options)) @click.stop="toggle()" style="cursor: pointer;" @endif
+            @if(!empty($options)) @click.stop="toggle()" @endif
         >
             @if($leftIcon)
                 <span class="input-icon select-icon-left" aria-hidden="true">

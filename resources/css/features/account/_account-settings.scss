@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------------
+// Account feature: settings page and sidebar card. Single responsibility.
+// -----------------------------------------------------------------------------
+
+@import '../../base/variables';
+
 .account-settings-page {
   .data-table table tbody tr {
     cursor: pointer;

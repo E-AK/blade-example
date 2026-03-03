@@ -16,7 +16,7 @@
   font-size: 12px;
   line-height: 16px;
   text-align: center;
-  color: #ffffff;
+  color: map-get($custom-colors, 'white');
   white-space: nowrap;
   box-sizing: border-box;
 }
@@ -27,12 +27,12 @@
 }
 
 .tooltip-bubble--pill {
-  background: #666563;
+  background: map-get($custom-colors, 'grey-1');
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 12px;
   line-height: 16px;
-  color: #ffffff;
+  color: map-get($custom-colors, 'white');
   text-align: center;
 }
 

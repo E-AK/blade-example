@@ -10,7 +10,7 @@
     <x-button
         type="main"
         size="large"
-        :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'link-shortener-open-add-sidebar\'))']"
+        :extra-attributes="['data-dispatch' => 'link-shortener-open-add-sidebar']"
     >
         Добавить ссылку
     </x-button>

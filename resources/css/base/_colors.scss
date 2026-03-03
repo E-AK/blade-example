@@ -1,0 +1,23 @@
+// -----------------------------------------------------------------------------
+// Color utilities: atomic classes from design tokens. Single responsibility.
+// -----------------------------------------------------------------------------
+
+@import 'variables';
+
+.bg-black {
+  background-color: $black-opacity-40 !important;
+}
+
+@each $name, $color in $custom-colors {
+  .text-#{$name} {
+    color: $color;
+  }
+
+  .bg-#{$name} {
+    background-color: $color;
+  }
+
+  .border-#{$name} {
+    border-color: $color;
+  }
+}

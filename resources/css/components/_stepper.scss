@@ -53,7 +53,7 @@
     align-items: center;
     justify-content: center;
     flex: none;
-    color: #ffffff;
+    color: map-get($custom-colors, 'white');
 
     &--check svg {
       width: 14.17px;

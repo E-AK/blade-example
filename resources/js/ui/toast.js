@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import * as bootstrap from 'bootstrap';
+import { escapeHtml } from '../utils/html.js';
 
 const STATE_ICON_SVG = {
   success:
@@ -51,12 +52,6 @@ function createToast(message, options = {}) {
       </div>
     </div>
   `;
-}
-
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
 }
 
 function show(message, options = {}) {

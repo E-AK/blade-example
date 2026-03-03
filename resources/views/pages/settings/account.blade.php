@@ -30,7 +30,7 @@
             >
                 <div class="account-sidebar-body d-flex flex-column align-items-stretch w-100">
                     {{-- User cards (same component as profile modal) --}}
-                    <div class="d-flex flex-column" @style('gap: 12px')>
+                    <div class="stack stack--gap-12">
                         @foreach($placeholderUsers as $user)
                             <div class="account-sidebar-card">
                                 <x-user-card

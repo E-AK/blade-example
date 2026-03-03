@@ -1,0 +1,20 @@
+// -----------------------------------------------------------------------------
+// Reusable mixins: один файл — одна задача. Подключать по необходимости.
+// -----------------------------------------------------------------------------
+
+@import 'variables';
+
+// Панель с отступами и скруглением по дизайн-системе
+@mixin panel-base {
+  padding: $panel-padding;
+  border-radius: $radius-md;
+  background-color: map-get($custom-colors, 'white');
+}
+
+// Строка flex по центру с отступом (часто повторяется в компонентах)
+@mixin flex-row-center($gap: 8px) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $gap;
+}

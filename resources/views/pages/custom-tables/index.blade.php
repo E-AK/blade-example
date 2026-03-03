@@ -14,7 +14,7 @@
     <x-button
         type="main"
         size="large"
-        :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'custom-tables-open-create\'))']"
+        :extra-attributes="['data-dispatch' => 'custom-tables-open-create']"
     >
         Создать новую таблицу
     </x-button>
@@ -52,7 +52,7 @@
                 :close-button-attributes="['x-on:click' => 'createSidebarOpen = false']"
                 :overlay-attributes="['x-on:click.self' => 'createSidebarOpen = false']"
             >
-                <div class="d-flex flex-column" style="gap: 12px">
+                <div class="stack stack--gap-12">
                     <div class="d-flex flex-column gap-1">
                         <h4>Введите название новой таблицы</h4>
                         <p class="p4">К наименованию  таблицы будет добавлен префикс формата "usertable_"</p>
@@ -61,7 +61,7 @@
                     <div class="d-flex flex-column gap-3">
                         <x-input name="name" placeholder="Название таблицы" />
                     </div>
-                    <div class="p4 text-grey-1" style="font-size: 14px !important;">Не больше 32 символов</div>
+                    <div class="p4 text-grey-1 text-hint">Не больше 32 символов</div>
                 </div>
                 <x-slot:footer>
                     <x-button type="main" size="large">Создать</x-button>

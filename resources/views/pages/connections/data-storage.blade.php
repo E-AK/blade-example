@@ -14,7 +14,7 @@
     <x-button
         type="main"
         size="large"
-        :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'data-storage-open-add-sidebar\'))']"
+        :extra-attributes="['data-dispatch' => 'data-storage-open-add-sidebar']"
     >
         Добавить удаленное подключение
     </x-button>

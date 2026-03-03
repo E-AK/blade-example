@@ -46,7 +46,7 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
-    color: #141414;
+    color: map-get($custom-colors, 'black');
   }
 
   &__email {
@@ -82,7 +82,7 @@
     flex-direction: column;
     padding: 8px;
     gap: 8px;
-    background: #fff;
+    background: map-get($custom-colors, 'white');
     border-radius: 8px;
 
     .accounts-modal-row__inner {

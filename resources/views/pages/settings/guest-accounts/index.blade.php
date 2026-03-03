@@ -9,7 +9,7 @@
     <x-button
         type="main"
         size="large"
-        :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'guestAccountsOpenSidebar\'))']"
+        :extra-attributes="['data-dispatch' => 'guestAccountsOpenSidebar']"
     >
         Добавить гостевой аккаунт
     </x-button>

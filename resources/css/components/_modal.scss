@@ -1,8 +1,6 @@
 $modal-shadow:
   0px 4px 12px -4px rgba(0, 0, 0, 0.12),
   0px 16px 32px rgba(0, 0, 0, 0.12);
-$modal-title-color: #141414;
-$modal-text-color: #141414;
 
 .modal {
   position: absolute;
@@ -78,7 +76,7 @@ $modal-text-color: #141414;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
-  color: $modal-title-color;
+  color: map-get($custom-colors, 'black');
 }
 
 .modal__close {
@@ -100,7 +98,7 @@ $modal-text-color: #141414;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: $modal-text-color;
+  color: map-get($custom-colors, 'black');
 }
 
 .modal__footer {

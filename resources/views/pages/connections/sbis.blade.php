@@ -10,7 +10,7 @@
     <x-button
         type="main"
         size="large"
-        :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'sbis-open-add-sidebar\'))']"
+        :extra-attributes="['data-dispatch' => 'sbis-open-add-sidebar']"
     >
         Добавить аккаунт Сбис
     </x-button>

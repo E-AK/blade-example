@@ -21,7 +21,7 @@
         <x-button
             type="main"
             size="large"
-            :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'import-settings-open-add-sidebar\'))']"
+            :extra-attributes="['data-dispatch' => 'import-settings-open-add-sidebar']"
         >
             Добавить задание
         </x-button>
@@ -58,7 +58,7 @@
                         left-icon="actions_calendar"
                         :options="[1 => 1]"
                 />
-                <div class="d-flex flex-row" style="gap: 12px">
+                <div class="stack-row--gap-12">
                     <x-switch
                             name="send_webhook"
                     />

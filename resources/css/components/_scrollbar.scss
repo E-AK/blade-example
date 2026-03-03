@@ -1,6 +1,6 @@
 // =============================================================================
 // Fully custom scrollbar (native hidden — ignores display:none issues)
-// Track/thumb overlay, 4px, #E0E0E0, border-radius 100px
+// Track/thumb overlay, 4px, grey-4, border-radius 100px
 // =============================================================================
 
 // Hide native scrollbar everywhere (scrolling still works)
@@ -63,17 +63,17 @@
   width: 4px;
   min-height: 24px;
   border-radius: 100px;
-  background: #e0e0e0;
+  background: map-get($custom-colors, 'grey-4');
   pointer-events: auto;
   cursor: pointer;
 }
 
 .custom-scrollbar-v__thumb:hover {
-  background: #c7c7c7;
+  background: map-get($custom-colors, 'grey-3');
 }
 
 .custom-scrollbar-v__thumb.is-dragging {
-  background: #c7c7c7;
+  background: map-get($custom-colors, 'grey-3');
 }
 
 .custom-scrollbar-h {
@@ -91,17 +91,17 @@
   height: 4px;
   min-width: 24px;
   border-radius: 100px;
-  background: #e0e0e0;
+  background: map-get($custom-colors, 'grey-4');
   pointer-events: auto;
   cursor: pointer;
 }
 
 .custom-scrollbar-h__thumb:hover {
-  background: #c7c7c7;
+  background: map-get($custom-colors, 'grey-3');
 }
 
 .custom-scrollbar-h__thumb.is-dragging {
-  background: #c7c7c7;
+  background: map-get($custom-colors, 'grey-3');
 }
 
 // Hide custom scrollbar when not scrollable

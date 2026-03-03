@@ -1,8 +1,6 @@
 $right-sidebar-shadow:
   -4px 0px 12px -4px rgba(0, 0, 0, 0.12),
   -16px 0px 32px rgba(0, 0, 0, 0.12);
-$right-sidebar-title-color: #141414;
-$right-sidebar-text-color: #141414;
 
 .right-sidebar-overlay {
   position: fixed;
@@ -63,7 +61,7 @@ $right-sidebar-text-color: #141414;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
-  color: $right-sidebar-title-color;
+  color: map-get($custom-colors, 'black');
 }
 
 .right-sidebar__close {
@@ -91,7 +89,7 @@ $right-sidebar-text-color: #141414;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: $right-sidebar-text-color;
+  color: map-get($custom-colors, 'black');
 }
 
 .right-sidebar__footer {

@@ -10,7 +10,7 @@
             'icon' => 'left',
             'state' => 'default',
             'extraAttributes' => [
-                'x-on:click' => "(function(p){ if (p && p.dataset.folderId) { window.dispatchEvent(new CustomEvent(\"dropdown-close-others\", { detail: \"close-all\" })); \$dispatch(\"password-manager-start-new-subfolder\", { parentId: p.dataset.folderId, parentDepth: parseInt(p.dataset.folderDepth, 10) || 0 }); } if (p && p.dataset.dropdownId) window.dispatchEvent(new CustomEvent('dropdown-close-self', { detail: p.dataset.dropdownId })); })(\$el.closest('.dropdown-panel'))",
+                'x-on:click' => "window.dispatchEvent(new CustomEvent('dropdown-close-others', { detail: 'close-all' })); \$refs.panel && \$dispatch('password-manager-folder-menu-action', { action: 'create-subfolder', folderId: \$refs.panel.dataset.folderId, folderDepth: \$refs.panel.dataset.folderDepth }); window.dispatchEvent(new CustomEvent('dropdown-close-self', { detail: _dropdownId }))",
             ],
         ],
         [
@@ -19,7 +19,7 @@
             'icon' => 'left',
             'state' => 'default',
             'extraAttributes' => [
-                'x-on:click' => "(function(p){ if (p && p.dataset.folderId) { \$dispatch(\"password-manager-start-rename\", { id: p.dataset.folderId, name: p.dataset.folderName }); } if (p && p.dataset.dropdownId) window.dispatchEvent(new CustomEvent('dropdown-close-self', { detail: p.dataset.dropdownId })); })(\$el.closest('.dropdown-panel'))",
+                'x-on:click' => "\$refs.panel && \$dispatch('password-manager-folder-menu-action', { action: 'rename', folderId: \$refs.panel.dataset.folderId, folderName: \$refs.panel.dataset.folderName }); window.dispatchEvent(new CustomEvent('dropdown-close-self', { detail: _dropdownId }))",
             ],
         ],
         [
@@ -28,7 +28,7 @@
             'icon' => 'left',
             'state' => 'danger',
             'extraAttributes' => [
-                'x-on:click' => "(function(p){ if (p && p.dataset.folderId) { \$dispatch(\"password-manager-open-delete-modal\", { id: p.dataset.folderId, name: p.dataset.folderName, passwordsCount: parseInt(p.dataset.folderPasswordsCount, 10) || 0 }); } if (p && p.dataset.dropdownId) window.dispatchEvent(new CustomEvent('dropdown-close-self', { detail: p.dataset.dropdownId })); })(\$el.closest('.dropdown-panel'))",
+                'x-on:click' => "\$refs.panel && \$dispatch('password-manager-folder-menu-action', { action: 'delete', folderId: \$refs.panel.dataset.folderId, folderName: \$refs.panel.dataset.folderName, passwordsCount: \$refs.panel.dataset.folderPasswordsCount }); window.dispatchEvent(new CustomEvent('dropdown-close-self', { detail: _dropdownId }))",
             ],
         ],
     ];
@@ -56,7 +56,7 @@
         type="main"
         size="large"
         icon-position="left"
-        :extra-attributes="['onclick' => 'Alpine.store(\'passwordManager\').openAddSidebar()']"
+        data-dispatch="password-manager-open-add-sidebar"
     >
         <x-slot:icon>
             <x-icon name="validation_add_circle" :size="20" />
@@ -67,7 +67,7 @@
         type="stroke"
         size="large"
         icon-position="left"
-        :extra-attributes="['onclick' => 'Alpine.store(\'passwordManager\').openAccessSidebar()']"
+        data-dispatch="password-manager-open-access-sidebar"
     >
         <x-slot:icon>
             <x-icon name="actions_share" :size="20" />
@@ -81,7 +81,7 @@
         <div
             class="password-manager-sidebar__section password-manager-sidebar__section--folders d-flex flex-column min-h-0"
             x-data="{ showNewFolderInput: false }"
-            x-effect="showNewFolderInput && \$nextTick(() => setTimeout(() => { const el = \$refs.newFolderInput && \$refs.newFolderInput.querySelector(&#39;input&#39;); if (el) el.focus(); }, 0))"
+            x-effect="showNewFolderInput && $nextTick(() => setTimeout(() => { const el = $refs.newFolderInput && $refs.newFolderInput.querySelector('input'); if (el) el.focus(); }, 0))"
         >
             <div class="password-manager-sidebar__header password-manager-sidebar__header--sticky d-flex align-items-center justify-content-between">
                 <span class="password-manager-sidebar__title">Папки</span>
@@ -100,6 +100,7 @@
             <div
                 class="d-flex password-manager-sidebar__folders-wrap flex-grow-1"
                 x-data="passwordManagerFolders()"
+                @password-manager-folder-menu-action.window="handleFolderMenuAction($event.detail)"
                 @password-manager-open-delete-modal.window="folderToDelete = $event.detail; deleteTarget = 'delete_with'; deleteModalSelectOpen = false; deleteModalOpen = true"
                 @password-manager-start-rename.window="startRename($event.detail)"
                 @password-manager-start-new-subfolder.window="startNewSubfolder($event.detail)"
@@ -134,15 +135,7 @@
                             class="password-manager-folders list-unstyled mb-0"
                             role="list"
                         >
-                    <li
-                        class="password-manager-sidebar__folder-spacer password-manager-folder-item--no-drag"
-                        aria-hidden="true"
-                        x-show="topSpacerHeight > 0"
-                        x-cloak
-                        :style="{ height: topSpacerHeight + 'px' }"
-                    ></li>
-                    <template x-for="item in renderedFolders" :key="item.id">
-                        <div style="display: contents">
+                    <template x-for="item in visibleFolders" :key="item.id">
                         <li
                             class="password-manager-folder-item"
                             :class="{
@@ -154,7 +147,7 @@
                             :data-folder="item.name"
                             :data-id="item.id"
                             :data-depth="item.depth"
-                            :style="{ marginLeft: (item.depth * 20) + 'px' }"
+                            :style="{ '--folder-depth': item.depth }"
                             @click="editingFolderId !== item.id && !$event.target.closest('.password-manager-folder-item__handle') && !$event.target.closest('.password-manager-folder-item__arrow') && !$event.target.closest('.password-manager-folder-item__icon-chevron') && !$event.target.closest('.password-manager-folder-item__menu') && select(item.id)"
                         >
                             <template x-if="editingFolderId === item.id">
@@ -223,6 +216,10 @@
                                                     class="password-manager-folder-item__menu-trigger"
                                                     aria-haspopup="true"
                                                     aria-expanded="false"
+                                                    :data-folder-id="item.id"
+                                                    :data-folder-name="item.name"
+                                                    :data-folder-depth="item.depth"
+                                                    :data-folder-passwords-count="(item.passwordsCount ?? 0)"
                                                 >
                                                     <x-icon name="arrow_three_dot_vertical" :size="20" />
                                                 </button>
@@ -231,17 +228,12 @@
                                     </div>
                                 </div>
                             </template>
-                        </li>
-                        <li
-                            class="password-manager-folder-item password-manager-folder-item--editing password-manager-folder-item--no-drag"
-                            x-show="newSubfolderParentId === item.id"
-                            x-cloak
-                            :style="{ marginLeft: ((item.depth + 1) * 20) + 'px' }"
-                            @mousedown.stop
-                        >
                             <div
-                                class="password-manager-sidebar__new-folder"
+                                class="password-manager-sidebar__new-folder password-manager-sidebar__new-folder--indent"
+                                x-show="newSubfolderParentId === item.id"
+                                x-cloak
                                 x-effect="newSubfolderParentId === item.id && $nextTick(() => { setTimeout(() => { const i = $el.querySelector('input'); if (i) i.focus(); }, 0); })"
+                                @mousedown.stop
                             >
                                 <div class="password-manager-sidebar__new-folder-inner">
                                     <div class="input-wrapper input-wrapper--stroke flex-grow-1 min-w-0 password-manager-sidebar__new-folder-input">
@@ -266,15 +258,7 @@
                                 </div>
                             </div>
                         </li>
-                        </div>
                     </template>
-                    <li
-                        class="password-manager-sidebar__folder-spacer password-manager-folder-item--no-drag"
-                        aria-hidden="true"
-                        x-show="bottomSpacerHeight > 0"
-                        x-cloak
-                        :style="{ height: bottomSpacerHeight + 'px' }"
-                    ></li>
                 </ul>
                     </div>
                 </div>
@@ -551,7 +535,7 @@
             class="data-table-wrapper d-flex flex-column flex-grow-1 min-h-0"
             data-deleted-only="0"
             data-password-filter="all"
-            :data-folder="(\$store.passwordManager && \$store.passwordManager.selectedFolderName) || ''"
+            :data-folder="($store.passwordManager && $store.passwordManager.selectedFolderName) || ''"
         >
             <x-table
                 search-class="password-manager-search"
@@ -655,7 +639,7 @@
                                     <template x-if="folderName">
                                         <span class="password-manager-search-chip password-manager-search-chip--folder tag tag--md tag--icon-right d-inline-flex align-items-center flex-nowrap">
                                             <x-icon name="document_folder" :size="20" class="me-1 password-manager-search-chip__folder-icon text-yellow" />
-                                            <span class="tag-text text-truncate" style="max-width: 140px" x-text="folderName"></span>
+                                            <span class="tag-text text-truncate tag-text--truncate-folder" x-text="folderName"></span>
                                             <span class="tag-icon tag-icon-right d-flex align-items-center justify-content-center" role="button" tabindex="0" @click.prevent="clearFolder()">
                                                 <x-icon name="arrow_close" :size="20" />
                                             </span>
@@ -664,7 +648,7 @@
                                     <template x-if="tagName">
                                         <span class="password-manager-search-chip tag tag--md tag--icon-right d-inline-flex align-items-center flex-nowrap password-manager-search-chip--tag">
                                             <x-icon name="specific_tag" :size="20" class="me-1" />
-                                            <span class="tag-text text-truncate" style="max-width: 120px" x-text="tagName"></span>
+                                            <span class="tag-text text-truncate tag-text--truncate-tag" x-text="tagName"></span>
                                             <span class="tag-icon tag-icon-right d-flex align-items-center justify-content-center" role="button" tabindex="0" @click.prevent="clearTag()">
                                                 <x-icon name="arrow_close" :size="20" />
                                             </span>
@@ -694,9 +678,8 @@
                                 </span>
                             </div>
                             <div
-                                class="password-manager-search-dropdown position-absolute start-0 end-0 mt-1 w-100 d-flex flex-column overflow-hidden"
+                                class="password-manager-search-dropdown password-manager-search-dropdown--positioned position-absolute start-0 end-0 mt-1 w-100 d-flex flex-column overflow-hidden"
                                 x-show.important="showDropdown"
-                                style="max-height: 320px; z-index: 10; top: 100%;"
                             >
                                 <div class="password-manager-search-dropdown__panel bg-white rounded shadow-sm border">
                                     <button
@@ -958,9 +941,9 @@
         </template>
 
         <div
+            class="d-none"
             x-show="$store.passwordManager.accessSidebarOpen"
             x-cloak
-            style="display: none;"
         >
             <x-right-sidebar
                 :open="true"

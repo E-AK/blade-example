@@ -8,7 +8,7 @@
     <x-button
         type="main"
         size="large"
-        :extra-attributes="['onclick' => 'window.dispatchEvent(new CustomEvent(\'custom-table-add-column-open\'))']"
+        :extra-attributes="['data-dispatch' => 'custom-table-add-column-open']"
     >
         Добавить колонку
     </x-button>

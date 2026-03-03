@@ -1,3 +1,5 @@
+import { uniqueId } from '../utils/id.js';
+
 export default function multiselect(Alpine) {
   Alpine.data('multiselectDropdownItems', () => ({
     selectedValues: [],
@@ -38,7 +40,7 @@ export default function multiselect(Alpine) {
       this.tagColor = el.dataset.tagColor || 'black';
       this.tagBorderColor = el.dataset.tagBorderColor || 'grey-4';
       const existingId = el.dataset.multiselectId?.trim();
-      this.id = existingId || `ms-${Math.random().toString(36).slice(2)}`;
+      this.id = existingId || uniqueId('ms-');
       if (!existingId) el.dataset.multiselectId = this.id;
       if (typeof Alpine.store('multiselectState') === 'undefined') {
         Alpine.store('multiselectState', {});

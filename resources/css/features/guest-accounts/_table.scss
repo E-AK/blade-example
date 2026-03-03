@@ -1,5 +1,7 @@
-// Guest accounts table: overflow ellipsis for long header "Пользовательские таблицы"
-// Селектор по классу колонки и по индексу (4-я колонка после id, email, connections, data_collection)
+// -----------------------------------------------------------------------------
+// Guest accounts feature: table column overflow. Single responsibility.
+// -----------------------------------------------------------------------------
+
 .guest-accounts-page .data-table table.guest-accounts-table th.column-custom-tables,
 .guest-accounts-page .data-table table.guest-accounts-table thead th:nth-child(5) {
   width: 210px !important;

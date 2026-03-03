@@ -1,3 +1,7 @@
+// -----------------------------------------------------------------------------
+// Typography: type scale, headings, body. One file, one concern.
+// -----------------------------------------------------------------------------
+
 $font-family-sans-serif: 'Inter' !default;
 
 $fw-regular: 400 !default;
@@ -43,7 +47,6 @@ h6 {
   line-height: 20px;
   font-weight: $fw-semibold;
 }
-//h7 { font-size: 12px; line-height: 16px; font-weight: $fw-bold; }
 
 .p1 {
   font-size: 20px;

@@ -12,7 +12,7 @@
             :data-table="$dataTable"
         >
             <x-slot:filterSlot>
-                <div style="width: 220px">
+                <div class="w-220">
                     <x-select
                             text="Все статусы"
                             value=""
