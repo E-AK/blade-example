@@ -52,7 +52,7 @@
                 :close-button-attributes="['x-on:click' => 'createSidebarOpen = false']"
                 :overlay-attributes="['x-on:click.self' => 'createSidebarOpen = false']"
             >
-                <div class="stack stack--gap-12">
+                <x-layout.stack>
                     <div class="d-flex flex-column gap-1">
                         <h4>Введите название новой таблицы</h4>
                         <p class="p4">К наименованию  таблицы будет добавлен префикс формата "usertable_"</p>
@@ -62,7 +62,7 @@
                         <x-input name="name" placeholder="Название таблицы" />
                     </div>
                     <div class="p4 text-grey-1 text-hint">Не больше 32 символов</div>
-                </div>
+                </x-layout.stack>
                 <x-slot:footer>
                     <x-button type="main" size="large">Создать</x-button>
                 </x-slot:footer>

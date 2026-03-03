@@ -30,7 +30,7 @@
             >
                 <div class="account-sidebar-body d-flex flex-column align-items-stretch w-100">
                     {{-- User cards (same component as profile modal) --}}
-                    <div class="stack stack--gap-12">
+                    <x-layout.stack>
                         @foreach($placeholderUsers as $user)
                             <div class="account-sidebar-card">
                                 <x-user-card
@@ -55,7 +55,7 @@
                                 Отправить доступ к аккаунту
                             </x-button>
                         </div>
-                    </div>
+                    </x-layout.stack>
 
                     <div class="d-flex flex-column align-items-stretch gap-3" x-show.important="showSendAccessForm">
                         <div class="d-flex flex-column gap-2">

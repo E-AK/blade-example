@@ -37,7 +37,7 @@
     $labelText = $label ?? $placeholder;
 @endphp
 
-<div @if($error) class="d-flex flex-column gap-1" @endif>
+<div class="d-flex flex-column {{ $error ? 'gap-1' : 'gap-0' }}">
     <div
             class="{{ $wrapperClass }}"
             @if($type === 'main')

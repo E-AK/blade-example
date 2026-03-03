@@ -7,8 +7,8 @@
 ])
 
 <div
-    class="dropdown-root position-relative d-inline-block {{ $class }}"
-    @if($panelMatchTrigger) data-panel-match-trigger="true" @endif
+    class="dropdown-root position-relative d-inline-block {{ $panelMatchTrigger ? 'dropdown-root--panel-match-trigger' : '' }} {{ $class }}"
+    data-panel-match-trigger="{{ $panelMatchTrigger ? 'true' : 'false' }}"
     data-teleport="{{ $teleport ? 'true' : 'false' }}"
     x-data="dropdown()"
     x-on:click.outside="{!! $teleport ? "(e) => !e.target.closest('.dropdown-panel') && close()" : 'close()' !!}"

@@ -3,22 +3,20 @@
     :class="{ 'is-accounts-modal-open': accountsModalOpen || usersModalOpen }"
     x-data="{ profileSubmenuTab: 'users', accountsModalOpen: false, usersModalOpen: false }"
 >
-    <div>
-        <div {{ $attributes->merge(['class' => 'profile-card d-flex flex-column gap-3 ' . $class]) }}>
-            <x-sidebar.profile.profile
-                :title="$title"
-                :subtitle="$subtitle"
-                :badge="$badge"
-                has-children
-            />
+    <div {{ $attributes->merge(['class' => 'profile-card d-flex flex-column gap-3 ' . $class]) }}>
+        <x-sidebar.profile.profile
+            :title="$title"
+            :subtitle="$subtitle"
+            :badge="$badge"
+            has-children
+        />
 
-            <x-sidebar.profile.balance
-                :balance="$balance"
-            />
-        </div>
+        <x-sidebar.profile.balance
+            :balance="$balance"
+        />
     </div>
 
-    <div class="sidebar-submenu-dropdown stack stack--gap-12">
+    <x-layout.stack class="sidebar-submenu-dropdown">
         <x-sidebar.sidebar-submenu class="d-flex flex-column gap-3">
             <div class="d-flex gap-2">
                 <x-sidebar.profile.profile
@@ -102,7 +100,7 @@
                 </div>
             </template>
         </x-sidebar.sidebar-submenu>
-    </div>
+    </x-layout.stack>
 
     <template x-if="accountsModalOpen">
         <x-modal

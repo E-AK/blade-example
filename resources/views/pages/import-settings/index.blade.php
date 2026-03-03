@@ -58,12 +58,12 @@
                         left-icon="actions_calendar"
                         :options="[1 => 1]"
                 />
-                <div class="stack-row--gap-12">
+                <x-layout.stack direction="row">
                     <x-switch
                             name="send_webhook"
                     />
                     <label for="send_webhook" class="p3">Отправлять вебхуки</label>
-                </div>
+                </x-layout.stack>
                 <x-slot:footer>
                     <x-button type="main" size="large">Сохранить</x-button>
                 </x-slot:footer>

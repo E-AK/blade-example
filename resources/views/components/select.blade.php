@@ -80,7 +80,7 @@
             @if(!empty($options)) @click.stop="toggle()" @endif
         >
             @if($leftIcon)
-                <span class="input-icon select-icon-left" aria-hidden="true">
+                <span class="input-icon input-icon--left select-icon-left" aria-hidden="true">
                     <x-icon :name="$leftIcon" />
                 </span>
             @endif
@@ -115,7 +115,7 @@
             </div>
 
             <span class="input-icons-right select-icon-right">
-                <span class="input-icon"><x-icon :name="$rightIcon" /></span>
+                <span class="input-icon input-icon--right" aria-hidden="true"><x-icon :name="$rightIcon" /></span>
             </span>
         </div>
 

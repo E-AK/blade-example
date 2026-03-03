@@ -61,3 +61,20 @@
 .tag-text--truncate-tag {
   max-width: 120px;
 }
+
+// Demo panels on welcome page (avoid inline styles)
+.control-demo-panel--border-purple {
+  border-color: #9747FF !important;
+}
+
+.control-demo-panel--border-purple-wide {
+  border-color: #7B61FF !important;
+}
+
+.control-demo-panel--w-276 {
+  width: 276px;
+}
+
+.control-demo-panel--w-351 {
+  width: 351px;
+}

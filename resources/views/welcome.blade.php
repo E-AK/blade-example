@@ -362,7 +362,7 @@
 
         <div class="d-flex flex-wrap gap-5">
             {{-- Checkbox --}}
-            <div class="control-demo-panel border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
+            <div class="control-demo-panel control-demo-panel--border-purple control-demo-panel--w-276 border-2 border-dashed rounded p-4">
                 <h3 class="h6 mb-3">Checkbox</h3>
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center gap-3">
@@ -403,7 +403,7 @@
             </div>
 
             {{-- Radio --}}
-            <div class="control-demo-panel border-2 border-dashed rounded p-4" style="border-color: #9747FF !important; width: 276px;">
+            <div class="control-demo-panel control-demo-panel--border-purple control-demo-panel--w-276 border-2 border-dashed rounded p-4">
                 <h3 class="h6 mb-3">Radio</h3>
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center gap-3">
@@ -444,7 +444,7 @@
             </div>
 
             {{-- Switch --}}
-            <div class="control-demo-panel border-2 border-dashed rounded p-4" style="border-color: #7B61FF !important; width: 351px;">
+            <div class="control-demo-panel control-demo-panel--border-purple-wide control-demo-panel--w-351 border-2 border-dashed rounded p-4">
                 <h3 class="h6 mb-3">Switch</h3>
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center gap-3">
@@ -608,7 +608,7 @@
         </div>
 
         {{-- Small, no footer — visibility controlled by Alpine x-show --}}
-        <div x-show="modalSmall" x-cloak style="display: none;">
+        <div x-show="modalSmall" x-cloak>
             <x-modal
                 :open="true"
                 title="Заголовок"
@@ -621,7 +621,7 @@
         </div>
 
         {{-- Small, with footer --}}
-        <div x-show="modalSmallFooter" x-cloak style="display: none;">
+        <div x-show="modalSmallFooter" x-cloak>
             <x-modal
                 :open="true"
                 title="Подтверждение"
@@ -640,7 +640,7 @@
         </div>
 
         {{-- Large, no footer --}}
-        <div x-show="modalLarge" x-cloak style="display: none;">
+        <div x-show="modalLarge" x-cloak>
             <x-modal
                 :open="true"
                 title="Заголовок (large)"
@@ -653,7 +653,7 @@
         </div>
 
         {{-- Large, with footer --}}
-        <div x-show="modalLargeFooter" x-cloak style="display: none;">
+        <div x-show="modalLargeFooter" x-cloak>
             <x-modal
                 :open="true"
                 title="Подтверждение (large)"
@@ -672,7 +672,7 @@
         </div>
 
         {{-- With icon next to title --}}
-        <div x-show="modalWithIcon" x-cloak style="display: none;">
+        <div x-show="modalWithIcon" x-cloak>
             <x-modal
                 :open="true"
                 title="Уведомление"
@@ -691,7 +691,7 @@
         </div>
 
         {{-- Footer with different button types --}}
-        <div x-show="modalFooterVariants" x-cloak style="display: none;">
+        <div x-show="modalFooterVariants" x-cloak>
             <x-modal
                 :open="true"
                 title="Удаление"
@@ -713,7 +713,7 @@
         </div>
 
         {{-- Custom size --}}
-        <div x-show="modalCustomSize" x-cloak style="display: none;">
+        <div x-show="modalCustomSize" x-cloak>
             <x-modal
                 :open="true"
                 title="Нестандартный размер"

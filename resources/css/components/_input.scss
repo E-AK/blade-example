@@ -18,7 +18,7 @@
     gap: 4px;
   }
 
-  // Focus / open state (ring)
+  // Focus / open state (ring) — same for input, select, multiselect (State=Selected: gap 10px)
   &.state-selected,
   &.open,
   &:focus-within {
@@ -26,16 +26,39 @@
     box-shadow: 0 0 0 2px map-get($custom-colors, 'blue-bg');
 
     .input-body--main,
-    .select-body--main,
-    .multiselect-trigger {
+    .select-body--main {
       background-color: map-get($custom-colors, 'white');
       outline: 1px solid map-get($custom-colors, 'blue-soft');
+    }
+
+    .multiselect-trigger {
+      background-color: map-get($custom-colors, 'white') !important;
+      outline: 1px solid map-get($custom-colors, 'blue-soft');
+      gap: 10px;
     }
 
     .search-body {
       outline: 1px solid map-get($custom-colors, 'blue-soft');
     }
   }
+}
+
+// Multiselect: focus ring when dropdown is open (State=Selected/Semi-filled: Blue-bg ring, White + Blue-soft)
+.dropdown-root--open .multiselect-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px map-get($custom-colors, 'blue-bg');
+
+  .multiselect-trigger {
+    background-color: map-get($custom-colors, 'white');
+    outline: 1px solid map-get($custom-colors, 'blue-soft');
+    gap: 10px;
+  }
+}
+
+// Multiselect: hover state — only body Grey 5, no ring/border (focus = Blue-bg + Blue-soft)
+.dropdown-root:not(.dropdown-root--open):hover .multiselect-wrapper .multiselect-trigger:not(.disabled):not(.error) {
+  background-color: map-get($custom-colors, 'grey-5');
+  outline: 1px solid transparent;
 }
 
 // Main select: selected state (spec: Blue-bg border, gap 10px)
@@ -476,8 +499,10 @@
   outline: 1px solid map-get($custom-colors, 'blue-soft');
 }
 
+// State=Disabled default: Grey 5 body, gap 10px, placeholder Grey 2
 .multiselect-trigger.disabled:not(.disabled-filled) {
   background-color: map-get($custom-colors, 'grey-5');
+  gap: 10px;
 
   .multiselect-search {
     color: map-get($custom-colors, 'grey-2');
@@ -517,9 +542,11 @@
   }
 }
 
+// State=Error default / Error filled: White body, Red border, gap 10px
 .multiselect-trigger.error {
   background-color: map-get($custom-colors, 'white');
   outline: 1px solid map-get($custom-colors, 'red');
+  gap: 10px;
 }
 
 .multiselect-wrapper.has-error {

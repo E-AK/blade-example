@@ -1,5 +1,6 @@
 @props([
     'name' => null,
+    'multiselectId' => null,
     'placeholder' => 'Сотрудники',
     'searchPlaceholder' => 'Поиск...',
     'leftIcon' => null,
@@ -89,7 +90,7 @@
                     aria-haspopup="listbox"
                 >
                     @if($leftIcon)
-                        <span class="input-icon multiselect-icon-left" aria-hidden="true">
+                        <span class="input-icon input-icon--left multiselect-icon-left" aria-hidden="true">
                             <x-icon :name="$leftIcon" />
                         </span>
                     @endif
@@ -140,7 +141,7 @@
 
                     @if($showRightIcon)
                         <span class="input-icons-right multiselect-icon-right">
-                            <span class="input-icon"><x-icon name="arrow_chevron_down" /></span>
+                            <span class="input-icon input-icon--right" aria-hidden="true"><x-icon name="arrow_chevron_down" /></span>
                         </span>
                     @endif
                     @if(isset($right) && $right->isNotEmpty())

@@ -34,15 +34,15 @@ export default function dropdown(Alpine) {
           new CustomEvent('dropdown-close-others', { detail: this._dropdownId })
         );
         if (dataTable) dataTable.classList.add('data-table--dropdown-open');
-        const isTeleport = this.$el.dataset.teleport === 'true';
+        const isTeleport = this.$el.getAttribute('data-teleport') === 'true';
         this.$nextTick(() => {
           requestAnimationFrame(() => {
+            this._applyPanelStyle();
             if (isTeleport) {
-              this._applyPanelStyle();
               requestAnimationFrame(() => this._applyPanelStyle());
               setTimeout(() => this._applyPanelStyle(), 50);
-            } else {
-              this._applyPanelStyle();
+            } else if (this.$el.classList.contains('dropdown-root--trigger-full')) {
+              requestAnimationFrame(() => this._applyPanelStyle());
             }
           });
         });
@@ -58,7 +58,7 @@ export default function dropdown(Alpine) {
       if (!this.$refs.panel) return;
       const panel = this.$refs.panel;
       const isTeleport =
-        this.$el.dataset.teleport === 'true' || panel.parentNode === document.body;
+        this.$el.getAttribute('data-teleport') === 'true' || panel.parentNode === document.body;
       const trigger =
         this._triggerEl ||
         this.$refs.trigger ||
@@ -122,8 +122,20 @@ export default function dropdown(Alpine) {
         panel.style.setProperty('z-index', '1060', 'important');
         panel.style.setProperty('pointer-events', 'auto', 'important');
       } else {
-        if (this.$el.dataset.panelMatchTrigger === 'true' && this.$refs.trigger) {
-          style.width = `${this.$refs.trigger.offsetWidth}px`;
+        const triggerEl = this.$refs.trigger;
+        if (triggerEl) {
+          const matchTriggerWidth =
+            triggerEl.querySelector('.multiselect-wrapper') ||
+            triggerEl.closest('.multiselect-wrapper') ||
+            this.$el.classList.contains('dropdown-root--trigger-full');
+          if (matchTriggerWidth) {
+            const width = Math.round(triggerEl.getBoundingClientRect().width) || 0;
+            if (width > 0) {
+              style.width = `${width}px`;
+              style.minWidth = `${width}px`;
+              style.maxWidth = `${width}px`;
+            }
+          }
         }
         const dataTable = this.$el.closest('.data-table');
         const contentInner = this.$el.closest('.content-inner');
@@ -147,7 +159,7 @@ export default function dropdown(Alpine) {
     close() {
       if (!this.open) return;
       const panel = this.$refs.panel;
-      const isTeleport = this.$el.dataset.teleport === 'true';
+      const isTeleport = this.$el.getAttribute('data-teleport') === 'true';
       const portal = document.getElementById(DROPDOWN_PORTAL_ID);
       const isInPortal = portal && panel && panel.parentNode === portal;
       const isInBody = panel && panel.parentNode === document.body;

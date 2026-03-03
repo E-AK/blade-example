@@ -33,14 +33,14 @@
                 :close-button-attributes="['x-on:click' => 'addRowSidebarOpen = false']"
                 :overlay-attributes="['x-on:click.self' => 'addRowSidebarOpen = false']"
             >
-                <div class="stack stack--gap-12">
+                <x-layout.stack>
                     <x-input name="name" placeholder="test" />
                     <div class="d-flex flex-column p4 text-grey-1 text-hint">
                         <p>Тип данных – INTEGER</p>
                         <p>Формат данных – Число целое</p>
                         <p>Пример данных – 1000</p>
                     </div>
-                </div>
+                </x-layout.stack>
 
                 <x-slot:footer>
                     <x-button type="main" size="large">Вставить данные</x-button>
