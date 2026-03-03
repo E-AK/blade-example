@@ -14,7 +14,7 @@
         <span class="fw-semibold text-body user-card__name">{{ $name }}</span>
         <div class="d-flex flex-row align-items-center gap-2 flex-wrap">
             @if($email !== '')
-                <span class="text-secondary user-card__email">{{ $email }}</span>
+                <span class="text-secondary small user-card__email">{{ $email }}</span>
             @endif
             <x-tag
                 :text="$role"

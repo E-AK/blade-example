@@ -20,7 +20,7 @@ const DEFAULT_DELAY = 5000;
 function ensureContainer() {
   let $container = $(`#${CONTAINER_ID}`);
   if ($container.length === 0) {
-    $container = $('<div>', { id: CONTAINER_ID, class: 'toast-container-custom' });
+    $container = $('<div>', { id: CONTAINER_ID, class: 'toast-container-custom d-flex flex-column align-items-center gap-3' });
     $('body').append($container);
   }
   return $container;

@@ -9,10 +9,6 @@
   grid-template-columns: 80px 1fr;
 }
 
-.main-area {
-  min-width: 0;
-}
-
 .main-scroll {
   grid-column: 2;
   grid-row: 1 / 3;
@@ -30,10 +26,6 @@
   border-radius: 12px;
   background-color: map-get($custom-colors, 'white');
   overflow: visible;
-
-  .right {
-    gap: 20px;
-  }
 }
 
 .workspace-container-header-title {
@@ -42,22 +34,6 @@
 
 // Breadcrumbs (workspace-container-header-info)
 .workspace-container-header-info {
-  display: flex;
-  align-items: center;
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #A4A4A4;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-
-  .workspace-container-header-info-sep {
-    margin: 0 0.25rem;
-  }
-
   .workspace-container-header-info-link {
     color: inherit;
     text-decoration: none;

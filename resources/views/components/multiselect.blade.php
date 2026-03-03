@@ -103,13 +103,13 @@
                             <template x-for="value in selected" :key="value">
                                 <span class="multiselect-tag" :data-value="value">
                                     <div
-                                        class="tag tag--md tag--icon-right border-solid"
+                                        class="tag tag--md tag--icon-right border-solid flex-nowrap d-inline-flex align-items-center gap-1"
                                         :class="{ 'tag--hoverable': !disabled, 'is-disabled': disabled }"
                                         :style="tagStyle(value)"
                                     >
                                         <span class="tag-text" x-text="getLabel(value)"></span>
                                         <span
-                                            class="tag-icon tag-icon-right"
+                                            class="tag-icon tag-icon-right d-flex align-items-center justify-content-center"
                                             data-multiselect-remove
                                             x-show="!disabled"
                                             @click.stop="removeTag(value)"

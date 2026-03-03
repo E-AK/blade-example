@@ -29,10 +29,10 @@
             class="modal"
             @if($styleStr) style="{{ $styleStr }}" @endif
         >
-            <header class="modal__header">
-                <div class="modal__header-inner">
+            <header class="modal__header d-flex align-items-center gap-3">
+                <div class="modal__header-inner d-flex align-items-center gap-2 flex-grow-1 min-w-0">
                     @if(isset($titleIcon) && $titleIcon->isNotEmpty())
-                        <span class="modal__title-icon align-items-center" aria-hidden="true">
+                        <span class="modal__title-icon d-inline-flex align-items-center" aria-hidden="true">
                             {{ $titleIcon }}
                         </span>
                     @endif
@@ -54,12 +54,12 @@
                 </x-button>
             </header>
 
-            <div class="modal__body">
+            <div class="modal__body d-flex flex-column gap-3">
                 {{ $slot }}
             </div>
 
             @if(isset($footer) && $footer->isNotEmpty())
-                <footer class="modal__footer">
+                <footer class="modal__footer d-flex align-items-center gap-2">
                     {{ $footer }}
                 </footer>
             @endif

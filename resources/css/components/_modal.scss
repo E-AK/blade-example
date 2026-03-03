@@ -51,11 +51,7 @@ $modal-text-color: #141414;
 
 .modal__header {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 20px;
-  gap: 20px;
   width: 100%;
   flex: none;
   align-self: stretch;
@@ -63,17 +59,10 @@ $modal-text-color: #141414;
 }
 
 .modal__header-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 0;
-  gap: 8px;
-  flex: 1 1 0;
-  min-width: 0;
 }
 
 .modal__title-icon {
-  display: inline-flex;
   flex: none;
   width: 20px;
   height: 20px;
@@ -102,12 +91,7 @@ $modal-text-color: #141414;
 }
 
 .modal__body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
   padding: 24px 20px;
-  gap: 16px;
   flex: 1 1 auto;
   align-self: stretch;
   overflow-y: auto;
@@ -121,11 +105,7 @@ $modal-text-color: #141414;
 
 .modal__footer {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 20px;
-  gap: 12px;
   width: 100%;
   flex: none;
   align-self: stretch;

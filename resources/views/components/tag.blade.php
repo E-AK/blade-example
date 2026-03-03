@@ -21,11 +21,11 @@
     $safeAttributes = $attributes->filter(fn ($value) => is_scalar($value) || $value === null);
 @endphp
 <div
-        {{ $safeAttributes->merge(['class' => $classes()]) }}
+        {{ $safeAttributes->merge(['class' => $classes() . ' d-inline-flex align-items-center gap-1']) }}
         style="{{ $inlineStyles() }}"
 >
     @if($hasLeftIcon())
-        <span class="tag-icon tag-icon-left">
+        <span class="tag-icon tag-icon-left d-flex align-items-center justify-content-center">
             <x-icon
                     :name="$leftIconName()"
                     :size="$iconSize()"
@@ -39,7 +39,7 @@
 
     @if($hasRightIcon())
         <span
-            class="tag-icon tag-icon-right"
+            class="tag-icon tag-icon-right d-flex align-items-center justify-content-center"
             @foreach(is_array($rightIconAttributes) ? $rightIconAttributes : [] as $attrKey => $attrVal)
                 @if(is_scalar($attrVal))
                     {{ $attrKey }}="{{ e($attrVal) }}"

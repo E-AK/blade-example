@@ -1,5 +1,5 @@
-<div class="status d-flex justify-content-between {{ $colorClass() }}">
-    <div class="dot-text d-flex align-items-center">
+<div class="status d-flex justify-content-between align-items-center gap-1 {{ $colorClass() }}">
+    <div class="dot-text d-flex align-items-center gap-1">
         <span class="status-dot"></span>
         <span class="status-text">{{ $text() }}</span>
     </div>

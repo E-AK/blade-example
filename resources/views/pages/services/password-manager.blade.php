@@ -653,19 +653,19 @@
                                 </span>
                                 <div class="search-content input-content d-flex align-items-center flex-nowrap gap-2 min-w-0">
                                     <template x-if="folderName">
-                                        <span class="password-manager-search-chip password-manager-search-chip--folder tag tag--md tag--icon-right border-solid d-inline-flex align-items-center">
-                                            <x-icon name="document_folder" :size="20" class="me-1" />
+                                        <span class="password-manager-search-chip password-manager-search-chip--folder tag tag--md tag--icon-right d-inline-flex align-items-center flex-nowrap">
+                                            <x-icon name="document_folder" :size="20" class="me-1 password-manager-search-chip__folder-icon text-yellow" />
                                             <span class="tag-text text-truncate" style="max-width: 140px" x-text="folderName"></span>
-                                            <span class="tag-icon tag-icon-right" role="button" tabindex="0" @click.prevent="clearFolder()">
+                                            <span class="tag-icon tag-icon-right d-flex align-items-center justify-content-center" role="button" tabindex="0" @click.prevent="clearFolder()">
                                                 <x-icon name="arrow_close" :size="20" />
                                             </span>
                                         </span>
                                     </template>
                                     <template x-if="tagName">
-                                        <span class="password-manager-search-chip tag tag--md tag--icon-right border-solid d-inline-flex align-items-center password-manager-search-chip--tag">
+                                        <span class="password-manager-search-chip tag tag--md tag--icon-right d-inline-flex align-items-center flex-nowrap password-manager-search-chip--tag">
                                             <x-icon name="specific_tag" :size="20" class="me-1" />
                                             <span class="tag-text text-truncate" style="max-width: 120px" x-text="tagName"></span>
-                                            <span class="tag-icon tag-icon-right" role="button" tabindex="0" @click.prevent="clearTag()">
+                                            <span class="tag-icon tag-icon-right d-flex align-items-center justify-content-center" role="button" tabindex="0" @click.prevent="clearTag()">
                                                 <x-icon name="arrow_close" :size="20" />
                                             </span>
                                         </span>
