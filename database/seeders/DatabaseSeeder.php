@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             CustomTableRowSeeder::class,
             ImportTaskSeeder::class,
             DataShowcaseSeeder::class,
+            GuestAccountSeeder::class,
         ]);
     }
 }

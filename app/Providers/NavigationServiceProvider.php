@@ -69,6 +69,7 @@ class NavigationServiceProvider extends ServiceProvider
                 $section->add('Настройки аккаунта', '#');
                 $section->add('Настройка вебхуков', '#');
                 $section->add('Управление аккаунтами', url('/settings/account'));
+                $section->add('Гостевые аккаунты', url('/settings/guest-accounts'));
             })
             ->add('Аккаунты', url('/account'), function (Section $section): void {
                 $section->attributes(['icon' => 'menu_accounts', 'shortText' => 'Аккаунты']);

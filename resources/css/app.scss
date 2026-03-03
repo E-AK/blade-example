@@ -15,7 +15,8 @@
 @import 'components/table', 'components/password-manager', 'components/scrollbar';
 
 @import 'components/account/table', 'components/account/search', 'components/account/select',
-  'components/account/account-settings', 'components/users/search';
+  'components/account/account-settings', 'components/users/search',
+  'components/guest-accounts/table';
 
 .bi::before {
   vertical-align: 0 !important;

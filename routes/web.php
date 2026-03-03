@@ -26,6 +26,10 @@ Route::get('/users', [UsersController::class, 'index'])
 Route::group(['prefix' => 'settings'], static function () {
     Route::get('account', [App\Http\Controllers\Settings\AccountsController::class, 'index'])
         ->name('settings.account');
+    Route::get('guest-accounts', [App\Http\Controllers\Settings\GuestAccountsController::class, 'index'])
+        ->name('settings.guest-accounts.index');
+    Route::post('guest-accounts', [App\Http\Controllers\Settings\GuestAccountsController::class, 'store'])
+        ->name('settings.guest-accounts.store');
 });
 
 Route::group(['prefix' => 'custom-tables'], static function () {
