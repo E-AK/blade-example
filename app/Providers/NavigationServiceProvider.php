@@ -71,6 +71,7 @@ class NavigationServiceProvider extends ServiceProvider
                 $section->add('Управление аккаунтами', url('/settings/account'));
                 $section->add('Гостевые аккаунты', url('/settings/guest-accounts'));
                 $section->add('Реквизиты', url('/settings/requisites'));
+                $section->add('Изменить пароль', url('/settings/change-password'));
             })
             ->add('Аккаунты', url('/account'), function (Section $section): void {
                 $section->attributes(['icon' => 'menu_accounts', 'shortText' => 'Аккаунты']);

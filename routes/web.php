@@ -34,6 +34,10 @@ Route::group(['prefix' => 'settings'], static function () {
         ->name('settings.requisites.index');
     Route::post('requisites', [App\Http\Controllers\Settings\RequisitesController::class, 'store'])
         ->name('settings.requisites.store');
+    Route::get('change-password', [App\Http\Controllers\Settings\ChangePasswordController::class, 'index'])
+        ->name('settings.change-password.index');
+    Route::post('change-password', [App\Http\Controllers\Settings\ChangePasswordController::class, 'store'])
+        ->name('settings.change-password.store');
 });
 
 Route::group(['prefix' => 'custom-tables'], static function () {

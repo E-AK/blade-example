@@ -36,6 +36,7 @@
 @import 'features/account/table', 'features/account/select', 'features/account/account-settings';
 @import 'features/guest-accounts/table';
 @import 'features/requisites';
+@import 'features/change-password';
 
 // 7. Глобальные утилиты и сброс
 .bi::before {
