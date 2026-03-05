@@ -1,5 +1,8 @@
 @php
     $headerTitleText = 'Редактирование таблицы';
+    $showCurrentPageInBreadcrumbs = true;
+    $showLastBreadcrumbPart = true;
+    $lastBreadcrumbUrl = route('custom-tables.index');
 @endphp
 
 @extends('layouts.app')

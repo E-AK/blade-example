@@ -12,7 +12,7 @@
                     @endif
                     <div class="item-container">
                         @if ($icon)
-                            <span class="menu-icon d-flex align-items-center justify-content-center fs-5 lh-1">
+                            <span class="menu-icon d-flex align-items-center justify-content-center fs-5 lh-1 {{ $icon === 'menu_get_info' ? 'menu-icon--fill-only' : '' }}">
                                 <x-icon :name="$icon"/>
                             </span>
                         @endif

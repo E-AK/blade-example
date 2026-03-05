@@ -21,6 +21,9 @@
         <x-topbar
             :header-info-text="$headerInfoText ?? ''"
             :header-title-text="$headerTitleText ?? ''"
+            :show-current-page-in-breadcrumbs="$showCurrentPageInBreadcrumbs ?? false"
+            :show-last-part="$showLastBreadcrumbPart ?? false"
+            :last-breadcrumb-url="$lastBreadcrumbUrl ?? null"
         >
             @yield('topbar_buttons')
         </x-topbar>

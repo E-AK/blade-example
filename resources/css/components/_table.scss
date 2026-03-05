@@ -267,7 +267,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 4px;
     position: absolute;
     right: 6px;
     top: 50%;
@@ -297,12 +296,24 @@
     cursor: pointer;
   }
 
+  & .table-sidebar-open-trigger__inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
+    gap: 4px;
+  }
+
   & .table-sidebar-open-trigger .table-sidebar-open-trigger__icon {
     flex: none;
     width: 16px;
     height: 16px;
     display: block;
     background-color: map.get($theme-colors, 'grey-1');
+  }
+
+  & .table-sidebar-open-trigger--icon-right {
+    width: 97px;
   }
 
   .dt-length {

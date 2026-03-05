@@ -15,6 +15,7 @@
 .sidebar-logo {
   width: 256px;
   height: 28px;
+  padding: 0 12px;
 }
 
 .logo-collapsed {
@@ -23,6 +24,14 @@
 
 .logo-expanded {
   display: block;
+  width: 184px;
+  height: 28px;
+  flex-shrink: 0;
+
+  svg {
+    width: 184px;
+    height: 28px;
+  }
 }
 
 .app-layout.is-collapsed {
@@ -33,6 +42,7 @@
   .sidebar-logo {
     width: 64px;
     height: 28px;
+    align-items: center !important;
 
     svg {
       width: 28px;

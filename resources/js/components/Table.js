@@ -2,6 +2,7 @@ import $ from 'jquery';
 import debounce from '../utils/debounce';
 import 'datatables.net-bs5';
 import sidebarIconUrl from '../../svg/actions_sidebar.svg?url';
+import arrowSwooshIconUrl from '../../svg/arrow_swoosh.svg?url';
 
 export class Table {
   constructor(element) {
@@ -281,20 +282,31 @@ export class Table {
         if ($td.hasClass('column-actions') || $td.find('.table-sidebar-open-trigger').length > 0) {
           return;
         }
+        const label = $td.closest('table').data('sidebar-label') || 'Открыть';
+        const isViewLabel = label === 'Просмотр';
+        const iconUrl = isViewLabel ? arrowSwooshIconUrl : sidebarIconUrl;
         const iconStyle =
           'mask:url(' +
-          sidebarIconUrl +
+          iconUrl +
           ') center/contain no-repeat;' +
           '-webkit-mask:url(' +
-          sidebarIconUrl +
+          iconUrl +
           ') center/contain no-repeat;';
-        const label = $td.closest('table').data('sidebar-label') || 'Открыть';
+        const iconHtml =
+          '<span class="table-sidebar-open-trigger__icon" style="' +
+          iconStyle +
+          '" aria-hidden="true"></span>';
+        const labelHtml = '<span>' + label + '</span>';
+        const contentHtml = isViewLabel ? labelHtml + iconHtml : iconHtml + labelHtml;
+        const triggerClass =
+          'table-sidebar-open-trigger' + (isViewLabel ? ' table-sidebar-open-trigger--icon-right' : '');
         const $trigger = $(
-          '<span class="table-sidebar-open-trigger" role="button" tabindex="0">' +
-            '<span class="table-sidebar-open-trigger__icon" style="' +
-            iconStyle +
-            '" aria-hidden="true"></span>' +
-            '<span>' + label + '</span>' +
+          '<span class="' +
+            triggerClass +
+            '" role="button" tabindex="0">' +
+            '<span class="table-sidebar-open-trigger__inner">' +
+            contentHtml +
+            '</span>' +
             '</span>'
         );
         $td.append($trigger);

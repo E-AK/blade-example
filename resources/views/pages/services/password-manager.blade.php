@@ -82,6 +82,8 @@
             class="password-manager-sidebar__section password-manager-sidebar__section--folders d-flex flex-column min-h-0"
             x-data="{ showNewFolderInput: false }"
             x-effect="showNewFolderInput && $nextTick(() => setTimeout(() => { const el = $refs.newFolderInput && $refs.newFolderInput.querySelector('input'); if (el) el.focus(); }, 0))"
+            @password-manager-new-folder-saved.window="showNewFolderInput = false"
+            @password-manager-new-folder-cancel.window="showNewFolderInput = false"
         >
             <div class="password-manager-sidebar__header password-manager-sidebar__header--sticky d-flex align-items-center justify-content-between">
                 <span class="password-manager-sidebar__title">Папки</span>
@@ -120,13 +122,42 @@
                             x-ref="newFolderInput"
                         >
                             <div class="password-manager-sidebar__new-folder-inner">
-                                <x-input
-                                    type="stroke"
-                                    name="new_folder_name"
-                                    placeholder="Название папки"
-                                    leftIcon="document_folder"
-                                    class="password-manager-sidebar__new-folder-input"
-                                />
+                                <div class="input-wrapper input-wrapper--stroke flex-grow-1 min-w-0 password-manager-sidebar__new-folder-input">
+                                    <div class="input-body input-body--stroke state-filled">
+                                        <span class="input-icon input-icon--left" aria-hidden="true">
+                                            <x-icon name="document_folder" :size="20" />
+                                        </span>
+                                        <div class="input-content">
+                                            <input
+                                                type="text"
+                                                class="input-field"
+                                                placeholder="Название папки"
+                                                x-model="newTopFolderName"
+                                                data-new-top-folder-input
+                                                @keydown.enter.prevent="saveNewTopFolder()"
+                                                @keydown.escape.prevent="cancelNewTopFolder()"
+                                            />
+                                        </div>
+                                        <span class="input-icons-right">
+                                            <button
+                                                type="button"
+                                                class="p-0 border-0 bg-transparent d-flex align-items-center justify-content-center"
+                                                aria-label="Сохранить"
+                                                @click="saveNewTopFolder()"
+                                            >
+                                                <x-icon name="validation_check" :size="20" />
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="p-0 border-0 bg-transparent d-flex align-items-center justify-content-center"
+                                                aria-label="Отменить"
+                                                @click="cancelNewTopFolder()"
+                                            >
+                                                <x-icon name="arrow_close" :size="20" />
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <ul
@@ -655,10 +686,11 @@
                                         </span>
                                     </template>
                                     <input
-                                        type="search"
+                                        type="text"
                                         class="input-field search-input flex-grow-1 min-w-0 border-0 bg-transparent"
                                         placeholder="Поиск по логину, ресурсу, тегу или названию"
                                         autocomplete="off"
+                                        role="searchbox"
                                         x-ref="searchInput"
                                         x-model="query"
                                         @input="onInput()"

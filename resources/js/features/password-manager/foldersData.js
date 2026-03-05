@@ -22,6 +22,29 @@ export function passwordManagerFoldersData() {
     editingFolderName: '',
     newSubfolderParentId: null,
     newSubfolderName: '',
+    newTopFolderName: '',
+
+    saveNewTopFolder() {
+      const name = this.newTopFolderName?.trim() ?? '';
+      if (name) {
+        const newId = 'new-' + Date.now();
+        this.foldersFlat.push({
+          id: newId,
+          parentId: null,
+          name,
+          depth: 0,
+          hasChildren: false,
+          passwordsCount: 0,
+        });
+      }
+      this.newTopFolderName = '';
+      this.$dispatch('password-manager-new-folder-saved');
+    },
+
+    cancelNewTopFolder() {
+      this.newTopFolderName = '';
+      this.$dispatch('password-manager-new-folder-cancel');
+    },
 
     startNewSubfolder(payload) {
       if (!payload || payload.parentId == null) return;

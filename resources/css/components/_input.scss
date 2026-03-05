@@ -204,11 +204,23 @@
   }
 
   .input-icons-right {
+    width: auto;
+    min-width: 0;
     gap: 10px;
+    flex-shrink: 0;
 
     .input-icon {
       width: 20px;
       height: 20px;
+    }
+
+    // Кнопки/иконки в слоте rightIcons — фиксированный размер, чтобы не вылезали
+    > * {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
     }
   }
 

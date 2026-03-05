@@ -17,6 +17,8 @@ class Topbar extends Component
     public function __construct(
         public ?string $headerInfoText = null,
         public string $headerTitleText = '',
+        public bool $showLastPart = false,
+        public ?string $lastBreadcrumbUrl = null,
     ) {
         //
     }
@@ -37,6 +39,8 @@ class Topbar extends Component
         return view('components.topbar', [
             'breadcrumbs' => $breadcrumbs,
             'headerInfoText' => $headerInfoText,
+            'showLastPart' => $this->showLastPart,
+            'lastBreadcrumbUrl' => $this->lastBreadcrumbUrl,
         ]);
     }
 }

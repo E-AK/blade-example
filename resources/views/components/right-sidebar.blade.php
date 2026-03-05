@@ -8,7 +8,7 @@
 
 @if($open)
     <div
-            class="right-sidebar-overlay d-flex justify-content-end"
+            class="right-sidebar-overlay d-flex justify-content-end align-items-center"
             role="dialog"
             aria-modal="true"
             aria-labelledby="{{ $title ? $dialogId : '' }}"

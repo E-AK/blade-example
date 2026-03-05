@@ -6,7 +6,7 @@
                     @php
                         $lastPart = $crumb['title'];
                     @endphp
-                    @if($index > 0)
+                    @if($index > 0 && ($index < count($breadcrumbs) - 1 || $showLastPart))
                         <span class="workspace-container-header-info-sep me-1 ms-1" aria-hidden="true"> / </span>
                     @endif
                     @if($index < count($breadcrumbs) - 1)
@@ -15,8 +15,8 @@
                         @else
                             <span>{{ $crumb['title'] }}</span>
                         @endif
-                    @else
-                        <span>{{ $headerInfoText ?: $crumb['title'] }}</span>
+                    @elseif($showLastPart)
+                        <a href="{{ $lastBreadcrumbUrl ?? url()->previous() }}" class="workspace-container-header-info-link">{{ $headerInfoText ?: $crumb['title'] }}</a>
                     @endif
                 @endforeach
             @else

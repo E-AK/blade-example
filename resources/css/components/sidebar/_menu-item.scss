@@ -54,13 +54,18 @@
     gap: 12px;
     flex: 1;
     min-width: 0;
+    justify-content: center;
   }
 
   .menu-text {
     font-size: 16px;
     line-height: 20px;
-    font-weight: $fw-medium;
+    font-weight: 400;
   }
+}
+
+.menu-icon--fill-only svg {
+  stroke: none !important;
 }
 
 .menu-icon {
@@ -243,17 +248,39 @@
 }
 
 // --- Sidebar toggle (Menu-controller) ---
-// Design: padding 8px 12px, height 40px, border 1px solid black-light, radius 8px
+// Design: Open-hover — 256×40px, padding 8px 12px, gap 8px, bg #141414, border #333333, radius 8px
 .sidebar-toggle-btn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   min-height: 40px !important;
   height: 40px !important;
   padding: 8px 12px !important;
+  gap: 8px;
+  width: 256px;
   border: 1px solid map-get($custom-colors, 'black-light') !important;
   border-radius: 8px !important;
   color: map-get($custom-colors, 'grey-2') !important;
 
-  &:hover,
-  &.active {
+  .menu-text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .menu-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: #141414 !important;
+    border-color: map-get($custom-colors, 'black-light') !important;
+
     .menu-text,
     .menu-icon {
       color: map-get($custom-colors, 'white') !important;
